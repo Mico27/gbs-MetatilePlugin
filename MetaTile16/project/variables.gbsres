@@ -1,0 +1,46 @@
+{
+  "_resourceType": "variables",
+  "variables": [
+    {
+      "id": "0",
+      "name": "HITBLOCKID",
+      "symbol": "var_hitblockid"
+    },
+    {
+      "id": "1",
+      "name": "FRAMECOINS",
+      "symbol": "var_framecoins"
+    },
+    {
+      "id": "2",
+      "name": "PLAYER_IFRAMES",
+      "symbol": "var_player_iframes"
+    },
+    {
+      "id": "3",
+      "name": "HITBLOCKX",
+      "symbol": "var_hitblockx"
+    },
+    {
+      "id": "4",
+      "name": "HITBLOCKY",
+      "symbol": "var_hitblocky"
+    },
+    {
+      "id": "5",
+      "name": "HITBLOCKSOURCE",
+      "symbol": "var_hitblocksource"
+    },
+    {
+      "id": "6",
+      "name": "MARIOSTATUS_0",
+      "symbol": "var_mariostatus_0"
+    },
+    {
+      "id": "7",
+      "name": "CANSWIM",
+      "symbol": "var_canswim"
+    }
+  ],
+  "constants": []
+}

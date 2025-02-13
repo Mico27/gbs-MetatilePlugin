@@ -1,0 +1,12 @@
+{
+  "_resourceType": "background",
+  "id": "067cc3da-ca8b-431e-b7cb-a7f2af2b52dd",
+  "name": "MetaTile1",
+  "symbol": "bg_metatile1",
+  "width": 32,
+  "height": 16,
+  "imageWidth": 256,
+  "imageHeight": 128,
+  "tileColors": "002+022+00c+0110+002+022+00c+0120+002+01d+02!0110+002+019+022+013+02!012+022+017+022+012+02!012+02!002+022+012+024+002+013+022+019+026+002+025+012+02!00d3+04!006e+",
+  "filename": "MetaTile1.png"
+}

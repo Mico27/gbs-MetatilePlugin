@@ -1,0 +1,12 @@
+{
+  "_resourceType": "background",
+  "id": "7be32329-5d60-46b6-bc30-a1788e4c8174",
+  "name": "overworld_metatile2",
+  "symbol": "bg_overworld_metatile2",
+  "width": 32,
+  "height": 32,
+  "imageWidth": 256,
+  "imageHeight": 256,
+  "tileColors": "0010+03c+0014+03c+004e+054+004+052+0016+054+004+052+0034c+",
+  "filename": "overworld_metatile2.png"
+}

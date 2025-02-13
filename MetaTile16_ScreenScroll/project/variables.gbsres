@@ -1,0 +1,21 @@
+{
+  "_resourceType": "variables",
+  "variables": [
+    {
+      "id": "0",
+      "name": "UI_Initialized",
+      "symbol": "var_ui_initialized"
+    },
+    {
+      "id": "1",
+      "name": "LastRenderedRowY",
+      "symbol": "var_lastrenderedrowy"
+    },
+    {
+      "id": "2",
+      "name": "MenuPosition",
+      "symbol": "var_menuposition"
+    }
+  ],
+  "constants": []
+}

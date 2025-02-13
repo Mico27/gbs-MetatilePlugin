@@ -1,0 +1,61 @@
+{
+  "_resourceType": "scene",
+  "id": "2cafe022-03f3-44d8-99f6-761fef1fb6f6",
+  "_index": 2,
+  "name": "Test_map_2",
+  "backgroundId": "3884d580-bd45-454c-9773-edc1d89a8bdc",
+  "tilesetId": "c71d004f-ae51-4e90-adf7-e053dbb70ce6",
+  "width": 20,
+  "height": 16,
+  "type": "ADVENTURE",
+  "paletteIds": [],
+  "spritePaletteIds": [],
+  "collisions": "00140+",
+  "autoFadeSpeed": null,
+  "symbol": "scene_3",
+  "x": 360,
+  "y": 184,
+  "script": [
+    {
+      "command": "EVENT_LOAD_META_TILES",
+      "args": {
+        "sceneId": "edfb7a26-0b55-4000-a41e-08b62953377b",
+        "matchColor": false,
+        "__collapse": true
+      },
+      "id": "ae08d235-9268-499d-8314-79c980cd9e8b"
+    },
+    {
+      "command": "EVENT_SET_NEIGHBOUR_SCENE",
+      "args": {
+        "sceneId": "8d244b4c-aa39-43ce-9918-296432e43e99",
+        "direction": "up",
+        "rounded": false,
+        "__collapse": true
+      },
+      "id": "3be7a26e-b8d1-4f8d-9f5b-ef01dc603576"
+    },
+    {
+      "command": "EVENT_SET_NEIGHBOUR_SCENE",
+      "args": {
+        "sceneId": "2cbc97a3-5a84-4135-b7d5-f1c9dc3cb279",
+        "direction": "right",
+        "rounded": false,
+        "__collapse": true
+      },
+      "id": "c5163330-563b-454a-a770-4a7a9c3ec0c9"
+    },
+    {
+      "command": "EVENT_FADE_IN",
+      "args": {
+        "speed": "2",
+        "__collapse": true
+      },
+      "id": "dde81bb5-fc4f-48c5-a890-110390430370"
+    }
+  ],
+  "playerHit1Script": [],
+  "playerHit2Script": [],
+  "playerHit3Script": [],
+  "playerSpriteSheetId": "c10425a9-f163-422d-bf86-f1b6ca8aa280"
+}

@@ -1,0 +1,12 @@
+{
+  "_resourceType": "background",
+  "id": "ab53e1a3-6dcb-4a92-b02a-f398f7ef386b",
+  "name": "MenuSubmaps",
+  "symbol": "bg_menusubmaps",
+  "width": 8,
+  "height": 16,
+  "imageWidth": 64,
+  "imageHeight": 128,
+  "tileColors": "",
+  "filename": "MenuSubmaps.png"
+}

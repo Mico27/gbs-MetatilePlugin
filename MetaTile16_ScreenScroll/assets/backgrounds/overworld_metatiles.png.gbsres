@@ -1,0 +1,13 @@
+{
+  "_resourceType": "background",
+  "id": "5102f749-e08f-47fe-a554-627cd5cda098",
+  "name": "overworld_metatiles",
+  "symbol": "bg_overworld_metatiles",
+  "width": 32,
+  "height": 32,
+  "imageWidth": 256,
+  "imageHeight": 256,
+  "tileColors": "0010+014+02!012+02!014+024+0010+014+024+014+024+0018+01!0031+014+004+012+002+01!0013+014+004+012+003+01!008+022+012+002+024+0116+022+012+002+024+01316+",
+  "filename": "overworld_metatiles.png",
+  "autoColor": false
+}
