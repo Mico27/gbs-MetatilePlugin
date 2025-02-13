@@ -24,7 +24,7 @@
           "type": "expression",
           "value": "($02$ + 1) % 2"
         },
-        "__comment": true
+        "__comment": false
       },
       "id": "a7559952-34ff-428a-b7a9-d4b13e5e13f8"
     },
@@ -37,7 +37,7 @@
           "value": 0
         },
         "__collapse": false,
-        "__comment": true
+        "__comment": false
       },
       "id": "f405bb79-0a97-4d2e-a683-b8b05cceff36"
     },
@@ -55,28 +55,9 @@
         },
         "direction": "up",
         "fadeSpeed": "2",
-        "__comment": true
+        "__comment": false
       },
       "id": "52c2e4c8-319c-4ab7-b375-a974d4462563"
-    },
-    {
-      "command": "EVENT_REPLACE_META_TILE",
-      "args": {
-        "x": {
-          "type": "number",
-          "value": 12
-        },
-        "y": {
-          "type": "number",
-          "value": 12
-        },
-        "metatile_id": {
-          "type": "number",
-          "value": 37
-        },
-        "commit": true
-      },
-      "id": "a12cd6d9-be89-4677-8b84-26b4279b942c"
     }
   ],
   "startScript": [
