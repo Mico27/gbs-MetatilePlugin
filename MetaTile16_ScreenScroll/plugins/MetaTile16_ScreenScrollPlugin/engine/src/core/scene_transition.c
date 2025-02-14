@@ -151,7 +151,22 @@ void transition_to_scene_modal(UBYTE direction) BANKED {
 	}
 }
 
-void transition_load_scene(UBYTE scene_bank, const scene_t * scene, BYTE t_scroll_x, BYTE t_scroll_y) BANKED {	
+void transition_load_scene(UBYTE scene_bank, const scene_t * scene, BYTE t_scroll_x, BYTE t_scroll_y) BANKED {
+	// hide actors (except player)
+	actor_t *actor = PLAYER.prev;
+    while (actor) {
+		actor->hidden = 1;
+		actor = actor->prev;
+	}
+	// hide projectiles
+	projectiles_init();
+	// Update sprites before scene change
+	toggle_shadow_OAM();
+	actors_update();
+	projectiles_render();
+	activate_shadow_OAM();
+	wait_vbl_done();
+	
 	initial_camera_x = camera_x = (-t_scroll_x * 128) + SCROLL_CAM_X;
 	initial_camera_y = camera_y = (-t_scroll_y * 128) + SCROLL_CAM_Y;
 	initial_player_x_pos = (PLAYER.pos.x -= (t_scroll_x * 128));
@@ -165,7 +180,8 @@ void transition_load_scene(UBYTE scene_bank, const scene_t * scene, BYTE t_scrol
     // reset input events on scene change
     events_init(FALSE);
     // reset music events
-    music_init_events(FALSE);
+    music_init_events(FALSE);	
+	
 	load_scene(scene, scene_bank, TRUE);	
 	//reinitialize initial positions after loading scene
 	initial_player_x_pos = 0;
