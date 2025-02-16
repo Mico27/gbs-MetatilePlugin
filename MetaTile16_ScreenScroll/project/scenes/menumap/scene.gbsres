@@ -7,7 +7,7 @@
   "tilesetId": "c71d004f-ae51-4e90-adf7-e053dbb70ce6",
   "width": 20,
   "height": 18,
-  "type": "TOPDOWN",
+  "type": "ADVENTURE",
   "paletteIds": [],
   "spritePaletteIds": [],
   "collisions": "",

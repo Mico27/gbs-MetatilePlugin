@@ -25,6 +25,7 @@ UBYTE metatile_collision_bank;
 unsigned char* metatile_collision_ptr;
 
 void vm_load_meta_tiles(SCRIPT_CTX * THIS) OLDCALL BANKED {
+	scroll_reset();
 	uint8_t scene_bank = *(uint8_t *) VM_REF_TO_PTR(FN_ARG0);
 	const scene_t * scene_ptr = *(scene_t **) VM_REF_TO_PTR(FN_ARG1);	
 	scene_t scn;
@@ -45,9 +46,8 @@ void vm_load_meta_tiles(SCRIPT_CTX * THIS) OLDCALL BANKED {
 	UBYTE half_height = (image_tile_height >> 1);
 	for (UBYTE y = 0; y < half_height; y++) {
 		MemcpyBanked(sram_map_data + METATILE_MAP_OFFSET(0, y << 1), image_ptr + (UWORD)(y * half_width), half_width, image_bank);
-	}
+	}	
 	
-	scroll_reset();
 	scroll_update();
 }
 

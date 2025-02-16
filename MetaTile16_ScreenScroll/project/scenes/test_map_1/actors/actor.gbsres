@@ -64,10 +64,9 @@
     {
       "command": "EVENT_ACTOR_HIDE",
       "args": {
-        "actorId": "$self$",
-        "__collapse": true
+        "actorId": "$self$"
       },
-      "id": "e78f9bfa-e0bf-4faf-b183-6c915dce186f"
+      "id": "7ee89530-5504-45f3-8960-38535dfc62e6"
     }
   ],
   "updateScript": [],

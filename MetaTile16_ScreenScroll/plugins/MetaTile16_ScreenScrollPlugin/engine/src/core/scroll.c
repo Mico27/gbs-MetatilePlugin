@@ -57,6 +57,7 @@ void scroll_init(void) BANKED {
 void scroll_reset(void) BANKED {
     pending_w_i     = 0;
     pending_h_i     = 0;
+	
 	INT16 x, y;
     if (is_transitioning_scene){
 		
@@ -79,6 +80,8 @@ void scroll_reset(void) BANKED {
 	} else {
 		scroll_x = 0x7FFF;
 		scroll_y = 0x7FFF;
+		metatile_bank = 0;
+		metatile_attr_bank = 0;
 	}
 }
 
@@ -402,7 +405,7 @@ void scroll_load_col(UBYTE x, UBYTE y, UBYTE height) BANKED {
         VBK_REG = 1;
 		if (metatile_attr_bank){
 			for (i = 0; i < height; i++) {			
-				tile_buffer[i] = ReadBankedUBYTE((metatile_attr_ptr + TILE_MAP_OFFSET(sram_map_data[METATILE_MAP_OFFSET(x, y + i)], x, y + i)), metatile_bank);
+				tile_buffer[i] = ReadBankedUBYTE((metatile_attr_ptr + TILE_MAP_OFFSET(sram_map_data[METATILE_MAP_OFFSET(x, y + i)], x, y + i)), metatile_attr_bank);
 			}
 		} else {
 			column_pointer = (image_attr_ptr + (UWORD)((pending_h_y * image_tile_width) + pending_h_x));

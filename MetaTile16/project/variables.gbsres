@@ -40,6 +40,26 @@
       "id": "7",
       "name": "CANSWIM",
       "symbol": "var_canswim"
+    },
+    {
+      "id": "8",
+      "name": "COINS",
+      "symbol": "var_coins"
+    },
+    {
+      "id": "9",
+      "name": "LIVES",
+      "symbol": "var_lives"
+    },
+    {
+      "id": "10",
+      "name": "COMPLETED_LEVEL_FLAGS1",
+      "symbol": "var_completed_level_flags1"
+    },
+    {
+      "id": "11",
+      "name": "COMPLETED_LEVEL_FLAGS2",
+      "symbol": "var_completed_level_flags2"
     }
   ],
   "constants": []
