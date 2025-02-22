@@ -1,0 +1,18 @@
+{
+  "_resourceType": "palette",
+  "id": "default-bg-3",
+  "name": "Default BG 3",
+  "colors": [
+    "8cffff",
+    "9dd6ff",
+    "1b8fff",
+    "000080"
+  ],
+  "defaultName": "Default BG 3",
+  "defaultColors": [
+    "F8D8A8",
+    "E0A878",
+    "785888",
+    "002030"
+  ]
+}

@@ -1,11 +1,11 @@
 {
   "_resourceType": "settings",
-  "startSceneId": "8d244b4c-aa39-43ce-9918-296432e43e99",
-  "startX": 10,
-  "startY": 25,
+  "startSceneId": "77b07650-98e9-4d74-8dcb-d23c2e0ebc0a",
+  "startX": 3,
+  "startY": 126,
   "startMoveSpeed": 1,
   "startAnimSpeed": 7,
-  "startDirection": "down",
+  "startDirection": "right",
   "showCollisionExtraTiles": true,
   "showCollisionTileValues": false,
   "collisionLayerOpacity": 50,
@@ -83,7 +83,7 @@
   "customControlsSelect": [
     "Shift"
   ],
-  "colorMode": "mono",
+  "colorMode": "color",
   "generateDebugFilesEnabled": false,
   "compilerPreset": 3000,
   "scriptEventPresets": {},

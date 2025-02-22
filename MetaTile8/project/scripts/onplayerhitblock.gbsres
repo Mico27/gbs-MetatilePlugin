@@ -1,0 +1,187 @@
+{
+  "_resourceType": "script",
+  "id": "c3d2bc86-7fb8-42a0-a289-23d70d68e7cf",
+  "name": "OnPlayerHitBlock",
+  "description": "",
+  "variables": {},
+  "actors": {},
+  "symbol": "script_1",
+  "script": [
+    {
+      "command": "EVENT_SWITCH",
+      "args": {
+        "variable": "0",
+        "choices": 2,
+        "__collapseCase0": false,
+        "value0": {
+          "type": "number",
+          "value": 128
+        },
+        "__collapseCase1": false,
+        "value1": {
+          "type": "number",
+          "value": 129
+        },
+        "__collapseCase2": false,
+        "value2": {
+          "type": "number",
+          "value": 3
+        },
+        "__collapseCase3": false,
+        "value3": {
+          "type": "number",
+          "value": 153
+        },
+        "__collapseCase4": false,
+        "value4": {
+          "type": "number",
+          "value": 154
+        },
+        "__collapseCase5": false,
+        "value5": {
+          "type": "number",
+          "value": 155
+        },
+        "__collapseCase6": false,
+        "value6": {
+          "type": "number",
+          "value": 156
+        },
+        "__collapseCase7": false,
+        "value7": {
+          "type": "number",
+          "value": 157
+        },
+        "__collapseCase8": false,
+        "value8": {
+          "type": "number",
+          "value": 158
+        },
+        "__collapseCase9": false,
+        "value9": {
+          "type": "number",
+          "value": 159
+        },
+        "__collapseCase10": false,
+        "value10": {
+          "type": "number",
+          "value": 160
+        },
+        "__collapseCase11": false,
+        "value11": {
+          "type": "number",
+          "value": 161
+        },
+        "__collapseCase12": false,
+        "value12": {
+          "type": "number",
+          "value": 162
+        },
+        "__collapseCase13": false,
+        "value13": {
+          "type": "number",
+          "value": 163
+        },
+        "__collapseCase14": false,
+        "value14": {
+          "type": "number",
+          "value": 169
+        },
+        "__collapseCase15": false,
+        "value15": {
+          "type": "number",
+          "value": 16
+        },
+        "__collapseElse": false,
+        "__collapse": false
+      },
+      "children": {
+        "true0": [
+          {
+            "command": "EVENT_GROUP",
+            "args": {
+              "__label": "Brick Block",
+              "__collapse": false
+            },
+            "children": {
+              "true": [
+                {
+                  "command": "EVENT_REPLACE_META_TILE",
+                  "args": {
+                    "x": {
+                      "type": "variable",
+                      "value": "3"
+                    },
+                    "y": {
+                      "type": "variable",
+                      "value": "4"
+                    },
+                    "metatile_id": {
+                      "type": "number",
+                      "value": 0
+                    },
+                    "commit": true,
+                    "__collapse": false
+                  },
+                  "id": "0a9fd134-41d2-4f17-8779-a494694ea46e"
+                }
+              ]
+            },
+            "id": "685ea5ac-e6bd-491c-bd96-ddf0d1d4f13b"
+          }
+        ],
+        "true1": [
+          {
+            "command": "EVENT_GROUP",
+            "args": {
+              "__label": "Coin Block",
+              "__collapse": false,
+              "__comment": false
+            },
+            "children": {
+              "true": [
+                {
+                  "command": "EVENT_REPLACE_META_TILE",
+                  "args": {
+                    "x": {
+                      "type": "variable",
+                      "value": "3"
+                    },
+                    "y": {
+                      "type": "variable",
+                      "value": "4"
+                    },
+                    "metatile_id": {
+                      "type": "number",
+                      "value": 144
+                    },
+                    "__collapse": false,
+                    "commit": true
+                  },
+                  "id": "f67a2e68-0443-4393-83da-0b28e2073396"
+                }
+              ]
+            },
+            "id": "1d2df1f8-c8b7-4ddf-8e57-d5aa143c6743"
+          }
+        ],
+        "true2": [],
+        "true3": [],
+        "true4": [],
+        "true5": [],
+        "true6": [],
+        "true7": [],
+        "true8": [],
+        "true9": [],
+        "true10": [],
+        "true11": [],
+        "true12": [],
+        "true13": [],
+        "true14": [],
+        "true15": [],
+        "false": []
+      },
+      "id": "b8c93a9d-bd30-4802-946e-67d40d5f743b"
+    }
+  ]
+}

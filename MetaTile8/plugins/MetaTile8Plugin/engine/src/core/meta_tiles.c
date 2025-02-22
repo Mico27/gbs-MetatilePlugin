@@ -12,8 +12,8 @@
 #include "data/game_globals.h"
 #include "data_manager.h"
 
-uint8_t __at(0xB400) sram_collision_data[1024];
-uint8_t __at(0xB800) sram_map_data[MAX_MAP_DATA_SIZE];
+uint8_t __at(0xA400) sram_collision_data[256]; //sram_map_data Address 0xA500 - 0x0100(256)
+uint8_t __at(0xA500) sram_map_data[MAX_MAP_DATA_SIZE]; //0xA000 + (0x2000 (8k SRAM max size) - 0x1B00 (MAX_MAP_DATA_SIZE))
 
 UBYTE metatile_bank;
 unsigned char* metatile_ptr;
@@ -41,19 +41,16 @@ void vm_load_meta_tiles(SCRIPT_CTX * THIS) OLDCALL BANKED {
     metatile_attr_bank = bkg.cgb_tilemap_attr.bank;
     metatile_attr_ptr = bkg.cgb_tilemap_attr.ptr;
 	
-	MemcpyBanked(&sram_collision_data, metatile_collision_ptr, 1024, metatile_collision_bank);
-	
-	UBYTE half_width = (image_tile_width >> 1);
-	UBYTE half_height = (image_tile_height >> 1);
+	MemcpyBanked(&sram_collision_data, metatile_collision_ptr, 256, metatile_collision_bank);
 	
 	image_tile_width_bit = 1;
-	UBYTE width = (half_width - 1);
+	UBYTE width = (image_tile_width - 1);
 	while(width >>= 1){
 		image_tile_width_bit++;
 	}
-		
-	for (UBYTE y = 0; y < half_height; y++) {
-		MemcpyBanked(sram_map_data + METATILE_MAP_OFFSET(0, y << 1), image_ptr + (UWORD)(y * half_width), half_width, image_bank);
+	
+	for (UBYTE y = 0; y < image_tile_height; y++) {
+		MemcpyBanked(sram_map_data + METATILE_MAP_OFFSET(0, y), image_ptr + (UWORD)(y * image_tile_width), image_tile_width, image_bank);
 	}
 	
 	
@@ -100,10 +97,10 @@ void vm_submap_metatiles(SCRIPT_CTX * THIS) OLDCALL BANKED {
 	UBYTE buffer_size = sizeof(UBYTE) * width;
 	for (uint8_t i = 0; i < height; i++){		
 		UBYTE current_y = (dest_y + i);			
-		MemcpyBanked(sram_map_data + METATILE_MAP_OFFSET(dest_x, current_y), tilemap_ptr + (UWORD)((((source_y + i) >> 1) * (bkg.width >> 1)) + (source_x >> 1)), width >> 1, bkg.tilemap.bank);
+		MemcpyBanked(sram_map_data + METATILE_MAP_OFFSET(dest_x, current_y), tilemap_ptr + (UWORD)(((source_y + i) * bkg.width) + source_x), width, bkg.tilemap.bank);
 		if (commit){
 			for (UBYTE j = 0; j < width; j++) {
-				tile_buffer[j] = ReadBankedUBYTE(metatile_ptr + TILE_MAP_OFFSET(sram_map_data[METATILE_MAP_OFFSET(dest_x + j, current_y)], dest_x + j, current_y), metatile_bank);
+				tile_buffer[j] = ReadBankedUBYTE(metatile_ptr + sram_map_data[METATILE_MAP_OFFSET(dest_x + j, current_y)], metatile_bank);
 			}
 			set_bkg_tiles(dest_x & 31, current_y & 31, width, 1, tile_buffer);
 	
@@ -111,7 +108,7 @@ void vm_submap_metatiles(SCRIPT_CTX * THIS) OLDCALL BANKED {
 				if (_is_CGB) { 
 					VBK_REG = 1;
 					for (UBYTE j = 0; j < width; j++) {
-						tile_buffer[j] = ReadBankedUBYTE(metatile_attr_ptr + TILE_MAP_OFFSET(sram_map_data[METATILE_MAP_OFFSET(dest_x + j, current_y)], dest_x + j, current_y), metatile_attr_bank);
+						tile_buffer[j] = ReadBankedUBYTE(metatile_attr_ptr + sram_map_data[METATILE_MAP_OFFSET(dest_x + j, current_y)], metatile_attr_bank);
 					}
 					set_bkg_tiles(dest_x & 31, current_y & 31, width, 1, tile_buffer);
 					VBK_REG = 0;
@@ -123,26 +120,15 @@ void vm_submap_metatiles(SCRIPT_CTX * THIS) OLDCALL BANKED {
 }
 
 void replace_meta_tile(UBYTE x, UBYTE y, UBYTE tile_id, UBYTE commit) BANKED {	
-	x -= x & 1;
-	y -= y & 1;
 	sram_map_data[METATILE_MAP_OFFSET(x, y)] = tile_id;	
-	if (commit){	
-	
+	if (commit){
 	#ifdef CGB
 			if (_is_CGB) {
 				VBK_REG = 1;
-				tile_buffer[0] = ReadBankedUBYTE(metatile_attr_ptr + TILE_MAP_OFFSET(tile_id, x, y), metatile_attr_bank);
-				tile_buffer[1] = ReadBankedUBYTE(metatile_attr_ptr + TILE_MAP_OFFSET(tile_id, x + 1, y), metatile_attr_bank);
-				tile_buffer[2] = ReadBankedUBYTE(metatile_attr_ptr + TILE_MAP_OFFSET(tile_id, x, y + 1), metatile_attr_bank);
-				tile_buffer[3] = ReadBankedUBYTE(metatile_attr_ptr + TILE_MAP_OFFSET(tile_id, x + 1, y + 1), metatile_attr_bank);
-				set_bkg_tiles(x & 31, y & 31, 2, 2, tile_buffer);
+				set_bkg_tile_xy(x, y, ReadBankedUBYTE(metatile_attr_ptr + tile_id, metatile_attr_bank));
 				VBK_REG = 0;
 			}
 	#endif
-		tile_buffer[0] = ReadBankedUBYTE(metatile_ptr + TILE_MAP_OFFSET(tile_id, x, y), metatile_bank);
-		tile_buffer[1] = ReadBankedUBYTE(metatile_ptr + TILE_MAP_OFFSET(tile_id, x + 1, y), metatile_bank);
-		tile_buffer[2] = ReadBankedUBYTE(metatile_ptr + TILE_MAP_OFFSET(tile_id, x, y + 1), metatile_bank);
-		tile_buffer[3] = ReadBankedUBYTE(metatile_ptr + TILE_MAP_OFFSET(tile_id, x + 1, y + 1), metatile_bank);
-		set_bkg_tiles(x & 31, y & 31, 2, 2, tile_buffer);	
+		set_bkg_tile_xy(x, y, ReadBankedUBYTE(metatile_ptr + tile_id, metatile_bank));
 	}
 }
