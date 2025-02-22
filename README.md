@@ -8,6 +8,18 @@ Contains 3 version of the plugin that allows metatiles in gbstudio
 
 - Third version "Metatile8" uses 8px metatiles and is more general purpose, the example project showcases a large map that will allow tile editing and persistance, dimensions can be edited in the metatile.h file.
 
+How to use:
+- Create a tileset that will contains all the unique tiles needed, those will be assigned to the common tileset of both the metatile scene and the main scene.
+- Create a metatile scene that will contain all the metatiles (max 256) the metatile scene must be 256 pixel wide (for the 16px version) or 128 pixel wide (for the 8px version)
+- In the scene that will use the metatiles, put the "Load meta tiles" event and assign it the metatile scene. 
+  When compiling, the tilemap will be reconstructed by selecting matching metatile from its scene and the metatile scene.
+  additional options can be checked:
+  - "Must match metatile color attributes" will try to match the color attributes (Useful if you have metatiles that uses the same tile but with a different color)
+  - "Must match metatile collision" will try to match collision attributes (Useful if you have metatiles that uses the same tile but with different collision)
+
+- the "Get meta tile at position" event allows you to get which metatile ID is at a given position in the current scene
+- the "Replace meta tile" event allows you to replace at metatile at a given position with the option to commit the render or not (have this unchecked if you replace a metatile that is offscreen)
+- the "Submap metatiles" event allows you to copy a section of metatiles from another scene and paste it at a given position in the current scene with the option to commit the render or not (have this unchecked if offscreen)
 
 
 https://github.com/user-attachments/assets/854163c6-284a-4cfd-9dc4-24ba58504804
