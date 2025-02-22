@@ -22,6 +22,7 @@ How to use:
 - the "Submap metatiles" event allows you to copy a section of metatiles from another scene and paste it at a given position in the current scene with the option to commit the render or not (have this unchecked if offscreen)
 
 Since the tilemap is loaded in memory, any metatile replacement are kept in memory and wont reset even if offscreen. This also allows you to replace metatiles in the scene's init script before it is rendered.
+You could even dynamicaly generate the scene this way.
 
 
 https://github.com/user-attachments/assets/854163c6-284a-4cfd-9dc4-24ba58504804
