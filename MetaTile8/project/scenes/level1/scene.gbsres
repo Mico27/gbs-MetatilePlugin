@@ -175,34 +175,12 @@
       "id": "286edcce-fffb-48e3-819b-d9dc14ad7b19"
     },
     {
-      "command": "EVENT_CAMERA_SET_POSITION",
-      "args": {
-        "x": {
-          "type": "number",
-          "value": 0
-        },
-        "y": {
-          "type": "number",
-          "value": 9
-        },
-        "__comment": false
-      },
-      "id": "39199a23-151a-4f44-880d-741b5a093fea"
-    },
-    {
-      "command": "EVENT_GBVM_SCRIPT",
-      "args": {
-        "script": "VM_SET_CONST_UINT8 _warp_level 0\nVM_SET_CONST_UINT8 _plat_camera_block 3"
-      },
-      "id": "a7d8e1ba-4b49-4cd0-b394-029b30e1395f"
-    },
-    {
       "command": "EVENT_LOAD_META_TILES",
       "args": {
         "sceneId": "edfb7a26-0b55-4000-a41e-08b62953377b",
         "matchColor": true,
         "matchCollision": false,
-        "__collapse": false
+        "__collapse": true
       },
       "id": "02013e7d-c0f5-4f74-a059-291d75ad3ad2"
     },
@@ -211,7 +189,7 @@
       "args": {
         "specific_event": "1",
         "__scriptTabs": "scriptinput",
-        "__collapse": false
+        "__collapse": true
       },
       "children": {
         "script": [
@@ -273,27 +251,6 @@
         "__comment": false
       },
       "id": "68c39a60-247b-40e3-9615-017c3c511015"
-    },
-    {
-      "command": "EVENT_SCRIPT_UNLOCK",
-      "args": {},
-      "id": "c738ced0-c0e1-4582-8518-91daf68a29c2"
-    },
-    {
-      "command": "EVENT_CAMERA_MOVE_TO",
-      "args": {
-        "x": {
-          "type": "number",
-          "value": 156
-        },
-        "y": {
-          "type": "number",
-          "value": 9
-        },
-        "speed": 0.25,
-        "__comment": false
-      },
-      "id": "b625f983-507e-4b33-bb0a-1a5b0c5cb50c"
     }
   ],
   "playerHit1Script": [],
