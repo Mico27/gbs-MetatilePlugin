@@ -4,10 +4,10 @@
   "name": "overworld_metatiles",
   "symbol": "bg_overworld_metatiles",
   "width": 32,
-  "height": 32,
+  "height": 8,
   "imageWidth": 256,
-  "imageHeight": 256,
-  "tileColors": "0010+014+02!012+02!014+024+0010+014+024+014+024+0018+01!0031+014+004+012+002+01!0013+014+004+012+003+01!008+022+012+002+024+0116+022+012+002+024+01316+",
+  "imageHeight": 64,
+  "tileColors": "00100+",
   "filename": "overworld_metatiles.png",
   "autoColor": false
 }
