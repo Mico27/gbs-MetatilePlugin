@@ -10,7 +10,7 @@
   "type": "ADVENTURE",
   "paletteIds": [],
   "spritePaletteIds": [],
-  "collisions": "00140+",
+  "collisions": "005c+0f4+0010+0f4+0010+0f4+0010+0f4+0030+0f4+0010+0f4+0010+0f4+0010+0f4+0034+",
   "autoFadeSpeed": null,
   "symbol": "scene_3",
   "x": 520,
@@ -21,7 +21,8 @@
       "args": {
         "sceneId": "edfb7a26-0b55-4000-a41e-08b62953377b",
         "matchColor": false,
-        "__collapse": true
+        "__collapse": true,
+        "__comment": false
       },
       "id": "ae08d235-9268-499d-8314-79c980cd9e8b"
     },
