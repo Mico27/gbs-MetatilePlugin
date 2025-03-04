@@ -13,8 +13,8 @@
   "collisions": "",
   "autoFadeSpeed": 1,
   "symbol": "scene_7",
-  "x": 712,
-  "y": 184,
+  "x": 872,
+  "y": 200,
   "script": [
     {
       "command": "EVENT_LOAD_META_TILES",

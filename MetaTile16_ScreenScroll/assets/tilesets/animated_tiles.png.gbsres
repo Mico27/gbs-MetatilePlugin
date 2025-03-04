@@ -1,0 +1,11 @@
+{
+  "_resourceType": "tileset",
+  "id": "936c00bd-fc90-4f06-9203-a94feabcca30",
+  "name": "animated_tiles",
+  "symbol": "tileset_animated_tiles",
+  "width": 4,
+  "height": 56,
+  "imageWidth": 32,
+  "imageHeight": 448,
+  "filename": "animated_tiles.png"
+}

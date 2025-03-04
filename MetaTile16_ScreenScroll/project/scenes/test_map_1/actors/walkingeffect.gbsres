@@ -1,0 +1,44 @@
+{
+  "_resourceType": "actor",
+  "id": "b6e102d6-65eb-4e48-a9f3-bf0472977363",
+  "name": "WalkingEffect",
+  "frame": 0,
+  "animate": false,
+  "spriteSheetId": "5d525879-fcd4-4c00-b5d5-6e724fcab8ee",
+  "prefabId": "",
+  "direction": "down",
+  "moveSpeed": 1,
+  "animSpeed": 255,
+  "paletteId": "",
+  "isPinned": false,
+  "persistent": false,
+  "collisionGroup": "",
+  "prefabScriptOverrides": {},
+  "symbol": "actor_1",
+  "script": [],
+  "startScript": [
+    {
+      "command": "EVENT_ACTOR_SET_STATE",
+      "args": {
+        "actorId": "$self$",
+        "spriteStateId": "StepGrass",
+        "loopAnim": true
+      },
+      "id": "96c8c58c-0e82-4277-babd-3dc0e6f7b5c5"
+    },
+    {
+      "command": "EVENT_ACTOR_HIDE",
+      "args": {
+        "actorId": "$self$"
+      },
+      "id": "d4cbe6d5-20a4-4739-9482-fa3f73160996"
+    }
+  ],
+  "updateScript": [],
+  "hit1Script": [],
+  "hit2Script": [],
+  "hit3Script": [],
+  "x": 0,
+  "y": 15,
+  "_index": 3
+}

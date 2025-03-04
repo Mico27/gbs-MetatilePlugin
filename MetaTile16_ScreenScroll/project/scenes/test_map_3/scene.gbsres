@@ -13,8 +13,8 @@
   "collisions": "00140+",
   "autoFadeSpeed": null,
   "symbol": "scene_4",
-  "x": 536,
-  "y": 184,
+  "x": 696,
+  "y": 200,
   "script": [
     {
       "command": "EVENT_LOAD_META_TILES",
@@ -46,7 +46,7 @@
     {
       "command": "EVENT_SET_NEIGHBOUR_SCENE",
       "args": {
-        "sceneId": "6510b26d-49d6-4c4f-9fea-dcb3accd56b3",
+        "sceneId": "03b46cc4-e999-4149-9300-038a48270698",
         "direction": "up",
         "rounded": false
       },

@@ -13,8 +13,8 @@
   "collisions": "00140+",
   "autoFadeSpeed": null,
   "symbol": "scene_5",
-  "x": 536,
-  "y": 32,
+  "x": 696,
+  "y": 48,
   "script": [
     {
       "command": "EVENT_LOAD_META_TILES",
@@ -23,6 +23,51 @@
         "matchColor": false
       },
       "id": "3b9b6196-0097-425c-8458-99b8be0cfea5"
+    },
+    {
+      "command": "EVENT_SET_TIMER_SCRIPT",
+      "args": {
+        "timer": 1,
+        "duration": 0.5,
+        "frames": 32,
+        "__scriptTabs": "end",
+        "units": "frames"
+      },
+      "children": {
+        "script": [
+          {
+            "command": "EVENT_LOAD_TILESET_EX",
+            "args": {
+              "tilesetId": "936c00bd-fc90-4f06-9203-a94feabcca30",
+              "idx_target_tile": {
+                "type": "number",
+                "value": 108
+              },
+              "idx_start_tile": {
+                "type": "expression",
+                "value": "32 + ($03$ << 2)"
+              },
+              "tile_length": {
+                "type": "number",
+                "value": 4
+              }
+            },
+            "id": "25d11adb-c299-4c35-8dd2-2741f85bd308"
+          },
+          {
+            "command": "EVENT_SET_VALUE",
+            "args": {
+              "variable": "3",
+              "value": {
+                "type": "expression",
+                "value": "($03$ + 1) & 3"
+              }
+            },
+            "id": "53d41e1f-a0c3-49ec-a04a-2ec5f140a852"
+          }
+        ]
+      },
+      "id": "530502f7-5e7f-4d78-a255-e5c7bef72dfd"
     },
     {
       "command": "EVENT_SET_NEIGHBOUR_SCENE",

@@ -1,0 +1,217 @@
+{
+  "_resourceType": "trigger",
+  "id": "b9df04c5-c78e-48bd-b763-3f58df6f2ccb",
+  "name": "",
+  "prefabId": "",
+  "x": 8,
+  "y": 2,
+  "symbol": "trigger_3",
+  "prefabScriptOverrides": {},
+  "width": 4,
+  "height": 1,
+  "script": [
+    {
+      "command": "EVENT_REPLACE_META_TILE",
+      "args": {
+        "x": {
+          "type": "number",
+          "value": 12
+        },
+        "y": {
+          "type": "number",
+          "value": 4
+        },
+        "metatile_id": {
+          "type": "number",
+          "value": 65
+        },
+        "commit": false
+      },
+      "id": "c9bb5064-3f8f-4b03-8175-880f222f5099"
+    },
+    {
+      "command": "EVENT_REPLACE_META_TILE",
+      "args": {
+        "x": {
+          "type": "number",
+          "value": 12
+        },
+        "y": {
+          "type": "number",
+          "value": 6
+        },
+        "metatile_id": {
+          "type": "number",
+          "value": 65
+        },
+        "commit": false
+      },
+      "id": "d16ab0b5-f739-466d-901c-05490ee1efab"
+    },
+    {
+      "command": "EVENT_REPLACE_META_TILE",
+      "args": {
+        "x": {
+          "type": "number",
+          "value": 12
+        },
+        "y": {
+          "type": "number",
+          "value": 8
+        },
+        "metatile_id": {
+          "type": "number",
+          "value": 65
+        },
+        "commit": false
+      },
+      "id": "ec72e57d-5e1b-4cef-9143-dd7e0ab9076f"
+    },
+    {
+      "command": "EVENT_REPLACE_META_TILE",
+      "args": {
+        "x": {
+          "type": "number",
+          "value": 6
+        },
+        "y": {
+          "type": "number",
+          "value": 4
+        },
+        "metatile_id": {
+          "type": "number",
+          "value": 64
+        },
+        "commit": false
+      },
+      "id": "5cb43e45-6ced-4fce-ae1d-e7d7e0ba7e7a"
+    },
+    {
+      "command": "EVENT_REPLACE_META_TILE",
+      "args": {
+        "x": {
+          "type": "number",
+          "value": 6
+        },
+        "y": {
+          "type": "number",
+          "value": 6
+        },
+        "metatile_id": {
+          "type": "number",
+          "value": 64
+        },
+        "commit": false
+      },
+      "id": "b74b246b-abca-437d-bce5-527cec31fd58"
+    },
+    {
+      "command": "EVENT_REPLACE_META_TILE",
+      "args": {
+        "x": {
+          "type": "number",
+          "value": 6
+        },
+        "y": {
+          "type": "number",
+          "value": 8
+        },
+        "metatile_id": {
+          "type": "number",
+          "value": 64
+        },
+        "commit": false
+      },
+      "id": "6376a4c8-c20c-41e3-b83c-5d0071b1ac6b"
+    },
+    {
+      "command": "EVENT_REPLACE_META_TILE",
+      "args": {
+        "x": {
+          "type": "number",
+          "value": 8
+        },
+        "y": {
+          "type": "number",
+          "value": 2
+        },
+        "metatile_id": {
+          "type": "number",
+          "value": 12
+        },
+        "commit": false
+      },
+      "id": "36d4375e-ab46-4d58-ba06-00868d438fea"
+    },
+    {
+      "command": "EVENT_REPLACE_META_TILE",
+      "args": {
+        "x": {
+          "type": "number",
+          "value": 10
+        },
+        "y": {
+          "type": "number",
+          "value": 2
+        },
+        "metatile_id": {
+          "type": "number",
+          "value": 12
+        },
+        "commit": false
+      },
+      "id": "8485043e-1e3c-49c6-ba5f-64d6ef1fa898"
+    },
+    {
+      "command": "EVENT_REPLACE_META_TILE",
+      "args": {
+        "x": {
+          "type": "number",
+          "value": 8
+        },
+        "y": {
+          "type": "number",
+          "value": 10
+        },
+        "metatile_id": {
+          "type": "number",
+          "value": 12
+        },
+        "commit": false
+      },
+      "id": "ac3afa83-6695-4df2-85cd-d7d1c413b577"
+    },
+    {
+      "command": "EVENT_REPLACE_META_TILE",
+      "args": {
+        "x": {
+          "type": "number",
+          "value": 10
+        },
+        "y": {
+          "type": "number",
+          "value": 10
+        },
+        "metatile_id": {
+          "type": "number",
+          "value": 12
+        },
+        "commit": false
+      },
+      "id": "8b967bc3-93be-4940-bcb0-0b768ca80b6e"
+    },
+    {
+      "command": "EVENT_SET_ACTOR_ACTIVE_INDEX",
+      "args": {
+        "actorId": "$self$",
+        "activeIdx": {
+          "type": "number",
+          "value": 99
+        }
+      },
+      "id": "627d16d5-307a-406b-ba64-5feaa9019d00"
+    }
+  ],
+  "leaveScript": [],
+  "_index": 3
+}
