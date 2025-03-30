@@ -24,6 +24,8 @@ How to use:
 Since the tilemap is loaded in memory, any metatile replacement are kept in memory and wont reset even if offscreen. This also allows you to replace metatiles in the scene's init script before it is rendered.
 You could even dynamicaly generate the scene this way.
 
+IMPORTANT: if you are planning to use the Platformer Plus Plugin with this plugin, use this modified version here: https://github.com/Mico27/GBS_PlatformerPlus
+
 
 https://github.com/user-attachments/assets/854163c6-284a-4cfd-9dc4-24ba58504804
 
