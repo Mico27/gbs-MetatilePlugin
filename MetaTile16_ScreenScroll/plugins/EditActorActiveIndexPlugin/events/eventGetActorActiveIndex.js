@@ -39,7 +39,7 @@ export const compile = (input, helpers) => {
   _stackPushConst(variableAlias);
   _stackPush(tmp0);
   		
-  _callNative("vm_get_actor_active_index");
+  _callNative("get_actor_active_index");
   _stackPop(2);   
   
 };

@@ -84,6 +84,7 @@
     "Shift"
   ],
   "colorMode": "mono",
+  "colorCorrection": "default",
   "generateDebugFilesEnabled": false,
   "compilerPreset": 3000,
   "scriptEventPresets": {},

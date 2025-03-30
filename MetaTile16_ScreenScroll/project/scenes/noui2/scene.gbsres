@@ -2,19 +2,20 @@
   "_resourceType": "scene",
   "id": "7a837489-8f45-414e-986b-851f84fc262f",
   "_index": 7,
-  "name": "NOUI2",
-  "backgroundId": "d3fc5bbb-05bc-4eb1-8b94-80a4eb7e3a41",
-  "tilesetId": "c71d004f-ae51-4e90-adf7-e053dbb70ce6",
-  "width": 20,
-  "height": 18,
   "type": "ADVENTURE",
-  "paletteIds": [],
-  "spritePaletteIds": [],
-  "collisions": "",
-  "autoFadeSpeed": 1,
+  "name": "NOUI2",
   "symbol": "scene_9",
   "x": 520,
   "y": 368,
+  "width": 20,
+  "height": 18,
+  "backgroundId": "d3fc5bbb-05bc-4eb1-8b94-80a4eb7e3a41",
+  "tilesetId": "c71d004f-ae51-4e90-adf7-e053dbb70ce6",
+  "colorModeOverride": "none",
+  "paletteIds": [],
+  "spritePaletteIds": [],
+  "autoFadeSpeed": 1,
+  "playerSpriteSheetId": "c10425a9-f163-422d-bf86-f1b6ca8aa280",
   "script": [
     {
       "command": "EVENT_LOAD_META_TILES",
@@ -153,5 +154,5 @@
   "playerHit1Script": [],
   "playerHit2Script": [],
   "playerHit3Script": [],
-  "playerSpriteSheetId": "c10425a9-f163-422d-bf86-f1b6ca8aa280"
+  "collisions": ""
 }

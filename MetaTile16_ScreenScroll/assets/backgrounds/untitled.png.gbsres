@@ -3,10 +3,10 @@
   "id": "0eeb5b5e-c8b8-46f2-a547-06ebf9c286ea",
   "name": "untitled",
   "symbol": "bg_untitled",
+  "tileColors": "",
   "width": 32,
   "height": 32,
   "imageWidth": 256,
   "imageHeight": 256,
-  "tileColors": "",
   "filename": "untitled.png"
 }

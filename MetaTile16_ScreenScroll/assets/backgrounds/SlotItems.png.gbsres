@@ -3,10 +3,10 @@
   "id": "7d0f54b1-c802-4d3f-96b3-b6575ffc071e",
   "name": "SlotItems",
   "symbol": "bg_slotitems",
+  "tileColors": "",
   "width": 16,
   "height": 3,
   "imageWidth": 128,
   "imageHeight": 24,
-  "tileColors": "",
   "filename": "SlotItems.png"
 }

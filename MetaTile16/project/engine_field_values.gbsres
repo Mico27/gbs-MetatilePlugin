@@ -4,6 +4,10 @@
     {
       "id": "fade_style",
       "value": 0
+    },
+    {
+      "id": "MAX_MAP_DATA_SIZE",
+      "value": 2048
     }
   ]
 }

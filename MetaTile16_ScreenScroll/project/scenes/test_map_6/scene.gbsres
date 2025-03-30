@@ -2,19 +2,20 @@
   "_resourceType": "scene",
   "id": "02e8c49d-ad29-44d9-aed8-0d2a8d71480e",
   "_index": 8,
-  "name": "Test_map_6",
-  "backgroundId": "a1e07686-5960-4e61-9d7d-5bc9da91346b",
-  "tilesetId": "c71d004f-ae51-4e90-adf7-e053dbb70ce6",
-  "width": 20,
-  "height": 16,
   "type": "ADVENTURE",
-  "paletteIds": [],
-  "spritePaletteIds": [],
-  "collisions": "00140+",
-  "autoFadeSpeed": null,
+  "name": "Test_map_6",
   "symbol": "scene_10",
   "x": 352,
   "y": 200,
+  "width": 20,
+  "height": 16,
+  "backgroundId": "a1e07686-5960-4e61-9d7d-5bc9da91346b",
+  "tilesetId": "c71d004f-ae51-4e90-adf7-e053dbb70ce6",
+  "colorModeOverride": "none",
+  "paletteIds": [],
+  "spritePaletteIds": [],
+  "autoFadeSpeed": null,
+  "playerSpriteSheetId": "c10425a9-f163-422d-bf86-f1b6ca8aa280",
   "script": [
     {
       "command": "EVENT_LOAD_META_TILES",
@@ -119,5 +120,5 @@
   "playerHit1Script": [],
   "playerHit2Script": [],
   "playerHit3Script": [],
-  "playerSpriteSheetId": "c10425a9-f163-422d-bf86-f1b6ca8aa280"
+  "collisions": "00140+"
 }

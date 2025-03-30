@@ -42,7 +42,7 @@ export const compile = (input, helpers) => {
   _stackPush(tmp1);
   _stackPush(tmp0);
   		
-  _callNative("vm_set_actor_active_index");
+  _callNative("set_actor_active_index");
   _stackPop(2);   
   
 };

@@ -3,10 +3,10 @@
   "id": "0a34a65e-645d-4332-880a-de255b500a7a",
   "name": "test_map_6",
   "symbol": "bg_test_map_6",
-  "width": 20,
-  "height": 18,
-  "imageWidth": 160,
-  "imageHeight": 144,
   "tileColors": "",
+  "width": 20,
+  "height": 16,
+  "imageWidth": 160,
+  "imageHeight": 128,
   "filename": "test_map_6.png"
 }
