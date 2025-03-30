@@ -17,7 +17,7 @@
 #define METATILE_MAP_OFFSET(x, y)  (((y >> 1) << image_tile_width_bit) + (x >> 1))
 #define TILE_MAP_OFFSET(metatile_idx,x,y)  (((metatile_idx >> 4) << 6) + ((metatile_idx & 15) << 1) + ((y & 1) << 5) + (x & 1))
 
-//#define MAX_MAP_DATA_SIZE 2048 // 128 x 16 (Always make sure the width is a power of 2 if edited, cannot exceed 128)
+#define MAX_MAP_DATA_SIZE (MAX_MAP_DATA_WIDTH * MAX_MAP_DATA_HEIGHT) // 128 x 16 (Always make sure the width is a power of 2 if edited, cannot exceed 128)
 #define SRAM_MAP_DATA_PTR (0xA000 + (0x2000 - MAX_MAP_DATA_SIZE))
 #define SRAM_COLLISION_DATA_PTR (SRAM_MAP_DATA_PTR - 0x0400)
 

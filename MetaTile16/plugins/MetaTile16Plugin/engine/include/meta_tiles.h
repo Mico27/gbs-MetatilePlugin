@@ -9,7 +9,7 @@
 #include "vm.h"
 #include "data/states_defines.h"
 
-//#define MAX_MAP_DATA_SIZE 2048 // 128 x 16 (Always make sure the width is a power of 2 if edited, cannot exceed 128)
+#define MAX_MAP_DATA_SIZE (MAX_MAP_DATA_WIDTH * MAX_MAP_DATA_HEIGHT) // 128 x 16 (Always make sure the width is a power of 2 if edited, cannot exceed 128)
 #define SRAM_MAP_DATA_PTR (0xA000 + (0x2000 - MAX_MAP_DATA_SIZE))
 #define SRAM_COLLISION_DATA_PTR (SRAM_MAP_DATA_PTR - 0x0400)
 

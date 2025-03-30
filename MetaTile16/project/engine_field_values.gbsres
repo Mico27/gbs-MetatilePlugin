@@ -8,6 +8,14 @@
     {
       "id": "MAX_MAP_DATA_SIZE",
       "value": 2048
+    },
+    {
+      "id": "MAX_MAP_DATA_HEIGHT",
+      "value": 16
+    },
+    {
+      "id": "MAX_MAP_DATA_WIDTH",
+      "value": 128
     }
   ]
 }
