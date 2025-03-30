@@ -30,6 +30,7 @@ IMPORTANT: if you are planning to use the Platformer Plus Plugin with this plugi
 
 ![image](https://github.com/user-attachments/assets/d5ad2258-30f5-4c55-ae53-806cf7f2e769)
 
+This means if you configure the scene max width and max height as such, this maximum amount is 128x16 (2048). This doesnt necessarily mean you cant have a scene Higher than 16, but as long as  (the width in tiles rounded to the upper power of two) x (the height in tile) doesnt exceed 2048.
 
 https://github.com/user-attachments/assets/854163c6-284a-4cfd-9dc4-24ba58504804
 
