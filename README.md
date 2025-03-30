@@ -26,6 +26,10 @@ You could even dynamicaly generate the scene this way.
 
 IMPORTANT: if you are planning to use the Platformer Plus Plugin with this plugin, use this modified version here: https://github.com/Mico27/GBS_PlatformerPlus
 
+- The main scenes must respect the dimensions described as such: (the width in tiles rounded to the upper power of two) x (the height in tile) must not exceed the maximum map size configured in the settings (width x height)
+
+![image](https://github.com/user-attachments/assets/d5ad2258-30f5-4c55-ae53-806cf7f2e769)
+
 
 https://github.com/user-attachments/assets/854163c6-284a-4cfd-9dc4-24ba58504804
 
