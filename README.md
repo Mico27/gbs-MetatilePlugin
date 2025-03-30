@@ -26,7 +26,8 @@ You could even dynamicaly generate the scene this way.
 
 IMPORTANT: if you are planning to use the Platformer Plus Plugin with this plugin, use this modified version here: https://github.com/Mico27/GBS_PlatformerPlus
 
-- The main scenes must respect the dimensions described as such: (the width in tiles rounded to the upper power of two) x (the height in tile) must not exceed the maximum map size configured in the settings (width x height) cannot exceed 8k
+- The main scenes must respect the dimensions described as such: (the width in tiles rounded to the upper power of two) x (the height in tile) must not exceed the maximum map size configured in the settings (width x height) cannot exceed 8k.
+- Also the bigger you make the max scene size, the less space will be available for save data. If the space begins to become too small for the default GBS Save function, this plugin will help saving data optimaly with minimal space: https://github.com/Mico27/gbs-ConfigLoadSavePlugin
 
 ![image](https://github.com/user-attachments/assets/d5ad2258-30f5-4c55-ae53-806cf7f2e769)
 
