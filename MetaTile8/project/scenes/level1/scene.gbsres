@@ -23,7 +23,7 @@
       "command": "EVENT_GROUP",
       "args": {
         "__label": "Init vars",
-        "__collapse": true
+        "__collapse": false
       },
       "children": {
         "true": [
@@ -170,6 +170,18 @@
               "__collapse": true
             },
             "id": "bfaf932c-5bf5-4b1c-bb58-dd5f6757a5b8"
+          },
+          {
+            "command": "EVENT_SET_VALUE",
+            "args": {
+              "variable": "13",
+              "value": {
+                "type": "number",
+                "value": 0
+              },
+              "__collapse": true
+            },
+            "id": "e6158455-7a47-49fd-a041-c579caecb7e4"
           }
         ]
       },
@@ -190,7 +202,7 @@
       "args": {
         "specific_event": "1",
         "__scriptTabs": "scriptinput",
-        "__collapse": true
+        "__collapse": false
       },
       "children": {
         "script": [
@@ -224,7 +236,7 @@
       "args": {
         "specific_event": "0",
         "__scriptTabs": "scriptinput",
-        "__collapse": true
+        "__collapse": false
       },
       "children": {
         "script": [

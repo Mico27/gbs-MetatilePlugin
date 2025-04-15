@@ -159,6 +159,161 @@
                     "commit": true
                   },
                   "id": "f67a2e68-0443-4393-83da-0b28e2073396"
+                },
+                {
+                  "command": "EVENT_SET_VALUE",
+                  "args": {
+                    "variable": "13",
+                    "value": {
+                      "type": "expression",
+                      "value": "$13$ == 0"
+                    }
+                  },
+                  "id": "dc0feeed-6703-4dd9-aabe-1183e9e5d733"
+                },
+                {
+                  "command": "EVENT_IF",
+                  "args": {
+                    "condition": {
+                      "type": "eq",
+                      "valueA": {
+                        "type": "variable",
+                        "value": "13"
+                      },
+                      "valueB": {
+                        "type": "number",
+                        "value": 0
+                      }
+                    },
+                    "__collapseElse": false
+                  },
+                  "children": {
+                    "true": [
+                      {
+                        "command": "EVENT_REPLACE_COLLISION",
+                        "args": {
+                          "metatile_id": {
+                            "type": "number",
+                            "value": 130
+                          },
+                          "collision": {
+                            "type": "number",
+                            "value": 0
+                          }
+                        },
+                        "id": "1d8aca97-be8c-43db-87e4-7d6ebfb11955"
+                      },
+                      {
+                        "command": "EVENT_REPLACE_COLLISION",
+                        "args": {
+                          "metatile_id": {
+                            "type": "number",
+                            "value": 128
+                          },
+                          "collision": {
+                            "type": "number",
+                            "value": 15
+                          }
+                        },
+                        "id": "287f101a-bea7-42fc-b7f4-2d5e498d1577"
+                      },
+                      {
+                        "command": "EVENT_REPLACE_TILESET_TILES",
+                        "args": {
+                          "tilesetId": "e8c0884f-3fd5-4cc3-a806-368d8c53a2cf",
+                          "idx_target_tile": {
+                            "type": "number",
+                            "value": 129
+                          },
+                          "idx_start_tile": {
+                            "type": "number",
+                            "value": 258
+                          },
+                          "tile_length": 1
+                        },
+                        "id": "df9a46af-4cf6-4740-aceb-d80491fa6162"
+                      },
+                      {
+                        "command": "EVENT_REPLACE_TILESET_TILES",
+                        "args": {
+                          "tilesetId": "e8c0884f-3fd5-4cc3-a806-368d8c53a2cf",
+                          "idx_target_tile": {
+                            "type": "number",
+                            "value": 128
+                          },
+                          "idx_start_tile": {
+                            "type": "number",
+                            "value": 256
+                          },
+                          "tile_length": 1
+                        },
+                        "id": "a360bc99-688e-4a95-82a4-17138e5027e8"
+                      }
+                    ],
+                    "false": [
+                      {
+                        "command": "EVENT_REPLACE_COLLISION",
+                        "args": {
+                          "metatile_id": {
+                            "type": "number",
+                            "value": 130
+                          },
+                          "collision": {
+                            "type": "number",
+                            "value": 15
+                          }
+                        },
+                        "id": "143abac4-8882-4ef7-a782-f2a828459f85"
+                      },
+                      {
+                        "command": "EVENT_REPLACE_COLLISION",
+                        "args": {
+                          "metatile_id": {
+                            "type": "number",
+                            "value": 128
+                          },
+                          "collision": {
+                            "type": "number",
+                            "value": 0
+                          }
+                        },
+                        "id": "47cee085-e14e-4848-880b-64fba5b10c36"
+                      },
+                      {
+                        "command": "EVENT_REPLACE_TILESET_TILES",
+                        "args": {
+                          "tilesetId": "e8c0884f-3fd5-4cc3-a806-368d8c53a2cf",
+                          "idx_target_tile": {
+                            "type": "number",
+                            "value": 128
+                          },
+                          "idx_start_tile": {
+                            "type": "number",
+                            "value": 258
+                          },
+                          "tile_length": 1
+                        },
+                        "id": "03eab459-e9ab-46d7-bfd2-ccdb8dfd06a4"
+                      },
+                      {
+                        "command": "EVENT_REPLACE_TILESET_TILES",
+                        "args": {
+                          "tilesetId": "e8c0884f-3fd5-4cc3-a806-368d8c53a2cf",
+                          "idx_target_tile": {
+                            "type": "number",
+                            "value": 129
+                          },
+                          "idx_start_tile": {
+                            "type": "number",
+                            "value": 256
+                          },
+                          "tile_length": 1
+                        },
+                        "id": "c5a845fb-cdb1-4e6c-9210-e2d334da5d72"
+                      }
+                    ]
+                  },
+                  "id": "37056800-ab5d-4f74-b111-5857b1fba6b2"
                 }
               ]
             },

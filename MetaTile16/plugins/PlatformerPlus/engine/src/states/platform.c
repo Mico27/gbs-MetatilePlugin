@@ -277,15 +277,17 @@ void platform_update(void) BANKED {
 
 inline void on_metatile_enter(UBYTE tile_x, UBYTE tile_y) {
 	UBYTE tile_id = sram_map_data[METATILE_MAP_OFFSET(tile_x, tile_y)];
-	switch(tile_id){
-		case 72://coin
-			replace_meta_tile(tile_x, tile_y, 2, 1);
-			script_memory[VAR_FRAMECOINS]++;
-			break;
-		case 73://underwater coin
-			replace_meta_tile(tile_x, tile_y, 127, 1);
-			script_memory[VAR_FRAMECOINS]++;
-			break;
+	if (!script_memory[VAR_COINTOGGLE]){
+		switch(tile_id){
+			case 72://coin
+				replace_meta_tile(tile_x, tile_y, 2, 1);
+				script_memory[VAR_FRAMECOINS]++;
+				break;
+			case 73://underwater coin
+				replace_meta_tile(tile_x, tile_y, 127, 1);
+				script_memory[VAR_FRAMECOINS]++;
+				break;
+		}
 	}
 }
 
@@ -361,6 +363,9 @@ void on_player_metatile_collision(UBYTE tile_x, UBYTE tile_y, UBYTE direction) B
 		switch(direction){
 			case DIR_UP:
 				UBYTE tile_id = sram_map_data[METATILE_MAP_OFFSET(tile_x, tile_y)];
+				if (script_memory[VAR_COINTOGGLE] && tile_id == 72){
+					tile_id = 0;
+				}
 				switch(tile_id){
 					case 0://brick	
 					case 1://coin block	

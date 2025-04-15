@@ -159,6 +159,157 @@
                     "commit": true
                   },
                   "id": "f67a2e68-0443-4393-83da-0b28e2073396"
+                },
+                {
+                  "command": "EVENT_SET_VALUE",
+                  "args": {
+                    "variable": "15",
+                    "value": {
+                      "type": "expression",
+                      "value": "$15$ == 0"
+                    }
+                  },
+                  "id": "e783196b-d131-4bb5-bf8c-63edd7180a5d"
+                },
+                {
+                  "command": "EVENT_IF",
+                  "args": {
+                    "condition": {
+                      "type": "eq",
+                      "valueA": {
+                        "type": "variable",
+                        "value": "15"
+                      },
+                      "valueB": {
+                        "type": "number",
+                        "value": 0
+                      }
+                    },
+                    "__collapseElse": false
+                  },
+                  "children": {
+                    "true": [
+                      {
+                        "command": "EVENT_REPLACE_COLLISION",
+                        "args": {
+                          "metatile_id": {
+                            "type": "number",
+                            "value": 72
+                          },
+                          "collision_tl": {
+                            "type": "number",
+                            "value": 0
+                          },
+                          "collision_tr": {
+                            "type": "number",
+                            "value": 0
+                          },
+                          "collision_bl": {
+                            "type": "number",
+                            "value": 0
+                          },
+                          "collision_br": {
+                            "type": "number",
+                            "value": 0
+                          }
+                        },
+                        "id": "62a86984-2a88-489d-9b0c-f2e9afb9c2f4"
+                      },
+                      {
+                        "command": "EVENT_REPLACE_TILESET_TILES",
+                        "args": {
+                          "tilesetId": "2190c038-381f-4747-88c7-bb4c84ac8b8a",
+                          "idx_target_tile": {
+                            "type": "number",
+                            "value": 54
+                          },
+                          "idx_start_tile": {
+                            "type": "number",
+                            "value": 54
+                          },
+                          "tile_length": 2
+                        },
+                        "id": "6b240e38-9c6e-4189-989a-76376fff17b8"
+                      },
+                      {
+                        "command": "EVENT_REPLACE_TILESET_TILES",
+                        "args": {
+                          "tilesetId": "2190c038-381f-4747-88c7-bb4c84ac8b8a",
+                          "idx_target_tile": {
+                            "type": "number",
+                            "value": 60
+                          },
+                          "idx_start_tile": {
+                            "type": "number",
+                            "value": 60
+                          },
+                          "tile_length": 2
+                        },
+                        "id": "5507d558-7d8c-40f7-9ffd-c2c68df97567"
+                      }
+                    ],
+                    "false": [
+                      {
+                        "command": "EVENT_REPLACE_COLLISION",
+                        "args": {
+                          "metatile_id": {
+                            "type": "number",
+                            "value": 72
+                          },
+                          "collision_tl": {
+                            "type": "number",
+                            "value": 15
+                          },
+                          "collision_tr": {
+                            "type": "number",
+                            "value": 15
+                          },
+                          "collision_bl": {
+                            "type": "number",
+                            "value": 15
+                          },
+                          "collision_br": {
+                            "type": "number",
+                            "value": 15
+                          }
+                        },
+                        "id": "5df57624-f654-41c5-8db8-1abf46d52fa7"
+                      },
+                      {
+                        "command": "EVENT_REPLACE_TILESET_TILES",
+                        "args": {
+                          "tilesetId": "2190c038-381f-4747-88c7-bb4c84ac8b8a",
+                          "idx_target_tile": {
+                            "type": "number",
+                            "value": 54
+                          },
+                          "idx_start_tile": {
+                            "type": "number",
+                            "value": 0
+                          },
+                          "tile_length": 2
+                        },
+                        "id": "b5417d5e-b432-476a-81f3-f8423bc012a2"
+                      },
+                      {
+                        "command": "EVENT_REPLACE_TILESET_TILES",
+                        "args": {
+                          "tilesetId": "2190c038-381f-4747-88c7-bb4c84ac8b8a",
+                          "idx_target_tile": {
+                            "type": "number",
+                            "value": 60
+                          },
+                          "idx_start_tile": {
+                            "type": "number",
+                            "value": 18
+                          },
+                          "tile_length": 2
+                        },
+                        "id": "98a62ef5-78d5-45d8-a0ef-69e61e63c5ad"
+                      }
+                    ]
+                  },
+                  "id": "afdcf067-740c-4b1a-942f-621d7809bab9"
                 }
               ]
             },

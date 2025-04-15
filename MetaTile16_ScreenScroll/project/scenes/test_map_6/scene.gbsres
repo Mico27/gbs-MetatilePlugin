@@ -28,51 +28,6 @@
       "id": "389711ac-f910-42b1-94df-b9533f5bc38e"
     },
     {
-      "command": "EVENT_SET_TIMER_SCRIPT",
-      "args": {
-        "timer": 1,
-        "duration": 0.5,
-        "frames": 30,
-        "__scriptTabs": "end",
-        "__collapse": true
-      },
-      "children": {
-        "script": [
-          {
-            "command": "EVENT_LOAD_TILESET_EX",
-            "args": {
-              "tilesetId": "936c00bd-fc90-4f06-9203-a94feabcca30",
-              "idx_target_tile": {
-                "type": "number",
-                "value": 108
-              },
-              "idx_start_tile": {
-                "type": "expression",
-                "value": "32 + ($03$ << 2)"
-              },
-              "tile_length": {
-                "type": "number",
-                "value": 4
-              }
-            },
-            "id": "237f2d97-4ec0-4a77-a579-47292acf4e64"
-          },
-          {
-            "command": "EVENT_SET_VALUE",
-            "args": {
-              "variable": "3",
-              "value": {
-                "type": "expression",
-                "value": "($03$ + 1) & 3"
-              }
-            },
-            "id": "e275b2fe-e23f-4cf1-aeba-50ec41c92c9a"
-          }
-        ]
-      },
-      "id": "a65e4f66-d286-4935-b8a8-4f2b481cd5ef"
-    },
-    {
       "command": "EVENT_SET_ACTOR_ACTIVE_INDEX",
       "args": {
         "actorId": "$self$",

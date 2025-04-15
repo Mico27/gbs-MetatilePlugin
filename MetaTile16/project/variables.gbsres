@@ -65,6 +65,21 @@
       "id": "12",
       "name": "VARIABLE_1",
       "symbol": "var_variable_1"
+    },
+    {
+      "id": "13",
+      "name": "SubmapSceneBank",
+      "symbol": "var_submapscenebank"
+    },
+    {
+      "id": "14",
+      "name": "SubmapScenePtr",
+      "symbol": "var_submapsceneptr"
+    },
+    {
+      "id": "15",
+      "name": "CoinToggle",
+      "symbol": "var_cointoggle"
     }
   ],
   "constants": []

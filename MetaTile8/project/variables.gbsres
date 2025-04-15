@@ -65,6 +65,11 @@
       "id": "12",
       "name": "VARIABLE_1",
       "symbol": "var_variable_1"
+    },
+    {
+      "id": "13",
+      "name": "CoinToggle",
+      "symbol": "var_cointoggle"
     }
   ],
   "constants": []

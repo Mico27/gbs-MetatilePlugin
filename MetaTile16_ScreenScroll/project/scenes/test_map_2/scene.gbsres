@@ -68,51 +68,6 @@
       "id": "997c73f8-a876-4207-a653-ea2a8f2d6b0d"
     },
     {
-      "command": "EVENT_SET_TIMER_SCRIPT",
-      "args": {
-        "timer": 1,
-        "duration": 0.5,
-        "frames": 30,
-        "__scriptTabs": "end",
-        "__collapse": true
-      },
-      "children": {
-        "script": [
-          {
-            "command": "EVENT_LOAD_TILESET_EX",
-            "args": {
-              "tilesetId": "936c00bd-fc90-4f06-9203-a94feabcca30",
-              "idx_target_tile": {
-                "type": "number",
-                "value": 108
-              },
-              "idx_start_tile": {
-                "type": "expression",
-                "value": "32 + ($03$ << 2)"
-              },
-              "tile_length": {
-                "type": "number",
-                "value": 4
-              }
-            },
-            "id": "70b5c9d3-d780-43ae-b7d7-086a8903fa1b"
-          },
-          {
-            "command": "EVENT_SET_VALUE",
-            "args": {
-              "variable": "3",
-              "value": {
-                "type": "expression",
-                "value": "($03$ + 1) & 3"
-              }
-            },
-            "id": "d5eeaef3-0660-45be-b0e3-04051b957a84"
-          }
-        ]
-      },
-      "id": "c507d950-0fe4-4670-a052-4ec12a59b3b5"
-    },
-    {
       "command": "EVENT_FADE_IN",
       "args": {
         "speed": "2",

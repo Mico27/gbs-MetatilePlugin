@@ -200,51 +200,6 @@
       "id": "f79b95f3-f65a-4990-aee4-5498d21c92d5"
     },
     {
-      "command": "EVENT_THREAD_START",
-      "args": {
-        "variable": "T0",
-        "__scriptTabs": "true",
-        "__collapse": false,
-        "__comment": false
-      },
-      "children": {
-        "true": [
-          {
-            "command": "EVENT_LOOP",
-            "args": {},
-            "children": {
-              "true": [
-                {
-                  "command": "EVENT_SORT_ACTORS_VERTICALY",
-                  "args": {
-                    "__comment": false
-                  },
-                  "id": "61b624e1-9e52-4175-954d-a67646671281"
-                },
-                {
-                  "command": "EVENT_WAIT",
-                  "args": {
-                    "time": {
-                      "type": "number",
-                      "value": 1
-                    },
-                    "frames": {
-                      "type": "number",
-                      "value": 8
-                    },
-                    "units": "frames"
-                  },
-                  "id": "23b872f2-98f0-4f3c-869b-990b7237d10e"
-                }
-              ]
-            },
-            "id": "c2ff5026-6baf-430d-818f-658a36f8407a"
-          }
-        ]
-      },
-      "id": "012a0607-2ebb-47be-b457-e23c1b820171"
-    },
-    {
       "command": "EVENT_SET_TIMER_SCRIPT",
       "args": {
         "timer": 1,
@@ -253,12 +208,12 @@
         "__scriptTabs": "end",
         "__comment": false,
         "units": "frames",
-        "__collapse": true
+        "__collapse": false
       },
       "children": {
         "script": [
           {
-            "command": "EVENT_LOAD_TILESET_EX",
+            "command": "EVENT_REPLACE_TILESET_TILES",
             "args": {
               "tilesetId": "936c00bd-fc90-4f06-9203-a94feabcca30",
               "idx_target_tile": {
@@ -269,13 +224,9 @@
                 "type": "expression",
                 "value": "32 + ($03$ << 2)"
               },
-              "tile_length": {
-                "type": "number",
-                "value": 4
-              },
-              "__comment": false
+              "tile_length": 4
             },
-            "id": "9582a8e7-aa07-4b6e-9f71-904ae187409b"
+            "id": "14d9a88d-a97a-47ca-bfb6-a728e450b01a"
           },
           {
             "command": "EVENT_SET_VALUE",
