@@ -1,0 +1,11 @@
+{
+  "_resourceType": "tileset",
+  "id": "c4371fef-268b-46eb-ac02-4fb10eaf230c",
+  "name": "Firework_anim_tile_1",
+  "symbol": "tileset_firework_anim_tile_",
+  "width": 16,
+  "height": 1,
+  "imageWidth": 128,
+  "imageHeight": 8,
+  "filename": "Firework_anim_tile_1.png"
+}

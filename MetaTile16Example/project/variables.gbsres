@@ -1,0 +1,146 @@
+{
+  "_resourceType": "variables",
+  "variables": [
+    {
+      "id": "0",
+      "name": "BombAmountUpgrades",
+      "symbol": "var_bombamountupgrades"
+    },
+    {
+      "id": "1",
+      "name": "BombRangeUpgrades",
+      "symbol": "var_bombrangeupgrades"
+    },
+    {
+      "id": "2",
+      "name": "BombAmount",
+      "symbol": "var_bombamount"
+    },
+    {
+      "id": "3",
+      "name": "Bomb1PosX",
+      "symbol": "var_bomb1posx"
+    },
+    {
+      "id": "4",
+      "name": "Bomb1Frame",
+      "symbol": "var_bomb1frame"
+    },
+    {
+      "id": "5",
+      "name": "Bomb1State",
+      "symbol": "var_bomb1state"
+    },
+    {
+      "id": "6",
+      "name": "Bomb2PosX",
+      "symbol": "var_bomb2posx"
+    },
+    {
+      "id": "7",
+      "name": "Bomb2Frame",
+      "symbol": "var_bomb2frame"
+    },
+    {
+      "id": "8",
+      "name": "Bomb2State",
+      "symbol": "var_bomb2state"
+    },
+    {
+      "id": "9",
+      "name": "Bomb3PosX",
+      "symbol": "var_bomb3posx"
+    },
+    {
+      "id": "10",
+      "name": "Bomb3Frame",
+      "symbol": "var_bomb3frame"
+    },
+    {
+      "id": "11",
+      "name": "Bomb3State",
+      "symbol": "var_bomb3state"
+    },
+    {
+      "id": "12",
+      "name": "Bomb4PosX",
+      "symbol": "var_bomb4posx"
+    },
+    {
+      "id": "13",
+      "name": "Bomb4Frame",
+      "symbol": "var_bomb4frame"
+    },
+    {
+      "id": "14",
+      "name": "Bomb4State",
+      "symbol": "var_bomb4state"
+    },
+    {
+      "id": "15",
+      "name": "PlayerTilePosX",
+      "symbol": "var_playertileposx"
+    },
+    {
+      "id": "16",
+      "name": "PlayerTilePosY",
+      "symbol": "var_playertileposy"
+    },
+    {
+      "id": "17",
+      "name": "CurrentMetatileId",
+      "symbol": "var_currentmetatileid"
+    },
+    {
+      "id": "18",
+      "name": "BombsThread",
+      "symbol": "var_bombsthread"
+    },
+    {
+      "id": "19",
+      "name": "BombSlotCursor",
+      "symbol": "var_bombslotcursor"
+    },
+    {
+      "id": "20",
+      "name": "BlastCursor",
+      "symbol": "var_blastcursor"
+    },
+    {
+      "id": "21",
+      "name": "CurrentMetatileCollision",
+      "symbol": "var_currentmetatilecollisio"
+    },
+    {
+      "id": "22",
+      "name": "Bomb1PosY",
+      "symbol": "var_bomb1posy"
+    },
+    {
+      "id": "23",
+      "name": "Bomb2PosY",
+      "symbol": "var_bomb2posy"
+    },
+    {
+      "id": "24",
+      "name": "Bomb3PosY",
+      "symbol": "var_bomb3posy"
+    },
+    {
+      "id": "25",
+      "name": "Bomb4PosY",
+      "symbol": "var_bomb4posy"
+    },
+    {
+      "id": "26",
+      "name": "TextPosX",
+      "symbol": "var_textposx"
+    },
+    {
+      "id": "27",
+      "name": "TextPosY",
+      "symbol": "var_textposy"
+    }
+  ],
+  "constants": []
+}

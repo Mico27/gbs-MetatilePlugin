@@ -1,0 +1,11 @@
+{
+  "_resourceType": "tileset",
+  "id": "af205f41-f40b-4cc0-8067-0d7c4dfcba08",
+  "name": "anim_tile_9",
+  "symbol": "tileset_anim_tile_9",
+  "width": 4,
+  "height": 1,
+  "imageWidth": 32,
+  "imageHeight": 8,
+  "filename": "anim_tile_9.png"
+}

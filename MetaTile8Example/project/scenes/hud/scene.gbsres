@@ -1,0 +1,23 @@
+{
+  "_resourceType": "scene",
+  "id": "8442b96e-d35b-4d1d-a652-106fff95bac4",
+  "_index": 2,
+  "name": "Hud",
+  "backgroundId": "8fbec4f6-c661-4759-84a6-12d2aa2b0a97",
+  "tilesetId": "f5add83b-76cc-4484-afe5-e808c38b8441",
+  "width": 20,
+  "height": 2,
+  "type": "PLATFORM",
+  "colorModeOverride": "none",
+  "paletteIds": [],
+  "spritePaletteIds": [],
+  "collisions": "0028+",
+  "autoFadeSpeed": 1,
+  "symbol": "scene_3",
+  "x": 328,
+  "y": 208,
+  "script": [],
+  "playerHit1Script": [],
+  "playerHit2Script": [],
+  "playerHit3Script": []
+}

@@ -1,0 +1,12 @@
+{
+  "_resourceType": "background",
+  "id": "77b3c549-8389-4174-b2d0-e90086938549",
+  "name": "stage1_map",
+  "symbol": "bg_stage1_map",
+  "tileColors": "",
+  "filename": "stage1_map.png",
+  "width": 30,
+  "height": 30,
+  "imageWidth": 240,
+  "imageHeight": 240
+}

@@ -1,0 +1,151 @@
+{
+  "_resourceType": "variables",
+  "variables": [
+    {
+      "id": "0",
+      "name": "Timer",
+      "symbol": "var_timer"
+    },
+    {
+      "id": "1",
+      "name": "Tile_anim_counter",
+      "symbol": "var_tile_anim_counter"
+    },
+    {
+      "id": "2",
+      "name": "Temp_Thread_Handle",
+      "symbol": "var_temp_thread_handle"
+    },
+    {
+      "id": "3",
+      "name": "Goal_Counter",
+      "symbol": "var_goal_counter"
+    },
+    {
+      "id": "4",
+      "name": "PlayerPosX",
+      "symbol": "var_playerposx"
+    },
+    {
+      "id": "5",
+      "name": "PlayerPosY",
+      "symbol": "var_playerposy"
+    },
+    {
+      "id": "6",
+      "name": "MetatileId",
+      "symbol": "var_metatileid"
+    },
+    {
+      "id": "7",
+      "name": "MetatilePosX",
+      "symbol": "var_metatileposx"
+    },
+    {
+      "id": "8",
+      "name": "MetatilePosY",
+      "symbol": "var_metatileposy"
+    },
+    {
+      "id": "9",
+      "name": "Coins",
+      "symbol": "var_coins"
+    },
+    {
+      "id": "10",
+      "name": "Lives",
+      "symbol": "var_lives"
+    },
+    {
+      "id": "11",
+      "name": "MarioStatus",
+      "symbol": "var_mariostatus"
+    },
+    {
+      "id": "12",
+      "name": "ItemType",
+      "symbol": "var_itemtype"
+    },
+    {
+      "id": "13",
+      "name": "EnemyPosX",
+      "symbol": "var_enemyposx"
+    },
+    {
+      "id": "14",
+      "name": "EnemyPosY",
+      "symbol": "var_enemyposy"
+    },
+    {
+      "id": "15",
+      "name": "PlatformerState",
+      "symbol": "var_platformerstate"
+    },
+    {
+      "id": "16",
+      "name": "MarioStarTimer",
+      "symbol": "var_mariostartimer"
+    },
+    {
+      "id": "17",
+      "name": "PowerStarComboScore",
+      "symbol": "var_powerstarcomboscore"
+    },
+    {
+      "id": "18",
+      "name": "JumpComboScore",
+      "symbol": "var_jumpcomboscore"
+    },
+    {
+      "id": "19",
+      "name": "ScoreLower",
+      "symbol": "var_scorelower"
+    },
+    {
+      "id": "20",
+      "name": "ScoreUpper",
+      "symbol": "var_scoreupper"
+    },
+    {
+      "id": "21",
+      "name": "PlayerIFrame",
+      "symbol": "var_playeriframe"
+    },
+    {
+      "id": "22",
+      "name": "EnemyBehavior",
+      "symbol": "var_enemybehavior"
+    },
+    {
+      "id": "23",
+      "name": "EnemyState",
+      "symbol": "var_enemystate"
+    },
+    {
+      "id": "24",
+      "name": "ActiveEffectCounter",
+      "symbol": "var_activeeffectcounter"
+    },
+    {
+      "id": "25",
+      "name": "Metatile2Id",
+      "symbol": "var_metatile2id"
+    },
+    {
+      "id": "26",
+      "name": "Metatile2PosX",
+      "symbol": "var_metatile2posx"
+    },
+    {
+      "id": "27",
+      "name": "Metatile2PosY",
+      "symbol": "var_metatile2posy"
+    },
+    {
+      "id": "28",
+      "name": "ShellComboScore",
+      "symbol": "var_shellcomboscore"
+    }
+  ],
+  "constants": []
+}
