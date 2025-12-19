@@ -1,0 +1,102 @@
+{
+  "_resourceType": "sprite",
+  "id": "b9e602a9-03a5-4677-9f46-f499ff110e60",
+  "name": "smugtwickster",
+  "symbol": "sprite_smugtwickster",
+  "states": [
+    {
+      "id": "b964beb5-4b58-4899-8317-634abcbb059e",
+      "name": "",
+      "animationType": "multi_movement",
+      "flipLeft": true,
+      "animations": [
+        {
+          "id": "61a96a54-72cf-4a0e-b5f2-15316a272f32",
+          "frames": [
+            {
+              "id": "b6c7bc50-7d8a-42a7-a1c0-43e8a4ced4cc",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "0317ebab-c839-44a6-ad58-ea0f59626271",
+          "frames": [
+            {
+              "id": "c0fd981b-3c04-4bd1-8498-93b297fa8ff4",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "8da6d67c-dfc9-4bd2-9cbe-b276ed0de5c7",
+          "frames": [
+            {
+              "id": "fc535b3b-a862-49c8-a04b-0dd2a2a57ba6",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "a561aacc-4ff8-4b98-9dd4-e5eac272abe8",
+          "frames": [
+            {
+              "id": "0c014a15-b3e0-440c-9bf5-bfb430a02e25",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "19552e35-dc9f-4502-8c4e-0d4176289b4f",
+          "frames": [
+            {
+              "id": "fc592037-81ac-4fed-b48b-437f2be0ec3e",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "a2d9cae5-6819-4b6e-b984-5a76c57cedd4",
+          "frames": [
+            {
+              "id": "7628b1cf-cfb1-41b5-b4d7-5187536c1221",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "8697a508-f697-44db-9c0e-3cea77083574",
+          "frames": [
+            {
+              "id": "56534053-5849-40cb-ae36-9ee141d1fd76",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "0da66805-fc23-4e3a-a0a3-b9348fa716d1",
+          "frames": [
+            {
+              "id": "e232da17-c2d8-4359-b89f-22cef73c191d",
+              "tiles": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "numTiles": 0,
+  "canvasOriginX": 0,
+  "canvasOriginY": 0,
+  "canvasWidth": 32,
+  "canvasHeight": 32,
+  "boundsX": 0,
+  "boundsY": -8,
+  "boundsWidth": 16,
+  "boundsHeight": 16,
+  "animSpeed": 15,
+  "filename": "smugtwickster.png",
+  "width": 64,
+  "height": 64,
+  "checksum": "d3e7a878da5428669372b6e37c6b6c8ecace96e7"
+}

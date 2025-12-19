@@ -1,0 +1,26 @@
+{
+  "_resourceType": "variables",
+  "variables": [
+    {
+      "id": "0",
+      "name": "PlayerPosX",
+      "symbol": "var_playerposx"
+    },
+    {
+      "id": "1",
+      "name": "PlayerPosY",
+      "symbol": "var_playerposy"
+    },
+    {
+      "id": "2",
+      "name": "MetatileId",
+      "symbol": "var_metatileid"
+    },
+    {
+      "id": "3",
+      "name": "LoadedOnce",
+      "symbol": "var_loadedonce"
+    }
+  ],
+  "constants": []
+}

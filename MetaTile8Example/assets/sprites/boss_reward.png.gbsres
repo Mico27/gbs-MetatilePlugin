@@ -1,0 +1,116 @@
+{
+  "_resourceType": "sprite",
+  "id": "b7c8c46e-e4df-43e4-a3f0-b9734b1288a6",
+  "name": "boss_reward",
+  "symbol": "sprite_boss_reward",
+  "states": [
+    {
+      "id": "ae819e01-8c72-4e8d-9faf-0417c3a884fc",
+      "name": "",
+      "animationType": "fixed",
+      "flipLeft": true,
+      "animations": [
+        {
+          "id": "bab8089e-d4b5-4356-b472-a4b5b8b59f06",
+          "frames": [
+            {
+              "id": "4b622445-b2b7-4061-9543-9fa4203c8d6d",
+              "tiles": [
+                {
+                  "id": "4b5c6958-972d-4353-adb3-a96442b84ad5",
+                  "x": 0,
+                  "y": 8,
+                  "sliceX": 0,
+                  "sliceY": 0,
+                  "palette": 0,
+                  "flipX": false,
+                  "flipY": false,
+                  "objPalette": "OBP0",
+                  "paletteIndex": 3,
+                  "priority": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "14b385ca-c795-4333-acb8-baa54e78f067",
+          "frames": [
+            {
+              "id": "c73b613d-02f8-43a6-8c4c-96efffbc8a6a",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "6fa51af3-4a47-4898-854e-a7baea8a9dd7",
+          "frames": [
+            {
+              "id": "debabfd1-753d-4e25-8260-f057d2058c57",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "dd30d8ba-31cb-444e-9ebd-49256eb9df64",
+          "frames": [
+            {
+              "id": "278c040a-0455-4753-a130-9c737cdc232e",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "1ba123de-de13-4d17-99ee-524199a105cc",
+          "frames": [
+            {
+              "id": "1c67ff1a-871a-4ab3-8f2c-2eb82d8a98a2",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "f14d09e7-8e02-4609-8ca4-1c7744bd0a5b",
+          "frames": [
+            {
+              "id": "eaaee6d4-3d75-4393-8224-bbb28679ccdc",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "822f3bd0-9f31-44d6-9d9e-368ed7b0221a",
+          "frames": [
+            {
+              "id": "cac8a593-feab-4df8-b976-3ae87c3c03b1",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "da150b84-e7d5-4a19-8648-efdd7ec57141",
+          "frames": [
+            {
+              "id": "6bbfe56a-0d7a-4c5d-9a7d-2c45a3d2e7bf",
+              "tiles": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "numTiles": 1,
+  "canvasOriginX": 0,
+  "canvasOriginY": 0,
+  "canvasWidth": 32,
+  "canvasHeight": 32,
+  "boundsX": 0,
+  "boundsY": -8,
+  "boundsWidth": 8,
+  "boundsHeight": 8,
+  "animSpeed": 15,
+  "filename": "boss_reward.png",
+  "width": 8,
+  "height": 8,
+  "checksum": "742ec284317a87506f8d1e8340a2a38242bc7e8d"
+}

@@ -1,0 +1,62 @@
+{
+  "_resourceType": "actor",
+  "id": "1cd8df55-eebb-406d-b845-908b41cf9c25",
+  "name": "RedParaGoomba",
+  "frame": 0,
+  "animate": false,
+  "spriteSheetId": "3e2246d5-0bc9-4e2b-bb29-997465f4617c",
+  "prefabId": "ca74c8fd-285f-4fb8-82dd-80886745cf1b",
+  "direction": "down",
+  "moveSpeed": 1,
+  "animSpeed": 15,
+  "paletteId": "",
+  "isPinned": false,
+  "persistent": false,
+  "collisionGroup": "1",
+  "collisionExtraFlags": [],
+  "prefabScriptOverrides": {},
+  "symbol": "actor_9",
+  "script": [],
+  "startScript": [
+    {
+      "command": "EVENT_SET_ACTOR_BEHAVIOR",
+      "args": {
+        "actorId": "$self$",
+        "behaviorId": {
+          "type": "number",
+          "value": 8
+        }
+      },
+      "id": "24c1ada4-2ca0-4fd5-9bb6-02cc7ba743fc",
+      "children": {}
+    },
+    {
+      "command": "EVENT_SET_ACTOR_X_VELOCITY",
+      "args": {
+        "actorId": "$self$",
+        "xVelocity": {
+          "type": "number",
+          "value": -8
+        }
+      },
+      "id": "ba84c2e4-3aed-4577-bc00-6bcf7db0d647"
+    },
+    {
+      "command": "EVENT_ACTOR_SET_STATE",
+      "args": {
+        "actorId": "$self$",
+        "spriteStateId": "Red_Winged",
+        "loopAnim": true
+      },
+      "id": "d935bafa-05c2-4129-978b-0bf42b32eb9b"
+    }
+  ],
+  "updateScript": [],
+  "hit1Script": [],
+  "hit2Script": [],
+  "hit3Script": [],
+  "coordinateType": "tiles",
+  "x": 59,
+  "y": 25,
+  "_index": 8
+}

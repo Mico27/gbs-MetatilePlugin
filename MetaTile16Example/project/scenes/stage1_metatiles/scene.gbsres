@@ -1,0 +1,23 @@
+{
+  "_resourceType": "scene",
+  "id": "52abccb2-351d-4ba0-ac5c-a851cea435db",
+  "_index": 0,
+  "name": "Stage1_Metatiles",
+  "backgroundId": "87e20ab8-e5c4-4f45-a46e-1633c65384fa",
+  "tilesetId": "2d3c0ea2-c36f-4d9d-b91e-376974525076",
+  "width": 32,
+  "height": 32,
+  "type": "ADVENTURE",
+  "colorModeOverride": "none",
+  "paletteIds": [],
+  "spritePaletteIds": [],
+  "collisions": "002+0fa+15!19!0f12+002+0fa+16!1a!0f12+15!19!15!19!15!19!008+15!19!15!19!0fa+002+0f2+16!1a!16!1a!16!1a!008+0fe+002+0f2+0010+0f4+001c+0f4+0034c+",
+  "autoFadeSpeed": 1,
+  "symbol": "scene_1",
+  "x": 136,
+  "y": 56,
+  "script": [],
+  "playerHit1Script": [],
+  "playerHit2Script": [],
+  "playerHit3Script": []
+}

@@ -1,0 +1,49 @@
+{
+  "_resourceType": "engineFieldValues",
+  "engineFieldValues": [
+    {
+      "id": "fade_style",
+      "value": 0
+    },
+    {
+      "id": "FEAT_PLATFORM_COYOTE_TIME",
+      "value": 0
+    },
+    {
+      "id": "FEAT_PLATFORM_DROP_THROUGH",
+      "value": 0
+    },
+    {
+      "id": "SHOOTER_MOVEMENT_TYPE",
+      "value": "MOVEMENT_TYPE_LOCK_PERPENDICULAR"
+    },
+    {
+      "id": "SHOOTER_TRIGGER_ACTIVATION",
+      "value": "ON_PLAYER_COLLISION"
+    },
+    {
+      "id": "SHOOTER_WALL_COLLISION_GROUP",
+      "value": "COLLISION_GROUP_NONE"
+    },
+    {
+      "id": "topdown_grid",
+      "value": 16
+    },
+    {
+      "id": "MAX_MAP_DATA_HEIGHT",
+      "value": 32
+    },
+    {
+      "id": "MAX_MAP_DATA_WIDTH",
+      "value": 32
+    },
+    {
+      "id": "FEAT_ADVENTURE_KNOCKBACK",
+      "value": 0
+    },
+    {
+      "id": "INPUT_ADVENTURE_MOVE_TYPE",
+      "value": "MOVE_TYPE_4_WAY"
+    }
+  ]
+}

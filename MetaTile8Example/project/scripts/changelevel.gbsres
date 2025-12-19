@@ -1,0 +1,29 @@
+{
+  "_resourceType": "script",
+  "id": "1da14dfe-ad02-4e47-addd-68af4399854d",
+  "name": "ChangeLevel",
+  "description": "",
+  "variables": {},
+  "actors": {},
+  "symbol": "script_5",
+  "script": [
+    {
+      "command": "EVENT_SWITCH_SCENE",
+      "args": {
+        "sceneId": "8366dca1-3138-4af3-bb1a-7f8ad49585a0",
+        "x": {
+          "type": "number",
+          "value": 6
+        },
+        "y": {
+          "type": "number",
+          "value": 26
+        },
+        "direction": "right",
+        "fadeSpeed": "2",
+        "__collapse": true
+      },
+      "id": "08ca5a4f-beeb-466c-897b-9c9e4487bbc9"
+    }
+  ]
+}

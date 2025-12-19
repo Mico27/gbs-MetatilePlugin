@@ -1,0 +1,11 @@
+{
+  "_resourceType": "tileset",
+  "id": "a0b1e7d1-1b66-45eb-865c-b5cd3bef9f37",
+  "name": "animation_equipment_scroll",
+  "symbol": "tileset_animation_equipment",
+  "width": 8,
+  "height": 6,
+  "imageWidth": 64,
+  "imageHeight": 48,
+  "filename": "animation_equipment_scroll.png"
+}

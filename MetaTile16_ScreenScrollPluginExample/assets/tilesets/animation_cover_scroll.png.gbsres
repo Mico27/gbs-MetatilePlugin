@@ -1,0 +1,11 @@
+{
+  "_resourceType": "tileset",
+  "id": "e6b466ec-3d57-4097-abed-63273fe7f338",
+  "name": "animation_cover_scroll",
+  "symbol": "tileset_animation_cover_scr",
+  "width": 8,
+  "height": 5,
+  "imageWidth": 64,
+  "imageHeight": 40,
+  "filename": "animation_cover_scroll.png"
+}

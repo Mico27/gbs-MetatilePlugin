@@ -1,0 +1,12 @@
+{
+  "_resourceType": "background",
+  "id": "2e6048ea-3dc3-43d8-a5f2-71f341335f28",
+  "name": "MenuMap2",
+  "symbol": "bg_menumap2",
+  "tileColors": "",
+  "filename": "MenuMap2.png",
+  "width": 16,
+  "height": 11,
+  "imageWidth": 128,
+  "imageHeight": 88
+}

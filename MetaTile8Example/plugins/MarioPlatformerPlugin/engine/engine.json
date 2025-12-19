@@ -1,0 +1,69 @@
+{
+  "version": "4.2.0-e26",
+  "fields": [
+    {
+      "key": "frame_coins",
+      "sceneType": "PLATFORM",
+      "label": "Frame Coins",
+      "description": "Coins collected during current frame",
+      "group": "GAMETYPE_PLATFORMER",
+      "type": "number",
+      "cType": "UBYTE",
+      "defaultValue": 0,
+      "runtimeOnly": true
+    },
+	{
+      "key": "hit_metatile_id",
+      "sceneType": "PLATFORM",
+      "label": "Hit Metatile Id",
+      "description": "Id of the collided metatile",
+      "group": "GAMETYPE_PLATFORMER",
+      "type": "number",
+      "cType": "UBYTE",
+      "defaultValue": 0,
+      "runtimeOnly": true
+    },
+	{
+      "key": "hit_metatile_x",
+      "sceneType": "PLATFORM",
+      "label": "Hit Metatile X position",
+      "description": "X position of the collided metatile",
+      "group": "GAMETYPE_PLATFORMER",
+      "type": "number",
+      "cType": "UBYTE",
+      "defaultValue": 0,
+      "runtimeOnly": true
+    },
+	{
+      "key": "hit_metatile_y",
+      "sceneType": "PLATFORM",
+      "label": "Hit Metatile Y position",
+      "description": "Y position of the collided metatile",
+      "group": "GAMETYPE_PLATFORMER",
+      "type": "number",
+      "cType": "UBYTE",
+      "defaultValue": 0,
+      "runtimeOnly": true
+    },
+	{
+      "key": "hit_metatile_source",
+      "sceneType": "PLATFORM",
+      "label": "Hit Metatile Source",
+      "description": "Actor Idx of the collided metatile",
+      "group": "GAMETYPE_PLATFORMER",
+      "type": "number",
+      "cType": "UBYTE",
+      "defaultValue": 0,
+      "runtimeOnly": true
+    }
+  ],
+  "consts": {
+    "COIN_COLLECTED": 21,
+    "HIT_BLOCK": 22,
+    "ENTER_DOWN_PIPE": 23,
+    "ENTER_UP_PIPE": 24,
+    "ENTER_RIGHT_PIPE": 25,
+    "ENTER_LEFT_PIPE": 26,
+    "FELL_IN_PIT": 27
+  }
+}
