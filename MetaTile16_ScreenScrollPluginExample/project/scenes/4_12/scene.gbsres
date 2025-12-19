@@ -1,0 +1,82 @@
+{
+  "_resourceType": "scene",
+  "id": "63e28227-b73d-494f-adda-26dd2bd3db3a",
+  "_index": 7,
+  "name": "4_12",
+  "backgroundId": "f1c2cf03-035e-4032-b720-a03e245166e9",
+  "tilesetId": "4ba66abc-f8ad-4288-b48c-e5d8a03624e2",
+  "width": 20,
+  "height": 16,
+  "type": "ADVENTURE",
+  "colorModeOverride": "none",
+  "paletteIds": [],
+  "spritePaletteIds": [],
+  "collisions": "00140+",
+  "autoFadeSpeed": 1,
+  "symbol": "scene_8",
+  "x": 520,
+  "y": 648,
+  "script": [
+    {
+      "command": "EVENT_LOAD_META_TILES",
+      "args": {
+        "sceneId": "08fa5e5c-2d36-4439-acf8-356b60014ef5",
+        "matchColor": false,
+        "matchCollision": false,
+        "__collapse": true
+      },
+      "id": "e738e015-ebf1-4f35-a5e7-29aba70ac3a5"
+    },
+    {
+      "command": "EVENT_SET_NEIGHBOUR_SCENE",
+      "args": {
+        "sceneId": "3ae328ec-38ca-4635-a5ec-c38ddc6d3a66",
+        "direction": "left",
+        "rounded": false,
+        "__collapse": true
+      },
+      "id": "3efcb0c6-7952-4363-bbc0-782dde83e0fa"
+    },
+    {
+      "command": "EVENT_SET_NEIGHBOUR_SCENE",
+      "args": {
+        "sceneId": "a612e359-b652-48f5-b645-0d0985f4b243",
+        "direction": "up",
+        "rounded": false,
+        "__collapse": true
+      },
+      "id": "02c953cc-a4a8-4c66-ac77-458e16e88849"
+    },
+    {
+      "command": "EVENT_SET_NEIGHBOUR_SCENE",
+      "args": {
+        "sceneId": "c7b4f1ae-ee97-432f-b57b-dd73f5008ade",
+        "direction": "down",
+        "rounded": false,
+        "__collapse": true
+      },
+      "id": "bfa99549-3387-4a8f-83c6-7ce4a2f15387"
+    },
+    {
+      "command": "EVENT_SET_NEIGHBOUR_SCENE",
+      "args": {
+        "sceneId": "edf783f9-3e53-44c1-82a1-fb6f11e0e15e",
+        "direction": "right",
+        "rounded": false,
+        "__collapse": true
+      },
+      "id": "5e2b7cff-0ebf-46cb-a091-c3cb5932c98e"
+    },
+    {
+      "command": "EVENT_CALL_CUSTOM_EVENT",
+      "args": {
+        "customEventId": "d2adb382-96a8-4994-ab31-b1e4dddffaa9",
+        "__collapse": true
+      },
+      "id": "c69be626-2f4c-4bf0-aced-64a9f2991e70"
+    }
+  ],
+  "playerHit1Script": [],
+  "playerHit2Script": [],
+  "playerHit3Script": []
+}

@@ -509,7 +509,7 @@
               "text": "%D1$10$",
               "x": 1,
               "y": 1,
-              "__collapse": true
+              "__collapse": false
             },
             "id": "4c051d12-c262-4f88-9d89-8dc6a6b11ad8"
           },

@@ -61,6 +61,13 @@ void vm_replace_meta_tile(SCRIPT_CTX * THIS) OLDCALL BANKED {
 	replace_meta_tile(x, y, tile_id, commit);	
 }
 
+void vm_reset_meta_tile(SCRIPT_CTX * THIS) OLDCALL BANKED {
+	uint8_t x = *(uint8_t *) VM_REF_TO_PTR(FN_ARG0);
+	uint8_t y = *(uint8_t *) VM_REF_TO_PTR(FN_ARG1);
+	uint8_t commit = *(uint8_t *) VM_REF_TO_PTR(FN_ARG2);	
+	reset_meta_tile(x, y, commit);	
+}
+
 void vm_get_sram_tile_id_at_pos(SCRIPT_CTX * THIS) OLDCALL BANKED {
 	uint8_t x = *(uint8_t *) VM_REF_TO_PTR(FN_ARG0);
 	uint8_t y = *(uint8_t *) VM_REF_TO_PTR(FN_ARG1);
@@ -121,7 +128,7 @@ void vm_submap_metatiles(SCRIPT_CTX * THIS) OLDCALL BANKED {
 	
 }
 
-void replace_meta_tile(UBYTE x, UBYTE y, UBYTE tile_id, UBYTE commit) BANKED {	
+static void impl_replace_meta_tile(UBYTE x, UBYTE y, UBYTE tile_id, UBYTE commit) {	
 	sram_map_data[METATILE_MAP_OFFSET(x, y)] = tile_id;	
 	if (commit){
 	#ifdef CGB
@@ -133,4 +140,13 @@ void replace_meta_tile(UBYTE x, UBYTE y, UBYTE tile_id, UBYTE commit) BANKED {
 	#endif
 		set_bkg_tile_xy(x, y, ReadBankedUBYTE(metatile_ptr + tile_id, metatile_bank));
 	}
+}
+
+
+void replace_meta_tile(UBYTE x, UBYTE y, UBYTE tile_id, UBYTE commit) BANKED {	
+	impl_replace_meta_tile(x, y, tile_id, commit);
+}
+
+void reset_meta_tile(UBYTE x, UBYTE y, UBYTE commit) BANKED {	
+	impl_replace_meta_tile(x, y, ReadBankedUBYTE(image_ptr + (UWORD)((y * image_tile_width) + x), image_bank), commit);	
 }

@@ -1,0 +1,11 @@
+{
+  "_resourceType": "tileset",
+  "id": "45870712-95d6-4c6f-8dba-cc4c4193b03d",
+  "name": "common_tileset_menu",
+  "symbol": "tileset_common_tileset_menu",
+  "width": 16,
+  "height": 16,
+  "imageWidth": 128,
+  "imageHeight": 128,
+  "filename": "common_tileset_menu.png"
+}

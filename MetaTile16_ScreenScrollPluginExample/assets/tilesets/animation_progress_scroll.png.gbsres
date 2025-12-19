@@ -1,0 +1,11 @@
+{
+  "_resourceType": "tileset",
+  "id": "3ae09f1b-c2c3-4e76-84e8-e4da6beb7fcc",
+  "name": "animation_progress_scroll",
+  "symbol": "tileset_animation_progress_",
+  "width": 8,
+  "height": 6,
+  "imageWidth": 64,
+  "imageHeight": 48,
+  "filename": "animation_progress_scroll.png"
+}

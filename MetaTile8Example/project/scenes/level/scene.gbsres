@@ -26,7 +26,7 @@
       "command": "EVENT_GBVM_SCRIPT",
       "args": {
         "script": "VM_SET_CONST_INT8 _text_palette, 3",
-        "__collapse": false
+        "__collapse": true
       },
       "id": "1767dc03-dea0-4224-84df-513967658a6d"
     },
@@ -49,7 +49,7 @@
         "matchColor": true,
         "matchCollision": false,
         "__comment": false,
-        "__collapse": false
+        "__collapse": true
       },
       "id": "a042815b-c6a4-4b5e-981f-a8a329152dd2"
     },
@@ -668,7 +668,7 @@
       "args": {
         "event": "coinCollected",
         "__scriptTabs": "scriptinput",
-        "__collapse": true,
+        "__collapse": false,
         "__comment": false
       },
       "children": {
@@ -2547,7 +2547,8 @@
       "command": "EVENT_SET_PLATFORMER_CALLBACK_SCRIPT",
       "args": {
         "event": "groundStart",
-        "__scriptTabs": "scriptinput"
+        "__scriptTabs": "scriptinput",
+        "__collapse": true
       },
       "children": {
         "script": [

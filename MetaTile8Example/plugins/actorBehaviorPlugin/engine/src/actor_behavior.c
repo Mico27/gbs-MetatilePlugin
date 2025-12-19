@@ -395,7 +395,7 @@ void actor_behavior_update(void) BANKED {
 						actor->pos.y = new_y;
 					}
 					//Actor Collision		
-					actor_t * hit_actor = actor_overlapping_bb(&actor->bounds, &actor->pos, actor, FALSE);
+					actor_t * hit_actor = actor_overlapping_bb(&actor->bounds, &actor->pos, actor);
 					if (hit_actor && hit_actor->script.bank){							
 						script_execute(hit_actor->script.bank, hit_actor->script.ptr, 0, 1, 2);
 					}
@@ -552,7 +552,7 @@ void actor_behavior_update(void) BANKED {
 						actor_vel_y[i] = 0;
 					}
 					//Actor Collision						
-					actor_t * hit_actor = actor_overlapping_bb(&actor->bounds, &actor->pos, actor, FALSE);
+					actor_t * hit_actor = actor_overlapping_bb(&actor->bounds, &actor->pos, actor);
 					if (hit_actor && hit_actor->script.bank && actor->collision_group != hit_actor->collision_group){						
 						script_execute(hit_actor->script.bank, hit_actor->script.ptr, 0, 1, 4);
 						script_execute(actor->script.bank, actor->script.ptr, 0, 1, 2);

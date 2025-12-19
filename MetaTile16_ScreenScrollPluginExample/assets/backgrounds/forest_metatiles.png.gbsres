@@ -1,0 +1,12 @@
+{
+  "_resourceType": "background",
+  "id": "9b9c69bb-ec9d-441d-94cb-de2e6e4ef57c",
+  "name": "forest_metatiles",
+  "symbol": "bg_forest_metatiles",
+  "tileColors": "",
+  "filename": "forest_metatiles.png",
+  "width": 32,
+  "height": 32,
+  "imageWidth": 256,
+  "imageHeight": 256
+}

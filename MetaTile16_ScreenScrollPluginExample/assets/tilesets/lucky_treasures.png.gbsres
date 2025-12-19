@@ -1,0 +1,11 @@
+{
+  "_resourceType": "tileset",
+  "id": "c5f2c237-4848-4dd2-af1d-0fa74f12e67b",
+  "name": "lucky_treasures",
+  "symbol": "tileset_lucky_treasures",
+  "width": 2,
+  "height": 12,
+  "imageWidth": 16,
+  "imageHeight": 96,
+  "filename": "lucky_treasures.png"
+}

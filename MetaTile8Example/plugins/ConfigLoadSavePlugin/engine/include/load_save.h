@@ -3,7 +3,7 @@
 
 #include <gbdk/platform.h>
 
-#define SRAM_BANKS_TO_SAVE 3
+#define SRAM_BANKS_TO_SAVE 4
 #define SRAM_BANK_SIZE 0x2000
 
 BANKREF_EXTERN(VM_LOAD_SAVE)
