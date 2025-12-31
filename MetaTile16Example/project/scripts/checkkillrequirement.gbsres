@@ -1,0 +1,148 @@
+{
+  "_resourceType": "script",
+  "id": "abf4bf3f-e3c7-45a5-a326-7e5d4d5cf239",
+  "name": "CheckKillRequirement",
+  "description": "",
+  "variables": {},
+  "actors": {},
+  "symbol": "script_2",
+  "script": [
+    {
+      "command": "EVENT_IF",
+      "args": {
+        "condition": {
+          "type": "eq",
+          "valueA": {
+            "type": "variable",
+            "value": "7"
+          },
+          "valueB": {
+            "type": "number",
+            "value": 3
+          }
+        },
+        "__collapseElse": true
+      },
+      "children": {
+        "true": [
+          {
+            "command": "EVENT_REPLACE_META_TILE",
+            "args": {
+              "x": {
+                "type": "number",
+                "value": 20
+              },
+              "y": {
+                "type": "number",
+                "value": 2
+              },
+              "metatile_id": {
+                "type": "number",
+                "value": 26
+              },
+              "commit": true
+            },
+            "id": "3cd4f8b9-b94b-454c-a5f2-227a4c1de334"
+          },
+          {
+            "command": "EVENT_REPLACE_META_TILE",
+            "args": {
+              "x": {
+                "type": "number",
+                "value": 22
+              },
+              "y": {
+                "type": "number",
+                "value": 2
+              },
+              "metatile_id": {
+                "type": "number",
+                "value": 27
+              },
+              "commit": true
+            },
+            "id": "0c8a6e19-91ac-4a8c-91bd-072d31285d08"
+          },
+          {
+            "command": "EVENT_REPLACE_META_TILE",
+            "args": {
+              "x": {
+                "type": "number",
+                "value": 24
+              },
+              "y": {
+                "type": "number",
+                "value": 2
+              },
+              "metatile_id": {
+                "type": "number",
+                "value": 28
+              },
+              "commit": true
+            },
+            "id": "5c0fc1c6-1fff-4e2d-8cfd-25ba62c15687"
+          },
+          {
+            "command": "EVENT_REPLACE_META_TILE",
+            "args": {
+              "x": {
+                "type": "number",
+                "value": 20
+              },
+              "y": {
+                "type": "number",
+                "value": 4
+              },
+              "metatile_id": {
+                "type": "number",
+                "value": 29
+              },
+              "commit": true
+            },
+            "id": "0f5f8302-1a67-4a34-b635-c9c0b4c1ff53"
+          },
+          {
+            "command": "EVENT_REPLACE_META_TILE",
+            "args": {
+              "x": {
+                "type": "number",
+                "value": 22
+              },
+              "y": {
+                "type": "number",
+                "value": 4
+              },
+              "metatile_id": {
+                "type": "number",
+                "value": 30
+              },
+              "commit": true
+            },
+            "id": "05641ad0-728d-4d44-a558-a534d6f57b18"
+          },
+          {
+            "command": "EVENT_REPLACE_META_TILE",
+            "args": {
+              "x": {
+                "type": "number",
+                "value": 24
+              },
+              "y": {
+                "type": "number",
+                "value": 4
+              },
+              "metatile_id": {
+                "type": "number",
+                "value": 31
+              },
+              "commit": true
+            },
+            "id": "536308b4-b3e1-483b-bc02-59759ade34b7"
+          }
+        ],
+        "false": []
+      },
+      "id": "12c91a78-4717-4796-b2f2-68f21166d573"
+    }
+  ]
+}

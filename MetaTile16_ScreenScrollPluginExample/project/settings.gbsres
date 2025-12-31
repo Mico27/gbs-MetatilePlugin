@@ -110,7 +110,12 @@
   "openBuildFolderOnExport": true,
   "showRomUsageAfterBuild": false,
   "romFilename": "",
-  "defaultSceneTypeId": "TOPDOWN",
-  "disabledSceneTypeIds": [],
+  "defaultSceneTypeId": "ADVENTURE",
+  "disabledSceneTypeIds": [
+    "POINTNCLICK",
+    "SHMUP",
+    "PLATFORM",
+    "TOPDOWN"
+  ],
   "autoTileFlipEnabled": true
 }

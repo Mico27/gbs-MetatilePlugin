@@ -1,6 +1,6 @@
 {
   "_resourceType": "actor",
-  "id": "fa610cd6-6fe5-4a2c-9dc4-e6adbc312727",
+  "id": "07f9f618-a96c-4ec9-aa3e-2d7b92fe4db0",
   "name": "Enemy",
   "frame": 0,
   "animate": false,
@@ -15,7 +15,7 @@
   "collisionGroup": "",
   "collisionExtraFlags": [],
   "prefabScriptOverrides": {},
-  "symbol": "actor_2",
+  "symbol": "actor_0",
   "script": [],
   "startScript": [],
   "updateScript": [],
@@ -23,7 +23,7 @@
   "hit2Script": [],
   "hit3Script": [],
   "coordinateType": "tiles",
-  "x": 18,
-  "y": 7,
+  "x": 3,
+  "y": 26,
   "_index": 2
 }

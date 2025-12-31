@@ -12,7 +12,15 @@
   "collisionGroup": "1",
   "collisionExtraFlags": [],
   "prefabScriptOverrides": {},
-  "script": [],
+  "script": [
+    {
+      "command": "EVENT_CALL_CUSTOM_EVENT",
+      "args": {
+        "customEventId": "c0ce4a25-77dd-486c-bf70-be5fd5316abe"
+      },
+      "id": "37d6148a-ce6d-41bd-8c52-9d6006c1b048"
+    }
+  ],
   "startScript": [],
   "updateScript": [
     {
@@ -156,20 +164,21 @@
       "id": "f3107d9f-daa5-44c7-af56-725c7310b511"
     }
   ],
-  "hit1Script": [
+  "hit1Script": [],
+  "hit2Script": [
     {
       "command": "EVENT_ACTOR_COLLISIONS_DISABLE",
       "args": {
         "actorId": "$self$"
       },
-      "id": "0ff4138a-1515-4586-ace6-f94a8a7f2d56"
+      "id": "847dbd3a-a349-4dc9-be5f-c834af58cbe3"
     },
     {
       "command": "EVENT_ACTOR_STOP_UPDATE",
       "args": {
         "actorId": "$self$"
       },
-      "id": "6e5a1be3-e6c4-4db1-96a3-d6d7b8f82b48"
+      "id": "ee99a664-c50d-47fa-90a7-510f1c2e4d82"
     },
     {
       "command": "EVENT_ACTOR_SET_STATE",
@@ -178,7 +187,7 @@
         "spriteStateId": "Dead",
         "loopAnim": false
       },
-      "id": "b6cdd9e5-524c-4c4a-8810-4062874c289a"
+      "id": "a56e2610-aff6-4952-a0ac-30b0ab2c6133"
     },
     {
       "command": "EVENT_WAIT",
@@ -193,16 +202,29 @@
         },
         "units": "frames"
       },
-      "id": "5e53e246-203d-4439-b487-9114c58f05e6"
+      "id": "a0016b65-09ee-4edf-8725-def6c6ae9f25"
     },
     {
       "command": "EVENT_ACTOR_DEACTIVATE",
       "args": {
         "actorId": "$self$"
       },
-      "id": "9eb1557c-923f-4dfe-8709-30efb98420ff"
+      "id": "dd53e94e-451a-4aa6-92c7-d22bc4c9f0d0"
+    },
+    {
+      "command": "EVENT_INC_VALUE",
+      "args": {
+        "variable": "7"
+      },
+      "id": "103a24fc-9c49-4adb-94b8-40d6e9450513"
+    },
+    {
+      "command": "EVENT_CALL_CUSTOM_EVENT",
+      "args": {
+        "customEventId": "abf4bf3f-e3c7-45a5-a326-7e5d4d5cf239"
+      },
+      "id": "dff3b548-91e5-41f4-9431-6e541ce3981e"
     }
   ],
-  "hit2Script": [],
   "hit3Script": []
 }

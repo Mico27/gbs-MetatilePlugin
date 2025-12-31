@@ -20,6 +20,21 @@
       "id": "3",
       "name": "LoadedOnce",
       "symbol": "var_loadedonce"
+    },
+    {
+      "id": "4",
+      "name": "EnteredMetatileX",
+      "symbol": "var_enteredmetatilex"
+    },
+    {
+      "id": "5",
+      "name": "EnteredMetatileY",
+      "symbol": "var_enteredmetatiley"
+    },
+    {
+      "id": "6",
+      "name": "EnteredMetatileId",
+      "symbol": "var_enteredmetatileid"
     }
   ],
   "constants": []

@@ -39,7 +39,7 @@
 
 #define MAX_BOMBS 4
 #define MAX_BOMBS_UPGRADES 4
-#define MAX_LEVEL_BOMBS_UPGRADES 4
+#define MAX_LEVEL_BOMBS_UPGRADES 6
 
 #define MAX_CORNER_PUSH_DISTANCE PX_TO_SUBPX(9)
 
@@ -303,13 +303,6 @@ static void update_bomb_blast_tile(UBYTE x, UBYTE y, UBYTE end_tile_id){
 		case 5:
 			tile_id--;		
 			replace_meta_tile(x, y, tile_id, TRUE);
-			if (!tile_id){
-				for (UBYTE i = 0; i < MAX_LEVEL_BOMBS_UPGRADES; i++){
-					if (level_bomb_upgrade_type[i] && level_bomb_upgrade_posx[i] == x && level_bomb_upgrade_posy[i] == y){
-						replace_meta_tile(x, y, level_bomb_upgrade_type[i], TRUE);
-					}				
-				}
-			}
 		break;
 		case 16:
 		case 17:
@@ -335,6 +328,12 @@ static void reset_bomb_blast_tile(UBYTE x, UBYTE y){
 		reset_meta_tile(x, y, TRUE);
 	} else {
 		replace_meta_tile(x, y, 0, TRUE);
+		for (UBYTE i = 0; i < MAX_LEVEL_BOMBS_UPGRADES; i++){
+			if (level_bomb_upgrade_type[i] && level_bomb_upgrade_posx[i] == x && level_bomb_upgrade_posy[i] == y){
+				replace_meta_tile(x, y, level_bomb_upgrade_type[i], TRUE);
+				level_bomb_upgrade_type[i] = 0;
+			}				
+		}
 	}
 }
 
@@ -401,7 +400,7 @@ static void hit_actor_in_bomb_blast(UBYTE bomb_idx){
 		SUBPX_TO_TILE(actor->pos.x + actor->bounds.left) <= a_right && SUBPX_TO_TILE(actor->pos.x + actor->bounds.right) >= a_left)) {
 			
 			if (actor->script.bank){							
-				script_execute(actor->script.bank, actor->script.ptr, 0, 1, 2);
+				script_execute(actor->script.bank, actor->script.ptr, 0, 1, 4);
 			}			
 		}
         actor = actor->prev;
@@ -488,6 +487,21 @@ void adventure_init(void) BANKED {
     adv_dash_cooldown_timer = 0;
     adv_knockback_timer = 0;
     adv_push_timer = 0;
+	bomb_count_upgrade = 0;
+    bomb_range_upgrade = 0;
+    bomb_count = 0;
+	memset(bomb_state, 0, MAX_BOMBS);
+	memset(bomb_posx, 0, MAX_BOMBS);
+	memset(bomb_posy, 0, MAX_BOMBS);
+	memset(bomb_timer, 0, MAX_BOMBS);
+	memset(bomb_fire_top, 0, MAX_BOMBS);
+	memset(bomb_fire_right, 0, MAX_BOMBS);
+	memset(bomb_fire_bottom, 0, MAX_BOMBS);
+	memset(bomb_fire_left, 0, MAX_BOMBS);
+	memset(level_bomb_upgrade_posx, 0, MAX_LEVEL_BOMBS_UPGRADES);
+	memset(level_bomb_upgrade_posy, 0, MAX_LEVEL_BOMBS_UPGRADES);
+	memset(level_bomb_upgrade_type, 0, MAX_LEVEL_BOMBS_UPGRADES);
+    
 }
 
 void adventure_update(void) BANKED {
@@ -783,13 +797,18 @@ void adventure_update(void) BANKED {
             break;
         }
 #endif
-
+#ifdef FEAT_ADVENTURE_BLANK
+        case BLANK_STATE: {
+			move_and_collide(COL_CHECK_ALL);
+            break;
+        }
+#endif
     }
 	
 	//Placing bombs
 	if (INPUT_PRESSED(INPUT_B) && bomb_count <= bomb_count_upgrade){
 		UBYTE tile_x = SUBPX_TO_TILE(PLAYER.pos.x + 256) & 0xFE;
-		UBYTE tile_y = SUBPX_TO_TILE(PLAYER.pos.y) & 0xFE;
+		UBYTE tile_y = SUBPX_TO_TILE(PLAYER.pos.y + 256) & 0xFE;
 		UBYTE tile_id = sram_map_data[METATILE_MAP_OFFSET(tile_x, tile_y)];
 		if (!tile_id){
 			bomb_count++;
@@ -1100,10 +1119,11 @@ static void move_and_collide(UBYTE mask)
     delta.x  = 0;
     delta.y  = 0;
 
-    if (mask & COL_CHECK_ACTORS)
+    if (mask & COL_CHECK_ACTORS && PLAYER.collision_enabled)
     {
         actor_t *hit_actor;
-        hit_actor = actor_overlapping_player();
+		actor_t *tmp_hit_actor;
+        tmp_hit_actor = hit_actor = actor_overlapping_player();
         adv_attached_actor = NULL;
 
         while (hit_actor != NULL) {
@@ -1135,6 +1155,7 @@ static void move_and_collide(UBYTE mask)
             adv_attached_prev_x = hit_actor->pos.x;
             adv_attached_prev_y = hit_actor->pos.y; 
         } else {
+			hit_actor = tmp_hit_actor;
             adv_attached_actor = NULL;
             collision_dir = DIR_NONE;
             adv_attached_prev_x = 0;
@@ -1160,6 +1181,7 @@ static void move_and_collide(UBYTE mask)
     if (mask & COL_CHECK_TRIGGERS)
     {
         trigger_activate_at_intersection(&PLAYER.bounds, &PLAYER.pos, FALSE);
+		metatile_overlap_at_intersection(&PLAYER.bounds, &PLAYER.pos);
     }    
 }
 
@@ -1178,6 +1200,17 @@ void adv_callback_detach(SCRIPT_CTX *THIS) OLDCALL BANKED
     UWORD *slot = VM_REF_TO_PTR(FN_ARG0);
     adv_events[*slot].script_bank = 0;
     adv_events[*slot].script_addr = NULL;
+}
+
+void vm_set_bomb_powerup(SCRIPT_CTX *THIS) OLDCALL BANKED
+{
+	uint8_t slot = *(uint8_t *) VM_REF_TO_PTR(FN_ARG0);
+	uint8_t powerup_type = *(uint8_t *) VM_REF_TO_PTR(FN_ARG1);
+	uint8_t powerup_x = *(uint8_t *) VM_REF_TO_PTR(FN_ARG2);
+	uint8_t powerup_y = *(uint8_t *) VM_REF_TO_PTR(FN_ARG3);
+	level_bomb_upgrade_posx[slot] = powerup_x;
+	level_bomb_upgrade_posy[slot] = powerup_y;
+	level_bomb_upgrade_type[slot] = powerup_type;
 }
 
 inline void adv_callback_reset(void)

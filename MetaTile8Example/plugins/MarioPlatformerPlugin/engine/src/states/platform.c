@@ -209,21 +209,10 @@ WORD plat_knockback_vel_y;     // Knockback velocity in the y direction
 UBYTE plat_knockback_frames;   // Number of frames for knockback
 WORD plat_blank_grav;          // Blank state gravity
 
-UBYTE frame_coins;             // Coins collected during current frame
 UBYTE hit_metatile_id;         // Id of the collided metatile
 UBYTE hit_metatile_x;          // X position of the collided metatile
 UBYTE hit_metatile_y;          // Y position of the collided metatile
 UBYTE hit_metatile_source;     // actor Idx of the source of the hit metatile
-
-UBYTE previous_top_tile;
-UBYTE previous_left_tile;
-UBYTE previous_bottom_tile;
-UBYTE previous_right_tile;
-
-UBYTE current_left_tile; 
-UBYTE current_top_tile;	
-UBYTE current_right_tile; 
-UBYTE current_bottom_tile;
 	
 UBYTE actors_collisionx_cache[4];
 UBYTE actors_collisiony_cache[4];
@@ -513,7 +502,6 @@ void platform_init(void) BANKED
 
 void platform_update(void) BANKED
 {	
-	frame_coins = 0;
 	actor_behavior_update();
     // State transitions
 
@@ -1651,85 +1639,6 @@ void platform_update(void) BANKED
         camera_deadzone_x--;
     }
 	
-	check_player_metatiles_entered();
-	if(frame_coins){
-		plat_callback_execute(COIN_COLLECTED);
-    }
-}
-
-
-static void on_metatile_enter(UBYTE tile_x, UBYTE tile_y) {
-	UBYTE tile_id = sram_map_data[METATILE_MAP_OFFSET(tile_x, tile_y)];
-	switch(tile_id){
-		case 130://coin
-			replace_meta_tile(tile_x, tile_y, 0, 1);
-			frame_coins++;
-			break;
-	}
-}
-
-static void check_player_metatiles_entered(void) {
-	
-    current_left_tile = SUBPX_TO_TILE(PLAYER.pos.x + PLAYER.bounds.left); 
-    current_top_tile = SUBPX_TO_TILE(PLAYER.pos.y + PLAYER.bounds.top);	
-	current_right_tile = SUBPX_TO_TILE(PLAYER.pos.x + PLAYER.bounds.right);	
-    current_bottom_tile = SUBPX_TO_TILE(PLAYER.pos.y + PLAYER.bounds.bottom);	
-		
-	UBYTE tmp_tile = 0;
-	UBYTE left_side_checked = 0;
-	UBYTE right_side_checked = 0;
-	UBYTE max_counter = 0;
-	
-	//check left
-	if (current_left_tile < previous_left_tile){
-		tmp_tile = current_top_tile;
-		while (max_counter < 4 && tmp_tile <= current_bottom_tile){
-			on_metatile_enter(current_left_tile, tmp_tile);			
-			tmp_tile++;
-			max_counter++;
-		}
-		max_counter = 0;
-		left_side_checked = 1;
-	}
-	//check right	
-	if (current_left_tile != current_right_tile && (current_right_tile > previous_right_tile)){
-		tmp_tile = current_top_tile;
-		while (max_counter < 4 && tmp_tile <= current_bottom_tile){
-			on_metatile_enter(current_right_tile, tmp_tile);
-			tmp_tile++;
-			max_counter++;
-		}
-		max_counter = 0;
-		right_side_checked = 1;
-	}
-	
-	//Check top
-	if (current_top_tile < previous_top_tile){
-		tmp_tile = current_left_tile + left_side_checked;
-		while (max_counter < 4 && tmp_tile <= (current_right_tile - right_side_checked)){
-			on_metatile_enter(tmp_tile, current_top_tile);			
-			tmp_tile++;
-			max_counter++;
-		}
-		max_counter = 0;
-	}	
-	
-	//Check bottom
-	if (current_top_tile != current_bottom_tile && (current_bottom_tile > previous_bottom_tile)){
-		tmp_tile = current_left_tile + left_side_checked;
-		while (max_counter < 4 && tmp_tile <= (current_right_tile - right_side_checked)){
-			on_metatile_enter(tmp_tile, current_bottom_tile);			
-			tmp_tile++;
-			max_counter++;
-		}
-		max_counter = 0;
-	}
-	
-	previous_left_tile = current_left_tile;
-	previous_top_tile = current_top_tile;
-	previous_right_tile = current_right_tile;
-	previous_bottom_tile = current_bottom_tile;
-	
 }
 
 static void on_player_metatile_collision(UBYTE tile_x, UBYTE tile_y, UBYTE direction) {	
@@ -2417,6 +2326,7 @@ finally_check_actor_col:
     if (mask & COL_CHECK_TRIGGERS)
     {
         trigger_activate_at_intersection(&PLAYER.bounds, &PLAYER.pos, INPUT_UP_PRESSED);
+		metatile_overlap_at_intersection(&PLAYER.bounds, &PLAYER.pos);
     }
 }
 

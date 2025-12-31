@@ -2,145 +2,72 @@
   "_resourceType": "variables",
   "variables": [
     {
-      "id": "0",
-      "name": "BombAmountUpgrades",
-      "symbol": "var_bombamountupgrades"
-    },
-    {
-      "id": "1",
-      "name": "BombRangeUpgrades",
-      "symbol": "var_bombrangeupgrades"
-    },
-    {
-      "id": "2",
-      "name": "BombAmount",
-      "symbol": "var_bombamount"
-    },
-    {
       "id": "3",
-      "name": "Bomb1PosX",
-      "symbol": "var_bomb1posx"
+      "name": "EnteredMetaTileY",
+      "symbol": "var_enteredmetatiley"
     },
     {
       "id": "4",
-      "name": "Bomb1Frame",
-      "symbol": "var_bomb1frame"
+      "name": "EnteredMetaTileX",
+      "symbol": "var_enteredmetatilex"
     },
     {
       "id": "5",
-      "name": "Bomb1State",
-      "symbol": "var_bomb1state"
-    },
-    {
-      "id": "6",
-      "name": "Bomb2PosX",
-      "symbol": "var_bomb2posx"
+      "name": "SpinningStateHandler",
+      "symbol": "var_spinningstatehandler"
     },
     {
       "id": "7",
-      "name": "Bomb2Frame",
-      "symbol": "var_bomb2frame"
-    },
-    {
-      "id": "8",
-      "name": "Bomb2State",
-      "symbol": "var_bomb2state"
-    },
-    {
-      "id": "9",
-      "name": "Bomb3PosX",
-      "symbol": "var_bomb3posx"
-    },
-    {
-      "id": "10",
-      "name": "Bomb3Frame",
-      "symbol": "var_bomb3frame"
-    },
-    {
-      "id": "11",
-      "name": "Bomb3State",
-      "symbol": "var_bomb3state"
-    },
-    {
-      "id": "12",
-      "name": "Bomb4PosX",
-      "symbol": "var_bomb4posx"
-    },
-    {
-      "id": "13",
-      "name": "Bomb4Frame",
-      "symbol": "var_bomb4frame"
-    },
-    {
-      "id": "14",
-      "name": "Bomb4State",
-      "symbol": "var_bomb4state"
-    },
-    {
-      "id": "15",
-      "name": "PlayerTilePosX",
-      "symbol": "var_playertileposx"
-    },
-    {
-      "id": "16",
-      "name": "PlayerTilePosY",
-      "symbol": "var_playertileposy"
-    },
-    {
-      "id": "17",
-      "name": "CurrentMetatileId",
-      "symbol": "var_currentmetatileid"
-    },
-    {
-      "id": "18",
-      "name": "BombsThread",
-      "symbol": "var_bombsthread"
-    },
-    {
-      "id": "19",
-      "name": "BombSlotCursor",
-      "symbol": "var_bombslotcursor"
+      "name": "KillCount",
+      "symbol": "var_killcount"
     },
     {
       "id": "20",
-      "name": "BlastCursor",
-      "symbol": "var_blastcursor"
-    },
-    {
-      "id": "21",
-      "name": "CurrentMetatileCollision",
-      "symbol": "var_currentmetatilecollisio"
+      "name": "EnteredMetaTileId",
+      "symbol": "var_enteredmetatileid"
     },
     {
       "id": "22",
-      "name": "Bomb1PosY",
-      "symbol": "var_bomb1posy"
-    },
-    {
-      "id": "23",
-      "name": "Bomb2PosY",
-      "symbol": "var_bomb2posy"
-    },
-    {
-      "id": "24",
-      "name": "Bomb3PosY",
-      "symbol": "var_bomb3posy"
-    },
-    {
-      "id": "25",
-      "name": "Bomb4PosY",
-      "symbol": "var_bomb4posy"
-    },
-    {
-      "id": "26",
-      "name": "TextPosX",
-      "symbol": "var_textposx"
-    },
-    {
-      "id": "27",
-      "name": "TextPosY",
-      "symbol": "var_textposy"
+      "name": "PlayerSpinning",
+      "symbol": "var_playerspinning"
     }
   ],
-  "constants": []
+  "constants": [
+    {
+      "id": "a81f9a51-bec1-4667-9ba2-c93cc48aca02",
+      "name": "METATILE/ARROW_RIGHT",
+      "symbol": "const_metatile_arrow_right",
+      "value": 19
+    },
+    {
+      "id": "001adb9e-b702-495c-81dc-bedfeac9448a",
+      "name": "METATILE/ARROW_UP",
+      "symbol": "const_metatile_arrow_up",
+      "value": 20
+    },
+    {
+      "id": "d90f7fe6-bde8-437f-9e55-ea0323675613",
+      "name": "METATILE/ARROW_LEFT",
+      "symbol": "const_metatile_arrow_left",
+      "value": 21
+    },
+    {
+      "id": "94a198bd-56ba-4e9c-9150-d01731668b49",
+      "name": "METATILE/ARROW_DOWN",
+      "symbol": "const_metatile_arrow_down",
+      "value": 22
+    },
+    {
+      "id": "f0b7e40d-42dc-4cef-bda1-6e51bf1063f6",
+      "name": "METATILE/POWERUP_RANGE",
+      "symbol": "const_metatile_powerup_rang",
+      "value": 32
+    },
+    {
+      "id": "3f509082-7d2a-42f5-9b6e-2910b1763e29",
+      "name": "METATILE/POWERUP_AMOUNT",
+      "symbol": "const_metatile_powerup_amou",
+      "value": 33
+    }
+  ]
 }

@@ -48,6 +48,14 @@
     {
       "id": "plat_turn_control",
       "value": 1
+    },
+    {
+      "id": "plat_max_fall_vel",
+      "value": 12288
+    },
+    {
+      "id": "MIN_OVERLAP_METATILE",
+      "value": 130
     }
   ]
 }

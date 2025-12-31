@@ -1,3 +1,25 @@
 {
-	"version": "4.2.0-e26"
+	"version": "4.2.0-e26",
+	"fields": [
+		{
+          "key": "bomb_count_upgrade",
+          "label": "Bomb count upgrade",
+          "description": "Bomb count upgrade",
+          "group": "Bomberman",
+          "type": "number",
+          "cType": "UBYTE",
+          "defaultValue": 0,
+          "runtimeOnly": true
+        },
+	    {
+          "key": "bomb_range_upgrade",
+          "label": "Bomb range upgrade",
+          "description": "Bomb range upgrade",
+          "group": "Bomberman",
+          "type": "number",
+          "cType": "UBYTE",
+          "defaultValue": 0,
+          "runtimeOnly": true
+        }
+	]
 }

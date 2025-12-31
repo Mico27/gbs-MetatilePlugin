@@ -44,6 +44,38 @@
     {
       "id": "INPUT_ADVENTURE_MOVE_TYPE",
       "value": "MOVE_TYPE_4_WAY"
+    },
+    {
+      "id": "ADVENTURE_KNOCKBACK_ANIM",
+      "value": "Spinning"
+    },
+    {
+      "id": "FEAT_ADVENTURE_BLANK",
+      "value": 1
+    },
+    {
+      "id": "adv_knockback_vel_x",
+      "value": 0
+    },
+    {
+      "id": "adv_knockback_vel_y",
+      "value": 0
+    },
+    {
+      "id": "adv_knockback_frames",
+      "value": 60
+    },
+    {
+      "id": "FEAT_ADVENTURE_DASH",
+      "value": 0
+    },
+    {
+      "id": "ADVENTURE_BLANK_ANIM",
+      "value": ""
+    },
+    {
+      "id": "MIN_OVERLAP_METATILE",
+      "value": 19
     }
   ]
 }

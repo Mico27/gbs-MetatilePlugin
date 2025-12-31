@@ -1,17 +1,6 @@
 {
   "version": "4.2.0-e26",
   "fields": [
-    {
-      "key": "frame_coins",
-      "sceneType": "PLATFORM",
-      "label": "Frame Coins",
-      "description": "Coins collected during current frame",
-      "group": "GAMETYPE_PLATFORMER",
-      "type": "number",
-      "cType": "UBYTE",
-      "defaultValue": 0,
-      "runtimeOnly": true
-    },
 	{
       "key": "hit_metatile_id",
       "sceneType": "PLATFORM",
@@ -58,12 +47,11 @@
     }
   ],
   "consts": {
-    "COIN_COLLECTED": 21,
-    "HIT_BLOCK": 22,
-    "ENTER_DOWN_PIPE": 23,
-    "ENTER_UP_PIPE": 24,
-    "ENTER_RIGHT_PIPE": 25,
-    "ENTER_LEFT_PIPE": 26,
-    "FELL_IN_PIT": 27
+    "HIT_BLOCK": 21,
+    "ENTER_DOWN_PIPE": 22,
+    "ENTER_UP_PIPE": 23,
+    "ENTER_RIGHT_PIPE": 24,
+    "ENTER_LEFT_PIPE": 25,
+    "FELL_IN_PIT": 26
   }
 }
