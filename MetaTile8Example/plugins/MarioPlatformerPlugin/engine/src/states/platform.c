@@ -17,6 +17,7 @@
 #include "vm.h"
 #include "meta_tiles.h"
 #include "actor_behavior.h"
+#include "macro.h"
 
 // Feature Flags --------------------------------------------------------------
 // Optional feature flags, set in 'state_defines.h'
@@ -976,7 +977,7 @@ void platform_update(void) BANKED
         if (plat_is_actor_attached)
         {
             // If the platform has been disabled, detach the player
-            if (plat_attached_actor->disabled == TRUE)
+            if (CHK_FLAG(plat_attached_actor->flags, ACTOR_FLAG_DISABLED))
             {
                 plat_next_state = FALL_STATE;
                 plat_is_actor_attached = FALSE;

@@ -4,7 +4,7 @@
   "name": "",
   "frame": 0,
   "animate": false,
-  "spriteSheetId": "581d34d0-9591-4e6e-a609-1d94f203b0cd",
+  "spriteSheetId": "11b5452b-187c-43a3-afb1-a1f4f74ffda2",
   "prefabId": "",
   "direction": "down",
   "moveSpeed": 1,
@@ -16,7 +16,16 @@
   "collisionExtraFlags": [],
   "prefabScriptOverrides": {},
   "symbol": "actor_1",
-  "script": [],
+  "script": [
+    {
+      "command": "EVENT_ACTOR_EMOTE",
+      "args": {
+        "actorId": "$self$",
+        "emoteId": "edf96d29-9a08-4813-b2d3-46e0996f89f2"
+      },
+      "id": "4aabaa8e-5413-4b17-bee9-b151cec13bb2"
+    }
+  ],
   "startScript": [],
   "updateScript": [],
   "hit1Script": [],

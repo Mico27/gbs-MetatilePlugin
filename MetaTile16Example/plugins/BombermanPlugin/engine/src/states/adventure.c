@@ -17,7 +17,7 @@
 #include "rand.h"
 #include "vm.h"
 #include "math.h"
-
+#include "macro.h"
 #include "meta_tiles.h"
 
 // Feature Flags --------------------------------------------------------------
@@ -389,8 +389,8 @@ static void hit_actor_in_bomb_blast(UBYTE bomb_idx){
     const UBYTE a_left   = bomb_fire_left[bomb_idx];
     const UBYTE a_right  = bomb_fire_right[bomb_idx];
 
-    while (actor) {
-		if (!actor->collision_enabled) {
+    while (actor) {		
+		if (!CHK_FLAG(actor->flags, ACTOR_FLAG_COLLISION)) {
             actor = actor->prev;
             continue;
         }		
@@ -1119,7 +1119,7 @@ static void move_and_collide(UBYTE mask)
     delta.x  = 0;
     delta.y  = 0;
 
-    if (mask & COL_CHECK_ACTORS && PLAYER.collision_enabled)
+    if (mask & COL_CHECK_ACTORS && CHK_FLAG(PLAYER.flags, ACTOR_FLAG_COLLISION))
     {
         actor_t *hit_actor;
 		actor_t *tmp_hit_actor;

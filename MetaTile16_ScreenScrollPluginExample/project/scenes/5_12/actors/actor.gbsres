@@ -4,7 +4,7 @@
   "name": "",
   "frame": 0,
   "animate": false,
-  "spriteSheetId": "581d34d0-9591-4e6e-a609-1d94f203b0cd",
+  "spriteSheetId": "11b5452b-187c-43a3-afb1-a1f4f74ffda2",
   "prefabId": "",
   "direction": "down",
   "moveSpeed": 1,
@@ -16,7 +16,61 @@
   "collisionExtraFlags": [],
   "prefabScriptOverrides": {},
   "symbol": "actor_0",
-  "script": [],
+  "script": [
+    {
+      "command": "EVENT_SET_VALUE",
+      "args": {
+        "variable": "7",
+        "value": {
+          "type": "add",
+          "valueA": {
+            "type": "number",
+            "value": 2
+          },
+          "valueB": {
+            "type": "engineField",
+            "value": "bkg_offset_x"
+          }
+        }
+      },
+      "id": "c3acc681-4d99-4359-937e-c1a7adffbd25"
+    },
+    {
+      "command": "EVENT_SET_VALUE",
+      "args": {
+        "variable": "8",
+        "value": {
+          "type": "add",
+          "valueA": {
+            "type": "number",
+            "value": 2
+          },
+          "valueB": {
+            "type": "engineField",
+            "value": "bkg_offset_y"
+          }
+        }
+      },
+      "id": "2ca393dc-6208-487c-ad0c-36b574e1db89"
+    },
+    {
+      "command": "EVENT_GBVM_SCRIPT",
+      "args": {
+        "script": "VM_SWITCH_TEXT_LAYER    .TEXT_LAYER_BKG\nVM_LOAD_TEXT            2\n.dw VAR_TEXT_POS_X\n.dw VAR_TEXT_POS_Y\n.asciz \"\\003%c%cTalk to the person\\nsouth of here!\"\nVM_DISPLAY_TEXT",
+        "references": [
+          {
+            "type": "variable",
+            "id": "7"
+          },
+          {
+            "type": "variable",
+            "id": "8"
+          }
+        ]
+      },
+      "id": "4350aae5-a996-4ac0-8318-c359b221a229"
+    }
+  ],
   "startScript": [],
   "updateScript": [],
   "hit1Script": [],

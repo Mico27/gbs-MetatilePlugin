@@ -4,7 +4,7 @@
   "name": "",
   "frame": 0,
   "animate": false,
-  "spriteSheetId": "581d34d0-9591-4e6e-a609-1d94f203b0cd",
+  "spriteSheetId": "11b5452b-187c-43a3-afb1-a1f4f74ffda2",
   "prefabId": "",
   "direction": "down",
   "moveSpeed": 1,
@@ -16,14 +16,68 @@
   "collisionExtraFlags": [],
   "prefabScriptOverrides": {},
   "symbol": "actor_7",
-  "script": [],
+  "script": [
+    {
+      "command": "EVENT_SET_VALUE",
+      "args": {
+        "variable": "7",
+        "value": {
+          "type": "add",
+          "valueA": {
+            "type": "number",
+            "value": 4
+          },
+          "valueB": {
+            "type": "engineField",
+            "value": "bkg_offset_x"
+          }
+        }
+      },
+      "id": "91be3061-8293-44ae-a682-204e9a0f422e"
+    },
+    {
+      "command": "EVENT_SET_VALUE",
+      "args": {
+        "variable": "8",
+        "value": {
+          "type": "add",
+          "valueA": {
+            "type": "number",
+            "value": 2
+          },
+          "valueB": {
+            "type": "engineField",
+            "value": "bkg_offset_y"
+          }
+        }
+      },
+      "id": "1ca28b9d-023b-4c74-9ed2-5eb51608c986"
+    },
+    {
+      "command": "EVENT_GBVM_SCRIPT",
+      "args": {
+        "script": "VM_SWITCH_TEXT_LAYER    .TEXT_LAYER_BKG\nVM_LOAD_TEXT            2\n.dw VAR_TEXT_POS_X\n.dw VAR_TEXT_POS_Y\n.asciz \"\\003%c%cHello good sir!\"\nVM_DISPLAY_TEXT",
+        "references": [
+          {
+            "type": "variable",
+            "id": "7"
+          },
+          {
+            "type": "variable",
+            "id": "8"
+          }
+        ]
+      },
+      "id": "0d4bc095-9796-4b4c-8e11-9171b269d199"
+    }
+  ],
   "startScript": [],
   "updateScript": [],
   "hit1Script": [],
   "hit2Script": [],
   "hit3Script": [],
   "coordinateType": "tiles",
-  "x": 9,
+  "x": 10,
   "y": 12,
   "_index": 2
 }

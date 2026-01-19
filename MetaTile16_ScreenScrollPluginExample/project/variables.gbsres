@@ -35,6 +35,16 @@
       "id": "6",
       "name": "EnteredMetatileId",
       "symbol": "var_enteredmetatileid"
+    },
+    {
+      "id": "7",
+      "name": "TEXT_POS_X",
+      "symbol": "var_text_pos_x"
+    },
+    {
+      "id": "8",
+      "name": "TEXT_POS_Y",
+      "symbol": "var_text_pos_y"
     }
   ],
   "constants": []

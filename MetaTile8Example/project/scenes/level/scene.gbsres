@@ -64,7 +64,7 @@
                       "value": 0
                     },
                     "commit": true,
-                    "__collapse": true
+                    "__collapse": false
                   },
                   "id": "a40e78ef-c04e-4c60-aa37-171e3ee05d02"
                 },
@@ -168,7 +168,7 @@
       "command": "EVENT_GBVM_SCRIPT",
       "args": {
         "script": "VM_SET_CONST_INT8 _text_palette, 3",
-        "__collapse": true
+        "__collapse": false
       },
       "id": "1767dc03-dea0-4224-84df-513967658a6d"
     },
@@ -196,24 +196,30 @@
       "id": "a042815b-c6a4-4b5e-981f-a8a329152dd2"
     },
     {
-      "command": "EVENT_REPLACE_META_TILE",
+      "command": "EVENT_SET_VALUE",
       "args": {
-        "x": {
-          "type": "number",
-          "value": 15
-        },
-        "y": {
-          "type": "number",
-          "value": 19
-        },
-        "metatile_id": {
+        "variable": "6",
+        "value": {
           "type": "number",
           "value": 156
         },
-        "commit": false,
         "__collapse": true
       },
-      "id": "5184063a-a7dc-49fc-a9b6-2d803cdaa9f9"
+      "id": "64a471d3-15bc-45c6-a98a-8bb20cc4b896"
+    },
+    {
+      "command": "EVENT_GBVM_SCRIPT",
+      "args": {
+        "script": "; parameters of the function to put on stack (use push const for constants use push value for variables or stack references)\n         ; render the change imediately\n        VM_PUSH_CONST           1\n         ; Id of the metatile to replace with\n        VM_PUSH_VALUE           VAR_METATILEID\n         ; Y position of the tile to replace\n        VM_PUSH_CONST           19\n         ; X position of the tile to replace\n        VM_PUSH_CONST           15\n         ; the actual function\n        VM_CALL_NATIVE          b_vm_replace_meta_tile, _vm_replace_meta_tile\n         ; pop the 4 values we put on stack previously\n        VM_POP                  4",
+        "__collapse": true,
+        "references": [
+          {
+            "type": "variable",
+            "id": "6"
+          }
+        ]
+      },
+      "id": "b0fdf9be-7c77-45c9-933d-e946086c9ce7"
     },
     {
       "command": "EVENT_REPLACE_META_TILE",

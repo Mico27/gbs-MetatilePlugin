@@ -18,6 +18,7 @@
 #include "meta_tiles.h"
 #include "collision.h"
 #include "data_manager.h"
+#include "macro.h"
 #include "data/game_globals.h"
 
 UBYTE actor_behavior_ids[MAX_ACTORS];
@@ -114,7 +115,7 @@ static void apply_velocity(UBYTE actor_idx, actor_t * actor) {
 	//Apply velocity
 	new_actor_y =  actor->pos.y + actor_vel_y[actor_idx];
 	new_actor_x =  actor->pos.x + actor_vel_x[actor_idx];
-	if (actor->collision_enabled){
+	if (CHK_FLAG(actor->flags, ACTOR_FLAG_COLLISION)){
 		//Tile Collision
 		actor->pos.x = check_collision(new_actor_x, actor->pos.y, &actor->bounds, ((actor->pos.x > new_actor_x) ? CHECK_DIR_LEFT : CHECK_DIR_RIGHT));
 		if (actor->pos.x != new_actor_x){
@@ -131,7 +132,7 @@ static void apply_velocity_avoid_fall(UBYTE actor_idx, actor_t * actor) {
 	//Apply velocity
 	new_actor_y =  actor->pos.y + actor_vel_y[actor_idx];
 	new_actor_x =  actor->pos.x + actor_vel_x[actor_idx];
-	if (actor->collision_enabled){
+	if (CHK_FLAG(actor->flags, ACTOR_FLAG_COLLISION)){
 		//Tile Collision
 		actor->pos.y = check_collision(actor->pos.x, new_actor_y, &actor->bounds, ((actor->pos.y > new_actor_y) ? CHECK_DIR_UP : CHECK_DIR_DOWN));
 		if (new_actor_y != actor->pos.y){
@@ -155,7 +156,7 @@ static void apply_velocity_avoid_fall(UBYTE actor_idx, actor_t * actor) {
 void actor_behavior_update(void) BANKED {
 	for (UBYTE i = 0; i < MAX_ACTORS; i++){
 		actor_t * actor = (actors + i);
-		if (!actor->active){
+		if (!CHK_FLAG(actor->flags, ACTOR_FLAG_ACTIVE)){
 			continue;
 		}
 		current_behavior = actor_behavior_ids[i];
@@ -202,7 +203,7 @@ void actor_behavior_update(void) BANKED {
 						actor_reset_anim(actor);
 						actor_vel_y[i] = 0;
 						actor_vel_x[i] = 0;
-						actor->collision_enabled = false;
+						CLR_FLAG(actor->flags, ACTOR_FLAG_COLLISION);
 					}
 					actor_counter_a[i]++;
 					if (actor_counter_a[i] > 30){
@@ -230,7 +231,7 @@ void actor_behavior_update(void) BANKED {
 					}
 					break;
 				case 255: //Dead
-					actor->collision_enabled = true;
+					SET_FLAG(actor->flags, ACTOR_FLAG_COLLISION);
 					actor_counter_a[i] = 0;
 					deactivate_actor(actor);
 					break;
@@ -363,7 +364,7 @@ void actor_behavior_update(void) BANKED {
 					//Apply velocity
 					WORD new_y =  actor->pos.y + actor_vel_y[i];
 					WORD new_x =  actor->pos.x + actor_vel_x[i];
-					if (actor->collision_enabled){
+					if (CHK_FLAG(actor->flags, ACTOR_FLAG_COLLISION)){
 						//Tile Collision
 						actor->pos.x = check_collision(new_x, actor->pos.y, &actor->bounds, ((actor->pos.x > new_x) ? CHECK_DIR_LEFT : CHECK_DIR_RIGHT));
 						if (actor->pos.x != new_x){
@@ -571,7 +572,7 @@ void actor_behavior_update(void) BANKED {
 						actor_states[i] = 1; 
 						actor_vel_y[i] = -40;
 						actor_vel_x[i] = 0;
-						actor->collision_enabled = false;
+						CLR_FLAG(actor->flags, ACTOR_FLAG_COLLISION);
 					}
 					break;
 				case 1: //Main state
@@ -586,7 +587,7 @@ void actor_behavior_update(void) BANKED {
 					actor->pos.y =  actor->pos.y + actor_vel_y[i];					
 					break;
 				case 255: //Dead
-					actor->collision_enabled = true;
+					SET_FLAG(actor->flags, ACTOR_FLAG_COLLISION);
 					actor_reset_anim(actor);
 					deactivate_actor(actor);
 					break;
@@ -598,7 +599,7 @@ void actor_behavior_update(void) BANKED {
 					//Actor Collision	
 					for (UBYTE j = 1; j < MAX_ACTORS; j++){
 						actor_t * hit_actor = (actors + j);
-						if (!hit_actor->active || hit_actor == actor || !hit_actor->collision_enabled){
+						if (!CHK_FLAG(hit_actor->flags, ACTOR_FLAG_ACTIVE) || hit_actor == actor || !CHK_FLAG(hit_actor->flags, ACTOR_FLAG_COLLISION)){
 							continue;
 						}
 						if (bb_intersects(&actor->bounds, &actor->pos, &hit_actor->bounds, &hit_actor->pos)) {
