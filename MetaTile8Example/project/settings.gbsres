@@ -111,6 +111,10 @@
   "showRomUsageAfterBuild": false,
   "romFilename": "",
   "defaultSceneTypeId": "TOPDOWN",
-  "disabledSceneTypeIds": [],
+  "disabledSceneTypeIds": [
+    "ADVENTURE",
+    "POINTNCLICK",
+    "SHMUP"
+  ],
   "autoTileFlipEnabled": false
 }

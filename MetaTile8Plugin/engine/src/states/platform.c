@@ -123,6 +123,9 @@
 #define COLLISION_SLOPE_ANY           (COLLISION_SLOPE_45 | COLLISION_SLOPE_225_BOT | COLLISION_SLOPE_225_TOP)
 #define COLLISION_SLOPE               0x70u
 
+#define ENABLE_PLAT_HORIZONTAL_COLLISION_METATILE \
+    defined(ENABLE_PLAT_LEFT_COLLISION_METATILE) || \
+    defined(ENABLE_PLAT_RIGHT_COLLISION_METATILE)
 
 #define PLATFORM_ANIM_OVERRIDES_SET \
     defined(PLATFORM_FALL_ANIM) || \
@@ -580,7 +583,7 @@ void platform_init(void) BANKED
 }
 
 void platform_update(void) BANKED
-{
+{    
     // State transitions
 
     if (plat_state != plat_next_state)
@@ -1175,6 +1178,27 @@ static void move_and_collide(UBYTE mask)
 #ifdef FEAT_PLATFORM_WALL_JUMP
             plat_coyote_timer = plat_coyote_frames + 1;
 #endif
+#if ENABLE_PLAT_HORIZONTAL_COLLISION_METATILE
+            if (moving_right){
+#ifdef ENABLE_PLAT_RIGHT_COLLISION_METATILE
+                on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_RIGHT);
+#endif
+            } else {
+#ifdef ENABLE_PLAT_LEFT_COLLISION_METATILE
+                on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_LEFT);
+#endif
+            }
+        } else {
+            if (moving_right){
+#ifdef ENABLE_PLAT_RIGHT_COLLISION_METATILE
+                reset_collision_cache(DIR_RIGHT);
+#endif                
+            } else {
+#ifdef ENABLE_PLAT_LEFT_COLLISION_METATILE
+                reset_collision_cache(DIR_LEFT);	
+#endif 
+            }				
+#endif  
         }
 
     finally_update_x:
@@ -1317,6 +1341,11 @@ static void move_and_collide(UBYTE mask)
                 plat_drop_timer = 0;
 #endif
                 plat_grounded = TRUE;
+#ifdef ENABLE_PLAT_DOWN_COLLISION_METATILE
+                on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_DOWN);
+            } else {
+                reset_collision_cache(DIR_DOWN);
+#endif  
             }
         finally_update_y:
             if (plat_grounded && (plat_state != DASH_STATE)) {
@@ -1349,6 +1378,11 @@ static void move_and_collide(UBYTE mask)
                 plat_coyote_timer = 0;
 #endif
                 plat_next_state = FALL_STATE;
+#ifdef ENABLE_PLAT_UP_COLLISION_METATILE
+                on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_UP);
+            } else {
+                reset_collision_cache(DIR_UP);
+#endif  
             }
             PLAYER.pos.y = new_y;
         }
@@ -1453,7 +1487,9 @@ finally_check_actor_col:
     if (mask & COL_CHECK_TRIGGERS)
     {
         trigger_activate_at_intersection(&PLAYER.bounds, &PLAYER.pos, INPUT_UP_PRESSED);
+#ifdef ENABLE_PLAT_ENTER_METATILE
         metatile_overlap_at_intersection(&PLAYER.bounds, &PLAYER.pos);
+#endif
     }
 }
 
