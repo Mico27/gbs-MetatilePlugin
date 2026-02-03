@@ -1,5 +1,5 @@
 {
-	"version": "4.2.0-e29",
+	"version": "4.2.0-e33",
 	"fields": [
         {
 			"key": "MAX_MAP_DATA_WIDTH",
@@ -83,7 +83,7 @@
           "group": "GAMETYPE_PLATFORMER",
           "type": "checkbox",
           "cType": "define",
-          "defaultValue": 1,
+          "defaultValue": 0,
           "isHeading": true
         },
         {
@@ -94,7 +94,7 @@
           "group": "GAMETYPE_PLATFORMER",
           "type": "checkbox",
           "cType": "define",
-          "defaultValue": 1,
+          "defaultValue": 0,
           "isHeading": true
         },
 		{
@@ -173,7 +173,7 @@
           "group": "GAMETYPE_POINT_N_CLICK",
           "type": "checkbox",
           "cType": "define",
-          "defaultValue": 1,
+          "defaultValue": 0,
           "isHeading": true
         },
         {
@@ -184,7 +184,7 @@
           "group": "GAMETYPE_ADVENTURE",
           "type": "checkbox",
           "cType": "define",
-          "defaultValue": 1,
+          "defaultValue": 0,
           "isHeading": true
         },
         {
@@ -195,7 +195,7 @@
           "group": "GAMETYPE_ADVENTURE",
           "type": "checkbox",
           "cType": "define",
-          "defaultValue": 1,
+          "defaultValue": 0,
           "isHeading": true
         },
 		{
@@ -274,7 +274,7 @@
           "group": "GAMETYPE_SHMUP",
           "type": "checkbox",
           "cType": "define",
-          "defaultValue": 1,
+          "defaultValue": 0,
           "isHeading": true
         },
         {
@@ -285,7 +285,7 @@
           "group": "GAMETYPE_SHMUP",
           "type": "checkbox",
           "cType": "define",
-          "defaultValue": 1,
+          "defaultValue": 0,
           "isHeading": true
         },
 		{
@@ -364,7 +364,7 @@
           "group": "GAMETYPE_TOP_DOWN",
           "type": "checkbox",
           "cType": "define",
-          "defaultValue": 1,
+          "defaultValue": 0,
           "isHeading": true
         },
         {
@@ -375,7 +375,7 @@
           "group": "GAMETYPE_TOP_DOWN",
           "type": "checkbox",
           "cType": "define",
-          "defaultValue": 1,
+          "defaultValue": 0,
           "isHeading": true
         },
 		{
@@ -477,9 +477,9 @@
           "runtimeOnly": true
         },   
         {
-          "key": "collided_down_metatile_id",
-          "label": "Collided Down Metatile Id",
-          "description": "Id of the collided down metatile",
+          "key": "collided_metatile_id",
+          "label": "Collided Metatile Id",
+          "description": "Id of the collided metatile",
           "group": "Metatiles",
           "type": "number",
           "cType": "UBYTE",
@@ -487,9 +487,9 @@
           "runtimeOnly": true
         },
 	    {
-          "key": "collided_down_metatile_x",
-          "label": "Collided Down Metatile X position",
-          "description": "X position of the collided down metatile",
+          "key": "collided_metatile_x",
+          "label": "Collided Metatile X position",
+          "description": "X position of the collided metatile",
           "group": "Metatiles",
           "type": "number",
           "cType": "UBYTE",
@@ -497,9 +497,9 @@
           "runtimeOnly": true
         },
 	    {
-          "key": "collided_down_metatile_y",
-          "label": "Collided Down Metatile Y position",
-          "description": "Y position of the collided down metatile",
+          "key": "collided_metatile_y",
+          "label": "Collided Metatile Y position",
+          "description": "Y position of the collided metatile",
           "group": "Metatiles",
           "type": "number",
           "cType": "UBYTE",
@@ -507,9 +507,9 @@
           "runtimeOnly": true
         },
         {
-          "key": "collided_right_metatile_id",
-          "label": "Collided Right Metatile Id",
-          "description": "Id of the collided right metatile",
+          "key": "collided_metatile_dir",
+          "label": "Collided Metatile Direction",
+          "description": "Direction of the collided metatile",
           "group": "Metatiles",
           "type": "number",
           "cType": "UBYTE",
@@ -517,85 +517,14 @@
           "runtimeOnly": true
         },
 	    {
-          "key": "collided_right_metatile_x",
-          "label": "Collided Right Metatile X position",
-          "description": "X position of the collided right metatile",
+          "key": "collided_metatile_source",
+          "label": "Collided Metatile Source",
+          "description": "Source of the collided metatile",
           "group": "Metatiles",
           "type": "number",
           "cType": "UBYTE",
           "defaultValue": 0,
           "runtimeOnly": true
-        },
-	    {
-          "key": "collided_right_metatile_y",
-          "label": "Collided Right Metatile Y position",
-          "description": "Y position of the collided right metatile",
-          "group": "Metatiles",
-          "type": "number",
-          "cType": "UBYTE",
-          "defaultValue": 0,
-          "runtimeOnly": true
-        },
-        {
-          "key": "collided_up_metatile_id",
-          "label": "Collided Up Metatile Id",
-          "description": "Id of the collided up metatile",
-          "group": "Metatiles",
-          "type": "number",
-          "cType": "UBYTE",
-          "defaultValue": 0,
-          "runtimeOnly": true
-        },
-	    {
-          "key": "collided_up_metatile_x",
-          "label": "Collided Up Metatile X position",
-          "description": "X position of the collided up metatile",
-          "group": "Metatiles",
-          "type": "number",
-          "cType": "UBYTE",
-          "defaultValue": 0,
-          "runtimeOnly": true
-        },
-	    {
-          "key": "collided_up_metatile_y",
-          "label": "Collided Up Metatile Y position",
-          "description": "Y position of the collided up metatile",
-          "group": "Metatiles",
-          "type": "number",
-          "cType": "UBYTE",
-          "defaultValue": 0,
-          "runtimeOnly": true
-        },
-        {
-          "key": "collided_left_metatile_id",
-          "label": "Collided Left Metatile Id",
-          "description": "Id of the collided left metatile",
-          "group": "Metatiles",
-          "type": "number",
-          "cType": "UBYTE",
-          "defaultValue": 0,
-          "runtimeOnly": true
-        },
-	    {
-          "key": "collided_left_metatile_x",
-          "label": "Collided Left Metatile X position",
-          "description": "X position of the collided left metatile",
-          "group": "Metatiles",
-          "type": "number",
-          "cType": "UBYTE",
-          "defaultValue": 0,
-          "runtimeOnly": true
-        },
-	    {
-          "key": "collided_left_metatile_y",
-          "label": "Collided Left Metatile Y position",
-          "description": "Y position of the collided left metatile",
-          "group": "Metatiles",
-          "type": "number",
-          "cType": "UBYTE",
-          "defaultValue": 0,
-          "runtimeOnly": true
-        }        
-		
+        }		
 	]
 }

@@ -375,11 +375,13 @@ void actor_behavior_update(void) BANKED {
 								case 129://coin block
 								case 156://powerup block	
 								case 157://1up block
-                                script_event_t* metatile_event = metatile_events + METATILE_COLLISION_LEFT_EVENT;
+                                script_event_t* metatile_event = metatile_events + METATILE_COLLISION_UP_EVENT;
 								if(metatile_event->script_addr){
-									collided_left_metatile_id = tile_id;
-									collided_left_metatile_x = col_tx;
-									collided_left_metatile_y = col_ty;
+									collided_metatile_id = tile_id;
+									collided_metatile_x = col_tx;
+									collided_metatile_y = col_ty;                                    
+                                    collided_metatile_dir = DIR_UP;
+                                    collided_metatile_source = i;
 									script_execute(metatile_event->script_bank, metatile_event->script_addr, 0, 0);
 								}
 								break;

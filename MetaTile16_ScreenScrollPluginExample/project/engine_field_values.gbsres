@@ -56,6 +56,38 @@
     {
       "id": "player_transition_left_threshold",
       "value": 256
+    },
+    {
+      "id": "ENABLE_ADV_DOWN_COLLISION_METATILE",
+      "value": 1
+    },
+    {
+      "id": "MIN_OVERLAP_METATILE",
+      "value": 6
+    },
+    {
+      "id": "MIN_DOWN_COLLISION_METATILE",
+      "value": 16
+    },
+    {
+      "id": "ENABLE_ADV_LEFT_COLLISION_METATILE",
+      "value": 1
+    },
+    {
+      "id": "ENABLE_ADV_UP_COLLISION_METATILE",
+      "value": 1
+    },
+    {
+      "id": "ENABLE_ADV_RIGHT_COLLISION_METATILE",
+      "value": 1
+    },
+    {
+      "id": "ENABLE_ADV_COLLISION_METATILE",
+      "value": 0
+    },
+    {
+      "id": "ENABLE_ADV_ENTER_METATILE",
+      "value": 1
     }
   ]
 }

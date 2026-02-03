@@ -23,7 +23,7 @@
         "sceneId": "08fa5e5c-2d36-4439-acf8-356b60014ef5",
         "matchColor": false,
         "matchCollision": false,
-        "__collapse": false
+        "__collapse": true
       },
       "id": "a975e901-be69-412e-90b5-9757b9e48b13"
     },
@@ -33,7 +33,7 @@
         "sceneId": "63e28227-b73d-494f-adda-26dd2bd3db3a",
         "direction": "left",
         "rounded": false,
-        "__collapse": false
+        "__collapse": true
       },
       "id": "b5b9a25f-2115-4b72-8c3d-fd038c2d5476"
     },

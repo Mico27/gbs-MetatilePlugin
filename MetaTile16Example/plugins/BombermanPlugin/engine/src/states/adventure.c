@@ -62,6 +62,9 @@
 #define MOVE_TYPE_4_WAY 0
 #define MOVE_TYPE_8_WAY 1
 
+#define DIRECTION_TYPE_4_WAY 0
+#define DIRECTION_TYPE_HORIZONTAL 1
+
 #define DIR_PRIORITY_NONE 0
 #define DIR_PRIORITY_HORIZONTAL 1
 #define DIR_PRIORITY_VERTICAL 2
@@ -76,6 +79,9 @@
 
 #ifndef INPUT_ADVENTURE_MOVE_TYPE
 #define INPUT_ADVENTURE_MOVE_TYPE MOVE_TYPE_8_WAY
+#endif
+#ifndef INPUT_ADVENTURE_DIRECTION_TYPE
+#define INPUT_ADVENTURE_DIRECTION_TYPE DIRECTION_TYPE_4_WAY
 #endif
 #define DASH_INPUT_INTERACT 0
 #define DASH_INPUT_DOUBLE_TAP 1
@@ -291,6 +297,33 @@ inline UBYTE dash_input_pressed(void)
 #endif
 }
 
+#endif
+
+static void state_enter_ground(void);
+static void state_exit_ground(void);
+static void state_update_ground(void);
+#ifdef FEAT_ADVENTURE_DASH
+static void state_enter_dash(void);
+static void state_exit_dash(void);
+static void state_update_dash(void);
+#endif
+#ifdef FEAT_ADVENTURE_KNOCKBACK
+static void state_enter_knockback(void);
+static void state_exit_knockback(void);
+static void state_update_knockback(void);
+#endif
+#ifdef FEAT_ADVENTURE_BLANK
+static void state_enter_blank(void);
+static void state_exit_blank(void);
+#endif
+#ifdef FEAT_ADVENTURE_RUN
+static void state_enter_run(void);
+static void state_exit_run(void);
+#endif
+#ifdef FEAT_ADVENTURE_PUSH
+static void state_enter_push(void);
+static void state_exit_push(void);
+static void state_update_push(void);
 #endif
 
 static void update_bomb_blast_tile(UBYTE x, UBYTE y, UBYTE end_tile_id){	
@@ -513,40 +546,36 @@ void adventure_update(void) BANKED {
         switch (adv_state)
         {
             case GROUND_STATE: {
-                adv_callback_execute(GROUND_END);
+                state_exit_ground();
                 break;
             }
 #ifdef FEAT_ADVENTURE_RUN
             case RUN_STATE: {
-                adv_callback_execute(RUN_END);
+                state_exit_run();
                 break;
             }
 #endif              
 #ifdef FEAT_ADVENTURE_DASH
             case DASH_STATE: {
-                adv_callback_execute(DASH_END);
+                state_exit_dash();
                 break;
             }
 #endif
 #ifdef FEAT_ADVENTURE_KNOCKBACK
             case KNOCKBACK_STATE: {
-                adv_vel_x = 0;
-                adv_vel_y = 0;
-                adv_callback_execute(KNOCKBACK_END);
+                state_exit_knockback();
                 break;
             }
 #endif
 #ifdef FEAT_ADVENTURE_BLANK
             case BLANK_STATE: {
-                adv_vel_x = 0;
-                adv_vel_y = 0;
-                adv_callback_execute(BLANK_END);
+                state_exit_blank();
                 break;
             }
 #endif
 #ifdef FEAT_ADVENTURE_PUSH
             case PUSH_STATE: {
-                adv_callback_execute(PUSH_END);
+                state_exit_push();
                 break;
             }
 #endif
@@ -558,86 +587,36 @@ void adventure_update(void) BANKED {
         switch (adv_state)
         {
             case GROUND_STATE: {
-#if ADVENTURE_ANIM_OVERRIDES_SET
-                adv_restore_default_anim_state();
-#endif
-                adv_callback_execute(GROUND_INIT);
+                state_enter_ground();
                 break;
             }
 #ifdef FEAT_ADVENTURE_RUN
             case RUN_STATE: {
-#ifdef ADVENTURE_RUN_ANIM
-                adv_set_player_anim_state(ADVENTURE_RUN_ANIM);
-#elif ADVENTURE_ANIM_OVERRIDES_SET
-                adv_restore_default_anim_state();
-#endif
-                adv_callback_execute(RUN_INIT);
+                state_enter_run();
                 break;
             }
 #endif            
 #ifdef FEAT_ADVENTURE_DASH
-        case DASH_STATE: {
-            dash_init();
-            if (adv_next_state != DASH_STATE) {
-                // Break out if dash not allowed
-                return;
+            case DASH_STATE: {
+                state_enter_dash();
+                break;
             }
-#ifdef ADVENTURE_DASH_ANIM
-            adv_set_player_anim_state(ADVENTURE_DASH_ANIM);
-#elif ADVENTURE_ANIM_OVERRIDES_SET  
-            adv_restore_default_anim_state();
-#endif
-            adv_callback_execute(DASH_INIT);
-            break;
-        }
 #endif
 #ifdef FEAT_ADVENTURE_KNOCKBACK
             case KNOCKBACK_STATE: {
-                // Knockback in opposite direction to current movement
-                if (adv_vel_x != 0) {
-                    adv_vel_x = adv_vel_x > 0 ? -adv_knockback_vel_x : adv_knockback_vel_x;
-                } else if (IS_DIR_HORIZONTAL(PLAYER.dir)) {
-                    adv_vel_x = PLAYER.dir == DIR_RIGHT ? -adv_knockback_vel_x : adv_knockback_vel_x;
-                }
-
-                if (adv_vel_y != 0) {
-                    adv_vel_y = adv_vel_y > 0 ? -adv_knockback_vel_y : adv_knockback_vel_y;
-                } else if (IS_DIR_VERTICAL(PLAYER.dir)) {
-                    adv_vel_y = PLAYER.dir == DIR_DOWN ? -adv_knockback_vel_y : adv_knockback_vel_y;
-                }
-
-                adv_knockback_timer = adv_knockback_frames;
-#ifdef ADVENTURE_KNOCKBACK_ANIM
-                adv_set_player_anim_state(ADVENTURE_KNOCKBACK_ANIM);
-#elif ADVENTURE_ANIM_OVERRIDES_SET
-                adv_restore_default_anim_state();
-#endif
-                adv_callback_execute(KNOCKBACK_INIT);
+                state_enter_knockback();
                 break;
             }
 #endif
 #ifdef FEAT_ADVENTURE_BLANK
             case BLANK_STATE: {
-                adv_vel_x = 0;
-                adv_vel_y = 0;
-#ifdef ADVENTURE_BLANK_ANIM
-                adv_set_player_anim_state(ADVENTURE_BLANK_ANIM);
-#elif ADVENTURE_ANIM_OVERRIDES_SET
-                adv_restore_default_anim_state();
-#endif
-                adv_callback_execute(BLANK_INIT);
+                state_enter_blank();
                 break;
             }
 #endif
 #ifdef FEAT_ADVENTURE_PUSH
             case PUSH_STATE: {
-#ifdef ADVENTURE_PUSH_ANIM
-                adv_set_player_anim_state(ADVENTURE_PUSH_ANIM);
-#elif ADVENTURE_ANIM_OVERRIDES_SET
-                adv_restore_default_anim_state();
-#endif
-                actor_set_dir(&PLAYER, facing_dir, TRUE);
-                adv_callback_execute(PUSH_INIT);
+                state_enter_push();
                 break;
             }
 #endif
@@ -651,149 +630,27 @@ void adventure_update(void) BANKED {
     {
         case GROUND_STATE:
         case RUN_STATE: {
-
-            handle_dir_input();
-            adv_deceleration();
-
-            if (collision_dir != DIR_NONE) {
-                // Push away from attached solid actor
-                WORD delta_mp_x = adv_attached_actor->pos.x - adv_attached_prev_x;
-                WORD delta_mp_y = adv_attached_actor->pos.y - adv_attached_prev_y;
-                adv_attached_prev_x = adv_attached_actor->pos.x;
-                adv_attached_prev_y = adv_attached_actor->pos.y;
-                
-                if (collision_dir == DIR_DOWN && delta_mp_y > adv_vel_y) {
-                    adv_vel_y = MAX(0, DELTA_TO_VEL(delta_mp_y));
-                } else if (collision_dir == DIR_UP && delta_mp_y < adv_vel_y) {
-                    adv_vel_y = MIN(0, DELTA_TO_VEL(delta_mp_y));
-                } else if (collision_dir == DIR_LEFT && delta_mp_x < adv_vel_x) {
-                    adv_vel_x = MIN(0, DELTA_TO_VEL(delta_mp_x));
-                } else if (collision_dir == DIR_RIGHT && delta_mp_x > adv_vel_x) {
-                    adv_vel_x = MAX(0, DELTA_TO_VEL(delta_mp_x));
-                }
-            }
-
-            delta.x = VEL_TO_SUBPX(adv_vel_x);
-            delta.y = VEL_TO_SUBPX(adv_vel_y);
-
-#ifdef FEAT_ADVENTURE_PUSH
-            UWORD prev_x = PLAYER.pos.x;
-            UWORD prev_y = PLAYER.pos.y;
-#endif
-
-            move_and_collide(COL_CHECK_ALL);
-
-#ifdef FEAT_ADVENTURE_PUSH
-            // Check if player is pushing against an obstacle
-            if (joy & INPUT_DPAD && prev_x == PLAYER.pos.x && prev_y == PLAYER.pos.y) {
-                if (adv_push_timer == adv_push_delay_frames) {
-                    adv_next_state = PUSH_STATE;
-                    break;
-                }                
-                adv_push_timer++;
-            } else {
-                adv_push_timer = 0;
-            }
-#endif
-
-#ifdef FEAT_ADVENTURE_DASH
-            if (adv_dash_cooldown_timer == 0 && dash_input_pressed()) {
-                adv_next_state = DASH_STATE;
-                break;
-            }
-#endif
-
-#ifdef FEAT_ADVENTURE_RUN
-            const UBYTE running = INPUT_ADVENTURE_RUN;
-            if (adv_state == GROUND_STATE && running) {
-                adv_next_state = RUN_STATE;
-                break;
-            } else if (adv_state == RUN_STATE && !running) {
-                adv_next_state = GROUND_STATE;
-                break;
-            }
-#endif
-
-            // Facing and animation update
-            if (joy & INPUT_DPAD) {
-                actor_set_dir(&PLAYER, facing_dir, TRUE);
-            } else {
-                actor_set_anim_idle(&PLAYER);
-            }
-            
+            state_update_ground();
             break;
         }
 
 #ifdef FEAT_ADVENTURE_DASH
         case DASH_STATE: {
-            WORD remaining_dash_dist = adv_dash_per_frame;
-
-            BYTE x_dir = 0;
-            BYTE y_dir = 0;
-
-            if (PLAYER.dir == DIR_RIGHT) {
-                x_dir = 1;
-            } else if (PLAYER.dir == DIR_LEFT) {
-                x_dir = -1;
-            } else if (PLAYER.dir == DIR_DOWN) {
-                y_dir = 1;
-            } else if (PLAYER.dir == DIR_UP) {
-                y_dir = -1;
-            }
-
-            while (remaining_dash_dist)
-            {
-                WORD dist = MIN(remaining_dash_dist, MAX_DELTA);
-                delta.x = dist * x_dir;
-                delta.y = dist * y_dir;
-                move_and_collide(adv_dash_mask);
-                remaining_dash_dist -= dist;
-            }
-
-            COUNTER_DECREMENT_CB(adv_dash_currentframe, {
-                adv_next_state = GROUND_STATE;
-                adv_vel_x = 0;
-                adv_vel_y = 0;
-            });
-
+            state_update_dash();
+            break;
         }
 #endif
 
 #ifdef FEAT_ADVENTURE_KNOCKBACK
         case KNOCKBACK_STATE: {
-            delta.x = VEL_TO_SUBPX(adv_vel_x);
-            delta.y = VEL_TO_SUBPX(adv_vel_y);
-
-            move_and_collide(COL_CHECK_ALL);
-
-            COUNTER_DECREMENT_CB(adv_knockback_timer, {
-                adv_next_state = GROUND_STATE;
-            });
-
+            state_update_knockback();
             break;
-
         }
 #endif
 
 #ifdef FEAT_ADVENTURE_PUSH
         case PUSH_STATE: {
-
-            handle_dir_input();
-  
-            delta.x = VEL_TO_SUBPX(adv_vel_x);
-            delta.y = VEL_TO_SUBPX(adv_vel_y);
-
-            UWORD prev_x = PLAYER.pos.x;
-            UWORD prev_y = PLAYER.pos.y;
-
-            move_and_collide(COL_CHECK_ALL);
-
-            // Check if player is still pushing against an obstacle
-            if (!(joy & INPUT_DPAD) || prev_x != PLAYER.pos.x || prev_y != PLAYER.pos.y) {
-                adv_next_state = GROUND_STATE;
-                break;
-            }
-           
+            state_update_push();
             break;
         }
 #endif
@@ -861,7 +718,6 @@ static void handle_dir_input(void) {
     WORD target_x = 0;
     WORD target_y = 0;
     static UBYTE facing_priority_axis = DIR_PRIORITY_NONE;
-
 #ifdef FEAT_ADVENTURE_RUN
     const WORD max_vel = (adv_state == RUN_STATE) ? adv_run_vel : adv_walk_vel;
     const WORD base_acc = (adv_state == RUN_STATE) ? adv_run_acc : adv_walk_acc;
@@ -888,7 +744,7 @@ static void handle_dir_input(void) {
         target_x = (target_x >> 1) + (target_x >> 2);  
         target_y = (target_y >> 1) + (target_y >> 2);  
     }
-
+#if INPUT_ADVENTURE_DIRECTION_TYPE == DIRECTION_TYPE_4_WAY
     // Update facing priority axis
     if ((left | right) && !(up | down)) {
         facing_priority_axis = DIR_PRIORITY_HORIZONTAL;
@@ -897,26 +753,34 @@ static void handle_dir_input(void) {
     } else if (!(left | right | up | down)) {
         facing_priority_axis = DIR_PRIORITY_NONE;
     }
-
+#endif
     // Determine facing based on which axis was pressed first
     if ((left | right) && (up | down)) {
+#if INPUT_ADVENTURE_DIRECTION_TYPE == DIRECTION_TYPE_4_WAY
         // Both axes pressed, respect whichever axis was pressed first
         if (facing_priority_axis == DIR_PRIORITY_HORIZONTAL) {
             facing_dir = left ? DIR_LEFT : DIR_RIGHT;
         } else {
             facing_dir = up ? DIR_UP : DIR_DOWN;
-        }
+        }	
+#else
+	    facing_dir = left ? DIR_LEFT : DIR_RIGHT;
+#endif
     } else if (left) {
         facing_dir = DIR_LEFT;
     } else if (right) {
         facing_dir = DIR_RIGHT;
-    } else if (up) {
+    } 
+#if INPUT_ADVENTURE_DIRECTION_TYPE != DIRECTION_TYPE_HORIZONTAL
+	else if (up) {
         facing_dir = DIR_UP;
     } else if (down) {
         facing_dir = DIR_DOWN;
     }
+#endif
 #else
     // ---------------------- 4-WAY ----------------------
+#if INPUT_ADVENTURE_DIRECTION_TYPE != DIRECTION_TYPE_HORIZONTAL
     if (INPUT_RECENT_LEFT) {
         target_x = -max_vel;
         facing_dir = DIR_LEFT;
@@ -930,6 +794,19 @@ static void handle_dir_input(void) {
         target_y =  max_vel;
         facing_dir = DIR_DOWN;
     }
+#else
+	if (INPUT_RECENT_LEFT) {
+        target_x = -max_vel;
+        facing_dir = DIR_LEFT;
+    } else if (INPUT_RECENT_RIGHT) {
+        target_x =  max_vel;
+        facing_dir = DIR_RIGHT;
+    } else if (INPUT_RECENT_UP) {
+        target_y = -max_vel;
+    } else if (INPUT_RECENT_DOWN) {
+        target_y =  max_vel;
+    }
+#endif
 #endif
 
     // ---------------------- Apply Acceleration ----------------------
@@ -958,6 +835,9 @@ static void handle_dir_input(void) {
             if (adv_vel_y < -max_vel) adv_vel_y = -max_vel;
         }
     }
+
+    adv_vel_x = CLAMP(adv_vel_x, -max_vel, max_vel);
+    adv_vel_y = CLAMP(adv_vel_y, -max_vel, max_vel);
 }
 
 static void move_and_collide(UBYTE mask)
@@ -1004,9 +884,13 @@ static void move_and_collide(UBYTE mask)
                             }
                         }
                     }
-                } 
+                }
+#ifdef ENABLE_ADV_RIGHT_COLLISION_METATILE
+                on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_RIGHT);
+            } else {
+                reset_collision_cache(DIR_RIGHT);		
+#endif 
             }
-            new_x = MIN(image_width_subpx - EXCLUSIVE_OFFSET(PLAYER.bounds.right), new_x);
         } else if (delta.x < 0) {
             UBYTE tile_x = SUBPX_TO_TILE(new_x + PLAYER.bounds.left);
             UBYTE tile = tile_col_test_range_y(COLLISION_RIGHT, tile_x, tile_start, tile_end);
@@ -1034,6 +918,11 @@ static void move_and_collide(UBYTE mask)
                         }
                     }
                 }
+#ifdef ENABLE_ADV_LEFT_COLLISION_METATILE
+                on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_LEFT);
+            } else {
+                reset_collision_cache(DIR_LEFT);		
+#endif 
             }
         }
 
@@ -1081,6 +970,11 @@ static void move_and_collide(UBYTE mask)
                         }
                     }                        
                 }
+#ifdef ENABLE_ADV_DOWN_COLLISION_METATILE
+                on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_DOWN);
+            } else {
+                reset_collision_cache(DIR_DOWN);		
+#endif 
             }
         } else if (delta.y < 0) {
             UBYTE tile_y = SUBPX_TO_TILE(new_y + PLAYER.bounds.top);
@@ -1109,6 +1003,11 @@ static void move_and_collide(UBYTE mask)
                         }
                     }
                 }
+#ifdef ENABLE_ADV_UP_COLLISION_METATILE
+                on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_UP);
+            } else {
+                reset_collision_cache(DIR_UP);		
+#endif 
             }
         }
 
@@ -1122,8 +1021,8 @@ static void move_and_collide(UBYTE mask)
     if (mask & COL_CHECK_ACTORS && CHK_FLAG(PLAYER.flags, ACTOR_FLAG_COLLISION))
     {
         actor_t *hit_actor;
-		actor_t *tmp_hit_actor;
-        tmp_hit_actor = hit_actor = actor_overlapping_player();
+        actor_t *initial_hit_actor;
+        initial_hit_actor = hit_actor = actor_overlapping_player();
         adv_attached_actor = NULL;
 
         while (hit_actor != NULL) {
@@ -1155,7 +1054,7 @@ static void move_and_collide(UBYTE mask)
             adv_attached_prev_x = hit_actor->pos.x;
             adv_attached_prev_y = hit_actor->pos.y; 
         } else {
-			hit_actor = tmp_hit_actor;
+            hit_actor = initial_hit_actor;
             adv_attached_actor = NULL;
             collision_dir = DIR_NONE;
             adv_attached_prev_x = 0;
@@ -1168,9 +1067,7 @@ static void move_and_collide(UBYTE mask)
             player_register_collision_with(hit_actor);
         }
         else if (INPUT_PRESSED(INPUT_ADVENTURE_INTERACT)) {
-            if (!hit_actor) {
-                hit_actor = actor_in_front_of_player(8, TRUE);
-            }
+            hit_actor = actor_with_script_in_front_of_player(8);
             if (hit_actor && !(hit_actor->collision_group & COLLISION_GROUP_MASK) && hit_actor->script.bank) {
                 actor_set_dir(hit_actor, FLIPPED_DIR(PLAYER.dir), FALSE);
                 script_execute(hit_actor->script.bank, hit_actor->script.ptr, 0, 1, 0);
@@ -1181,7 +1078,9 @@ static void move_and_collide(UBYTE mask)
     if (mask & COL_CHECK_TRIGGERS)
     {
         trigger_activate_at_intersection(&PLAYER.bounds, &PLAYER.pos, FALSE);
-		metatile_overlap_at_intersection(&PLAYER.bounds, &PLAYER.pos);
+#ifdef ENABLE_ADV_ENTER_METATILE
+        metatile_overlap_at_intersection(&PLAYER.bounds, &PLAYER.pos);
+#endif
     }    
 }
 
@@ -1324,6 +1223,7 @@ static void dash_init(void)
         }
 
         if (col) {
+            adv_dash_per_frame = 0;
             adv_next_state = GROUND_STATE;
             return;
         }
@@ -1343,3 +1243,287 @@ static void dash_init(void)
     adv_dash_mask |= COL_CHECK_X | COL_CHECK_Y;
 }
 #endif
+
+// State Machine Functions ----------------------------------------------------
+
+// GROUND_STATE
+
+static void state_enter_ground(void)
+{
+#if ADVENTURE_ANIM_OVERRIDES_SET
+    adv_restore_default_anim_state();
+#endif
+    adv_callback_execute(GROUND_INIT);
+}
+
+static void state_exit_ground(void)
+{
+    adv_callback_execute(GROUND_END);
+}
+
+static void state_update_ground(void)
+{
+    handle_dir_input();
+    adv_deceleration();
+
+    if (collision_dir != DIR_NONE) {
+        // Push away from attached solid actor
+        WORD delta_mp_x = adv_attached_actor->pos.x - adv_attached_prev_x;
+        WORD delta_mp_y = adv_attached_actor->pos.y - adv_attached_prev_y;
+        adv_attached_prev_x = adv_attached_actor->pos.x;
+        adv_attached_prev_y = adv_attached_actor->pos.y;
+        
+        if (collision_dir == DIR_DOWN && delta_mp_y > adv_vel_y) {
+            adv_vel_y = MAX(0, DELTA_TO_VEL(delta_mp_y));
+        } else if (collision_dir == DIR_UP && delta_mp_y < adv_vel_y) {
+            adv_vel_y = MIN(0, DELTA_TO_VEL(delta_mp_y));
+        } else if (collision_dir == DIR_LEFT && delta_mp_x < adv_vel_x) {
+            adv_vel_x = MIN(0, DELTA_TO_VEL(delta_mp_x));
+        } else if (collision_dir == DIR_RIGHT && delta_mp_x > adv_vel_x) {
+            adv_vel_x = MAX(0, DELTA_TO_VEL(delta_mp_x));
+        }
+    }
+
+    delta.x = VEL_TO_SUBPX(adv_vel_x);
+    delta.y = VEL_TO_SUBPX(adv_vel_y);
+
+#ifdef FEAT_ADVENTURE_PUSH
+    UWORD prev_x = PLAYER.pos.x;
+    UWORD prev_y = PLAYER.pos.y;
+#endif
+
+    move_and_collide(COL_CHECK_ALL);
+
+#ifdef FEAT_ADVENTURE_PUSH
+    // Check if player is pushing against an obstacle
+    if (joy & INPUT_DPAD && prev_x == PLAYER.pos.x && prev_y == PLAYER.pos.y) {
+        if (adv_push_timer == adv_push_delay_frames) {
+            adv_next_state = PUSH_STATE;
+            return;
+        }                
+        adv_push_timer++;
+    } else {
+        adv_push_timer = 0;
+    }
+#endif
+
+#ifdef FEAT_ADVENTURE_DASH
+    if (adv_dash_cooldown_timer == 0 && dash_input_pressed()) {
+        adv_next_state = DASH_STATE;
+        return;
+    }
+#endif
+
+#ifdef FEAT_ADVENTURE_RUN
+    const UBYTE running = INPUT_ADVENTURE_RUN;
+    if (adv_state == GROUND_STATE && running) {
+        adv_next_state = RUN_STATE;
+        return;
+    } else if (adv_state == RUN_STATE && !running) {
+        adv_next_state = GROUND_STATE;
+        return;
+    }
+#endif
+
+    // Facing and animation update
+    if (joy & INPUT_DPAD) {
+        actor_set_dir(&PLAYER, facing_dir, TRUE);
+    } else {
+        actor_set_anim_idle(&PLAYER);
+    }
+    
+}
+
+// DASH_STATE
+
+#ifdef FEAT_ADVENTURE_DASH
+static void state_enter_dash(void)
+{
+    dash_init();
+    if (adv_next_state != DASH_STATE) {
+        // Break out if dash not allowed
+        return;
+    }
+#ifdef ADVENTURE_DASH_ANIM
+    adv_set_player_anim_state(ADVENTURE_DASH_ANIM);
+#elif ADVENTURE_ANIM_OVERRIDES_SET  
+    adv_restore_default_anim_state();
+#endif
+    adv_callback_execute(DASH_INIT);
+}
+
+static void state_exit_dash(void)
+{
+    adv_callback_execute(DASH_END);
+}
+
+static void state_update_dash(void)
+{
+    WORD remaining_dash_dist = adv_dash_per_frame;
+
+    BYTE x_dir = 0;
+    BYTE y_dir = 0;
+
+    if (PLAYER.dir == DIR_RIGHT) {
+        x_dir = 1;
+    } else if (PLAYER.dir == DIR_LEFT) {
+        x_dir = -1;
+    } else if (PLAYER.dir == DIR_DOWN) {
+        y_dir = 1;
+    } else if (PLAYER.dir == DIR_UP) {
+        y_dir = -1;
+    }
+
+    while (remaining_dash_dist)
+    {
+        WORD dist = MIN(remaining_dash_dist, MAX_DELTA);
+        delta.x = dist * x_dir;
+        delta.y = dist * y_dir;
+        move_and_collide(adv_dash_mask);
+        remaining_dash_dist -= dist;
+    }
+
+    COUNTER_DECREMENT_CB(adv_dash_currentframe, {
+        adv_next_state = GROUND_STATE;
+        adv_vel_x = 0;
+        adv_vel_y = 0;
+    });
+}
+#endif
+
+// KNOCKBACK_STATE
+
+#ifdef FEAT_ADVENTURE_KNOCKBACK
+static void state_enter_knockback(void)
+{
+    // Knockback in opposite direction to current movement
+    if (adv_vel_x != 0) {
+        adv_vel_x = adv_vel_x > 0 ? -adv_knockback_vel_x : adv_knockback_vel_x;
+    } else if (IS_DIR_HORIZONTAL(PLAYER.dir)) {
+        adv_vel_x = PLAYER.dir == DIR_RIGHT ? -adv_knockback_vel_x : adv_knockback_vel_x;
+    }
+
+    if (adv_vel_y != 0) {
+        adv_vel_y = adv_vel_y > 0 ? -adv_knockback_vel_y : adv_knockback_vel_y;
+    } else if (IS_DIR_VERTICAL(PLAYER.dir)) {
+        adv_vel_y = PLAYER.dir == DIR_DOWN ? -adv_knockback_vel_y : adv_knockback_vel_y;
+    }
+
+    adv_knockback_timer = adv_knockback_frames;
+#ifdef ADVENTURE_KNOCKBACK_ANIM
+    adv_set_player_anim_state(ADVENTURE_KNOCKBACK_ANIM);
+#elif ADVENTURE_ANIM_OVERRIDES_SET
+    adv_restore_default_anim_state();
+#endif
+    adv_callback_execute(KNOCKBACK_INIT);
+}
+
+static void state_exit_knockback(void)
+{
+    adv_vel_x = 0;
+    adv_vel_y = 0;
+    adv_callback_execute(KNOCKBACK_END);
+}
+
+static void state_update_knockback(void)
+{
+    delta.x = VEL_TO_SUBPX(adv_vel_x);
+    delta.y = VEL_TO_SUBPX(adv_vel_y);
+
+    move_and_collide(COL_CHECK_ALL);
+
+    COUNTER_DECREMENT_CB(adv_knockback_timer, {
+        adv_next_state = GROUND_STATE;
+    });
+}
+#endif
+
+// BLANK_STATE
+
+#ifdef FEAT_ADVENTURE_BLANK
+static void state_enter_blank(void)
+{
+    adv_vel_x = 0;
+    adv_vel_y = 0;
+#ifdef ADVENTURE_BLANK_ANIM
+    adv_set_player_anim_state(ADVENTURE_BLANK_ANIM);
+#elif ADVENTURE_ANIM_OVERRIDES_SET
+    adv_restore_default_anim_state();
+#endif
+    adv_callback_execute(BLANK_INIT);
+}
+
+static void state_exit_blank(void)
+{
+    adv_vel_x = 0;
+    adv_vel_y = 0;
+    adv_callback_execute(BLANK_END);
+}
+#endif
+
+// RUN_STATE
+
+#ifdef FEAT_ADVENTURE_RUN
+static void state_enter_run(void)
+{
+#ifdef ADVENTURE_RUN_ANIM
+    adv_set_player_anim_state(ADVENTURE_RUN_ANIM);
+#elif ADVENTURE_ANIM_OVERRIDES_SET
+    adv_restore_default_anim_state();
+#endif
+    adv_callback_execute(RUN_INIT);
+}
+
+static void state_exit_run(void)
+{
+    adv_callback_execute(RUN_END);
+}
+#endif
+
+// PUSH_STATE
+
+#ifdef FEAT_ADVENTURE_PUSH
+static void state_enter_push(void)
+{
+#ifdef ADVENTURE_PUSH_ANIM
+    adv_set_player_anim_state(ADVENTURE_PUSH_ANIM);
+#elif ADVENTURE_ANIM_OVERRIDES_SET
+    adv_restore_default_anim_state();
+#endif
+    actor_set_dir(&PLAYER, facing_dir, TRUE);
+    adv_callback_execute(PUSH_INIT);
+}
+
+static void state_exit_push(void)
+{
+    adv_callback_execute(PUSH_END);
+}
+
+static void state_update_push(void)
+{
+    handle_dir_input();
+  
+    delta.x = VEL_TO_SUBPX(adv_vel_x);
+    delta.y = VEL_TO_SUBPX(adv_vel_y);
+
+    UWORD prev_x = PLAYER.pos.x;
+    UWORD prev_y = PLAYER.pos.y;
+
+    move_and_collide(COL_CHECK_ALL);
+
+    // Check if player is still pushing against an obstacle
+    if (!(joy & INPUT_DPAD) || prev_x != PLAYER.pos.x || prev_y != PLAYER.pos.y) {
+        adv_next_state = GROUND_STATE;
+        return;
+    }
+
+    // Facing and animation update
+    if (joy & INPUT_DPAD) {
+        actor_set_dir(&PLAYER, facing_dir, TRUE);
+    } else {
+        actor_set_anim_idle(&PLAYER);
+    }
+}
+#endif
+
+// End of State Machine Functions ---------------------------------------------

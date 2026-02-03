@@ -14,6 +14,7 @@ const fields = [
           ["2", "Metatile Right Collision"],
           ["3", "Metatile Up Collision"],
           ["4", "Metatile Left Collision"],
+          ["5", "Metatile Any Collision"],
         ],
     },
     {

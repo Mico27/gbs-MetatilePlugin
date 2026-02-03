@@ -1,0 +1,53 @@
+{
+  "_resourceType": "script",
+  "id": "1391f94f-d103-4dd4-bb0c-b39ed770176f",
+  "name": "OnAnyCollision",
+  "description": "",
+  "variables": {
+    "V0": {
+      "id": "V0",
+      "name": "Pos_x",
+      "passByReference": false
+    },
+    "V1": {
+      "id": "V1",
+      "name": "Pos_y",
+      "passByReference": false
+    },
+    "V2": {
+      "id": "V2",
+      "name": "metatile_id",
+      "passByReference": false
+    }
+  },
+  "actors": {},
+  "symbol": "script_2",
+  "script": [
+    {
+      "command": "EVENT_REPLACE_META_TILE",
+      "args": {
+        "x": {
+          "type": "variable",
+          "value": "V0"
+        },
+        "y": {
+          "type": "variable",
+          "value": "V1"
+        },
+        "metatile_id": {
+          "type": "add",
+          "valueA": {
+            "type": "variable",
+            "value": "V2"
+          },
+          "valueB": {
+            "type": "number",
+            "value": 1
+          }
+        },
+        "commit": true
+      },
+      "id": "1689f1cf-94d4-40e0-9a3d-ec4883af8092"
+    }
+  ]
+}

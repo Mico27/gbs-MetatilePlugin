@@ -48,6 +48,9 @@
 #ifndef INPUT_PLATFORM_INTERACT
 #define INPUT_PLATFORM_INTERACT INPUT_A
 #endif
+#ifndef INPUT_PLATFORM_FORCE_TRIGGER
+#define INPUT_PLATFORM_FORCE_TRIGGER INPUT_UP_PRESSED
+#endif
 #ifndef INPUT_PLATFORM_DROP_THROUGH
 #define INPUT_PLATFORM_DROP_THROUGH 0
 #endif
@@ -843,7 +846,7 @@ static void player_set_jump_anim(void)
 #ifdef FEAT_PLATFORM_WALL_JUMP
 static void wall_check(void)
 {
-    if (plat_wall_col != 0 && plat_wall_slide)
+    if (plat_wall_col != 0 && plat_wall_slide && plat_next_state != GROUND_STATE)
     {
         plat_next_state = WALL_STATE;
     }
@@ -1064,7 +1067,7 @@ static void handle_horizontal_input(void)
         if (plat_vel_x != 0)
         {
             // Set deceleration value based on state
-            WORD dec = (plat_state == GROUND_STATE) ? plat_dec : plat_air_dec;
+            WORD dec = (plat_state == GROUND_STATE || plat_state == RUN_STATE) ? plat_dec : plat_air_dec;
 
             if (plat_vel_x < 0)
             {
@@ -1489,7 +1492,7 @@ finally_check_actor_col:
 
     if (mask & COL_CHECK_TRIGGERS)
     {
-        trigger_activate_at_intersection(&PLAYER.bounds, &PLAYER.pos, INPUT_UP_PRESSED);
+        trigger_activate_at_intersection(&PLAYER.bounds, &PLAYER.pos, INPUT_PLATFORM_FORCE_TRIGGER);
 #ifdef ENABLE_PLAT_ENTER_METATILE
         metatile_overlap_at_intersection(&PLAYER.bounds, &PLAYER.pos);
 #endif

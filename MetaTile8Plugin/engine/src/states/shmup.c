@@ -327,6 +327,13 @@ void shmup_update(void) BANKED {
                 shooter_reached_end = TRUE;
                 camera_x = shooter_dest;
             }
+            // Sync camera subpixels with player to prevent visual jitter
+            // (only when player isn't moving horizontally)
+            IF_FREE_MOVEMENT({
+                if (!player_moving || angle == ANGLE_0DEG || angle == ANGLE_180DEG) {
+                    camera_x = SUBPX_SNAP_PX(camera_x) | SUBPX_PX_REMAINDER(PLAYER.pos.x);
+                }
+            })
         } else if (shooter_direction == DIR_RIGHT) {
             IF_FREE_MOVEMENT(camera_x += shooter_scroll_speed);
             PLAYER.pos.x += shooter_scroll_speed;
@@ -334,6 +341,13 @@ void shmup_update(void) BANKED {
                 shooter_reached_end = TRUE;
                 camera_x = shooter_dest;
             }
+            // Sync camera subpixels with player to prevent visual jitter
+            // (only when player isn't moving horizontally)
+            IF_FREE_MOVEMENT({
+                if (!player_moving || angle == ANGLE_0DEG || angle == ANGLE_180DEG) {
+                    camera_x = SUBPX_SNAP_PX(camera_x) | SUBPX_PX_REMAINDER(PLAYER.pos.x);
+                }
+            })
         } else if (shooter_direction == DIR_UP) {
             IF_FREE_MOVEMENT(camera_y -= shooter_scroll_speed);
             PLAYER.pos.y -= shooter_scroll_speed;
@@ -341,6 +355,13 @@ void shmup_update(void) BANKED {
                 shooter_reached_end = TRUE;
                 camera_y = shooter_dest;
             }
+            // Sync camera subpixels with player to prevent visual jitter
+            // (only when player isn't moving vertically)
+            IF_FREE_MOVEMENT({
+                if (!player_moving || angle == ANGLE_90DEG || angle == ANGLE_270DEG) {
+                    camera_y = SUBPX_SNAP_PX(camera_y) | SUBPX_PX_REMAINDER(PLAYER.pos.y);
+                }
+            })
         } else {
             IF_FREE_MOVEMENT(camera_y += shooter_scroll_speed);
             PLAYER.pos.y += shooter_scroll_speed;
@@ -348,16 +369,14 @@ void shmup_update(void) BANKED {
                 shooter_reached_end = TRUE;
                 camera_y = shooter_dest;
             }
+            // Sync camera subpixels with player to prevent visual jitter
+            // (only when player isn't moving vertically)
+            IF_FREE_MOVEMENT({
+                if (!player_moving || angle == ANGLE_90DEG || angle == ANGLE_270DEG) {
+                    camera_y = SUBPX_SNAP_PX(camera_y) | SUBPX_PX_REMAINDER(PLAYER.pos.y);
+                }
+            })
         }
-
-        // Sync camera subpixels with player to prevent visual jitter
-        // (only when player isn't moving)
-        IF_FREE_MOVEMENT({
-            if (!player_moving) {
-                camera_x = SUBPX_SNAP_PX(camera_x) | SUBPX_PX_REMAINDER(PLAYER.pos.x);
-                camera_y = SUBPX_SNAP_PX(camera_y) | SUBPX_PX_REMAINDER(PLAYER.pos.y);
-            }
-        })
     }
 
     // Check for collisions caused by auto-scroll

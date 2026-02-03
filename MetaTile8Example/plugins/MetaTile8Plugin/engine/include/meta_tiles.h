@@ -19,6 +19,7 @@
 #define METATILE_COLLISION_RIGHT_EVENT 2
 #define METATILE_COLLISION_UP_EVENT 3
 #define METATILE_COLLISION_LEFT_EVENT 4
+#define METATILE_COLLISION_ANY_EVENT 5
 
 
 extern uint8_t __at(SRAM_COLLISION_DATA_PTR) sram_collision_data[256]; //sram_map_data Address 0xA500 - 0x0100(256)
@@ -38,21 +39,11 @@ extern UBYTE overlap_metatile_id;
 extern UBYTE overlap_metatile_x;
 extern UBYTE overlap_metatile_y;
 
-extern UBYTE collided_down_metatile_id;
-extern UBYTE collided_down_metatile_x;
-extern UBYTE collided_down_metatile_y;
-
-extern UBYTE collided_right_metatile_id;
-extern UBYTE collided_right_metatile_x;
-extern UBYTE collided_right_metatile_y;
-
-extern UBYTE collided_up_metatile_id;
-extern UBYTE collided_up_metatile_x;
-extern UBYTE collided_up_metatile_y;
-
-extern UBYTE collided_left_metatile_id;
-extern UBYTE collided_left_metatile_x;
-extern UBYTE collided_left_metatile_y;
+extern UBYTE collided_metatile_id;
+extern UBYTE collided_metatile_x;
+extern UBYTE collided_metatile_y;
+extern UBYTE collided_metatile_dir;
+extern UBYTE collided_metatile_source;
 
 void replace_meta_tile(UBYTE x, UBYTE y, UBYTE tile_id, UBYTE commit) BANKED;
 void reset_meta_tile(UBYTE x, UBYTE y, UBYTE commit) BANKED;

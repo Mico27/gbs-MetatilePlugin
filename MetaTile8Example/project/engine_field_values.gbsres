@@ -184,6 +184,10 @@
     {
       "id": "ENABLE_TOPDOWN_ENTER_METATILE",
       "value": 0
+    },
+    {
+      "id": "ENABLE_PLAT_ENTER_METATILE",
+      "value": 1
     }
   ]
 }

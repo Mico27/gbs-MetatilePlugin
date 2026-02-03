@@ -83,50 +83,21 @@
       "id": "0864ef7d-3393-4877-858c-a9dcc075e55f"
     },
     {
-      "command": "EVENT_SET_INPUT_SCRIPT",
+      "command": "PM_EVENT_METATILE_SCRIPT",
       "args": {
-        "input": [
-          "b"
-        ],
-        "override": true,
-        "__scriptTabs": "press",
-        "__collapse": false
+        "metatile_event": "0",
+        "__scriptTabs": "scriptinput"
       },
       "children": {
-        "true": [
-          {
-            "command": "EVENT_ACTOR_GET_POSITION",
-            "args": {
-              "actorId": "$self$",
-              "vectorX": "0",
-              "vectorY": "1",
-              "units": "tiles"
-            },
-            "id": "06cf2f63-40e7-414a-80a2-8dcabbe03be9"
-          },
-          {
-            "command": "EVENT_GET_META_TILE_AT_POS",
-            "args": {
-              "x": {
-                "type": "variable",
-                "value": "0"
-              },
-              "y": {
-                "type": "variable",
-                "value": "1"
-              },
-              "output": "2"
-            },
-            "id": "e0076a59-f538-402a-857d-e48cd7f5550f"
-          },
+        "script": [
           {
             "command": "EVENT_IF",
             "args": {
               "condition": {
                 "type": "eq",
                 "valueA": {
-                  "type": "variable",
-                  "value": "2"
+                  "type": "engineField",
+                  "value": "overlap_metatile_id"
                 },
                 "valueB": {
                   "type": "number",
@@ -141,12 +112,12 @@
                   "command": "EVENT_REPLACE_META_TILE",
                   "args": {
                     "x": {
-                      "type": "variable",
-                      "value": "0"
+                      "type": "engineField",
+                      "value": "overlap_metatile_x"
                     },
                     "y": {
-                      "type": "variable",
-                      "value": "1"
+                      "type": "engineField",
+                      "value": "overlap_metatile_y"
                     },
                     "metatile_id": {
                       "type": "number",
@@ -163,7 +134,7 @@
           }
         ]
       },
-      "id": "4061d741-2359-4a26-aded-c258a0751137"
+      "id": "0ddd21f0-3dbe-4a0f-bb59-61f155c4cd4e"
     }
   ]
 }
