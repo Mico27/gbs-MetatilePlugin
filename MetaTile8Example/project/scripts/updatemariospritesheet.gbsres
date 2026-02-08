@@ -1,0 +1,102 @@
+{
+  "_resourceType": "script",
+  "id": "2a779ed4-7d7b-4f48-8e1f-bc28a2da4e72",
+  "name": "UpdateMarioSpritesheet",
+  "description": "",
+  "variables": {},
+  "actors": {},
+  "symbol": "script_6",
+  "script": [
+    {
+      "command": "EVENT_SWITCH",
+      "args": {
+        "variable": "11",
+        "choices": 2,
+        "__collapseCase0": false,
+        "__collapseCase1": false,
+        "__collapseCase2": false,
+        "__collapseCase3": false,
+        "__collapseCase4": false,
+        "__collapseCase5": false,
+        "__collapseCase6": false,
+        "__collapseCase7": false,
+        "__collapseCase8": false,
+        "__collapseCase9": false,
+        "__collapseCase10": false,
+        "__collapseCase11": false,
+        "__collapseCase12": false,
+        "__collapseCase13": false,
+        "__collapseCase14": false,
+        "__collapseCase15": false,
+        "__collapseElse": false,
+        "value0": {
+          "type": "number",
+          "value": 0
+        },
+        "value1": {
+          "type": "number",
+          "value": 1
+        }
+      },
+      "children": {
+        "true0": [
+          {
+            "command": "EVENT_PLAYER_SET_SPRITE",
+            "args": {
+              "spriteSheetId": "b2acc60a-47f6-4f1e-be0b-21f4816ecab0"
+            },
+            "id": "2f595ebd-59ad-491f-a469-b33e255cca97"
+          }
+        ],
+        "true1": [
+          {
+            "command": "EVENT_PLAYER_SET_SPRITE",
+            "args": {
+              "spriteSheetId": "b9a693c2-584d-4cd7-8736-6d48672d60ba"
+            },
+            "id": "2792c79e-2518-4474-9edf-0b9b6c4bd6cf"
+          }
+        ],
+        "true2": [],
+        "true3": [],
+        "true4": [],
+        "true5": [],
+        "true6": [],
+        "true7": [],
+        "true8": [],
+        "true9": [],
+        "true10": [],
+        "true11": [],
+        "true12": [],
+        "true13": [],
+        "true14": [],
+        "true15": [],
+        "false": [
+          {
+            "command": "EVENT_PLAYER_SET_SPRITE",
+            "args": {
+              "spriteSheetId": "b9a693c2-584d-4cd7-8736-6d48672d60ba"
+            },
+            "id": "c951b3ca-98e8-4e25-80cc-fe36400a2955"
+          },
+          {
+            "command": "EVENT_PALETTE_SET_SPRITE_EX",
+            "args": {
+              "palette0": "b07e9c1e-b595-4abe-98f6-cf43b42434fc",
+              "palette1": "keep",
+              "palette2": "keep",
+              "palette3": "keep",
+              "palette4": "keep",
+              "palette5": "keep",
+              "palette6": "keep",
+              "palette7": "keep",
+              "commit": false
+            },
+            "id": "e7dd46c4-cb9a-4ca2-9cb9-d91f4d5ba46c"
+          }
+        ]
+      },
+      "id": "7576276f-4777-428c-8c18-01729398f5e5"
+    }
+  ]
+}

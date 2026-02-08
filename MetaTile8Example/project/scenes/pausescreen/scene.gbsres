@@ -1,0 +1,72 @@
+{
+  "_resourceType": "scene",
+  "id": "4e2a848e-25f6-4335-bad2-7dec72eba32b",
+  "_index": 4,
+  "type": "TOPDOWN",
+  "name": "PauseScreen",
+  "symbol": "scene_5",
+  "x": 568,
+  "y": 80,
+  "width": 20,
+  "height": 18,
+  "backgroundId": "1e5f9d6a-bdbc-43e6-8c34-22f5bb5dea05",
+  "tilesetId": "",
+  "colorModeOverride": "none",
+  "paletteIds": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "default-bg-4"
+  ],
+  "spritePaletteIds": [],
+  "autoFadeSpeed": 1,
+  "script": [
+    {
+      "command": "EVENT_ACTOR_HIDE",
+      "args": {
+        "actorId": "$self$"
+      },
+      "id": "3b54cc53-ffbf-4718-b1fc-d96e71680263"
+    },
+    {
+      "command": "EVENT_TEXT_DRAW",
+      "args": {
+        "text": "Pause screen\nPress start\nto continue",
+        "x": 4,
+        "y": 7,
+        "location": "background"
+      },
+      "id": "f7f44939-8482-4fa4-9867-06e10c14cbdb"
+    },
+    {
+      "command": "EVENT_SET_INPUT_SCRIPT",
+      "args": {
+        "input": [
+          "start"
+        ],
+        "override": true,
+        "__scriptTabs": "press"
+      },
+      "children": {
+        "true": [
+          {
+            "command": "EVENT_POP_SCENE_STACK_EX",
+            "args": {
+              "fadeSpeed": "2"
+            },
+            "id": "eb7a2844-6d79-4f46-a062-58d8caf58866"
+          }
+        ]
+      },
+      "id": "fa8f1600-3a1d-4891-86c0-a8041469b87d"
+    }
+  ],
+  "playerHit1Script": [],
+  "playerHit2Script": [],
+  "playerHit3Script": [],
+  "collisions": "00168+"
+}

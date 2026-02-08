@@ -18,8 +18,8 @@
     },
     {
       "id": "3",
-      "name": "LoadedOnce",
-      "symbol": "var_loadedonce"
+      "name": "HUD_INITIALIZED",
+      "symbol": "var_hud_initialized"
     },
     {
       "id": "4",
@@ -45,6 +45,36 @@
       "id": "8",
       "name": "TEXT_POS_Y",
       "symbol": "var_text_pos_y"
+    },
+    {
+      "id": "9",
+      "name": "TILE_ANIM_SPEED",
+      "symbol": "var_tile_anim_speed"
+    },
+    {
+      "id": "10",
+      "name": "TILE_ANIM_FRAME",
+      "symbol": "var_tile_anim_frame"
+    },
+    {
+      "id": "11",
+      "name": "TILE_ANIM_HANDLE",
+      "symbol": "var_tile_anim_handle"
+    },
+    {
+      "id": "12",
+      "name": "TILE_ANIM_HANDLE2",
+      "symbol": "var_tile_anim_handle2"
+    },
+    {
+      "id": "13",
+      "name": "IgnoreTrigger",
+      "symbol": "var_ignoretrigger"
+    },
+    {
+      "id": "14",
+      "name": "StackSizeTest",
+      "symbol": "var_stacksizetest"
     }
   ],
   "constants": []

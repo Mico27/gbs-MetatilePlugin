@@ -48,13 +48,19 @@ INT16 transitioning_player_pos_x;
 INT16 transitioning_player_pos_y;
 
 void enable_transition_to_scene(void) BANKED {
-	camera_settings &= ~(CAMERA_LOCK_FLAG);
+	//camera_settings &= ~(CAMERA_LOCK_FLAG);
 	//camera_x = SCROLL_CAM_X;
 	//camera_y = SCROLL_CAM_Y;
 	scene_transition_enabled = 1;
 }
 
 void scene_transition_reset(void) BANKED {
+    if (image_height < SCREENHEIGHT){
+        camera_settings &= ~(CAMERA_LOCK_Y_FLAG);
+    }
+    if (image_width < SCREENWIDTH){
+        camera_settings &= ~(CAMERA_LOCK_X_FLAG);
+    }
 	up_scene.bank = 0;
 	right_scene.bank = 0;
 	down_scene.bank = 0;

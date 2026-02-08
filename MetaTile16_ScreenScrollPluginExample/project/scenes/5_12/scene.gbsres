@@ -12,11 +12,32 @@
   "paletteIds": [],
   "spritePaletteIds": [],
   "collisions": "00140+",
-  "autoFadeSpeed": 1,
+  "autoFadeSpeed": null,
   "symbol": "scene_9",
   "x": 680,
   "y": 648,
   "script": [
+    {
+      "command": "EVENT_IF_SAVED_DATA",
+      "args": {
+        "saveSlot": 0,
+        "__collapseElse": true,
+        "__comment": false
+      },
+      "children": {
+        "true": [
+          {
+            "command": "EVENT_LOAD_DATA",
+            "args": {
+              "saveSlot": 0
+            },
+            "id": "2445519d-d91a-44ef-b3dd-40c1aa9f90b2"
+          }
+        ],
+        "false": []
+      },
+      "id": "6c14d285-581b-4493-b3b6-b9a62dfdb40a"
+    },
     {
       "command": "EVENT_LOAD_META_TILES",
       "args": {
@@ -64,6 +85,13 @@
         "__collapse": false
       },
       "id": "89e98d30-7eed-487f-8e67-1ad1da9cd2ed"
+    },
+    {
+      "command": "EVENT_FADE_IN",
+      "args": {
+        "speed": "2"
+      },
+      "id": "513dbf24-a0ae-4f8f-bca3-7202cb20f9d8"
     }
   ],
   "playerHit1Script": [],

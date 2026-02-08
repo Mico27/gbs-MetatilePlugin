@@ -96,6 +96,10 @@
     {
       "id": "ENABLE_ADV_COLLISION_METATILE",
       "value": 0
+    },
+    {
+      "id": "ENABLE_ADV_ENTER_METATILE",
+      "value": 1
     }
   ]
 }

@@ -1,0 +1,12 @@
+{
+  "_resourceType": "background",
+  "id": "98f257b3-de77-4584-92f6-8302a2edf0ec",
+  "name": "PauseScreen",
+  "symbol": "bg_pausescreen",
+  "tileColors": "",
+  "filename": "PauseScreen.png",
+  "width": 20,
+  "height": 18,
+  "imageWidth": 160,
+  "imageHeight": 144
+}

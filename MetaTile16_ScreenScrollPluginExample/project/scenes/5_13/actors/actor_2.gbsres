@@ -16,7 +16,179 @@
   "collisionExtraFlags": [],
   "prefabScriptOverrides": {},
   "symbol": "actor_6",
-  "script": [],
+  "script": [
+    {
+      "command": "EVENT_TEXT",
+      "args": {
+        "text": [
+          "Would you like\nto save?"
+        ],
+        "__section": "text",
+        "avatarId": "",
+        "minHeight": 4,
+        "maxHeight": 7,
+        "textX": 1,
+        "textY": 1,
+        "textHeight": 5,
+        "position": "bottom",
+        "clearPrevious": true,
+        "showFrame": "true",
+        "speedIn": -1,
+        "speedOut": -1,
+        "closeWhen": "key",
+        "closeButton": "a",
+        "closeDelayTime": 0.5,
+        "closeDelayFrames": 30
+      },
+      "id": "c544e407-84cc-495f-83ed-a545b0794ce8"
+    },
+    {
+      "command": "EVENT_MENU",
+      "args": {
+        "variable": "L0",
+        "items": 2,
+        "option1": "Yes",
+        "option2": "No",
+        "option3": "",
+        "option4": "",
+        "option5": "",
+        "option6": "",
+        "option7": "",
+        "option8": "",
+        "cancelOnB": true,
+        "layout": "dialogue",
+        "cancelOnLastOption": true
+      },
+      "id": "b6f4426d-6848-485b-84c1-4fd163d0198c"
+    },
+    {
+      "command": "EVENT_IF",
+      "args": {
+        "condition": {
+          "type": "eq",
+          "valueA": {
+            "type": "variable",
+            "value": "L0"
+          },
+          "valueB": {
+            "type": "number",
+            "value": 1
+          }
+        },
+        "__collapseElse": true,
+        "__comment": false
+      },
+      "children": {
+        "true": [
+          {
+            "command": "EVENT_SAVE_DATA",
+            "args": {
+              "saveSlot": 0,
+              "__scriptTabs": "load"
+            },
+            "children": {
+              "true": [
+                {
+                  "command": "EVENT_TEXT",
+                  "args": {
+                    "text": [
+                      "Game was saved."
+                    ],
+                    "__section": "text",
+                    "avatarId": "",
+                    "minHeight": 4,
+                    "maxHeight": 7,
+                    "textX": 1,
+                    "textY": 1,
+                    "textHeight": 5,
+                    "position": "bottom",
+                    "clearPrevious": true,
+                    "showFrame": "true",
+                    "speedIn": -1,
+                    "speedOut": -1,
+                    "closeWhen": "key",
+                    "closeButton": "a",
+                    "closeDelayTime": 0.5,
+                    "closeDelayFrames": 30
+                  },
+                  "id": "d075d48a-9592-4c29-9275-d866b6623c83"
+                }
+              ],
+              "load": [
+                {
+                  "command": "EVENT_LOAD_META_TILES",
+                  "args": {
+                    "sceneId": "08fa5e5c-2d36-4439-acf8-356b60014ef5",
+                    "matchColor": false,
+                    "matchCollision": false,
+                    "__collapse": true
+                  },
+                  "id": "73612494-26ba-4ab2-bb93-cf1b27d0169e"
+                },
+                {
+                  "command": "EVENT_SET_NEIGHBOUR_SCENE",
+                  "args": {
+                    "sceneId": "c7b4f1ae-ee97-432f-b57b-dd73f5008ade",
+                    "direction": "left",
+                    "rounded": false,
+                    "__collapse": true
+                  },
+                  "id": "79071e7d-d64a-4b96-9061-8f35cca9f116"
+                },
+                {
+                  "command": "EVENT_SET_NEIGHBOUR_SCENE",
+                  "args": {
+                    "sceneId": "edf783f9-3e53-44c1-82a1-fb6f11e0e15e",
+                    "direction": "up",
+                    "rounded": false,
+                    "__collapse": true
+                  },
+                  "id": "554d2bde-ad57-49bc-acef-4da93d370215"
+                },
+                {
+                  "command": "EVENT_CALL_CUSTOM_EVENT",
+                  "args": {
+                    "customEventId": "d2adb382-96a8-4994-ab31-b1e4dddffaa9",
+                    "__collapse": true
+                  },
+                  "id": "7c7fda41-ebc2-4593-afc0-dfd5206278ef"
+                },
+                {
+                  "command": "EVENT_TEXT",
+                  "args": {
+                    "text": [
+                      "Game was loaded."
+                    ],
+                    "__section": "text",
+                    "avatarId": "",
+                    "minHeight": 4,
+                    "maxHeight": 7,
+                    "textX": 1,
+                    "textY": 1,
+                    "textHeight": 5,
+                    "position": "bottom",
+                    "clearPrevious": true,
+                    "showFrame": "true",
+                    "speedIn": -1,
+                    "speedOut": -1,
+                    "closeWhen": "key",
+                    "closeButton": "a",
+                    "closeDelayTime": 0.5,
+                    "closeDelayFrames": 30,
+                    "__collapse": true
+                  },
+                  "id": "22bcfa79-3f3b-4db4-b5f3-33e0bd7d8cb3"
+                }
+              ]
+            },
+            "id": "251b41ff-6741-4d33-8bb8-8c3e2fa46f62"
+          }
+        ],
+        "false": []
+      },
+      "id": "44cb7201-6397-4566-a766-64645502809a"
+    }
+  ],
   "startScript": [],
   "updateScript": [],
   "hit1Script": [],
