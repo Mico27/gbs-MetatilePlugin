@@ -67,7 +67,7 @@ Events:
 
 You can optimize the event by specifying the Minimum metatile index to start checking for the entered metatile event in the settings.
 
-- Metatile Collision (not implemented yet)
+- Metatile Collision
 
 <img width="745" height="213" alt="image" src="https://github.com/user-attachments/assets/2494bae8-3f9d-4efd-b397-f4faa3027ef6" />
  
