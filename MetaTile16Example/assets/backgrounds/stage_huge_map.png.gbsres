@@ -1,0 +1,12 @@
+{
+  "_resourceType": "background",
+  "id": "34f69f91-643c-4582-b01c-62db4687d00a",
+  "name": "stage_huge_map",
+  "symbol": "bg_stage_huge_map",
+  "tileColors": "",
+  "filename": "stage_huge_map.png",
+  "width": 240,
+  "height": 64,
+  "imageWidth": 1920,
+  "imageHeight": 512
+}
