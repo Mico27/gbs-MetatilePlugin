@@ -26,11 +26,7 @@ You could even dynamicaly generate the scene this way.
 
 - The main scenes must respect the dimensions described as such: (the width in tiles rounded to the upper power of two) x (the height in tile) must not exceed the maximum map size configured in the settings (width x height) cannot exceed (8px version) 7936 bytes/tiles (256 bytes are used for dynamic collision data, ex: 255 x 31 in 8px tiles) / (16px version) 7168 bytes/tiles (1024 bytes are used for dynamic collision data, ex: 127 x 56 in 16px tiles).
   
-- Also the bigger you make the max scene size, the less space will be available for save data. If the space begins to become too small for the default GBS Save function, this plugin will help saving data optimaly with minimal space: https://github.com/Mico27/gbs-ConfigLoadSavePlugin
-
-![image](https://github.com/user-attachments/assets/d5ad2258-30f5-4c55-ae53-806cf7f2e769)
-
-This means if you configure the scene max width and max height as such, this maximum amount is 128x16 (2048). This doesnt necessarily mean you cant have a scene Higher than 16, but as long as  (the width in tiles rounded to the upper power of two) x (the height in tile) doesnt exceed 2048.
+- Save data is now stored from SRAM bank 2 and 3, while the metatiles uses SRAM bank 0 and the extended scene stack feature uses SRAM bank 1
 
 Events:
 - Load meta tiles. The main event that allows to mark a scene as having metatiles and specifie the scene that contains the set of metatiles. Each tiles in the scene must match the tiles in the metatile scene. If using color only, check the "must match metatile color attributes" and color the scene accordingly. Check "Must match metatile collision" if you have metatiles that have the same tile/color data but have different collision data.
