@@ -57,16 +57,12 @@ UBYTE screen_x, screen_y;
 actor_t * invalid;
 UBYTE player_moving;
 UBYTE player_iframes;
-UBYTE player_is_offscreen;
 actor_t * player_collision_actor;
 actor_t * emote_actor;
 UBYTE emote_timer;
 
 UBYTE allocated_sprite_tiles;
 UBYTE allocated_hardware_sprites;
-
-UINT16 initial_player_x_pos;
-UINT16 initial_player_y_pos;
 
 static void deactivate_actor_impl(actor_t *actor);
 
@@ -84,12 +80,6 @@ void player_init(void) BANKED {
     actor_set_anim_idle(&PLAYER);
     CLR_FLAG(PLAYER.flags, ACTOR_FLAG_HIDDEN | ACTOR_FLAG_DISABLED | ACTOR_FLAG_ANIM_NOLOOP | ACTOR_FLAG_PINNED);
     SET_FLAG(PLAYER.flags, ACTOR_FLAG_COLLISION);
-    if (initial_player_x_pos){
-		PLAYER.pos.x = initial_player_x_pos;
-	}
-	if (initial_player_y_pos){
-		PLAYER.pos.y = initial_player_y_pos;
-	}
 }
 
 void actors_update(void) BANKED {
@@ -128,7 +118,7 @@ void actors_update(void) BANKED {
             }
         }
 
-       if (actor == &PLAYER || CHK_FLAG(actor_flags, ACTOR_FLAG_PINNED)) {
+        if (actor == &PLAYER || CHK_FLAG(actor_flags, ACTOR_FLAG_PINNED)) {
             actor = actor->prev;
             continue;
         }
@@ -210,8 +200,8 @@ void actors_render(void) NONBANKED {
 #endif
 
     // Render actors
-	for (actor = actors_active_tail; (actor); actor = actor->prev){
-		if (CHK_FLAG(actor->flags, ACTOR_FLAG_HIDDEN | ACTOR_FLAG_DISABLED)) {
+    for (actor = actors_active_tail; (actor); actor = actor->prev){
+        if (CHK_FLAG(actor->flags, ACTOR_FLAG_HIDDEN | ACTOR_FLAG_DISABLED)) {
            continue;
         }
         
@@ -561,5 +551,5 @@ void actors_handle_player_collision(void) BANKED {
         player_iframes--;
     }
     player_collision_actor = NULL;
-	check_transition_to_scene_collision();
+    check_transition_to_scene_collision();
 }

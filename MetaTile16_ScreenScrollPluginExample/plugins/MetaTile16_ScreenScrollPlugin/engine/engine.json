@@ -2,6 +2,42 @@
 	"version": "4.2.2-e1",
 	"fields": [
 	    {
+          "key": "scroll_right_margin",
+          "label": "right side margin for huds aligned to the right",
+          "description": "right side margin for huds aligned to the right",
+          "group": "Screen Scroll",
+          "type": "slider",
+          "cType": "UBYTE",
+          "defaultValue": 0,
+          "min": 0,
+          "max": 20,
+          "editUnits": "tile"
+        },
+        {
+          "key": "scroll_bottom_margin",
+          "label": "bottom margin for huds aligned to the bottom or top",
+          "description": "bottom margin for huds aligned to the bottom or top",
+          "group": "Screen Scroll",
+          "type": "slider",
+          "cType": "UBYTE",
+          "defaultValue": 0,
+          "min": 0,
+          "max": 18,
+          "editUnits": "tile"
+        },
+        {
+          "key": "scroll_top_offset",
+          "label": "top scroll offset for huds aligned to the top",
+          "description": "top scroll offset for huds aligned to the top",
+          "group": "Screen Scroll",
+          "type": "slider",
+          "cType": "UBYTE",
+          "defaultValue": 0,
+          "min": 0,
+          "max": 144,
+          "editUnits": "px"
+        },
+	    {
           "key": "player_transition_right_dist",
           "label": "player transition right distance",
           "description": "player transition right distance",
@@ -10,7 +46,8 @@
           "cType": "WORD",
           "defaultValue": 512,
           "min": 32,
-          "max": 5120
+          "max": 5120,
+          "editUnits": "subpx"
         },
 		{
           "key": "player_transition_left_dist",
@@ -21,7 +58,8 @@
           "cType": "WORD",
           "defaultValue": 512,
           "min": 32,
-          "max": 5120
+          "max": 5120,
+          "editUnits": "subpx"
         },
 		{
           "key": "player_transition_top_dist",
@@ -32,7 +70,8 @@
           "cType": "WORD",
           "defaultValue": 512,
           "min": 32,
-          "max": 4608
+          "max": 4608,
+          "editUnits": "subpx"
         },
 		{
           "key": "player_transition_bottom_dist",
@@ -43,7 +82,8 @@
           "cType": "WORD",
           "defaultValue": 512,
           "min": 32,
-          "max": 4608
+          "max": 4608,
+          "editUnits": "subpx"
         },
 		{
           "key": "player_transition_right_threshold",
@@ -54,7 +94,8 @@
           "cType": "WORD",
           "defaultValue": 512,
           "min": -3072,
-          "max": 5120
+          "max": 5120,
+          "editUnits": "subpx"
         },
 		{
           "key": "player_transition_left_threshold",
@@ -65,7 +106,8 @@
           "cType": "WORD",
           "defaultValue": 0,
           "min": -3072,
-          "max": 5120
+          "max": 5120,
+          "editUnits": "subpx"
         },
 		{
           "key": "player_transition_top_threshold",
@@ -76,7 +118,8 @@
           "cType": "WORD",
           "defaultValue": 256,
           "min": -3584,
-          "max": 4608
+          "max": 4608,
+          "editUnits": "subpx"
         },
 		{
           "key": "player_transition_bottom_threshold",
@@ -87,7 +130,8 @@
           "cType": "WORD",
           "defaultValue": 256,
           "min": -3584,
-          "max": 4608
+          "max": 4608,
+          "editUnits": "subpx"
         },
 		{
             "key": "DISABLE_PLAYER_SPRITE_LOAD_ON_TRANSITION",
@@ -115,7 +159,27 @@
             "type": "checkbox",
             "cType": "define",
             "defaultValue": 0
-		},
+		},		
+		{
+          "key": "bkg_offset_x",
+          "label": "Scene scroll offset X",
+          "description": "X offset of the screen viewport due to scene transition",
+          "group": "Screen Scroll",
+          "type": "number",
+          "cType": "UBYTE",
+          "defaultValue": 0,
+          "runtimeOnly": true
+        },
+		{
+          "key": "bkg_offset_y",
+          "label": "Scene scroll offset Y",
+          "description": "Y offset of the screen viewport due to scene transition",
+          "group": "Screen Scroll",
+          "type": "number",
+          "cType": "UBYTE",
+          "defaultValue": 0,
+          "runtimeOnly": true
+        },
 		{
 		  "key": "MIN_OVERLAP_METATILE",
 		  "label": "Minimum metatile index to start checking for the entered metatile event",
@@ -612,26 +676,6 @@
           "label": "Collided Metatile Source",
           "description": "Source of the collided metatile",
           "group": "Metatiles",
-          "type": "number",
-          "cType": "UBYTE",
-          "defaultValue": 0,
-          "runtimeOnly": true
-        },
-		{
-          "key": "bkg_offset_x",
-          "label": "Scene scroll offset X",
-          "description": "X offset of the screen viewport due to scene transition",
-          "group": "Screen Scroll",
-          "type": "number",
-          "cType": "UBYTE",
-          "defaultValue": 0,
-          "runtimeOnly": true
-        },
-		{
-          "key": "bkg_offset_y",
-          "label": "Scene scroll offset Y",
-          "description": "Y offset of the screen viewport due to scene transition",
-          "group": "Screen Scroll",
           "type": "number",
           "cType": "UBYTE",
           "defaultValue": 0,

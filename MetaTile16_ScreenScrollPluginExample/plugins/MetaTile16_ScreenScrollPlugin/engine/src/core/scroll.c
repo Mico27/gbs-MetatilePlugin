@@ -76,32 +76,12 @@ void scroll_reset(void) BANKED {
     pending_w_i     = 0;
     pending_h_i     = 0;
 	
-	INT16 x, y;
-    if (is_transitioning_scene){
-		
-		x = (SUBPX_TO_PX(camera_x) - (SCREENWIDTH >> 1));
-		y = (SUBPX_TO_PX(camera_y) - (SCREENHEIGHT >> 1));
-		
-		if (x & 0x8000u) {
-			scroll_x = x;
-    
-		} else if (x > scroll_x_max){
-			scroll_x = x;
-		}
-		
-		if (y & 0x8000u) {
-			scroll_y = y;
-		} else if (y > scroll_y_max){
-			scroll_y = y;
-		}
-		
-		
-	} else {
-		scroll_x = 0x400;
+    if (!is_transitioning_scene){
+        scroll_x = 0x400;
 		scroll_y = 0x400;	
 		bkg_offset_x = 0;
-		bkg_offset_y = 0;		
-	}	
+		bkg_offset_y = 0;			
+	}
 }
 
 void scroll_update(void) BANKED {
@@ -111,12 +91,14 @@ void scroll_update(void) BANKED {
     x = SUBPX_TO_PX(camera_x) - (SCREENWIDTH >> 1);
     y = SUBPX_TO_PX(camera_y) - (SCREENHEIGHT >> 1);
 
-    if (!is_transitioning_scene){
+    if (!(is_transitioning_scene & (DIRECTION_RIGHT | DIRECTION_LEFT))){
 		if ((x & 0x8000u) || (x < scroll_x_min)) {  // check for negative signed bit
 			x = scroll_x_min;
 		} else if (x > scroll_x_max) {
 			x = scroll_x_max;
 		}
+    }
+    if (!(is_transitioning_scene & (DIRECTION_UP | DIRECTION_DOWN))){
 		if ((y & 0x8000u) || (y < scroll_y_min)) {
 			y = scroll_y_min;
 		} else if (y > scroll_y_max) {
@@ -132,7 +114,7 @@ void scroll_update(void) BANKED {
     scroll_x = x;
     scroll_y = y;
     draw_scroll_x = x + scroll_offset_x;
-    draw_scroll_y = y + scroll_offset_y;
+    draw_scroll_y = y + scroll_offset_y  - scroll_top_offset;
 	bkg_scroll_x = (draw_scroll_x + TILE_TO_PX(bkg_offset_x));
 	bkg_scroll_y = (draw_scroll_y + TILE_TO_PX(bkg_offset_y));
 	
@@ -239,6 +221,23 @@ void scroll_render_rows(INT16 scroll_x, INT16 scroll_y, BYTE row_offset, BYTE n_
     }	
 }
 
+void scroll_render_cols(INT16 scroll_x, INT16 scroll_y, BYTE col_offset, BYTE n_cols) BANKED {
+    // Clear pending rows/ columns
+    pending_w_i = 0;
+    pending_h_i = 0;
+	
+	if (scroll_render_disabled) return;
+
+    UBYTE x = MAX(0, PX_TO_TILE(scroll_x) + col_offset);
+    UBYTE y = PX_TO_TILE(scroll_y);
+    UBYTE height = MIN(SCREEN_TILE_REFRES_H, image_tile_height);
+    
+    for (BYTE i = 0; i != n_cols && x != image_tile_width; ++i, x++) {
+        scroll_load_col(x, y, height);
+        activate_actors_in_col(x, y);
+    }	
+}
+
 void scroll_queue_row(UBYTE x, UBYTE y) {
     
 	while (pending_w_i) {
@@ -280,7 +279,7 @@ void scroll_queue_col(UBYTE x, UBYTE y) {
 void load_metatile_row(const UBYTE* from, UBYTE x, UBYTE y, UBYTE width, UBYTE bank) NONBANKED {
 	_save_bank = CURRENT_BANK;
 	SWITCH_ROM(bank);
-    UBYTE metatile_y_offset = METATILE_Y_OFFSET(y);
+    UWORD metatile_y_offset = METATILE_Y_OFFSET(y);
     UBYTE tile_y_offset = TILE_Y_OFFSET(y);
     width = width + x;
 	for (x; x != width; x++) {
@@ -328,23 +327,23 @@ void load_tile_col(const unsigned char * from, UBYTE x, UWORD y, UWORD height, U
 }
 
 void scroll_load_row(UBYTE x, UBYTE y) {
-	UBYTE width = MIN(SCREEN_TILE_REFRES_W, image_tile_width);	
-	// DMG Row Load	
+    UBYTE width = MIN(SCREEN_TILE_REFRES_W, image_tile_width);	
+    // DMG Row Load	
     bkg_address_offset = ((UWORD)get_bkg_xy_addr((x + bkg_offset_x), (y + bkg_offset_y))) - 0x9800;
-	if (metatile_bank){		
-		load_metatile_row(metatile_ptr, x, y, width, metatile_bank);
-	} else {
+    if (metatile_bank){		
+        load_metatile_row(metatile_ptr, x, y, width, metatile_bank);
+    } else {
         load_tile_row(image_ptr, x, y, width, image_bank);
-	}
+    }
 #ifdef CGB
     if (_is_CGB) {  // Color Row Load
         VBK_REG = 1;
-		bkg_address_offset = ((UWORD)get_bkg_xy_addr((x + bkg_offset_x) & 31, (y + bkg_offset_y) & 31)) - 0x9800;
-		if (metatile_attr_bank){			
-			load_metatile_row(metatile_attr_ptr, x, y, width, metatile_attr_bank);
-		} else {
+        bkg_address_offset = ((UWORD)get_bkg_xy_addr((x + bkg_offset_x) & 31, (y + bkg_offset_y) & 31)) - 0x9800;
+        if (metatile_attr_bank){			
+            load_metatile_row(metatile_attr_ptr, x, y, width, metatile_attr_bank);
+        } else {
             load_tile_row(image_attr_ptr, x, y, width, image_attr_bank);
-		}
+        }
         VBK_REG = 0;
     }
 #endif
@@ -354,24 +353,24 @@ void scroll_load_row(UBYTE x, UBYTE y) {
 /* Update pending (up to 5) rows */
 void scroll_load_pending_row(void) {    
     UBYTE width = MIN(pending_w_i, PENDING_BATCH_SIZE);	
-	// DMG Row Load	
+    // DMG Row Load	
     bkg_address_offset = ((UWORD)get_bkg_xy_addr((pending_w_x + bkg_offset_x) & 31, (pending_w_y + bkg_offset_y) & 31)) - 0x9800;
-	if (metatile_bank){		
-		load_metatile_row(metatile_ptr, pending_w_x, pending_w_y, width, metatile_bank);
-	} else {
+    if (metatile_bank){		
+        load_metatile_row(metatile_ptr, pending_w_x, pending_w_y, width, metatile_bank);
+    } else {
         load_tile_row(image_ptr, pending_w_x, pending_w_y, width, image_bank);
-	}
+    }
 
 
 #ifdef CGB
     if (_is_CGB) {  // Color Row Load
         VBK_REG = 1;		
         bkg_address_offset = ((UWORD)get_bkg_xy_addr((pending_w_x + bkg_offset_x) & 31, (pending_w_y + bkg_offset_y) & 31)) - 0x9800;
-		if (metatile_attr_bank){			
-			load_metatile_row(metatile_attr_ptr, pending_w_x, pending_w_y, width, metatile_attr_bank);
-		} else {
+        if (metatile_attr_bank){			
+            load_metatile_row(metatile_attr_ptr, pending_w_x, pending_w_y, width, metatile_attr_bank);
+        } else {
             load_tile_row(image_attr_ptr, pending_w_x, pending_w_y, width, image_attr_bank);
-		}
+        }
         VBK_REG = 0;
     }
 #endif
@@ -382,22 +381,22 @@ void scroll_load_pending_row(void) {
 
 
 void scroll_load_col(UBYTE x, UBYTE y, UBYTE height) {	
-	// DMG Column Load
+    // DMG Column Load
     bkg_address_offset = ((UWORD)get_bkg_xy_addr((x + bkg_offset_x) & 31, (y + bkg_offset_y) & 31)) - 0x9800;
-	if (metatile_bank){		
-		load_metatile_col(metatile_ptr, x, y, height, metatile_bank);
-	} else {
+    if (metatile_bank){		
+        load_metatile_col(metatile_ptr, x, y, height, metatile_bank);
+    } else {
         load_tile_col(image_ptr, x, y, height, image_bank);
-	}	
+    }	
 #ifdef CGB
     if (_is_CGB) {  // Color Column Load
         VBK_REG = 1;
-		bkg_address_offset = ((UWORD)get_bkg_xy_addr((x + bkg_offset_x) & 31, (y + bkg_offset_y) & 31)) - 0x9800;
-		if (metatile_attr_bank){			
-			load_metatile_col(metatile_attr_ptr, x, y, height, metatile_attr_bank);
-		} else {
+        bkg_address_offset = ((UWORD)get_bkg_xy_addr((x + bkg_offset_x) & 31, (y + bkg_offset_y) & 31)) - 0x9800;
+        if (metatile_attr_bank){			
+            load_metatile_col(metatile_attr_ptr, x, y, height, metatile_attr_bank);
+        } else {
             load_tile_col(image_attr_ptr, x, y, height, image_attr_bank);
-		}
+        }
         VBK_REG = 0;
     }
 #endif
@@ -406,22 +405,22 @@ void scroll_load_col(UBYTE x, UBYTE y, UBYTE height) {
 
 void scroll_load_pending_col(void) {
     UBYTE height = MIN(pending_h_i, PENDING_BATCH_SIZE);	
-	// DMG Column Load
+    // DMG Column Load
     bkg_address_offset = ((UWORD)get_bkg_xy_addr((pending_h_x + bkg_offset_x) & 31, (pending_h_y + bkg_offset_y) & 31)) - 0x9800;
-	if (metatile_bank){		
-		load_metatile_col(metatile_ptr, pending_h_x, pending_h_y, height, metatile_bank);
-	} else {
+    if (metatile_bank){		
+        load_metatile_col(metatile_ptr, pending_h_x, pending_h_y, height, metatile_bank);
+    } else {
         load_tile_col(image_ptr, pending_h_x, pending_h_y, height, image_bank);
-	}	
+    }	
 #ifdef CGB
     if (_is_CGB) {  // Color Column Load
         VBK_REG = 1;
-		bkg_address_offset = ((UWORD)get_bkg_xy_addr((pending_h_x + bkg_offset_x) & 31, (pending_h_y + bkg_offset_y) & 31)) - 0x9800;
-		if (metatile_attr_bank){			
-			load_metatile_col(metatile_attr_ptr, pending_h_x, pending_h_y, height, metatile_attr_bank);
-		} else {
+        bkg_address_offset = ((UWORD)get_bkg_xy_addr((pending_h_x + bkg_offset_x) & 31, (pending_h_y + bkg_offset_y) & 31)) - 0x9800;
+        if (metatile_attr_bank){			
+            load_metatile_col(metatile_attr_ptr, pending_h_x, pending_h_y, height, metatile_attr_bank);
+        } else {
             load_tile_col(image_attr_ptr, pending_h_x, pending_h_y, height, image_attr_bank);
-		}
+        }
         VBK_REG = 0;
     }
 #endif

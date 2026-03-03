@@ -26,15 +26,11 @@ extern BYTE camera_offset_y;
 extern BYTE camera_deadzone_x;
 extern BYTE camera_deadzone_y;
 extern UBYTE camera_settings;
-extern INT16 initial_camera_x;
-extern INT16 initial_camera_y;
 
 void camera_init(void) BANKED;
 
 inline void camera_reset(void) {
     camera_deadzone_x = camera_deadzone_y = 0;
-	camera_x = initial_camera_x;
-	camera_y = initial_camera_y;
 }
 
 void camera_update(void) BANKED;

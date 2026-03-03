@@ -24,11 +24,15 @@ extern UBYTE round_position_flags;
 extern INT16 transitioning_player_pos_x;
 extern INT16 transitioning_player_pos_y;
 
+extern UBYTE scroll_right_margin;
+extern UBYTE scroll_bottom_margin;
+extern UBYTE scroll_top_offset;
+
 void enable_transition_to_scene(void) BANKED;
 void scene_transition_reset(void) BANKED;
 void check_transition_to_scene_collision(void) BANKED;
 void transition_to_scene_modal(UBYTE direction) BANKED;
-void transition_load_scene(UBYTE scene_bank, const scene_t * scene, BYTE t_scroll_x, BYTE t_scroll_y) BANKED;
+void transition_load_scene(UBYTE scene_bank, const scene_t * scene, UBYTE direction) BANKED;
 uint8_t transition_camera_to(void) BANKED;
 uint8_t transition_player_to(void) BANKED;
 

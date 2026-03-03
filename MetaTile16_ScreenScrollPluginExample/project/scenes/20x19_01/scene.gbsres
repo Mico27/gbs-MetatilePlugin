@@ -18,6 +18,13 @@
   "y": 397,
   "script": [
     {
+      "command": "EVENT_GBVM_SCRIPT",
+      "args": {
+        "script": "VM_SET_CONST_UINT8 _scroll_bottom_margin, 0"
+      },
+      "id": "eb8ee513-b155-44f1-a62c-885e23413459"
+    },
+    {
       "command": "EVENT_LOAD_META_TILES",
       "args": {
         "sceneId": "08fa5e5c-2d36-4439-acf8-356b60014ef5",

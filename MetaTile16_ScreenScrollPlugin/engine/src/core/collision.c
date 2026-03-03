@@ -109,7 +109,7 @@ UBYTE tile_col_test_range_x(UBYTE tile_mask, UBYTE ty, UBYTE tx_start, UBYTE tx_
       return (!scene_transition_enabled && (COLLISION_ALL & tile_mask)) ? COLLISION_ALL : 0;
     }
 	if (metatile_collision_bank) {
-        UBYTE metatile_y_offset = METATILE_Y_OFFSET(ty);
+        UWORD metatile_y_offset = METATILE_Y_OFFSET(ty);
         UBYTE tile_y_offset = TILE_Y_OFFSET(ty);
 		UBYTE inc = UBYTE_LESS_THAN(tx_start, tx_end);		
 		UBYTE tile;

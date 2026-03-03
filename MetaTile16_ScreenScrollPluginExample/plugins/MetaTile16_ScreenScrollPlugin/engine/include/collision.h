@@ -14,16 +14,17 @@
 #define COLLISION_ALL 0xF
 #define TILE_PROP_LADDER 0x10
 
-#define SRAM_MAP_WIDTH 16
-#define SRAM_MAP_HEIGHT 16
 #define METATILE_X_OFFSET(x) (x >> 1)
-#define METATILE_Y_OFFSET(y) ((y & 0xFE) << 3)
+#define METATILE_Y_OFFSET(y) ((y >> 1) << image_tile_width_bit)
 #define TILE_X_OFFSET(x) (x & 1)
 #define TILE_Y_OFFSET(y) ((y & 1) << 5)
 #define METATILE_MAP_OFFSET(x, y)  (METATILE_Y_OFFSET(y) + METATILE_X_OFFSET(x))
 #define TILE_MAP_OFFSET(metatile_idx,x,y)  (UWORD)(((metatile_idx & 0xF0) << 2) + ((metatile_idx & 15) << 1) + TILE_Y_OFFSET(y) + TILE_X_OFFSET(x))
 
-#define MAX_MAP_DATA_SIZE (SRAM_MAP_WIDTH * SRAM_MAP_HEIGHT)
+#define MAX_MAP_DATA_SIZE 0x1C00
+#define SRAM_MAP_DATA_PTR 0xA000
+#define COLLISION_DATA_SIZE 0x0400
+#define SRAM_COLLISION_DATA_PTR (SRAM_MAP_DATA_PTR + MAX_MAP_DATA_SIZE)
 
 extern UBYTE collision_bank;
 extern unsigned char *collision_ptr;
@@ -33,9 +34,10 @@ extern UBYTE image_tile_height;
 extern UBYTE tile_hit_x;
 extern UBYTE tile_hit_y;
 
-extern uint8_t __at(0xBB00) sram_collision_data[1024];
-extern uint8_t __at(0xBF00) sram_map_data[MAX_MAP_DATA_SIZE]; //0xA000 + (0x2000 (8k SRAM max size) - 0x0100 (MAX_MAP_DATA_SIZE))
+extern uint8_t __at(SRAM_COLLISION_DATA_PTR) sram_collision_data[COLLISION_DATA_SIZE];
+extern uint8_t __at(SRAM_MAP_DATA_PTR) sram_map_data[MAX_MAP_DATA_SIZE];
 extern UBYTE metatile_collision_bank;
+extern UBYTE image_tile_width_bit;
 
 extern UBYTE scene_transition_enabled;
 
@@ -65,14 +67,8 @@ inline UBYTE bb_contains(rect16_t *bb, upoint16_t *offset, upoint16_t *point) {
  * @return Positioned bounding boxes intersect
  */
 inline UBYTE bb_intersects(rect16_t *bb_a, upoint16_t *offset_a, rect16_t *bb_b, upoint16_t *offset_b) {
-    UWORD b_left = offset_b->x + bb_b->left;
-    UWORD a_right = offset_a->x + bb_a->right;
-    if (SUBPX_TO_TILE(b_left) > SUBPX_TO_TILE(a_right)) return FALSE;
-    UWORD b_right = offset_b->x + bb_b->right;
-    UWORD a_left = offset_a->x + bb_a->left;
-    if (SUBPX_TO_TILE(b_right) < SUBPX_TO_TILE(a_left)) return FALSE;
-    if ((b_left  > a_right) ||
-        (b_right < a_left)) return FALSE;    
+    if ((offset_b->x + bb_b->left   > offset_a->x + bb_a->right) ||
+        (offset_b->x + bb_b->right  < offset_a->x + bb_a->left)) return FALSE;    
     if ((offset_b->y + bb_b->top    > offset_a->y + bb_a->bottom) ||
         (offset_b->y + bb_b->bottom < offset_a->y + bb_a->top)) return FALSE;
     return TRUE;

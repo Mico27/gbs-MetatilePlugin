@@ -75,7 +75,6 @@ void load_meta_tiles(void) BANKED{
 		MemcpyBanked(sram_map_data + METATILE_MAP_OFFSET(0, y << 1), image_ptr + (UWORD)(y * half_width), half_width, image_bank);
 	}	
 	scroll_reset();
-	scroll_update();
 }
 
 void vm_load_meta_tiles(SCRIPT_CTX * THIS) OLDCALL BANKED {	
@@ -375,7 +374,7 @@ void on_player_metatile_collision(UBYTE tile_x, UBYTE tile_y, UBYTE direction) B
                         collided_metatile_x = tile_x;
                         collided_metatile_y = tile_y;
                         collided_metatile_dir = DIR_DOWN;
-                        collided_metatile_source = 0;                      
+                        collided_metatile_source = 0;
                         script_execute(metatile_event->script_bank, metatile_event->script_addr, 0, 0);
                     }
                 }                
@@ -389,7 +388,7 @@ void on_player_metatile_collision(UBYTE tile_x, UBYTE tile_y, UBYTE direction) B
                         collided_metatile_x = tile_x;
                         collided_metatile_y = tile_y;
                         collided_metatile_dir = DIR_RIGHT;
-                        collided_metatile_source = 0;                        
+                        collided_metatile_source = 0;
                         script_execute(metatile_event->script_bank, metatile_event->script_addr, 0, 0);
                     }
                 }                
@@ -403,7 +402,7 @@ void on_player_metatile_collision(UBYTE tile_x, UBYTE tile_y, UBYTE direction) B
                         collided_metatile_x = tile_x;
                         collided_metatile_y = tile_y; 
                         collided_metatile_dir = DIR_UP;
-                        collided_metatile_source = 0;                        
+                        collided_metatile_source = 0;
                         script_execute(metatile_event->script_bank, metatile_event->script_addr, 0, 0);
                     }
                 }                
@@ -417,7 +416,7 @@ void on_player_metatile_collision(UBYTE tile_x, UBYTE tile_y, UBYTE direction) B
                         collided_metatile_x = tile_x;
                         collided_metatile_y = tile_y;  
                         collided_metatile_dir = DIR_LEFT;
-                        collided_metatile_source = 0;                        
+                        collided_metatile_source = 0;
                         script_execute(metatile_event->script_bank, metatile_event->script_addr, 0, 0);
                     }
                 }                

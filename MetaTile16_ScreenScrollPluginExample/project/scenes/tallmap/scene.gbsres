@@ -1,0 +1,80 @@
+{
+  "_resourceType": "scene",
+  "id": "4107284f-02e2-435c-a395-0e3f12a74ada",
+  "_index": 23,
+  "name": "TallMap",
+  "backgroundId": "d7769889-ca5f-4be9-ac0d-4189bc413792",
+  "tilesetId": "4ba66abc-f8ad-4288-b48c-e5d8a03624e2",
+  "width": 20,
+  "height": 36,
+  "type": "ADVENTURE",
+  "colorModeOverride": "none",
+  "paletteIds": [],
+  "spritePaletteIds": [],
+  "collisions": "",
+  "autoFadeSpeed": 1,
+  "symbol": "scene_24",
+  "x": 1656,
+  "y": 600,
+  "script": [
+    {
+      "command": "EVENT_GBVM_SCRIPT",
+      "args": {
+        "script": "VM_SET_CONST_UINT8 _scroll_bottom_margin, 0"
+      },
+      "id": "f3fbe60c-04e7-4e48-97bb-f4bbbe3a61f7"
+    },
+    {
+      "command": "EVENT_LOAD_META_TILES",
+      "args": {
+        "sceneId": "08fa5e5c-2d36-4439-acf8-356b60014ef5",
+        "matchColor": false,
+        "matchCollision": false
+      },
+      "id": "e3a48b5c-d27a-4472-a17f-027ecbed1411"
+    },
+    {
+      "command": "EVENT_SET_NEIGHBOUR_SCENE",
+      "args": {
+        "sceneId": "5e571686-5df1-4811-98e4-704f410c9f07",
+        "direction": "right",
+        "rounded": false,
+        "__collapse": false
+      },
+      "id": "17da9a86-41b3-493d-ae90-f84d72aa36b4"
+    },
+    {
+      "command": "EVENT_SET_NEIGHBOUR_SCENE",
+      "args": {
+        "sceneId": "5e571686-5df1-4811-98e4-704f410c9f07",
+        "direction": "left",
+        "rounded": false,
+        "__collapse": false
+      },
+      "id": "1707eb71-4700-48c5-b553-4c5349fda534"
+    },
+    {
+      "command": "EVENT_SET_NEIGHBOUR_SCENE",
+      "args": {
+        "sceneId": "0a2f0522-c3a0-4ad7-a4d0-f308d5012398",
+        "direction": "down",
+        "rounded": false,
+        "__collapse": false
+      },
+      "id": "92d5ccb2-75fd-45b0-88bb-7aaf48754921"
+    },
+    {
+      "command": "EVENT_SET_NEIGHBOUR_SCENE",
+      "args": {
+        "sceneId": "0a2f0522-c3a0-4ad7-a4d0-f308d5012398",
+        "direction": "up",
+        "rounded": false,
+        "__collapse": false
+      },
+      "id": "2fba71a7-4d42-4476-8f34-c108bfff9b6d"
+    }
+  ],
+  "playerHit1Script": [],
+  "playerHit2Script": [],
+  "playerHit3Script": []
+}

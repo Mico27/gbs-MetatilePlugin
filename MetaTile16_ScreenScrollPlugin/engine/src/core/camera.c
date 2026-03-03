@@ -17,8 +17,6 @@ BYTE camera_offset_y;
 BYTE camera_deadzone_x;
 BYTE camera_deadzone_y;
 UBYTE camera_settings;
-INT16 initial_camera_x;
-INT16 initial_camera_y;
 
 void camera_init(void) BANKED {
     camera_settings = CAMERA_LOCK_FLAG;

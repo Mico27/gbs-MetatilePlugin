@@ -15,8 +15,8 @@
 #include "scene_transition.h"
 #include "data/states_defines.h"
 
-uint8_t __at(0xBB00) sram_collision_data[1024];
-uint8_t __at(0xBF00) sram_map_data[MAX_MAP_DATA_SIZE];
+uint8_t __at(SRAM_COLLISION_DATA_PTR) sram_collision_data[1024];
+uint8_t __at(SRAM_MAP_DATA_PTR) sram_map_data[MAX_MAP_DATA_SIZE];
 
 UBYTE metatile_bank;
 unsigned char* metatile_ptr;
@@ -26,6 +26,8 @@ unsigned char* metatile_attr_ptr;
 
 UBYTE metatile_collision_bank;
 unsigned char* metatile_collision_ptr;
+
+UBYTE image_tile_width_bit;
 
 script_event_t metatile_events[METATILE_EVENTS_SIZE];
 
@@ -64,7 +66,12 @@ void metatile_reset(void) BANKED{
 void load_meta_tiles(void) BANKED{
     MemcpyBanked(&sram_collision_data, metatile_collision_ptr, 1024, metatile_collision_bank);	
 	UBYTE half_width = (image_tile_width >> 1);
-	UBYTE half_height = (image_tile_height >> 1);
+	UBYTE half_height = (image_tile_height >> 1);	
+	image_tile_width_bit = 1;
+	UBYTE width = (half_width - 1);
+	while(width >>= 1){
+		image_tile_width_bit++;
+	}		
 	for (UBYTE y = 0; y < half_height; y++) {
 		MemcpyBanked(sram_map_data + METATILE_MAP_OFFSET(0, y << 1), image_ptr + (UWORD)(y * half_width), half_width, image_bank);
 	}
@@ -383,7 +390,7 @@ void on_player_metatile_collision(UBYTE tile_x, UBYTE tile_y, UBYTE direction) B
                         collided_metatile_x = tile_x;
                         collided_metatile_y = tile_y;
                         collided_metatile_dir = DIR_RIGHT;
-                        collided_metatile_source = 0;                        
+                        collided_metatile_source = 0;
                         script_execute(metatile_event->script_bank, metatile_event->script_addr, 0, 0);
                     }
                 }                
@@ -397,7 +404,7 @@ void on_player_metatile_collision(UBYTE tile_x, UBYTE tile_y, UBYTE direction) B
                         collided_metatile_x = tile_x;
                         collided_metatile_y = tile_y; 
                         collided_metatile_dir = DIR_UP;
-                        collided_metatile_source = 0;                         
+                        collided_metatile_source = 0;
                         script_execute(metatile_event->script_bank, metatile_event->script_addr, 0, 0);
                     }
                 }                
@@ -411,7 +418,7 @@ void on_player_metatile_collision(UBYTE tile_x, UBYTE tile_y, UBYTE direction) B
                         collided_metatile_x = tile_x;
                         collided_metatile_y = tile_y;  
                         collided_metatile_dir = DIR_LEFT;
-                        collided_metatile_source = 0;                         
+                        collided_metatile_source = 0;
                         script_execute(metatile_event->script_bank, metatile_event->script_addr, 0, 0);
                     }
                 }                
