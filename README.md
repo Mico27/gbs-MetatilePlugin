@@ -4,7 +4,6 @@
 Contains 3 version of the plugin that allows metatiles in gbstudio
 - First version "Metatile16" uses 16px metatiles and is more general purpose, the example project showcases a large map that will allow tile editing and persistance, dimensions can be edited in the metatile.h file.
 - Second version "Metatile16_ScreenScroll" uses 16px metatiles and is a single screen scene that can scroll into another scene a la Link's awakening (basicaly a merge of Metatile16 and this plugin: https://github.com/Mico27/GBS-scrollScenePlugin)
- (Requires latest dev version of gbstudio)
 
 - Third version "Metatile8" uses 8px metatiles and is more general purpose, the example project showcases a large map that will allow tile editing and persistance, dimensions can be edited in the metatile.h file.
 
