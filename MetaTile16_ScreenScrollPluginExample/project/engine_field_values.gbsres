@@ -92,6 +92,10 @@
     {
       "id": "scroll_bottom_margin",
       "value": 2
+    },
+    {
+      "id": "METATILE_SIZE",
+      "value": "METATILE_SIZE_16"
     }
   ]
 }

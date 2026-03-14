@@ -1,0 +1,35 @@
+{
+  "type": "enginePlugin",
+  "name": "Metatile Plugin",
+  "author": "Mico27",
+  "url": "https://github.com/Mico27/gbs-MetatilePlugin",
+  "description": "Integrates the concept of metatiles in gbstudio",
+  "license": "MIT",
+  "version": "1.1.0",
+  "gbsVersion": ">=4.2.2",
+  "engineAltRules": [
+  {
+    "when": {
+      "additionalPlugins": ["Mico27/ConfigLoadSavePlugin"]
+    },
+    "use": "ConfigLoadSavePlugin"
+  },
+  {
+    "when": {
+      "additionalPlugins": ["ConfigLoadSavePlugin"]
+    },
+    "use": "ConfigLoadSavePlugin"
+  },
+  {
+    "when": {
+      "additionalPlugins": ["Mico27/FadeStreetPlugin"]
+    },
+    "use": "FadeStreetPlugin"
+  },
+  {
+    "when": {
+      "additionalPlugins": ["FadeStreetPlugin"]
+    },
+    "use": "FadeStreetPlugin"
+  }]
+}

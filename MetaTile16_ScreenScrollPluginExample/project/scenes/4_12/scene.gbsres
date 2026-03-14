@@ -23,7 +23,7 @@
         "sceneId": "08fa5e5c-2d36-4439-acf8-356b60014ef5",
         "matchColor": false,
         "matchCollision": false,
-        "__collapse": true
+        "__collapse": false
       },
       "id": "e738e015-ebf1-4f35-a5e7-29aba70ac3a5"
     },

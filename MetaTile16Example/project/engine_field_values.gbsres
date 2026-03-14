@@ -100,6 +100,10 @@
     {
       "id": "ENABLE_ADV_ENTER_METATILE",
       "value": 1
+    },
+    {
+      "id": "METATILE_SIZE",
+      "value": "METATILE_SIZE_16"
     }
   ]
 }

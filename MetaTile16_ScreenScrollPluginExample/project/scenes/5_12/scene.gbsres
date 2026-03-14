@@ -44,7 +44,7 @@
         "sceneId": "08fa5e5c-2d36-4439-acf8-356b60014ef5",
         "matchColor": false,
         "matchCollision": false,
-        "__collapse": true
+        "__collapse": false
       },
       "id": "a975e901-be69-412e-90b5-9757b9e48b13"
     },
