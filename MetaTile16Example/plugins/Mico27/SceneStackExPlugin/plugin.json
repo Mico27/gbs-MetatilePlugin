@@ -1,0 +1,134 @@
+{
+  "type": "enginePlugin",
+  "name": "Extended Scene Stack Plugin",
+  "author": "Mico27",
+  "url": "https://github.com/Mico27/gbs-SceneStackExPlugin",
+  "description": "Saving the scene in stack in GBStudio only saves the scene address and the Player position into the stack. This plugin adds an extanded version saving the scene to the stack which puts pretty much everything from the scene.",
+  "license": "MIT",
+  "version": "1.0.0",
+  "gbsVersion": ">=4.2.2",
+  "engineAltRules": [
+    {
+      "when": {
+        "additionalPlugins": [
+          "Mico27/ConfigLoadSavePlugin",
+          "Mico27/FadeStreetPlugin",
+          "Mico27/MetaTilePlugin"
+        ]
+      },
+      "use": "Conf_F_M"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "ConfigLoadSavePlugin",
+          "FadeStreetPlugin",
+          "MetaTilePlugin"
+        ]
+      },
+      "use": "Conf_F_M"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "Mico27/ConfigLoadSavePlugin",
+          "Mico27/FadeStreetPlugin"
+        ]
+      },
+      "use": "Conf_F"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "ConfigLoadSavePlugin",
+          "FadeStreetPlugin"
+        ]
+      },
+      "use": "Conf_F"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "Mico27/ConfigLoadSavePlugin",
+          "Mico27/MetaTilePlugin"
+        ]
+      },
+      "use": "Conf_M"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "ConfigLoadSavePlugin",
+          "MetaTilePlugin"
+        ]
+      },
+      "use": "Conf_M"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "Mico27/FadeStreetPlugin",
+          "Mico27/MetaTilePlugin"
+        ]
+      },
+      "use": "F_M"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "FadeStreetPlugin",
+          "MetaTilePlugin"
+        ]
+      },
+      "use": "F_M"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "Mico27/ConfigLoadSavePlugin"
+        ]
+      },
+      "use": "Conf"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "ConfigLoadSavePlugin"
+        ]
+      },
+      "use": "Conf"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "Mico27/FadeStreetPlugin"
+        ]
+      },
+      "use": "F"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "FadeStreetPlugin"
+        ]
+      },
+      "use": "F"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "Mico27/MetaTilePlugin"
+        ]
+      },
+      "use": "M"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "MetaTilePlugin"
+        ]
+      },
+      "use": "M"
+    }
+  ]
+}

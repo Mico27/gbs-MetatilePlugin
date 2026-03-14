@@ -1,0 +1,41 @@
+{
+  "_resourceType": "actor",
+  "id": "7468f531-7d67-4652-a550-5cdf34e6e53b",
+  "name": "Goomba",
+  "frame": 0,
+  "animate": false,
+  "spriteSheetId": "3e2246d5-0bc9-4e2b-bb29-997465f4617c",
+  "prefabId": "7b54c689-b134-4e2f-b942-201ead5f35c8",
+  "direction": "left",
+  "moveSpeed": 1,
+  "animSpeed": 15,
+  "paletteId": "",
+  "isPinned": false,
+  "persistent": false,
+  "collisionGroup": "1",
+  "collisionExtraFlags": [],
+  "prefabScriptOverrides": {},
+  "symbol": "actor_5",
+  "script": [],
+  "startScript": [
+    {
+      "command": "EVENT_SET_ACTOR_BEHAVIOR",
+      "args": {
+        "actorId": "$self$",
+        "behaviorId": {
+          "type": "number",
+          "value": 1
+        }
+      },
+      "id": "044497db-7a6f-494d-8214-657c931ea751"
+    }
+  ],
+  "updateScript": [],
+  "hit1Script": [],
+  "hit2Script": [],
+  "hit3Script": [],
+  "coordinateType": "tiles",
+  "x": 14,
+  "y": 26,
+  "_index": 4
+}

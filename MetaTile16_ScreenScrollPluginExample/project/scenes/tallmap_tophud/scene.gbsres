@@ -1,0 +1,89 @@
+{
+  "_resourceType": "scene",
+  "id": "6fe38857-94c3-4a2f-8c10-db78ee0e42dc",
+  "_index": 27,
+  "name": "TallMap_TopHud",
+  "backgroundId": "d3da6e4e-aa1f-4e0c-819c-4d338c95bf45",
+  "tilesetId": "4ba66abc-f8ad-4288-b48c-e5d8a03624e2",
+  "width": 20,
+  "height": 40,
+  "type": "ADVENTURE",
+  "colorModeOverride": "none",
+  "paletteIds": [],
+  "spritePaletteIds": [],
+  "collisions": "00320+",
+  "autoFadeSpeed": null,
+  "symbol": "scene_28",
+  "x": 1120,
+  "y": 1072,
+  "script": [
+    {
+      "command": "EVENT_CALL_CUSTOM_EVENT",
+      "args": {
+        "customEventId": "8604a964-872c-429f-9939-ba523b39b58a",
+        "__collapse": true
+      },
+      "id": "f4ac60cd-65a1-4b9d-941b-7904311d114a"
+    },
+    {
+      "command": "EVENT_LOAD_META_TILES",
+      "args": {
+        "sceneId": "08fa5e5c-2d36-4439-acf8-356b60014ef5",
+        "matchColor": false,
+        "matchCollision": false,
+        "__collapse": true
+      },
+      "id": "957a7da3-8941-4a50-945f-47644f366d38"
+    },
+    {
+      "command": "EVENT_SET_NEIGHBOUR_SCENE",
+      "args": {
+        "sceneId": "7299843e-4869-432a-99f3-dd2dde9f2f5f",
+        "direction": "right",
+        "rounded": false,
+        "__collapse": true
+      },
+      "id": "fd50b26f-5cc7-4428-a612-746331becaec"
+    },
+    {
+      "command": "EVENT_SET_NEIGHBOUR_SCENE",
+      "args": {
+        "sceneId": "7299843e-4869-432a-99f3-dd2dde9f2f5f",
+        "direction": "left",
+        "rounded": false,
+        "__collapse": true
+      },
+      "id": "af575a6f-ade3-488f-88e2-84c5d9f78a0d"
+    },
+    {
+      "command": "EVENT_SET_NEIGHBOUR_SCENE",
+      "args": {
+        "sceneId": "4e7774a3-6b67-4c61-a9cc-ad7bd0451af2",
+        "direction": "down",
+        "rounded": false,
+        "__collapse": true
+      },
+      "id": "400fb768-5d3b-44ef-8553-9f739558395a"
+    },
+    {
+      "command": "EVENT_SET_NEIGHBOUR_SCENE",
+      "args": {
+        "sceneId": "4e7774a3-6b67-4c61-a9cc-ad7bd0451af2",
+        "direction": "up",
+        "rounded": false,
+        "__collapse": true
+      },
+      "id": "ede50d22-9655-4dd2-8ee8-78cf40af133a"
+    },
+    {
+      "command": "EVENT_FADE_IN",
+      "args": {
+        "speed": "2"
+      },
+      "id": "c90b0840-b240-4272-8ea1-4f5546ffad2c"
+    }
+  ],
+  "playerHit1Script": [],
+  "playerHit2Script": [],
+  "playerHit3Script": []
+}

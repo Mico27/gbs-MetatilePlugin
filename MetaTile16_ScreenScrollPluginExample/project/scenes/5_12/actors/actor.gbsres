@@ -1,0 +1,69 @@
+{
+  "_resourceType": "actor",
+  "id": "b0f45ae9-fcbd-4277-8e13-1a7883dbc9b9",
+  "name": "",
+  "frame": 0,
+  "animate": false,
+  "spriteSheetId": "11b5452b-187c-43a3-afb1-a1f4f74ffda2",
+  "prefabId": "",
+  "direction": "down",
+  "moveSpeed": 1,
+  "animSpeed": 15,
+  "paletteId": "",
+  "isPinned": false,
+  "persistent": false,
+  "collisionGroup": "",
+  "collisionExtraFlags": [],
+  "prefabScriptOverrides": {},
+  "symbol": "actor_0",
+  "script": [
+    {
+      "command": "EVENT_SET_VALUE",
+      "args": {
+        "variable": "7",
+        "value": {
+          "type": "number",
+          "value": 2
+        }
+      },
+      "id": "c3acc681-4d99-4359-937e-c1a7adffbd25"
+    },
+    {
+      "command": "EVENT_SET_VALUE",
+      "args": {
+        "variable": "8",
+        "value": {
+          "type": "number",
+          "value": 2
+        }
+      },
+      "id": "2ca393dc-6208-487c-ad0c-36b574e1db89"
+    },
+    {
+      "command": "EVENT_GBVM_SCRIPT",
+      "args": {
+        "script": "VM_SWITCH_TEXT_LAYER    .TEXT_LAYER_BKG\nVM_LOAD_TEXT            2\n.dw VAR_TEXT_POS_X\n.dw VAR_TEXT_POS_Y\n.asciz \"\\003%c%cTalk to the person\\nsouth of here!\"\nVM_DISPLAY_TEXT\nVM_IDLE\nVM_SWITCH_TEXT_LAYER    .TEXT_LAYER_WIN",
+        "references": [
+          {
+            "type": "variable",
+            "id": "7"
+          },
+          {
+            "type": "variable",
+            "id": "8"
+          }
+        ]
+      },
+      "id": "4350aae5-a996-4ac0-8318-c359b221a229"
+    }
+  ],
+  "startScript": [],
+  "updateScript": [],
+  "hit1Script": [],
+  "hit2Script": [],
+  "hit3Script": [],
+  "coordinateType": "tiles",
+  "x": 14,
+  "y": 7,
+  "_index": 0
+}

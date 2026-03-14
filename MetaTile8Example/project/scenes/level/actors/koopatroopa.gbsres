@@ -1,0 +1,41 @@
+{
+  "_resourceType": "actor",
+  "id": "dd6f4fdb-107b-4ce6-a720-3834446d7fc2",
+  "name": "KoopaTroopa",
+  "frame": 0,
+  "animate": false,
+  "spriteSheetId": "d9172057-107d-4389-bcf9-a93a5c456bdf",
+  "prefabId": "db9e76d3-59a6-43f2-9077-8a1d028c9700",
+  "direction": "left",
+  "moveSpeed": 1,
+  "animSpeed": 15,
+  "paletteId": "",
+  "isPinned": false,
+  "persistent": false,
+  "collisionGroup": "1",
+  "collisionExtraFlags": [],
+  "prefabScriptOverrides": {},
+  "symbol": "actor_13",
+  "script": [],
+  "startScript": [
+    {
+      "command": "EVENT_SET_ACTOR_BEHAVIOR",
+      "args": {
+        "actorId": "$self$",
+        "behaviorId": {
+          "type": "number",
+          "value": 2
+        }
+      },
+      "id": "07d164b4-5d52-478a-b1b1-5fc872215c1e"
+    }
+  ],
+  "updateScript": [],
+  "hit1Script": [],
+  "hit2Script": [],
+  "hit3Script": [],
+  "coordinateType": "tiles",
+  "x": 91,
+  "y": 26,
+  "_index": 12
+}

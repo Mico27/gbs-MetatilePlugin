@@ -1,0 +1,23 @@
+{
+  "_resourceType": "scene",
+  "id": "597118b6-cacc-4b4f-9b6b-69dc558055e2",
+  "_index": 0,
+  "name": "Metatiles",
+  "backgroundId": "811377c2-6ad1-44e6-a66f-a0cc79d8e61f",
+  "tilesetId": "f5add83b-76cc-4484-afe5-e808c38b8441",
+  "width": 16,
+  "height": 16,
+  "type": "PLATFORM",
+  "colorModeOverride": "none",
+  "paletteIds": [],
+  "spritePaletteIds": [],
+  "collisions": "0018+0f8+00f+0f!013+009+0f4+013+00d+013+00d+013+001c+0f3+00!0fe+00!0ff+00!0f3+00!0f3+00!0f8+00e+0f4+003c+",
+  "autoFadeSpeed": 1,
+  "symbol": "scene_1",
+  "x": 328,
+  "y": 48,
+  "script": [],
+  "playerHit1Script": [],
+  "playerHit2Script": [],
+  "playerHit3Script": []
+}

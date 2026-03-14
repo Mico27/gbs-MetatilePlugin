@@ -1,0 +1,11 @@
+{
+  "_resourceType": "tileset",
+  "id": "4ba66abc-f8ad-4288-b48c-e5d8a03624e2",
+  "name": "common_tileset_forest",
+  "symbol": "tileset_common_tileset_fore",
+  "width": 16,
+  "height": 16,
+  "imageWidth": 128,
+  "imageHeight": 128,
+  "filename": "common_tileset_forest.png"
+}

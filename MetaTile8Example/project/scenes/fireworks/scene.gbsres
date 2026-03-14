@@ -1,0 +1,23 @@
+{
+  "_resourceType": "scene",
+  "id": "5048f4d0-ebb0-45b0-a391-21afb7173440",
+  "_index": 3,
+  "name": "Fireworks",
+  "backgroundId": "82bd4c38-26da-401a-97a5-29fa3407394e",
+  "tilesetId": "f5add83b-76cc-4484-afe5-e808c38b8441",
+  "width": 8,
+  "height": 26,
+  "type": "PLATFORM",
+  "colorModeOverride": "none",
+  "paletteIds": [],
+  "spritePaletteIds": [],
+  "collisions": "00d0+",
+  "autoFadeSpeed": 1,
+  "symbol": "scene_4",
+  "x": 200,
+  "y": 48,
+  "script": [],
+  "playerHit1Script": [],
+  "playerHit2Script": [],
+  "playerHit3Script": []
+}

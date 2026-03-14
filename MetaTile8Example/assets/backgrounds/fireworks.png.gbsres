@@ -1,0 +1,12 @@
+{
+  "_resourceType": "background",
+  "id": "82bd4c38-26da-401a-97a5-29fa3407394e",
+  "name": "fireworks",
+  "symbol": "bg_fireworks",
+  "tileColors": "03d0+",
+  "filename": "fireworks.png",
+  "width": 8,
+  "height": 26,
+  "imageWidth": 64,
+  "imageHeight": 208
+}

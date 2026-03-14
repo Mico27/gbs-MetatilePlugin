@@ -1,0 +1,12 @@
+{
+  "_resourceType": "background",
+  "id": "87e20ab8-e5c4-4f45-a46e-1633c65384fa",
+  "name": "stage1_metatiles",
+  "symbol": "bg_stage1_metatiles",
+  "tileColors": "",
+  "filename": "stage1_metatiles.png",
+  "width": 32,
+  "height": 32,
+  "imageWidth": 256,
+  "imageHeight": 256
+}

@@ -1,0 +1,61 @@
+{
+  "_resourceType": "actor",
+  "id": "96b9d044-0220-4c81-b685-9c311a26c4f5",
+  "name": "Paratroopa",
+  "frame": 0,
+  "animate": false,
+  "spriteSheetId": "d9172057-107d-4389-bcf9-a93a5c456bdf",
+  "prefabId": "c130db3a-a41e-4bb0-8160-ebc33729ca20",
+  "direction": "left",
+  "moveSpeed": 1,
+  "animSpeed": 15,
+  "paletteId": "",
+  "isPinned": false,
+  "persistent": false,
+  "collisionGroup": "1",
+  "collisionExtraFlags": [],
+  "prefabScriptOverrides": {},
+  "symbol": "actor_10",
+  "script": [],
+  "startScript": [
+    {
+      "command": "EVENT_SET_ACTOR_BEHAVIOR",
+      "args": {
+        "actorId": "$self$",
+        "behaviorId": {
+          "type": "number",
+          "value": 8
+        }
+      },
+      "id": "38a0f856-273f-4e7e-809b-01adff7a5ef5"
+    },
+    {
+      "command": "EVENT_SET_ACTOR_X_VELOCITY",
+      "args": {
+        "actorId": "$self$",
+        "xVelocity": {
+          "type": "number",
+          "value": -8
+        }
+      },
+      "id": "5f6f85dc-d5b9-4cf5-a90f-a2aa8c2c490e"
+    },
+    {
+      "command": "EVENT_ACTOR_SET_STATE",
+      "args": {
+        "actorId": "$self$",
+        "spriteStateId": "Winged",
+        "loopAnim": true
+      },
+      "id": "f5080309-976c-4a12-8411-ef1a2b08eae9"
+    }
+  ],
+  "updateScript": [],
+  "hit1Script": [],
+  "hit2Script": [],
+  "hit3Script": [],
+  "coordinateType": "tiles",
+  "x": 83,
+  "y": 20,
+  "_index": 9
+}

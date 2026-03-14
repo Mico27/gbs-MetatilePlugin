@@ -1,0 +1,97 @@
+{
+  "_resourceType": "script",
+  "id": "c0ce4a25-77dd-486c-bf70-be5fd5316abe",
+  "name": "KillBBman",
+  "description": "",
+  "variables": {},
+  "actors": {},
+  "symbol": "script_1",
+  "script": [
+    {
+      "command": "EVENT_IF",
+      "args": {
+        "condition": {
+          "type": "gt",
+          "valueA": {
+            "type": "variable",
+            "value": "5"
+          },
+          "valueB": {
+            "type": "number",
+            "value": 0
+          }
+        },
+        "__collapseElse": true,
+        "__collapse": true
+      },
+      "children": {
+        "true": [
+          {
+            "command": "EVENT_THREAD_STOP",
+            "args": {
+              "variable": "5",
+              "__collapse": false
+            },
+            "id": "ab426995-b185-4005-989a-23ea90625236"
+          }
+        ],
+        "false": []
+      },
+      "id": "e0918e45-085a-4f2a-8d0f-7c886a7bc66a"
+    },
+    {
+      "command": "EVENT_ACTOR_COLLISIONS_DISABLE",
+      "args": {
+        "actorId": "$self$"
+      },
+      "id": "abf817d0-2a9a-4cf4-8156-f3236e4729ac"
+    },
+    {
+      "command": "EVENT_ADVENTURE_STATE_SET",
+      "args": {
+        "state": "blank"
+      },
+      "id": "d6ba1e23-69ce-4551-b410-3d417cef7b70"
+    },
+    {
+      "command": "EVENT_ACTOR_SET_STATE",
+      "args": {
+        "actorId": "$self$",
+        "spriteStateId": "Death",
+        "loopAnim": false
+      },
+      "id": "279651e3-b143-4bc8-bdc4-f5aec70d22a5"
+    },
+    {
+      "command": "EVENT_WAIT",
+      "args": {
+        "time": {
+          "type": "number",
+          "value": 3
+        },
+        "frames": {
+          "type": "number",
+          "value": 1
+        }
+      },
+      "id": "2d7c0136-a5fa-43e2-b24e-9866ff1ba93b"
+    },
+    {
+      "command": "EVENT_SWITCH_SCENE",
+      "args": {
+        "sceneId": "66427c2f-e83c-43b0-be2a-d4c8aaa448a1",
+        "x": {
+          "type": "number",
+          "value": 2
+        },
+        "y": {
+          "type": "number",
+          "value": 6
+        },
+        "direction": "down",
+        "fadeSpeed": "2"
+      },
+      "id": "84043db1-c31d-4e3a-a0c8-f1c929681d4f"
+    }
+  ]
+}

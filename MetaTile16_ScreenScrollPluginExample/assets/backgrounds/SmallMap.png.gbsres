@@ -1,0 +1,12 @@
+{
+  "_resourceType": "background",
+  "id": "9d575d05-859d-47f4-9669-ee45d3b5aac8",
+  "name": "SmallMap",
+  "symbol": "bg_smallmap",
+  "tileColors": "",
+  "filename": "SmallMap.png",
+  "width": 20,
+  "height": 18,
+  "imageWidth": 160,
+  "imageHeight": 144
+}

@@ -1,0 +1,41 @@
+{
+  "_resourceType": "actor",
+  "id": "89298f02-e081-4ec7-bf98-7e9e089572a3",
+  "name": "PyrahnaPlant",
+  "frame": 0,
+  "animate": false,
+  "spriteSheetId": "88154ab6-247d-4955-902c-fc202085e528",
+  "prefabId": "99228de9-1bfd-4634-85d7-fb6418693114",
+  "direction": "up",
+  "moveSpeed": 1,
+  "animSpeed": 15,
+  "paletteId": "",
+  "isPinned": false,
+  "persistent": false,
+  "collisionGroup": "1",
+  "collisionExtraFlags": [],
+  "prefabScriptOverrides": {},
+  "symbol": "actor_3",
+  "script": [],
+  "startScript": [
+    {
+      "command": "EVENT_SET_ACTOR_BEHAVIOR",
+      "args": {
+        "actorId": "$self$",
+        "behaviorId": {
+          "type": "number",
+          "value": 7
+        }
+      },
+      "id": "7f512988-d331-45ba-8eb3-358017d850dc"
+    }
+  ],
+  "updateScript": [],
+  "hit1Script": [],
+  "hit2Script": [],
+  "hit3Script": [],
+  "coordinateType": "pixels",
+  "x": 180,
+  "y": 200,
+  "_index": 3
+}

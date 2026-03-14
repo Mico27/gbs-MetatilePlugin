@@ -1,0 +1,23 @@
+{
+  "_resourceType": "scene",
+  "id": "08fa5e5c-2d36-4439-acf8-356b60014ef5",
+  "_index": 0,
+  "name": "ForestMetatile",
+  "backgroundId": "9b9c69bb-ec9d-441d-94cb-de2e6e4ef57c",
+  "tilesetId": "4ba66abc-f8ad-4288-b48c-e5d8a03624e2",
+  "width": 32,
+  "height": 32,
+  "type": "ADVENTURE",
+  "colorModeOverride": "none",
+  "paletteIds": [],
+  "spritePaletteIds": [],
+  "collisions": "001a+0f4+001c+0f2+16!0f!002+15!19!15!19!15!19!15!19!15!19!15!19!0f4+004+15!0f2+19!0f8+16!1a!16!1a!16!1a!16!1a!16!1a!16!1a!0f4+004+0f8+16!0f2+1a!15!19!15!0f4+19!0f18+16!1a!0f1e+15!0f2+19!0f14+15!0f2+19!0f!002+0f9+16!0f2+1a!16!0f2+1a!0f8+16!0f2+1a!0f!002+0f!004+0f5+19!15!0f3+002+0f1e+002+16!0f15+002+0f2+0016+0f5+1a!002+0f2+00296+",
+  "autoFadeSpeed": 1,
+  "symbol": "scene_1",
+  "x": 200,
+  "y": 32,
+  "script": [],
+  "playerHit1Script": [],
+  "playerHit2Script": [],
+  "playerHit3Script": []
+}

@@ -1,0 +1,12 @@
+{
+  "_resourceType": "background",
+  "id": "811377c2-6ad1-44e6-a66f-a0cc79d8e61f",
+  "name": "grass_1_metatile",
+  "symbol": "bg_grass_1_metatile",
+  "tileColors": "0310+018+007+0310+02!00c+814+01c+034+02c+0324+802+00!022+83!01!03!007+802+023+004+814+804+003+02!012+00!023+00e+012+022+00c+034+008+024+008+018+028+81c+804+",
+  "filename": "grass_1_metatile.png",
+  "width": 16,
+  "height": 16,
+  "imageWidth": 128,
+  "imageHeight": 128
+}

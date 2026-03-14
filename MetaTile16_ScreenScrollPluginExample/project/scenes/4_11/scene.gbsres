@@ -1,0 +1,82 @@
+{
+  "_resourceType": "scene",
+  "id": "a612e359-b652-48f5-b645-0d0985f4b243",
+  "_index": 11,
+  "name": "4_11",
+  "backgroundId": "09771b4d-f58e-49e2-bd86-d7930e131b75",
+  "tilesetId": "4ba66abc-f8ad-4288-b48c-e5d8a03624e2",
+  "width": 20,
+  "height": 16,
+  "type": "ADVENTURE",
+  "colorModeOverride": "none",
+  "paletteIds": [],
+  "spritePaletteIds": [],
+  "collisions": "00140+",
+  "autoFadeSpeed": 1,
+  "symbol": "scene_12",
+  "x": 520,
+  "y": 520,
+  "script": [
+    {
+      "command": "EVENT_LOAD_META_TILES",
+      "args": {
+        "sceneId": "08fa5e5c-2d36-4439-acf8-356b60014ef5",
+        "matchColor": false,
+        "matchCollision": false,
+        "__collapse": true
+      },
+      "id": "d2a36d14-1d1a-4c89-abe0-b28340116322"
+    },
+    {
+      "command": "EVENT_SET_NEIGHBOUR_SCENE",
+      "args": {
+        "sceneId": "ca1804fc-0bc3-4a68-b86d-5b3355460cd4",
+        "direction": "left",
+        "rounded": false,
+        "__collapse": true
+      },
+      "id": "33416769-09b5-4693-a93a-dcadd5f01c49"
+    },
+    {
+      "command": "EVENT_SET_NEIGHBOUR_SCENE",
+      "args": {
+        "sceneId": "ba134017-5e85-4938-bd6e-15d896d304dd",
+        "direction": "up",
+        "rounded": false,
+        "__collapse": true
+      },
+      "id": "c3aa6725-96fc-4a01-8c44-559fc9cc6f04"
+    },
+    {
+      "command": "EVENT_SET_NEIGHBOUR_SCENE",
+      "args": {
+        "sceneId": "63e28227-b73d-494f-adda-26dd2bd3db3a",
+        "direction": "down",
+        "rounded": false,
+        "__collapse": true
+      },
+      "id": "52b27179-636e-4194-9aa9-569678400adb"
+    },
+    {
+      "command": "EVENT_SET_NEIGHBOUR_SCENE",
+      "args": {
+        "sceneId": "631cdde7-2798-4875-8e62-1e6b3433186d",
+        "direction": "right",
+        "rounded": false,
+        "__collapse": true
+      },
+      "id": "64ccbff9-ef17-461a-9b67-5ac9c1e99288"
+    },
+    {
+      "command": "EVENT_CALL_CUSTOM_EVENT",
+      "args": {
+        "customEventId": "d2adb382-96a8-4994-ab31-b1e4dddffaa9",
+        "__collapse": true
+      },
+      "id": "de393dbe-b7db-485d-ba2c-511f9c7f6476"
+    }
+  ],
+  "playerHit1Script": [],
+  "playerHit2Script": [],
+  "playerHit3Script": []
+}
