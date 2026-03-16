@@ -3,8 +3,133 @@
   "name": "Configure Load/Save Plugin",
   "author": "Mico27",
   "url": "https://github.com/Mico27/gbs-ConfigLoadSavePlugin",
-  "description": "Allows configuration of the game saving structure.\nWARNING: this plugin modifies the following engine files:\n- load_save.c\n- load_save.h\nAny other plugin that modifies any of these files will not be compatible with this plugin unless the files are manually merged.",
+  "description": "Allows configuration of the game saving structure.",
   "license": "MIT",
-  "version": "1.1.0",
-  "gbsVersion": ">=4.2.2"
+  "version": "4.2.2",
+  "gbsVersion": ">=4.2.2",
+  "order": -1,
+  "engineAltRules": [
+    {
+      "when": {
+        "additionalPlugins": [
+          "Mico27/MetaTilePlugin",
+          "Mico27/SceneStackExPlugin",
+          "Mico27/FadeStreetPlugin"
+        ]
+      },
+      "use": "M_Sce_F"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "MetaTilePlugin",
+          "SceneStackExPlugin",
+          "FadeStreetPlugin"
+        ]
+      },
+      "use": "M_Sce_F"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "Mico27/MetaTilePlugin",
+          "Mico27/FadeStreetPlugin"
+        ]
+      },
+      "use": "M_F"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "MetaTilePlugin",
+          "FadeStreetPlugin"
+        ]
+      },
+      "use": "M_F"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "Mico27/MetaTilePlugin",
+          "Mico27/SceneStackExPlugin"
+        ]
+      },
+      "use": "M_Sce"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "MetaTilePlugin",
+          "SceneStackExPlugin"
+        ]
+      },
+      "use": "M_Sce"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "Mico27/SceneStackExPlugin",
+          "Mico27/FadeStreetPlugin"
+        ]
+      },
+      "use": "Sce_F"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "SceneStackExPlugin",
+          "FadeStreetPlugin"
+        ]
+      },
+      "use": "Sce_F"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "Mico27/FadeStreetPlugin"
+        ]
+      },
+      "use": "F"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "FadeStreetPlugin"
+        ]
+      },
+      "use": "F"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "Mico27/MetaTilePlugin"
+        ]
+      },
+      "use": "M"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "MetaTilePlugin"
+        ]
+      },
+      "use": "M"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "Mico27/SceneStackExPlugin"
+        ]
+      },
+      "use": "Sce"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "SceneStackExPlugin"
+        ]
+      },
+      "use": "Sce"
+    }
+  ]
 }
