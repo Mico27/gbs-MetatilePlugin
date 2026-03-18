@@ -12,7 +12,29 @@ Index: src\states\shmup.c
  // Feature Flags --------------------------------------------------------------
  // Optional feature flags, set in 'state_defines.h'
  
-@@ -266,14 +267,24 @@
+@@ -101,9 +102,9 @@
+     camera_offset_x = 0;
+     camera_offset_y = 0;
+     camera_deadzone_x = 0;
+     camera_deadzone_y = 0;
+-    
++
+     shooter_direction = PLAYER.dir;
+ 
+     if (shooter_direction == DIR_LEFT) {
+         // Right to left scrolling
+@@ -131,9 +132,9 @@
+         IF_FREE_MOVEMENT(camera_settings &= ~CAMERA_LOCK_Y_FLAG);
+     }
+ 
+     shooter_reached_end = FALSE;
+-    
++
+     // Initialize camera position for unlocked movement
+     IF_FREE_MOVEMENT({
+         camera_x = add_signed_clamped_u16(PLAYER.pos.x, PX_TO_SUBPX(camera_offset_x),
+             PX_TO_SUBPX(SCREEN_WIDTH_HALF),
+@@ -266,18 +267,28 @@
                  UBYTE tile_y = SUBPX_TO_TILE(PLAYER.pos.y + PLAYER.bounds.bottom);
                  tile = tile_col_test_range_x(COLLISION_TOP, tile_y, tile_start, tile_end);
                  if (tile) {
@@ -20,8 +42,8 @@ Index: src\states\shmup.c
 +#ifdef ENABLE_DOWN_COLLISION_METATILE
 +                    on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_DOWN);
 +                } else {
-+                    reset_collision_cache(DIR_DOWN);		
-+#endif 
++                    reset_collision_cache(DIR_DOWN);
++#endif
                  }
              } else { // Moving up
                  UBYTE tile_y = SUBPX_TO_TILE(PLAYER.pos.y + PLAYER.bounds.top);
@@ -31,12 +53,17 @@ Index: src\states\shmup.c
 +#ifdef ENABLE_UP_COLLISION_METATILE
 +                    on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_UP);
 +                } else {
-+                    reset_collision_cache(DIR_UP);		
-+#endif 
++                    reset_collision_cache(DIR_UP);
++#endif
                  }
              }
          }
-         
+-        
++
+         if (angle != ANGLE_0DEG && angle != ANGLE_180DEG) { // Moved horizontally
+             // Step X
+             tile_start = SUBPX_TO_TILE(PLAYER.pos.y + PLAYER.bounds.top);
+             tile_end   = SUBPX_TO_TILE(PLAYER.pos.y + PLAYER.bounds.bottom);
 @@ -285,14 +296,24 @@
                  UBYTE tile_x = SUBPX_TO_TILE(PLAYER.pos.x + PLAYER.bounds.right);
                  tile = tile_col_test_range_y(COLLISION_LEFT, tile_x, tile_start, tile_end);
@@ -45,8 +72,8 @@ Index: src\states\shmup.c
 +#ifdef ENABLE_RIGHT_COLLISION_METATILE
 +                    on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_RIGHT);
 +                } else {
-+                    reset_collision_cache(DIR_RIGHT);		
-+#endif 
++                    reset_collision_cache(DIR_RIGHT);
++#endif
                  }
              } else { // Moving left
                  UBYTE tile_x = SUBPX_TO_TILE(PLAYER.pos.x + PLAYER.bounds.left);
@@ -56,8 +83,8 @@ Index: src\states\shmup.c
 +#ifdef ENABLE_LEFT_COLLISION_METATILE
 +                    on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_LEFT);
 +                } else {
-+                    reset_collision_cache(DIR_LEFT);		
-+#endif 
++                    reset_collision_cache(DIR_LEFT);
++#endif
                  }
              }
          }
@@ -71,9 +98,9 @@ Index: src\states\shmup.c
 +                if (tile) {
 +                    on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_RIGHT);
 +                } else {
-+                    reset_collision_cache(DIR_RIGHT);	
-+                }                    
-+#endif 
++                    reset_collision_cache(DIR_RIGHT);
++                }
++#endif
              } else { // DIR_LEFT
                  UBYTE tile_x = SUBPX_TO_TILE(PLAYER.pos.x + PLAYER.bounds.left);
                  tile = tile_col_test_range_y(COLLISION_RIGHT, tile_x, tile_start, tile_end);
@@ -86,14 +113,14 @@ Index: src\states\shmup.c
 +                if (tile) {
 +                    on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_LEFT);
 +                } else {
-+                    reset_collision_cache(DIR_LEFT);	
-+                }                    
-+#endif 
++                    reset_collision_cache(DIR_LEFT);
++                }
++#endif
              }
          } else {
              tile_start = SUBPX_TO_TILE(PLAYER.pos.x + PLAYER.bounds.left);
              tile_end   = SUBPX_TO_TILE(PLAYER.pos.x + PLAYER.bounds.right);
-@@ -391,16 +426,30 @@
+@@ -391,19 +426,33 @@
                      if (tile) {
                          PLAYER.pos.y = TILE_TO_SUBPX(tile_y) - EXCLUSIVE_OFFSET(PLAYER.bounds.bottom);
                      }
@@ -102,9 +129,9 @@ Index: src\states\shmup.c
 +                if (tile) {
 +                    on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_DOWN);
 +                } else {
-+                    reset_collision_cache(DIR_DOWN);	
-+                }                    
-+#endif 
++                    reset_collision_cache(DIR_DOWN);
++                }
++#endif
              } else { // DIR_UP
                  UBYTE tile_y = SUBPX_TO_TILE(PLAYER.pos.y + PLAYER.bounds.top);
                  tile = tile_col_test_range_x(COLLISION_BOTTOM, tile_y, tile_start, tile_end);
@@ -117,13 +144,17 @@ Index: src\states\shmup.c
 +                if (tile) {
 +                    on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_UP);
 +                } else {
-+                    reset_collision_cache(DIR_UP);	
-+                }                    
-+#endif 
++                    reset_collision_cache(DIR_UP);
++                }
++#endif
              }
          }
-     }    
+-    }    
++    }
  
+     IF_FREE_MOVEMENT({
+         // Keep player within screen bounds
+         if (IS_DIR_HORIZONTAL(shooter_direction)) {
 @@ -462,9 +511,11 @@
              // Trigger appeared on screen edge
              return;
@@ -131,7 +162,7 @@ Index: src\states\shmup.c
  #endif
 -
 +#ifdef ENABLE_SHMUP_ENTER_METATILE
-+		metatile_overlap_at_intersection(&PLAYER.bounds, &PLAYER.pos);
++        metatile_overlap_at_intersection(&PLAYER.bounds, &PLAYER.pos);
 +#endif
      } else {
          // Check for actor collisions on even frames

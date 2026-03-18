@@ -18,7 +18,7 @@ const fields = [
         ],
     },
   ];
-  
+
   const compile = (input, helpers) => {
     const {appendRaw, _addComment} = helpers;
 
@@ -29,7 +29,7 @@ const fields = [
     appendRaw(`VM_CALL_NATIVE b_vm_clear_metatile_script, _vm_clear_metatile_script`);
     appendRaw(`VM_POP 1`);
   };
-  
+
   module.exports = {
     id,
     name,
@@ -38,5 +38,4 @@ const fields = [
     compile,
     allowedBeforeInitFade: true,
   };
-  
-  
+

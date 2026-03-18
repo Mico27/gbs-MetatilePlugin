@@ -74,7 +74,7 @@ Index: src\core\data_manager.c
 -            // resolve and set base_tile for each projectile
 -            UBYTE idx = IndexOfFarPtr(scn.sprites.ptr, scn.sprites.bank, sprites_len, &projectile_def->sprite);
 -            projectile_def->base_tile = (idx < sprites_len) ? scene_sprites_base_tiles[idx] : 0;
-+    if (!vm_pop_scene_stack_state) { 
++    if (!vm_pop_scene_stack_state) {
 +        // Init and Load projectiles
 +        projectiles_init();
 +        if (projectiles_len  != 0) {

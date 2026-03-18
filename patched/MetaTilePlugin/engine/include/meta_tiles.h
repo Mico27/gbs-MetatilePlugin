@@ -11,7 +11,7 @@
 #define METATILE_SIZE_16    1
 
 #if METATILE_SIZE == METATILE_SIZE_16
-    
+
 #define METATILE_X_OFFSET(x) (x >> 1)
 #define METATILE_Y_OFFSET(y) ((y >> 1) << image_tile_width_bit)
 #define TILE_X_OFFSET(x) (x & 1)
@@ -67,14 +67,14 @@ extern UBYTE collided_metatile_y;
 extern UBYTE collided_metatile_dir;
 extern UBYTE collided_metatile_source;
 
-#if METATILE_SIZE == METATILE_SIZE_16    
+#if METATILE_SIZE == METATILE_SIZE_16
 inline UWORD get_metatile_tile(UWORD metatile_offset, UWORD tile_offset) {
-	UBYTE metatile_idx = sram_map_data[(metatile_offset)];
-	return (((metatile_idx & 0xF0) << 2) + ((metatile_idx & 15) << 1) + tile_offset);	
+    UBYTE metatile_idx = sram_map_data[(metatile_offset)];
+    return (((metatile_idx & 0xF0) << 2) + ((metatile_idx & 15) << 1) + tile_offset);
 }
 #else
 inline UBYTE get_metatile_tile(UWORD metatile_offset) {
-	return sram_map_data[metatile_offset];
+    return sram_map_data[metatile_offset];
 }
 #endif
 

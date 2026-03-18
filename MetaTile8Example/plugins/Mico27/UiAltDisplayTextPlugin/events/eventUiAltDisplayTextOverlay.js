@@ -39,22 +39,22 @@ const fields = [
 const compile = (input, helpers) => {
   const {
     appendRaw,
-	_callNative,
+    _callNative,
     _addComment,
     _loadStructuredText,
     _addNL,
   } = helpers;
-  		
-	const inputTexts = Array.isArray(input.text) ? input.text : [input.text];
+
+    const inputTexts = Array.isArray(input.text) ? input.text : [input.text];
     _addComment("Alt Draw Text To Overlay");
-	appendRaw(`VM_SWITCH_TEXT_LAYER .TEXT_LAYER_WIN`);
+    appendRaw(`VM_SWITCH_TEXT_LAYER .TEXT_LAYER_WIN`);
     inputTexts.forEach((inputText, textIndex) => {
       const warped_x = input.x % 32;
-	  const warped_y = input.y % 32;
-	  _loadStructuredText(`\\003\\${decOct(warped_x + 1)}\\${decOct(warped_y + 1)}${inputText}`);	  	  
-	  _callNative("ui_alt_display_text"); 	  
+      const warped_y = input.y % 32;
+      _loadStructuredText(`\\003\\${decOct(warped_x + 1)}\\${decOct(warped_y + 1)}${inputText}`);
+      _callNative("ui_alt_display_text");
     });
-    _addNL();  
+    _addNL();
 };
 
 module.exports = {

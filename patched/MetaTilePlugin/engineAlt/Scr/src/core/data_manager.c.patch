@@ -12,29 +12,11 @@ Index: src\core\data_manager.c
  #include "scene_transition.h"
  #include "macro.h"
  
-@@ -60,13 +61,14 @@
-     scene_stack_ptr = scene_stack;
- }
- 
- void load_bkg_tileset(const tileset_t* tiles, UBYTE bank) BANKED {
--	#ifdef DISABLE_TILESET_LOAD_ON_TRANSITION
-+    #ifdef DISABLE_TILESET_LOAD_ON_TRANSITION
-         if (((!bank) && (!tiles)) || is_transitioning_scene) return;    
--        #else
-+    #else
-         if ((!bank) && (!tiles)) return;
-     #endif
-+
-     UWORD n_tiles = ReadBankedUWORD(&(tiles->n_tiles), bank);
- 
-     // load first background chunk, align to zero tile
-     UBYTE * data = tiles->tiles;
-@@ -345,8 +347,10 @@
-     // Load triggers
+@@ -346,8 +347,9 @@
      if (triggers_len != 0) {
          MemcpyBanked(&triggers, scn.triggers.ptr, sizeof(trigger_t) * triggers_len, scn.triggers.bank);
      }
-+
+ 
 +    metatile_reset();
      scene_transition_reset();
      scroll_reset();

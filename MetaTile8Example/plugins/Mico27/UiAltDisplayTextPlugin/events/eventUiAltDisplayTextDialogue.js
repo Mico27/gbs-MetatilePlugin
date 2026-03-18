@@ -586,7 +586,7 @@ const textDialogue = (
           textHeight,
           ".UI_COLOR_WHITE",
         );
-        
+
         _overlayWait(false, [".UI_WAIT_WINDOW"]);
       }
 
@@ -596,7 +596,7 @@ const textDialogue = (
 
       _loadStructuredText(decoratedText);
       _invoke("ui_alt_display_dialogue", 0, ".ARG0");
-      
+
       if (isModal) {
         const waitFlags = [
           ".UI_WAIT_WINDOW",
@@ -659,7 +659,7 @@ const textDialogue = (
 
 
 const compile = (input, helpers) => {
-  
+
   let closeDelayFrames = 0;
   if (input.closeDelayUnits === "frames") {
     closeDelayFrames =

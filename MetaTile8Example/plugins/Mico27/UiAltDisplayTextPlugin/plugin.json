@@ -6,5 +6,5 @@
   "description": "Alternate method of displaying text (uses font loaded in tileset VRAM instead of writing text to tileset VRAM)",
   "license": "MIT",
   "version": "1.2.0",
-  "gbsVersion": ">=4.2.2"
+  "gbsVersion": ">=4.2.3"
 }

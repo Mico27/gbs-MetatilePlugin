@@ -132,14 +132,14 @@ UBYTE data_load(UBYTE slot) BANKED {
         // check chunk size
         if (*(size_t*)save_data != point->size){
             SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
-            return FALSE; 
+            return FALSE;
         } else {
             save_data += sizeof(point->size);
         }
         // check chunk id
         if (*(uint8_t*)save_data != point->id){
             SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
-            return FALSE; 
+            return FALSE;
         } else {
             save_data += sizeof(point->id);
         }

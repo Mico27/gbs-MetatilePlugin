@@ -20,7 +20,7 @@ Index: include\collision.h
 +#define METATILE_SIZE_16    1
 +
 +#if METATILE_SIZE == METATILE_SIZE_16
-+    
++
 +#define METATILE_X_OFFSET(x) (x >> 1)
 +#define METATILE_Y_OFFSET(y) ((y >> 1) << image_tile_width_bit)
 +#define TILE_X_OFFSET(x) (x & 1)
@@ -63,7 +63,7 @@ Index: include\collision.h
   * @return Tile value, 0 if no collisions, COLLISION_ALL if out of bounds
   */
  inline UBYTE tile_at(UBYTE tx, UBYTE ty) {
--    if ((tx < image_tile_width) && (ty < image_tile_height)) 
+-    if ((tx < image_tile_width) && (ty < image_tile_height))
 -        return ReadBankedUBYTE(collision_ptr + (ty * (UINT16)image_tile_width) + tx, collision_bank);
 +    if ((tx < image_tile_width) && (ty < image_tile_height)) {
 +        if (metatile_collision_bank) {

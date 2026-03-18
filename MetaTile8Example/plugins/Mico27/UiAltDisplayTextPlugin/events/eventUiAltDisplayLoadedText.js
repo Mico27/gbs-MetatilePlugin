@@ -14,11 +14,11 @@ const fields = [
 
 const compile = (input, helpers) => {
   const {
-	_callNative,
+    _callNative,
   } = helpers;
-  		
-	_callNative("ui_alt_display_text"); 
-    
+
+    _callNative("ui_alt_display_text");
+
 };
 
 module.exports = {

@@ -127,12 +127,12 @@ UBYTE ui_alt_draw_text_buffer_char(void) BANKED {
                 ui_alt_dest_ptr = ui_alt_dest_base += 32u;
                 break;
             case 0x0b:
-			#ifdef CGB
+            #ifdef CGB
                 text_palette = (*++ui_alt_text_ptr & 0x07);
-			#endif
+            #endif
                 break;
             case '\r':  // 0x0d
-				 // line feed
+                 // line feed
                 if ((ui_alt_dest_ptr + 32u) > (UBYTE *)((((UWORD)text_scroll_addr + ((UWORD)text_scroll_height << 5)) & 0xFFE0) - 1)) {
                     scroll_rect(text_scroll_addr, text_scroll_width, text_scroll_height, text_scroll_fill);
 #ifdef CGB
@@ -152,13 +152,13 @@ UBYTE ui_alt_draw_text_buffer_char(void) BANKED {
                 ui_alt_text_ptr++;
                 // fall down to default
             default:
-				UBYTE tile = ReadBankedUBYTE(char_tileset_mapping + (*ui_alt_text_ptr) , BANK(char_tileset_mapping));
-				//warp around of vram instead of next line
-				if (((UBYTE)ui_alt_dest_ptr >> 5) != ((UBYTE)ui_alt_dest_base >> 5)) {
-					ui_alt_dest_ptr -= 32u;
-				}
+                UBYTE tile = ReadBankedUBYTE(char_tileset_mapping + (*ui_alt_text_ptr) , BANK(char_tileset_mapping));
+                //warp around of vram instead of next line
+                if (((UBYTE)ui_alt_dest_ptr >> 5) != ((UBYTE)ui_alt_dest_base >> 5)) {
+                    ui_alt_dest_ptr -= 32u;
+                }
                 ui_alt_set_tile(ui_alt_dest_ptr, tile);
-				ui_alt_dest_ptr++;
+                ui_alt_dest_ptr++;
                 ui_alt_text_ptr++;
                 return TRUE;
         }
@@ -167,83 +167,83 @@ UBYTE ui_alt_draw_text_buffer_char(void) BANKED {
 }
 
 void ui_alt_display_text(SCRIPT_CTX * THIS) OLDCALL BANKED {
-	THIS;
+    THIS;
     ui_alt_text_drawn = FALSE;
     // all drawn - nothing to do
-	do {
-		ui_alt_draw_text_buffer_char();		
-	} while (!ui_alt_text_drawn);    
+    do {
+        ui_alt_draw_text_buffer_char();
+    } while (!ui_alt_text_drawn);
 }
 
 void ui_alt_display_dialogue_modal(SCRIPT_CTX * THIS) OLDCALL BANKED {
-	THIS;
-	INPUT_RESET;
+    THIS;
+    INPUT_RESET;
     ui_alt_text_drawn = text_ff = FALSE;
-	ui_alt_current_text_speed = 0;
-	UBYTE play_sound, speed_wait = FALSE;
+    ui_alt_current_text_speed = 0;
+    UBYTE play_sound, speed_wait = FALSE;
     // all drawn - nothing to do
-	do {
-		// too fast - wait
-		if ((text_ff_joypad) && (INPUT_A_OR_B_PRESSED)) {
-			text_ff = TRUE;
-		} else {
-			if (game_time & ui_alt_current_text_speed) {
-				speed_wait = TRUE;
-			}
-		}
-		// render next char
-		if (!speed_wait){
-			do {
-				play_sound = ui_alt_draw_text_buffer_char();
-			} while (((text_ff) || (text_draw_speed == 0)) && (!ui_alt_text_drawn));
-			// play sound
-			if ((play_sound) && (text_sound_bank != SFX_STOP_BANK)) music_play_sfx(text_sound_bank, text_sound_data, text_sound_mask, MUSIC_SFX_PRIORITY_NORMAL);
-		}
-		speed_wait = FALSE;
-		toggle_shadow_OAM();
-		camera_update();
-		scroll_update();
-		actors_update();
-		actors_render();
-		projectiles_render();
-		activate_shadow_OAM();
-	
-		game_time++;
-		wait_vbl_done();
-		input_update();
-		
-	} while (!ui_alt_text_drawn);    
+    do {
+        // too fast - wait
+        if ((text_ff_joypad) && (INPUT_A_OR_B_PRESSED)) {
+            text_ff = TRUE;
+        } else {
+            if (game_time & ui_alt_current_text_speed) {
+                speed_wait = TRUE;
+            }
+        }
+        // render next char
+        if (!speed_wait){
+            do {
+                play_sound = ui_alt_draw_text_buffer_char();
+            } while (((text_ff) || (text_draw_speed == 0)) && (!ui_alt_text_drawn));
+            // play sound
+            if ((play_sound) && (text_sound_bank != SFX_STOP_BANK)) music_play_sfx(text_sound_bank, text_sound_data, text_sound_mask, MUSIC_SFX_PRIORITY_NORMAL);
+        }
+        speed_wait = FALSE;
+        toggle_shadow_OAM();
+        camera_update();
+        scroll_update();
+        actors_update();
+        actors_render();
+        projectiles_render();
+        activate_shadow_OAM();
+
+        game_time++;
+        wait_vbl_done();
+        input_update();
+
+    } while (!ui_alt_text_drawn);
 }
 
 UBYTE ui_alt_display_dialogue(void * THIS, UBYTE start, UWORD * stack_frame) OLDCALL BANKED {
     THIS;
     UBYTE play_sound, speed_wait = FALSE;
-	if (start){
+    if (start){
         INPUT_RESET;
         ui_alt_text_drawn = text_ff = FALSE;
-        ui_alt_current_text_speed = 0;        
+        ui_alt_current_text_speed = 0;
     }
      // all drawn - nothing to do
-	if (!ui_alt_text_drawn) {
-		// too fast - wait
-		if ((text_ff_joypad) && (INPUT_A_OR_B_PRESSED)) {
-			text_ff = TRUE;
-		} else {
-			if (game_time & ui_alt_current_text_speed) {
-				speed_wait = TRUE;
-			}
-		}
-		// render next char
-		if (!speed_wait){
-			do {
-				play_sound = ui_alt_draw_text_buffer_char();
-			} while (((text_ff) || (text_draw_speed == 0)) && (!ui_alt_text_drawn));
-			// play sound
-			if ((play_sound) && (text_sound_bank != SFX_STOP_BANK)) music_play_sfx(text_sound_bank, text_sound_data, text_sound_mask, MUSIC_SFX_PRIORITY_NORMAL);
-		}
-				
+    if (!ui_alt_text_drawn) {
+        // too fast - wait
+        if ((text_ff_joypad) && (INPUT_A_OR_B_PRESSED)) {
+            text_ff = TRUE;
+        } else {
+            if (game_time & ui_alt_current_text_speed) {
+                speed_wait = TRUE;
+            }
+        }
+        // render next char
+        if (!speed_wait){
+            do {
+                play_sound = ui_alt_draw_text_buffer_char();
+            } while (((text_ff) || (text_draw_speed == 0)) && (!ui_alt_text_drawn));
+            // play sound
+            if ((play_sound) && (text_sound_bank != SFX_STOP_BANK)) music_play_sfx(text_sound_bank, text_sound_data, text_sound_mask, MUSIC_SFX_PRIORITY_NORMAL);
+        }
+
         ((SCRIPT_CTX *)THIS)->waitable = TRUE;
         return FALSE;
-	}
-    return TRUE;      
+    }
+    return TRUE;
 }

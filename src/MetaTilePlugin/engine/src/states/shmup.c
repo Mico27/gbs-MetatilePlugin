@@ -103,7 +103,7 @@ void shmup_init(void) BANKED {
     camera_offset_y = 0;
     camera_deadzone_x = 0;
     camera_deadzone_y = 0;
-    
+
     shooter_direction = PLAYER.dir;
 
     if (shooter_direction == DIR_LEFT) {
@@ -133,7 +133,7 @@ void shmup_init(void) BANKED {
     }
 
     shooter_reached_end = FALSE;
-    
+
     // Initialize camera position for unlocked movement
     IF_FREE_MOVEMENT({
         camera_x = add_signed_clamped_u16(PLAYER.pos.x, PX_TO_SUBPX(camera_offset_x),
@@ -271,8 +271,8 @@ void shmup_update(void) BANKED {
 #ifdef ENABLE_DOWN_COLLISION_METATILE
                     on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_DOWN);
                 } else {
-                    reset_collision_cache(DIR_DOWN);		
-#endif 
+                    reset_collision_cache(DIR_DOWN);
+#endif
                 }
             } else { // Moving up
                 UBYTE tile_y = SUBPX_TO_TILE(PLAYER.pos.y + PLAYER.bounds.top);
@@ -282,12 +282,12 @@ void shmup_update(void) BANKED {
 #ifdef ENABLE_UP_COLLISION_METATILE
                     on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_UP);
                 } else {
-                    reset_collision_cache(DIR_UP);		
-#endif 
+                    reset_collision_cache(DIR_UP);
+#endif
                 }
             }
         }
-        
+
         if (angle != ANGLE_0DEG && angle != ANGLE_180DEG) { // Moved horizontally
             // Step X
             tile_start = SUBPX_TO_TILE(PLAYER.pos.y + PLAYER.bounds.top);
@@ -300,8 +300,8 @@ void shmup_update(void) BANKED {
 #ifdef ENABLE_RIGHT_COLLISION_METATILE
                     on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_RIGHT);
                 } else {
-                    reset_collision_cache(DIR_RIGHT);		
-#endif 
+                    reset_collision_cache(DIR_RIGHT);
+#endif
                 }
             } else { // Moving left
                 UBYTE tile_x = SUBPX_TO_TILE(PLAYER.pos.x + PLAYER.bounds.left);
@@ -311,8 +311,8 @@ void shmup_update(void) BANKED {
 #ifdef ENABLE_LEFT_COLLISION_METATILE
                     on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_LEFT);
                 } else {
-                    reset_collision_cache(DIR_LEFT);		
-#endif 
+                    reset_collision_cache(DIR_LEFT);
+#endif
                 }
             }
         }
@@ -397,9 +397,9 @@ void shmup_update(void) BANKED {
                 if (tile) {
                     on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_RIGHT);
                 } else {
-                    reset_collision_cache(DIR_RIGHT);	
-                }                    
-#endif 
+                    reset_collision_cache(DIR_RIGHT);
+                }
+#endif
             } else { // DIR_LEFT
                 UBYTE tile_x = SUBPX_TO_TILE(PLAYER.pos.x + PLAYER.bounds.left);
                 tile = tile_col_test_range_y(COLLISION_RIGHT, tile_x, tile_start, tile_end);
@@ -412,9 +412,9 @@ void shmup_update(void) BANKED {
                 if (tile) {
                     on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_LEFT);
                 } else {
-                    reset_collision_cache(DIR_LEFT);	
-                }                    
-#endif 
+                    reset_collision_cache(DIR_LEFT);
+                }
+#endif
             }
         } else {
             tile_start = SUBPX_TO_TILE(PLAYER.pos.x + PLAYER.bounds.left);
@@ -431,9 +431,9 @@ void shmup_update(void) BANKED {
                 if (tile) {
                     on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_DOWN);
                 } else {
-                    reset_collision_cache(DIR_DOWN);	
-                }                    
-#endif 
+                    reset_collision_cache(DIR_DOWN);
+                }
+#endif
             } else { // DIR_UP
                 UBYTE tile_y = SUBPX_TO_TILE(PLAYER.pos.y + PLAYER.bounds.top);
                 tile = tile_col_test_range_x(COLLISION_BOTTOM, tile_y, tile_start, tile_end);
@@ -446,12 +446,12 @@ void shmup_update(void) BANKED {
                 if (tile) {
                     on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_UP);
                 } else {
-                    reset_collision_cache(DIR_UP);	
-                }                    
-#endif 
+                    reset_collision_cache(DIR_UP);
+                }
+#endif
             }
         }
-    }    
+    }
 
     IF_FREE_MOVEMENT({
         // Keep player within screen bounds
@@ -513,7 +513,7 @@ void shmup_update(void) BANKED {
         }
 #endif
 #ifdef ENABLE_SHMUP_ENTER_METATILE
-		metatile_overlap_at_intersection(&PLAYER.bounds, &PLAYER.pos);
+        metatile_overlap_at_intersection(&PLAYER.bounds, &PLAYER.pos);
 #endif
     } else {
         // Check for actor collisions on even frames

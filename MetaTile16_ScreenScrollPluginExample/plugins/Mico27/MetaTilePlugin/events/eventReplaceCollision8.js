@@ -6,7 +6,7 @@ export const autoLabel = (fetchArg) => {
   return `Replace collision (8px metatile)`;
 };
 
-export const fields = [ 
+export const fields = [
   {
     key: `metatile_id`,
     label: "Metatile Id",
@@ -15,7 +15,7 @@ export const fields = [
       type: "number",
       value: 0,
     },
-  }, 
+  },
   {
     key: `collision`,
     label: "Collision",
@@ -24,24 +24,24 @@ export const fields = [
       type: "number",
       value: 0,
     },
-  }, 
+  },
 ];
 
 export const compile = (input, helpers) => {
-  
+
   const { _callNative, _stackPush, _stackPushConst, _stackPop, _addComment, _declareLocal, variableSetToScriptValue } = helpers;
-  
+
   const tmp0 = _declareLocal("tmp0", 1, true);
   const tmp1 = _declareLocal("tmp1", 1, true);
-	
+
   variableSetToScriptValue(tmp0, input.metatile_id);
   variableSetToScriptValue(tmp1, input.collision);
-  
+
   _addComment("Replace collision");
-  
+
   _stackPush(tmp1);
   _stackPush(tmp0);
-  		
+
   _callNative("vm_replace_collision");
-  _stackPop(2);   
+  _stackPop(2);
 };

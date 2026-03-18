@@ -12,7 +12,7 @@ Index: src\core\data_manager.c
  #define ALLOC_BKG_TILES_TOWARDS_SPR
  
  #define EMOTE_SPRITE_SIZE       4
-@@ -50,19 +51,21 @@
+@@ -50,15 +51,17 @@
  const far_ptr_t spritesheet_none_far = TO_FAR_PTR_T(spritesheet_none);
  
  scene_stack_item_t scene_stack[SCENE_STACK_SIZE];
@@ -29,12 +29,7 @@ Index: src\core\data_manager.c
  }
  
  void load_bkg_tileset(const tileset_t* tiles, UBYTE bank) BANKED {
--	#ifdef DISABLE_TILESET_LOAD_ON_TRANSITION
-+    #ifdef DISABLE_TILESET_LOAD_ON_TRANSITION
-         if (((!bank) && (!tiles)) || is_transitioning_scene) return;    
-         #else
-         if ((!bank) && (!tiles)) return;
-     #endif
+     #ifdef DISABLE_TILESET_LOAD_ON_TRANSITION
 @@ -246,10 +249,12 @@
      #endif
              PLAYER.sprite = scn.player_sprite;
@@ -50,7 +45,7 @@ Index: src\core\data_manager.c
          }
      #endif
      } else {
-@@ -321,33 +326,38 @@
+@@ -321,34 +326,39 @@
                  // exclusive sprites allocated separately to avoid overwriting if modified
                  if (actor->reserve_tiles) load_sprite(actor->base_tile, actor->sprite.ptr, actor->sprite.bank);
              }
@@ -79,7 +74,7 @@ Index: src\core\data_manager.c
 -            // resolve and set base_tile for each projectile
 -            UBYTE idx = IndexOfFarPtr(scn.sprites.ptr, scn.sprites.bank, sprites_len, &projectile_def->sprite);
 -            projectile_def->base_tile = (idx < sprites_len) ? scene_sprites_base_tiles[idx] : 0;
-+    if (!vm_pop_scene_stack_state) { 
++    if (!vm_pop_scene_stack_state) {
 +        // Init and Load projectiles
 +        projectiles_init();
 +        if (projectiles_len  != 0) {
@@ -97,6 +92,7 @@ Index: src\core\data_manager.c
      if (triggers_len != 0) {
          MemcpyBanked(&triggers, scn.triggers.ptr, sizeof(trigger_t) * triggers_len, scn.triggers.bank);
      }
+ 
 -    scene_transition_reset();
 +    if (!vm_pop_scene_stack_state) {
 +        scene_transition_reset();

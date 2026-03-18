@@ -19,7 +19,7 @@ Index: src\core\scene_transition.c
          uint8_t player_arrived = FALSE;
 +        metatile_bank = 0;
 +        metatile_attr_bank = 0;
- 		do {
- 			script_runner_update();
+         do {
+             script_runner_update();
          } while (VM_ISLOCKED());
          switch(direction){

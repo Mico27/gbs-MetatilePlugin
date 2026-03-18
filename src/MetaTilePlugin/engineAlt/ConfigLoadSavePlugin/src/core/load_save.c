@@ -80,7 +80,7 @@ void data_init(void) BANKED {
         save_blob_size += sizeof(point_ref.size) + sizeof(point_ref.id) + point_ref.size;
         point_ptr++;
         MemcpyBanked(&point_ref, point_ptr, sizeof(save_point_t), BANK(save_points));
-    }	
+    }
     #else
     for(const save_point_t * point = save_points; (point->target); point++) {
         save_blob_size += sizeof(point->size) + sizeof(point->id) + point->size;
@@ -118,11 +118,11 @@ void data_save(UBYTE slot) BANKED {
     *(size_t*)save_data = save_blob_size;
     save_data += sizeof(save_blob_size);
     #if __has_include ("data/save_points.h")
-	save_point_t point_ref;
-	const save_point_t * point_ptr = save_points;
-	MemcpyBanked(&point_ref, point_ptr, sizeof(save_point_t), BANK(save_points));
-	while(point_ref.target){
-		// size of the block
+    save_point_t point_ref;
+    const save_point_t * point_ptr = save_points;
+    MemcpyBanked(&point_ref, point_ptr, sizeof(save_point_t), BANK(save_points));
+    while(point_ref.target){
+        // size of the block
         *(size_t*)save_data = point_ref.size;
         save_data += sizeof(point_ref.size);
         // ID of the block
@@ -131,10 +131,10 @@ void data_save(UBYTE slot) BANKED {
         // block data
         memcpy(save_data, point_ref.target, point_ref.size);
         save_data += point_ref.size;
-		point_ptr++;
-		MemcpyBanked(&point_ref, point_ptr, sizeof(save_point_t), BANK(save_points));
-	}	
-	#else
+        point_ptr++;
+        MemcpyBanked(&point_ref, point_ptr, sizeof(save_point_t), BANK(save_points));
+    }
+    #else
     for(const save_point_t * point = save_points; (point->target); point++) {
         // size of the block
         *(size_t*)save_data = point->size;
@@ -166,33 +166,33 @@ UBYTE data_load(UBYTE slot) BANKED {
     save_data += sizeof(save_signature) + sizeof(save_blob_size);
     // load blocks
     #if __has_include ("data/save_points.h")
-	save_point_t point_ref;
-	const save_point_t * point_ptr = save_points;
-	MemcpyBanked(&point_ref, point_ptr, sizeof(save_point_t), BANK(save_points));
-	while(point_ref.target){
-		// check chunk size
+    save_point_t point_ref;
+    const save_point_t * point_ptr = save_points;
+    MemcpyBanked(&point_ref, point_ptr, sizeof(save_point_t), BANK(save_points));
+    while(point_ref.target){
+        // check chunk size
         if (*(size_t*)save_data != point_ref.size) return FALSE; else save_data += sizeof(point_ref.size);
         // check chunk id
         if (*(uint8_t*)save_data != point_ref.id) return FALSE; else save_data += sizeof(point_ref.id);
         // copy chunk data
         memcpy(point_ref.target, save_data, point_ref.size);
         save_data += point_ref.size;
-		point_ptr++;
-		MemcpyBanked(&point_ref, point_ptr, sizeof(save_point_t), BANK(save_points));
-	}	
-	#else
+        point_ptr++;
+        MemcpyBanked(&point_ref, point_ptr, sizeof(save_point_t), BANK(save_points));
+    }
+    #else
     for(const save_point_t * point = save_points; (point->target); point++) {
         // check chunk size
         if (*(size_t*)save_data != point->size){
             SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
-            return FALSE; 
+            return FALSE;
         } else {
             save_data += sizeof(point->size);
         }
         // check chunk id
         if (*(uint8_t*)save_data != point->id){
             SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
-            return FALSE; 
+            return FALSE;
         } else {
             save_data += sizeof(point->id);
         }
@@ -245,18 +245,18 @@ UBYTE data_peek_ex(UBYTE slot, UINT16 idx, UWORD count, UINT16 * dest) BANKED {
         return FALSE;
     }
     if (count) memcpy(dest, save_data + (sizeof(save_signature) + sizeof(save_blob_size) + (((idx + 1) * (sizeof(size_t) + sizeof(uint8_t) + sizeof(int16_t))) - sizeof(int16_t))), count << 1);
-	SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
+    SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
     return TRUE;
 }
 
 void vm_data_peek_ex(SCRIPT_CTX * THIS) OLDCALL BANKED {
-	data_peek_ex(*(uint8_t *)VM_REF_TO_PTR(FN_ARG0), *(uint16_t *)VM_REF_TO_PTR(FN_ARG1), *(uint16_t *)VM_REF_TO_PTR(FN_ARG2), &script_memory[*(int16_t*)VM_REF_TO_PTR(FN_ARG3)]);
+    data_peek_ex(*(uint8_t *)VM_REF_TO_PTR(FN_ARG0), *(uint16_t *)VM_REF_TO_PTR(FN_ARG1), *(uint16_t *)VM_REF_TO_PTR(FN_ARG2), &script_memory[*(int16_t*)VM_REF_TO_PTR(FN_ARG3)]);
 }
 
 void vm_data_save_ex(SCRIPT_CTX * THIS) OLDCALL BANKED {
-	data_save(*(uint8_t *)VM_REF_TO_PTR(FN_ARG0));
+    data_save(*(uint8_t *)VM_REF_TO_PTR(FN_ARG0));
 }
 
 void vm_data_load_ex(SCRIPT_CTX * THIS) OLDCALL BANKED {
-	data_load(*(uint8_t *)VM_REF_TO_PTR(FN_ARG0));
+    data_load(*(uint8_t *)VM_REF_TO_PTR(FN_ARG0));
 }

@@ -463,7 +463,7 @@
         "cType": "UBYTE",
         "defaultValue": 0,
         "runtimeOnly": true
-        },   
+        },
         {
         "key": "collided_metatile_id",
         "label": "Collided Metatile Id",
@@ -513,6 +513,6 @@
         "cType": "UBYTE",
         "defaultValue": 0,
         "runtimeOnly": true
-        }       
+        }
     ]
 }

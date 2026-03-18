@@ -39,7 +39,7 @@ const fields = [
         ],
       },
   ];
-  
+
   const compile = (input, helpers) => {
     const {appendRaw, _compileSubScript, _addComment } = helpers;
     const ScriptRef = _compileSubScript("metatile_event", input.script, "metatile_event_" + input.metatile_event);
@@ -54,7 +54,7 @@ const fields = [
     appendRaw(`VM_CALL_NATIVE b_vm_assign_metatile_script, _vm_assign_metatile_script`);
     appendRaw(`VM_POP 3`);
   };
-  
+
   module.exports = {
     id,
     name,
@@ -63,5 +63,4 @@ const fields = [
     compile,
     allowedBeforeInitFade: true,
   };
-  
-  
+

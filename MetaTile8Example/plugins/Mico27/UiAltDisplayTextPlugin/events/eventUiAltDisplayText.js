@@ -38,25 +38,25 @@ const fields = [
 
 const compile = (input, helpers) => {
   const {
-	_callNative,
+    _callNative,
     _addComment,
     _loadStructuredText,
     _addNL,
     _setTextLayer,
   } = helpers;
-  		
-	const inputTexts = Array.isArray(input.text) ? input.text : [input.text];
+
+    const inputTexts = Array.isArray(input.text) ? input.text : [input.text];
     _addComment("Alt Draw Text To Background");
-	_setTextLayer(".TEXT_LAYER_BKG");
+    _setTextLayer(".TEXT_LAYER_BKG");
     inputTexts.forEach((inputText, textIndex) => {
       const warped_x = input.x % 32;
-	  const warped_y = input.y % 32;
-	  _loadStructuredText(`\\003\\${decOct(warped_x + 1)}\\${decOct(warped_y + 1)}${inputText}`);	  	  
-	  _callNative("ui_alt_display_text"); 	  
+      const warped_y = input.y % 32;
+      _loadStructuredText(`\\003\\${decOct(warped_x + 1)}\\${decOct(warped_y + 1)}${inputText}`);
+      _callNative("ui_alt_display_text");
     });
      _setTextLayer(".TEXT_LAYER_WIN");
-    _addNL();  
-    
+    _addNL();
+
 };
 
 module.exports = {
