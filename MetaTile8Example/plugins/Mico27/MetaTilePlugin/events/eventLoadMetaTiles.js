@@ -29,6 +29,7 @@ export const fields = [
 ];
 
 const background_cache = {};
+const metatiles_cache = {};
 
 export const compile = (input, helpers) => {
     const { options, _callNative, _stackPushConst, _stackPush, _stackPop, _addComment, _declareLocal, variableSetToScriptValue, writeAsset, engineFieldValues, engineFields } = helpers;
@@ -54,7 +55,8 @@ export const compile = (input, helpers) => {
         const metaTilemapData = metatile_scene.background.tilemap.data;
         const metaTilemapAttrData = metatile_scene.background.tilemapAttr?.data;
         const metaCollisionData = metatile_scene.collisions;
-        let tile_found = false;
+        let idx = 0;
+        let lookup_key = "";
         if (metatileSizeValue.value == "METATILE_SIZE_16"){
             let width = scene.background.width >> 1;
             width--;
@@ -67,37 +69,42 @@ export const compile = (input, helpers) => {
             if (width * height > 7168){
                 throw new Error(`The background's width is: ${(scene.background.width >> 1)} which its upper power of two is: ${width} multiplied by the background height: ${height} totals: ${width * height} which exceeds the limit of 7168. Please reduce the scene size.`);
             }
+            let metatile_dict = metatiles_cache[input.sceneId];
+            if (!metatile_dict){
+                metatile_dict = {};
+                for (let y = 0; y < metatile_scene.background.height >> 1; y++){
+                    for (let x = 0; x < metatile_scene.background.width >> 1; x++){
+                        idx = ((y << 1) * metatile_scene.background.width) + (x << 1);
+                        lookup_key = `${metaTilemapData[idx]}_${metaTilemapData[idx + 1]}_${metaTilemapData[idx + metatile_scene.background.width]}_${metaTilemapData[idx + metatile_scene.background.width + 1]}`;
+                        if (input.matchColor){
+                            lookup_key += `_${metaTilemapAttrData[idx]}_${metaTilemapAttrData[idx + 1]}_${metaTilemapAttrData[idx + metatile_scene.background.width]}_${metaTilemapAttrData[idx + metatile_scene.background.width + 1]}`;
+                        }
+                        if (input.matchCollision){
+                            lookup_key += `_${metaCollisionData[idx]}_${metaCollisionData[idx + 1]}_${metaCollisionData[idx + metatile_scene.background.width]}_${metaCollisionData[idx + metatile_scene.background.width + 1]}`;
+                        }
+                        if (metatile_dict[lookup_key] === undefined){
+                            metatile_dict[lookup_key] = (y * (metatile_scene.background.width >> 1)) + x;
+                        }
+                    }
+                }
+                metatiles_cache[input.sceneId] = metatile_dict;
+            }
+            let new_idx = 0;
             for (let y = 0; y < scene.background.height >> 1; y++){
                 for (let x = 0; x < scene.background.width >> 1; x++){
-                    for (let y2 = 0; y2 < metatile_scene.background.height >> 1; y2++){
-                        for (let x2 = 0; x2 < metatile_scene.background.width >> 1; x2++){
-                            if ((oldTilemapData[((y << 1) * scene.background.width) + (x << 1)] == metaTilemapData[((y2 << 1) * metatile_scene.background.width) + (x2 << 1)] &&
-                                oldTilemapData[((y << 1) * scene.background.width) + (x << 1) + 1] == metaTilemapData[((y2 << 1) * metatile_scene.background.width) + (x2 << 1) + 1] &&
-                                oldTilemapData[((y << 1) * scene.background.width) + (x << 1) + 1 + scene.background.width] == metaTilemapData[((y2 << 1) * metatile_scene.background.width) + (x2 << 1) + 1 + metatile_scene.background.width] &&
-                                oldTilemapData[((y << 1) * scene.background.width) + (x << 1) + scene.background.width] == metaTilemapData[((y2 << 1) * metatile_scene.background.width) + (x2 << 1) + metatile_scene.background.width]) &&
-                                (!input.matchColor || !oldTilemapAttrData || !metaTilemapAttrData ||
-                                (oldTilemapAttrData[((y << 1) * scene.background.width) + (x << 1)] == metaTilemapAttrData[((y2 << 1) * metatile_scene.background.width) + (x2 << 1)] &&
-                                oldTilemapAttrData[((y << 1) * scene.background.width) + (x << 1) + 1] == metaTilemapAttrData[((y2 << 1) * metatile_scene.background.width) + (x2 << 1) + 1] &&
-                                oldTilemapAttrData[((y << 1) * scene.background.width) + (x << 1) + 1 + scene.background.width] == metaTilemapAttrData[((y2 << 1) * metatile_scene.background.width) + (x2 << 1) + 1 + metatile_scene.background.width] &&
-                                oldTilemapAttrData[((y << 1) * scene.background.width) + (x << 1) + scene.background.width] == metaTilemapAttrData[((y2 << 1) * metatile_scene.background.width) + (x2 << 1) + metatile_scene.background.width])) &&
-                                (!input.matchCollision || !oldCollisionData || !metaCollisionData ||
-                                (oldCollisionData[((y << 1) * scene.background.width) + (x << 1)] == metaCollisionData[((y2 << 1) * metatile_scene.background.width) + (x2 << 1)] &&
-                                oldCollisionData[((y << 1) * scene.background.width) + (x << 1) + 1] == metaCollisionData[((y2 << 1) * metatile_scene.background.width) + (x2 << 1) + 1] &&
-                                oldCollisionData[((y << 1) * scene.background.width) + (x << 1) + 1 + scene.background.width] == metaCollisionData[((y2 << 1) * metatile_scene.background.width) + (x2 << 1) + 1 + metatile_scene.background.width] &&
-                                oldCollisionData[((y << 1) * scene.background.width) + (x << 1) + scene.background.width] == metaCollisionData[((y2 << 1) * metatile_scene.background.width) + (x2 << 1) + metatile_scene.background.width]))){
-                                    newTilemapData[(y * (scene.background.width >> 1)) + x] = (y2 * (metatile_scene.background.width >> 1)) + x2;
-                                    tile_found = true;
-                                    break;
-                            }
-                        }
-                        if (tile_found){
-                            break;
-                        }
+                    idx = ((y << 1) * scene.background.width) + (x << 1);
+                    lookup_key = `${oldTilemapData[idx]}_${oldTilemapData[idx + 1]}_${oldTilemapData[idx + scene.background.width]}_${oldTilemapData[idx + scene.background.width + 1]}`;
+                    if (input.matchColor){
+                        lookup_key += `_${oldTilemapAttrData[idx]}_${oldTilemapAttrData[idx + 1]}_${oldTilemapAttrData[idx + scene.background.width]}_${oldTilemapAttrData[idx + scene.background.width + 1]}`;
                     }
-                    if (!tile_found){
+                    if (input.matchCollision){
+                        lookup_key += `_${oldCollisionData[idx]}_${oldCollisionData[idx + 1]}_${oldCollisionData[idx + scene.background.width]}_${oldCollisionData[idx + scene.background.width + 1]}`;
+                    }
+                    new_idx = (y * (scene.background.width >> 1)) + x;
+                    newTilemapData[new_idx] = metatile_dict[lookup_key];
+                    if (newTilemapData[new_idx] === undefined){
                         throw new Error(`Cannot find matching metatile for tile at coordinate ${(x << 1)}, ${(y << 1)}`);
                     }
-                    tile_found = false;
                 }
             }
         } else {
@@ -112,28 +119,40 @@ export const compile = (input, helpers) => {
             if (width * height > 7936){
                 throw new Error(`The background's width is: ${scene.background.width} which its upper power of two is: ${width} multiplied by the background height: ${height} totals: ${width * height} which exceeds the limit of 7936. Please reduce the scene size.`);
             }
+            let metatile_dict = metatiles_cache[input.sceneId];
+            if (!metatile_dict){
+                metatile_dict = {};
+                for (let y = 0; y < metatile_scene.background.height; y++){
+                    for (let x = 0; x < metatile_scene.background.width; x++){
+                        idx = (y * metatile_scene.background.width) + x;
+                        lookup_key = metaTilemapData[idx];
+                        if (input.matchColor){
+                            lookup_key += `_${metaTilemapAttrData[idx]}`;
+                        }
+                        if (input.matchCollision){
+                            lookup_key += `_${metaCollisionData[idx]}`;
+                        }
+                        if (metatile_dict[lookup_key] === undefined){
+                            metatile_dict[lookup_key] = idx;
+                        }
+                    }
+                }
+                metatiles_cache[input.sceneId] = metatile_dict;
+            }
             for (let y = 0; y < scene.background.height; y++){
                 for (let x = 0; x < scene.background.width; x++){
-                    for (let y2 = 0; y2 < metatile_scene.background.height; y2++){
-                        for (let x2 = 0; x2 < metatile_scene.background.width; x2++){
-                            if ((oldTilemapData[(y * scene.background.width) + x] == metaTilemapData[(y2 * metatile_scene.background.width) + x2]) &&
-                                (!input.matchColor || !oldTilemapAttrData || !metaTilemapAttrData ||
-                                (oldTilemapAttrData[(y * scene.background.width) + x] == metaTilemapAttrData[(y2 * metatile_scene.background.width) + x2])) &&
-                                (!input.matchCollision || !oldCollisionData || !metaCollisionData ||
-                                (oldCollisionData[(y * scene.background.width) + x] == metaCollisionData[(y2 * metatile_scene.background.width) + x2]))){
-                                    newTilemapData[(y * scene.background.width) + x] = (y2 * metatile_scene.background.width) + x2;
-                                    tile_found = true;
-                                    break;
-                            }
-                        }
-                        if (tile_found){
-                            break;
-                        }
+                    idx = (y * scene.background.width) + x;
+                    lookup_key = oldTilemapData[idx];
+                    if (input.matchColor){
+                        lookup_key += `_${oldTilemapAttrData[idx]}`;
                     }
-                    if (!tile_found){
+                    if (input.matchCollision){
+                        lookup_key += `_${oldCollisionData[idx]}`;
+                    }
+                    newTilemapData[idx] = metatile_dict[lookup_key];
+                    if (newTilemapData[idx] === undefined){
                         throw new Error(`Cannot find matching metatile for tile at coordinate ${x}, ${y}`);
                     }
-                    tile_found = false;
                 }
             }
         }
