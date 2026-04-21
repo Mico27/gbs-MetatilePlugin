@@ -29,68 +29,82 @@ export const fields = [
 ];
 
 const background_cache = {};
+const metatiles_cache = {};
 
 export const compile = (input, helpers) => {
   const { options, _callNative, _stackPushConst, _stackPush, _stackPop, _addComment, _declareLocal, variableSetToScriptValue, writeAsset } = helpers;
-  
-  const { scenes, scene } = options;
+  const { scenes, scene, engineFields } = options;
   const metatile_scene = scenes.find((s) => s.id === input.sceneId);
   if (!metatile_scene) {
-  	return;
+    return;
   }
-  if (!background_cache[scene.backgroundId]){	
-	const newTilemapData = [];
-	const oldTilemapData = scene.background.tilemap.data;
-	const oldTilemapAttrData = scene.background.tilemapAttr?.data;
-	const oldCollisionData = scene.collisions;
-	const metaTilemapData = metatile_scene.background.tilemap.data;
-	const metaTilemapAttrData = metatile_scene.background.tilemapAttr?.data;
-	const metaCollisionData = metatile_scene.collisions;
-	let tile_found = false;
-	for (let y = 0; y < scene.background.height / 2; y++){
-		for (let x = 0; x < scene.background.width / 2; x++){
-			for (let y2 = 0; y2 < metatile_scene.background.height / 2; y2++){
-				for (let x2 = 0; x2 < metatile_scene.background.width / 2; x2++){
-					if ((oldTilemapData[(y * 2 * scene.background.width) + (x * 2)] == metaTilemapData[(y2 * 2 * metatile_scene.background.width) + (x2 * 2)] &&
-						oldTilemapData[(y * 2 * scene.background.width) + (x * 2) + 1] == metaTilemapData[(y2 * 2 * metatile_scene.background.width) + (x2 * 2) + 1] &&
-						oldTilemapData[(y * 2 * scene.background.width) + (x * 2) + 1 + scene.background.width] == metaTilemapData[(y2 * 2 * metatile_scene.background.width) + (x2 * 2) + 1 + metatile_scene.background.width] &&
-						oldTilemapData[(y * 2 * scene.background.width) + (x * 2) + scene.background.width] == metaTilemapData[(y2 * 2 * metatile_scene.background.width) + (x2 * 2) + metatile_scene.background.width]) &&
-						(!input.matchColor || !oldTilemapAttrData || !metaTilemapAttrData || 
-						(oldTilemapAttrData[(y * 2 * scene.background.width) + (x * 2)] == metaTilemapAttrData[(y2 * 2 * metatile_scene.background.width) + (x2 * 2)] &&
-						oldTilemapAttrData[(y * 2 * scene.background.width) + (x * 2) + 1] == metaTilemapAttrData[(y2 * 2 * metatile_scene.background.width) + (x2 * 2) + 1] &&
-						oldTilemapAttrData[(y * 2 * scene.background.width) + (x * 2) + 1 + scene.background.width] == metaTilemapAttrData[(y2 * 2 * metatile_scene.background.width) + (x2 * 2) + 1 + metatile_scene.background.width] &&
-						oldTilemapAttrData[(y * 2 * scene.background.width) + (x * 2) + scene.background.width] == metaTilemapAttrData[(y2 * 2 * metatile_scene.background.width) + (x2 * 2) + metatile_scene.background.width])) &&
-						(!input.matchCollision || !oldCollisionData || !metaCollisionData || 
-						(oldCollisionData[(y * 2 * scene.background.width) + (x * 2)] == metaCollisionData[(y2 * 2 * metatile_scene.background.width) + (x2 * 2)] &&
-						oldCollisionData[(y * 2 * scene.background.width) + (x * 2) + 1] == metaCollisionData[(y2 * 2 * metatile_scene.background.width) + (x2 * 2) + 1] &&
-						oldCollisionData[(y * 2 * scene.background.width) + (x * 2) + 1 + scene.background.width] == metaCollisionData[(y2 * 2 * metatile_scene.background.width) + (x2 * 2) + 1 + metatile_scene.background.width] &&
-						oldCollisionData[(y * 2 * scene.background.width) + (x * 2) + scene.background.width] == metaCollisionData[(y2 * 2 * metatile_scene.background.width) + (x2 * 2) + metatile_scene.background.width]))){
-							newTilemapData[(y * scene.background.width/2) + x] = (y2 * metatile_scene.background.width/2) + x2;
-							tile_found = true;
-							break;
-					}
-				}
-				if (tile_found){
-					break;
-				}
-			}
-			if (!tile_found){
-				throw new Error(`Cannot find matching metatile for tile at coordinate ${x * 2}, ${y * 2}`);
-			}
-			tile_found = false;
-		}
-	}
-	scene.background.tilemap.data = newTilemapData; 
-	scene.background.tilemapAttr.data = [0]; 
-	scene.collisions = [0];
-	background_cache[scene.backgroundId] = true;
+  if (!background_cache[scene.backgroundId]){
+    let width = scene.background.width >> 1;  
+    width--;
+    width |= width >> 1;
+    width |= width >> 2;
+    width |= width >> 4;
+    width |= width >> 8;
+    width++;
+    const height = scene.background.height >> 1;
+    if (width * height > 7168){
+        throw new Error(`The background's width is: ${(scene.background.width >> 1)} which its upper power of two is: ${width} multiplied by the background height: ${height} totals: ${width * height} which exceeds the limit of 7168. Please reduce the scene size.`);
+    }
+    const newTilemapData = [];
+    const oldTilemapData = scene.background.tilemap.data;
+    const oldTilemapAttrData = scene.background.tilemapAttr?.data;
+    const oldCollisionData = scene.collisions;
+    const metaTilemapData = metatile_scene.background.tilemap.data;
+    const metaTilemapAttrData = metatile_scene.background.tilemapAttr?.data;
+    const metaCollisionData = metatile_scene.collisions;
+    let idx = 0;
+    let lookup_key = "";    
+    let metatile_dict = metatiles_cache[input.sceneId];
+    if (!metatile_dict){
+        metatile_dict = {};        
+        for (let y = 0; y < metatile_scene.background.height >> 1; y++){
+            for (let x = 0; x < metatile_scene.background.width >> 1; x++){
+                idx = ((y << 1) * metatile_scene.background.width) + (x << 1);
+                lookup_key = `${metaTilemapData[idx]}_${metaTilemapData[idx + 1]}_${metaTilemapData[idx + metatile_scene.background.width]}_${metaTilemapData[idx + metatile_scene.background.width + 1]}`;
+                if (input.matchColor){
+                    lookup_key += `_${metaTilemapAttrData[idx]}_${metaTilemapAttrData[idx + 1]}_${metaTilemapAttrData[idx + metatile_scene.background.width]}_${metaTilemapAttrData[idx + metatile_scene.background.width + 1]}`;
+                }
+                if (input.matchCollision){
+                    lookup_key += `_${metaCollisionData[idx]}_${metaCollisionData[idx + 1]}_${metaCollisionData[idx + metatile_scene.background.width]}_${metaCollisionData[idx + metatile_scene.background.width + 1]}`;
+                }
+                if (metatile_dict[lookup_key] === undefined){
+                    metatile_dict[lookup_key] = (y * (metatile_scene.background.width >> 1)) + x;
+                }
+            }
+        }
+        metatiles_cache[input.sceneId] = metatile_dict;
+    }
+    let new_idx = 0;
+    for (let y = 0; y < scene.background.height >> 1; y++){
+        for (let x = 0; x < scene.background.width >> 1; x++){
+            idx = ((y << 1) * scene.background.width) + (x << 1);
+            lookup_key = `${oldTilemapData[idx]}_${oldTilemapData[idx + 1]}_${oldTilemapData[idx + scene.background.width]}_${oldTilemapData[idx + scene.background.width + 1]}`;
+            if (input.matchColor){
+                lookup_key += `_${oldTilemapAttrData[idx]}_${oldTilemapAttrData[idx + 1]}_${oldTilemapAttrData[idx + scene.background.width]}_${oldTilemapAttrData[idx + scene.background.width + 1]}`;
+            }
+            if (input.matchCollision){
+                lookup_key += `_${oldCollisionData[idx]}_${oldCollisionData[idx + 1]}_${oldCollisionData[idx + scene.background.width]}_${oldCollisionData[idx + scene.background.width + 1]}`;
+            }
+            new_idx = (y * (scene.background.width >> 1)) + x;
+            newTilemapData[new_idx] = metatile_dict[lookup_key];
+            if (newTilemapData[new_idx] === undefined){
+                throw new Error(`Cannot find matching metatile for tile at coordinate ${(x << 1)}, ${(y << 1)}`);
+            }
+        }
+    }
+    scene.background.tilemap.data = newTilemapData; 
+    scene.background.tilemapAttr.data = [0]; 
+    scene.collisions = [0];
+    background_cache[scene.backgroundId] = true;
   }
   _addComment("Load meta tiles");
-  
   _stackPushConst(`_${metatile_scene.symbol}`);
   _stackPushConst(`___bank_${metatile_scene.symbol}`);
-  		
   _callNative("vm_load_meta_tiles");
-  _stackPop(2);  
-  
+  _stackPop(2);
 };

@@ -170,7 +170,7 @@
       "args": {
         "metatile_event": "3",
         "__scriptTabs": "scriptinput",
-        "__collapse": true
+        "__collapse": false
       },
       "children": {
         "script": [
