@@ -162,12 +162,12 @@ void vm_submap_metatiles(SCRIPT_CTX * THIS) OLDCALL BANKED {
 		UBYTE current_y = (dest_y + i);			
 		MemcpyBanked(sram_map_data + METATILE_MAP_OFFSET(dest_x, current_y), tilemap_ptr + (UWORD)((((source_y + i) >> 1) * (bkg.width >> 1)) + (source_x >> 1)), width >> 1, bkg.tilemap.bank);
 		if (commit){
-			bkg_address_offset = ((UWORD)get_bkg_xy_addr((dest_x + bkg_offset_x) & 31, (dest_y + bkg_offset_y) & 31)) - 0x9800;
+			bkg_address_offset = ((UWORD)get_bkg_xy_addr((dest_x + bkg_offset_x) & 31, (current_y + bkg_offset_y) & 31)) - 0x9800;
 			load_metatile_row(metatile_ptr, dest_x, current_y, width, metatile_bank);
 			#ifdef CGB
 				if (_is_CGB) { 
 					VBK_REG = 1;
-					bkg_address_offset = ((UWORD)get_bkg_xy_addr((dest_x + bkg_offset_x) & 31, (dest_y + bkg_offset_y) & 31)) - 0x9800;
+					bkg_address_offset = ((UWORD)get_bkg_xy_addr((dest_x + bkg_offset_x) & 31, (current_y + bkg_offset_y) & 31)) - 0x9800;
 					load_metatile_row(metatile_attr_ptr, dest_x, current_y, width, metatile_attr_bank);
 					VBK_REG = 0;
 				}
