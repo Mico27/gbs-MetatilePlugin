@@ -216,7 +216,7 @@ static void impl_replace_meta_tile(UBYTE x, UBYTE y, UBYTE tile_id, UBYTE commit
 	x -= x & 1;
 	y -= y & 1;
 	sram_map_data[METATILE_MAP_OFFSET(x, y)] = tile_id;	
-	if (commit){	
+	if (commit && !is_transitioning_scene){	
 	UWORD tile_map_offset;
 	#ifdef CGB
 			if (_is_CGB) {

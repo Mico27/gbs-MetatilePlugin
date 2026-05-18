@@ -64,6 +64,25 @@
         "__collapse": true
       },
       "id": "3f72de5f-8df7-47eb-86cd-c1ab829be742"
+    },
+    {
+      "command": "EVENT_REPLACE_META_TILE",
+      "args": {
+        "x": {
+          "type": "number",
+          "value": 12
+        },
+        "y": {
+          "type": "number",
+          "value": 6
+        },
+        "metatile_id": {
+          "type": "number",
+          "value": 19
+        },
+        "commit": true
+      },
+      "id": "144d1550-5f1a-46ad-99dc-58f40bb4d7f4"
     }
   ],
   "playerHit1Script": [],
