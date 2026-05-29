@@ -22,7 +22,7 @@
           }
         },
         "__collapseElse": true,
-        "__collapse": false
+        "__collapse": true
       },
       "children": {
         "true": [
@@ -121,7 +121,7 @@
         ],
         "override": true,
         "__scriptTabs": "press",
-        "__collapse": false
+        "__collapse": true
       },
       "children": {
         "true": [
@@ -265,28 +265,55 @@
       "args": {
         "metatile_event": "0",
         "__scriptTabs": "scriptinput",
-        "__collapse": true
+        "__collapse": false
       },
       "children": {
         "script": [
           {
-            "command": "EVENT_IF",
+            "command": "EVENT_SET_VALUE",
             "args": {
-              "condition": {
-                "type": "eq",
-                "valueA": {
-                  "type": "engineField",
-                  "value": "overlap_metatile_id"
-                },
-                "valueB": {
-                  "type": "number",
-                  "value": 6
-                }
+              "variable": "6",
+              "value": {
+                "type": "engineField",
+                "value": "overlap_metatile_id"
+              }
+            },
+            "id": "c802df14-04f2-420a-90f7-fa14a9c7ac0a"
+          },
+          {
+            "command": "EVENT_SWITCH",
+            "args": {
+              "variable": "6",
+              "choices": 2,
+              "__collapseCase0": false,
+              "__collapseCase1": false,
+              "__collapseCase2": false,
+              "__collapseCase3": false,
+              "__collapseCase4": false,
+              "__collapseCase5": false,
+              "__collapseCase6": false,
+              "__collapseCase7": false,
+              "__collapseCase8": false,
+              "__collapseCase9": false,
+              "__collapseCase10": false,
+              "__collapseCase11": false,
+              "__collapseCase12": false,
+              "__collapseCase13": false,
+              "__collapseCase14": false,
+              "__collapseCase15": false,
+              "__collapseElse": false,
+              "value0": {
+                "type": "number",
+                "value": 6
               },
-              "__collapseElse": true
+              "value1": {
+                "type": "number",
+                "value": 11
+              },
+              "__collapse": false
             },
             "children": {
-              "true": [
+              "true0": [
                 {
                   "command": "EVENT_REPLACE_META_TILE",
                   "args": {
@@ -302,18 +329,709 @@
                       "type": "number",
                       "value": 1
                     },
-                    "commit": true
+                    "commit": true,
+                    "__collapse": true
                   },
                   "id": "ee67b956-8f60-4c12-b0c2-c51cd1f85629"
                 }
               ],
+              "true1": [
+                {
+                  "command": "EVENT_COMMENT",
+                  "args": {
+                    "text": "metatile id 11 is the hole tile in the metatile scene\nwe store the hole position in pixel to compare with the player pixel position",
+                    "__collapse": true
+                  },
+                  "id": "4776a4bd-3d8a-48c8-81bc-0099125e3905"
+                },
+                {
+                  "command": "EVENT_SET_VALUE",
+                  "args": {
+                    "variable": "17",
+                    "value": {
+                      "type": "shl",
+                      "valueA": {
+                        "type": "engineField",
+                        "value": "overlap_metatile_x"
+                      },
+                      "valueB": {
+                        "type": "number",
+                        "value": 3
+                      }
+                    },
+                    "__collapse": true
+                  },
+                  "id": "4d3bc696-905c-4a9b-882c-b0353465dc7e"
+                },
+                {
+                  "command": "EVENT_SET_VALUE",
+                  "args": {
+                    "variable": "18",
+                    "value": {
+                      "type": "shl",
+                      "valueA": {
+                        "type": "engineField",
+                        "value": "overlap_metatile_y"
+                      },
+                      "valueB": {
+                        "type": "number",
+                        "value": 3
+                      }
+                    },
+                    "__collapse": true
+                  },
+                  "id": "d2380210-ee5d-4cfb-9356-fe567a222e0a"
+                },
+                {
+                  "command": "EVENT_COMMENT",
+                  "args": {
+                    "text": "We add a check to see if we're not already falling",
+                    "__collapse": true
+                  },
+                  "id": "f8e25344-9c93-4978-bdd8-e72ffa60fb0a"
+                },
+                {
+                  "command": "EVENT_IF",
+                  "args": {
+                    "condition": {
+                      "type": "eq",
+                      "valueA": {
+                        "type": "variable",
+                        "value": "15"
+                      },
+                      "valueB": {
+                        "type": "number",
+                        "value": 0
+                      }
+                    },
+                    "__collapseElse": true,
+                    "__collapse": false
+                  },
+                  "children": {
+                    "true": [
+                      {
+                        "command": "EVENT_INC_VALUE",
+                        "args": {
+                          "variable": "15",
+                          "__collapse": true
+                        },
+                        "id": "ec6b5b3d-c664-49d2-87aa-3485adfbe8be"
+                      },
+                      {
+                        "command": "EVENT_COMMENT",
+                        "args": {
+                          "text": "We change the animation state of the actor to tripping\nand start a new thread with the loop that will pull the player\nin the hole",
+                          "__collapse": true
+                        },
+                        "id": "568a9773-75cb-48f0-8367-c57cee7e9f5e"
+                      },
+                      {
+                        "command": "EVENT_ACTOR_SET_STATE",
+                        "args": {
+                          "actorId": "$self$",
+                          "spriteStateId": "Tripping",
+                          "loopAnim": true,
+                          "__collapse": true
+                        },
+                        "id": "52852195-fa81-40d4-9a20-e46a16705bc1"
+                      },
+                      {
+                        "command": "EVENT_THREAD_START",
+                        "args": {
+                          "variable": "16",
+                          "__scriptTabs": "true",
+                          "__collapse": false
+                        },
+                        "children": {
+                          "true": [
+                            {
+                              "command": "EVENT_LOOP",
+                              "args": {},
+                              "children": {
+                                "true": [
+                                  {
+                                    "command": "EVENT_COMMENT",
+                                    "args": {
+                                      "text": "Compare player position in pixel to the current hole position in pixel",
+                                      "__collapse": true
+                                    },
+                                    "id": "757ac7ea-d832-474e-9b9f-5d62a459213c"
+                                  },
+                                  {
+                                    "command": "EVENT_COMMENT",
+                                    "args": {
+                                      "text": "if the player is right of it, we push the player left by changing velocity\nelse if the player is left of it, we push the player right by changing velocity",
+                                      "__collapse": true
+                                    },
+                                    "id": "9a58d1c7-8b41-42c3-8e85-778b0a182705"
+                                  },
+                                  {
+                                    "command": "EVENT_IF",
+                                    "args": {
+                                      "condition": {
+                                        "type": "gt",
+                                        "valueA": {
+                                          "type": "property",
+                                          "target": "player",
+                                          "property": "pxpos"
+                                        },
+                                        "valueB": {
+                                          "type": "variable",
+                                          "value": "17"
+                                        }
+                                      },
+                                      "__collapseElse": false,
+                                      "__collapse": true
+                                    },
+                                    "children": {
+                                      "true": [
+                                        {
+                                          "command": "EVENT_ENGINE_FIELD_SET",
+                                          "args": {
+                                            "engineFieldKey": "adv_vel_x",
+                                            "value": {
+                                              "type": "sub",
+                                              "valueA": {
+                                                "type": "engineField",
+                                                "value": "adv_vel_x"
+                                              },
+                                              "valueB": {
+                                                "type": "number",
+                                                "value": 4096
+                                              }
+                                            },
+                                            "__collapse": true
+                                          },
+                                          "id": "43242e02-4909-44cd-ad6f-6adecf57dec1"
+                                        }
+                                      ],
+                                      "false": [
+                                        {
+                                          "command": "EVENT_ENGINE_FIELD_SET",
+                                          "args": {
+                                            "engineFieldKey": "adv_vel_x",
+                                            "value": {
+                                              "type": "add",
+                                              "valueA": {
+                                                "type": "engineField",
+                                                "value": "adv_vel_x"
+                                              },
+                                              "valueB": {
+                                                "type": "number",
+                                                "value": 4096
+                                              }
+                                            },
+                                            "__collapse": true
+                                          },
+                                          "id": "4ed81368-79b3-4698-8ddf-8a399f083458"
+                                        }
+                                      ]
+                                    },
+                                    "id": "41a9b082-8b9e-471b-b02f-4e69ee76474c"
+                                  },
+                                  {
+                                    "command": "EVENT_COMMENT",
+                                    "args": {
+                                      "text": "We add idles between the operations for performance reason to allow other things to happen in the backgroun",
+                                      "__collapse": true
+                                    },
+                                    "id": "6aeec7fa-d578-4cf6-b3b2-d1e7b2837076"
+                                  },
+                                  {
+                                    "command": "EVENT_IDLE",
+                                    "args": {
+                                      "__collapse": true
+                                    },
+                                    "id": "e6225eb8-708c-4e0f-9009-bd694e2f9073"
+                                  },
+                                  {
+                                    "command": "EVENT_COMMENT",
+                                    "args": {
+                                      "text": "if the player is down of it, we push the player up by changing velocity\nelse if the player is up of it, we push the player down by changing velocity",
+                                      "__collapse": true
+                                    },
+                                    "id": "68635f88-f164-44ae-9e96-9bfde5d0a466"
+                                  },
+                                  {
+                                    "command": "EVENT_IF",
+                                    "args": {
+                                      "condition": {
+                                        "type": "gt",
+                                        "valueA": {
+                                          "type": "property",
+                                          "target": "player",
+                                          "property": "pypos"
+                                        },
+                                        "valueB": {
+                                          "type": "variable",
+                                          "value": "18"
+                                        }
+                                      },
+                                      "__collapseElse": false,
+                                      "__collapse": true
+                                    },
+                                    "children": {
+                                      "true": [
+                                        {
+                                          "command": "EVENT_ENGINE_FIELD_SET",
+                                          "args": {
+                                            "engineFieldKey": "adv_vel_y",
+                                            "value": {
+                                              "type": "sub",
+                                              "valueA": {
+                                                "type": "engineField",
+                                                "value": "adv_vel_y"
+                                              },
+                                              "valueB": {
+                                                "type": "number",
+                                                "value": 4096
+                                              }
+                                            },
+                                            "__collapse": true
+                                          },
+                                          "id": "45df17fc-c4bf-4a54-b65e-240ac8183ab5"
+                                        }
+                                      ],
+                                      "false": [
+                                        {
+                                          "command": "EVENT_ENGINE_FIELD_SET",
+                                          "args": {
+                                            "engineFieldKey": "adv_vel_y",
+                                            "value": {
+                                              "type": "add",
+                                              "valueA": {
+                                                "type": "engineField",
+                                                "value": "adv_vel_y"
+                                              },
+                                              "valueB": {
+                                                "type": "number",
+                                                "value": 4096
+                                              }
+                                            },
+                                            "__collapse": true
+                                          },
+                                          "id": "b0e60840-feec-4098-a5bd-18964cc8da59"
+                                        }
+                                      ]
+                                    },
+                                    "id": "768d6b96-9ab6-42b9-b7c9-e72f63023796"
+                                  },
+                                  {
+                                    "command": "EVENT_IDLE",
+                                    "args": {
+                                      "__collapse": true
+                                    },
+                                    "id": "6594d8cd-373b-4213-b973-2aeb882b9392"
+                                  },
+                                  {
+                                    "command": "EVENT_COMMENT",
+                                    "args": {
+                                      "text": "If player is too close to center of the hole, make the player fall down the hole, respawn and stop thread",
+                                      "__collapse": true
+                                    },
+                                    "id": "cadef278-be29-40a0-a196-dace0274105c"
+                                  },
+                                  {
+                                    "command": "EVENT_IF",
+                                    "args": {
+                                      "condition": {
+                                        "type": "and",
+                                        "valueA": {
+                                          "type": "lt",
+                                          "valueA": {
+                                            "type": "abs",
+                                            "value": {
+                                              "type": "sub",
+                                              "valueA": {
+                                                "type": "property",
+                                                "target": "player",
+                                                "property": "pxpos"
+                                              },
+                                              "valueB": {
+                                                "type": "variable",
+                                                "value": "17"
+                                              }
+                                            }
+                                          },
+                                          "valueB": {
+                                            "type": "number",
+                                            "value": 2
+                                          }
+                                        },
+                                        "valueB": {
+                                          "type": "lt",
+                                          "valueA": {
+                                            "type": "abs",
+                                            "value": {
+                                              "type": "sub",
+                                              "valueA": {
+                                                "type": "property",
+                                                "target": "player",
+                                                "property": "pypos"
+                                              },
+                                              "valueB": {
+                                                "type": "variable",
+                                                "value": "18"
+                                              }
+                                            }
+                                          },
+                                          "valueB": {
+                                            "type": "number",
+                                            "value": 2
+                                          }
+                                        }
+                                      },
+                                      "__collapseElse": true,
+                                      "__collapse": true
+                                    },
+                                    "children": {
+                                      "true": [
+                                        {
+                                          "command": "EVENT_ACTOR_SET_STATE",
+                                          "args": {
+                                            "actorId": "$self$",
+                                            "spriteStateId": "Falling",
+                                            "loopAnim": false,
+                                            "__collapse": true
+                                          },
+                                          "id": "1712bc1b-6bf9-4de1-a30c-be55ebe31d1b"
+                                        },
+                                        {
+                                          "command": "EVENT_ADVENTURE_STATE_SET",
+                                          "args": {
+                                            "state": "blank",
+                                            "__collapse": true
+                                          },
+                                          "id": "28eae16a-4ed2-4244-bdab-f2ba0908fd83"
+                                        },
+                                        {
+                                          "command": "EVENT_WAIT",
+                                          "args": {
+                                            "time": {
+                                              "type": "number",
+                                              "value": 1
+                                            },
+                                            "frames": {
+                                              "type": "number",
+                                              "value": 1
+                                            },
+                                            "__collapse": true
+                                          },
+                                          "id": "6f154036-e4ac-48a1-892f-2004dde6a863"
+                                        },
+                                        {
+                                          "command": "EVENT_ACTOR_SET_POSITION",
+                                          "args": {
+                                            "actorId": "$self$",
+                                            "x": {
+                                              "type": "variable",
+                                              "value": "19"
+                                            },
+                                            "y": {
+                                              "type": "variable",
+                                              "value": "20"
+                                            },
+                                            "__collapse": false,
+                                            "units": "pixels"
+                                          },
+                                          "id": "2d4f37e0-2fed-49f4-b7a7-0e78c0e2b918"
+                                        },
+                                        {
+                                          "command": "EVENT_ACTOR_SET_STATE",
+                                          "args": {
+                                            "actorId": "$self$",
+                                            "spriteStateId": "",
+                                            "loopAnim": true,
+                                            "__collapse": true
+                                          },
+                                          "id": "067b5167-5b4b-4c80-b57d-06bf48f0f82a"
+                                        },
+                                        {
+                                          "command": "EVENT_ADVENTURE_STATE_SET",
+                                          "args": {
+                                            "state": "ground",
+                                            "__collapse": true
+                                          },
+                                          "id": "25f609e8-909b-4cae-bfb3-c189de415bd0"
+                                        },
+                                        {
+                                          "command": "EVENT_SET_VALUE",
+                                          "args": {
+                                            "variable": "15",
+                                            "value": {
+                                              "type": "number",
+                                              "value": 0
+                                            },
+                                            "__collapse": true
+                                          },
+                                          "id": "4ae17117-6d8f-4da0-acf0-0bc1566eb419"
+                                        },
+                                        {
+                                          "command": "EVENT_STOP",
+                                          "args": {
+                                            "__collapse": true
+                                          },
+                                          "id": "cf87e512-93a2-4527-8531-b05235067a42"
+                                        }
+                                      ],
+                                      "false": []
+                                    },
+                                    "id": "8afa6290-bfe5-4725-8d92-1f668b1d4adb"
+                                  },
+                                  {
+                                    "command": "EVENT_IDLE",
+                                    "args": {
+                                      "__collapse": true
+                                    },
+                                    "id": "bc79a0cb-a7fd-46c4-a9dc-109efb10aba9"
+                                  },
+                                  {
+                                    "command": "EVENT_COMMENT",
+                                    "args": {
+                                      "text": "If player is too far to center of the hole, reset the player to default state and stop thread",
+                                      "__collapse": true
+                                    },
+                                    "id": "84f031f1-77ba-44d8-95cd-a88556661ea5"
+                                  },
+                                  {
+                                    "command": "EVENT_IF",
+                                    "args": {
+                                      "condition": {
+                                        "type": "or",
+                                        "valueA": {
+                                          "type": "gt",
+                                          "valueA": {
+                                            "type": "abs",
+                                            "value": {
+                                              "type": "sub",
+                                              "valueA": {
+                                                "type": "property",
+                                                "target": "player",
+                                                "property": "pxpos"
+                                              },
+                                              "valueB": {
+                                                "type": "variable",
+                                                "value": "17"
+                                              }
+                                            }
+                                          },
+                                          "valueB": {
+                                            "type": "number",
+                                            "value": 14
+                                          }
+                                        },
+                                        "valueB": {
+                                          "type": "gt",
+                                          "valueA": {
+                                            "type": "abs",
+                                            "value": {
+                                              "type": "sub",
+                                              "valueA": {
+                                                "type": "property",
+                                                "target": "player",
+                                                "property": "pypos"
+                                              },
+                                              "valueB": {
+                                                "type": "variable",
+                                                "value": "18"
+                                              }
+                                            }
+                                          },
+                                          "valueB": {
+                                            "type": "number",
+                                            "value": 14
+                                          }
+                                        }
+                                      },
+                                      "__collapseElse": true,
+                                      "__collapse": true
+                                    },
+                                    "children": {
+                                      "true": [
+                                        {
+                                          "command": "EVENT_ACTOR_SET_STATE",
+                                          "args": {
+                                            "actorId": "$self$",
+                                            "spriteStateId": "",
+                                            "loopAnim": true,
+                                            "__collapse": true
+                                          },
+                                          "id": "2dc49a83-480f-4d57-9a8f-91563aefb88b"
+                                        },
+                                        {
+                                          "command": "EVENT_ADVENTURE_STATE_SET",
+                                          "args": {
+                                            "state": "ground",
+                                            "__collapse": true
+                                          },
+                                          "id": "eb3d7b59-9f9a-4d8b-b1f0-b990e707e2f6"
+                                        },
+                                        {
+                                          "command": "EVENT_SET_VALUE",
+                                          "args": {
+                                            "variable": "15",
+                                            "value": {
+                                              "type": "number",
+                                              "value": 0
+                                            },
+                                            "__collapse": true
+                                          },
+                                          "id": "8c5523d5-cbe0-40e1-9bff-14bf68c07b84"
+                                        },
+                                        {
+                                          "command": "EVENT_STOP",
+                                          "args": {
+                                            "__collapse": true
+                                          },
+                                          "id": "b5b7e71c-4dc8-4ea2-a827-f1da8813e6b4"
+                                        }
+                                      ],
+                                      "false": []
+                                    },
+                                    "id": "03de759f-fd2e-4ea0-a692-cd36aed1c025"
+                                  },
+                                  {
+                                    "command": "EVENT_WAIT",
+                                    "args": {
+                                      "time": {
+                                        "type": "number",
+                                        "value": 0.5
+                                      },
+                                      "frames": {
+                                        "type": "number",
+                                        "value": 2
+                                      },
+                                      "units": "frames",
+                                      "__collapse": true
+                                    },
+                                    "id": "36b9b668-92f4-425b-9c09-9fb36845ab06"
+                                  }
+                                ]
+                              },
+                              "id": "ef616f4e-1bfd-4259-8736-10e0d57c2127"
+                            }
+                          ]
+                        },
+                        "id": "ad351c9c-aa10-43e1-9341-68d08f726b5e"
+                      }
+                    ],
+                    "false": []
+                  },
+                  "id": "e6f14ffa-6940-4430-bec5-8ade2844eade"
+                }
+              ],
+              "true2": [],
+              "true3": [],
+              "true4": [],
+              "true5": [],
+              "true6": [],
+              "true7": [],
+              "true8": [],
+              "true9": [],
+              "true10": [],
+              "true11": [],
+              "true12": [],
+              "true13": [],
+              "true14": [],
+              "true15": [],
               "false": []
             },
-            "id": "04b7ce64-4a2a-4515-b79c-f1e74a2df983"
+            "id": "ef569112-90b0-4c78-aa19-25aaa1fb9ef9"
           }
         ]
       },
-      "id": "0ddd21f0-3dbe-4a0f-bb59-61f155c4cd4e"
+      "id": "ef760603-6511-4825-999b-c9f2e58a30bd"
+    },
+    {
+      "command": "EVENT_GROUP",
+      "args": {
+        "__label": "Wait for screen scroll to finish",
+        "__collapse": true
+      },
+      "children": {
+        "true": [
+          {
+            "command": "EVENT_IF",
+            "args": {
+              "condition": {
+                "type": "ne",
+                "valueA": {
+                  "type": "engineField",
+                  "value": "is_transitioning_scene"
+                },
+                "valueB": {
+                  "type": "number",
+                  "value": 0
+                }
+              },
+              "__collapseElse": true
+            },
+            "children": {
+              "true": [
+                {
+                  "command": "EVENT_SCRIPT_UNLOCK",
+                  "args": {},
+                  "id": "14cedfd4-09dc-4f94-bd35-f70b52019350"
+                },
+                {
+                  "command": "EVENT_WAIT",
+                  "args": {
+                    "time": {
+                      "type": "number",
+                      "value": 0.5
+                    },
+                    "frames": {
+                      "type": "number",
+                      "value": 32
+                    },
+                    "units": "frames"
+                  },
+                  "id": "a021760d-555b-4a8e-b9d2-ecb000602d4d"
+                }
+              ],
+              "false": []
+            },
+            "id": "14ed506e-287f-4dd5-8b14-ea6c119c257b"
+          }
+        ]
+      },
+      "id": "e75d795c-53a4-4975-b091-a01df6c15d8e"
+    },
+    {
+      "command": "EVENT_GROUP",
+      "args": {
+        "__label": "Set Respawn Point",
+        "__collapse": true
+      },
+      "children": {
+        "true": [
+          {
+            "command": "EVENT_SET_VALUE",
+            "args": {
+              "variable": "19",
+              "value": {
+                "type": "property",
+                "target": "player",
+                "property": "pxpos"
+              }
+            },
+            "id": "4bba0b18-6a47-45b4-806b-eba28c7d4fee"
+          },
+          {
+            "command": "EVENT_SET_VALUE",
+            "args": {
+              "variable": "20",
+              "value": {
+                "type": "property",
+                "target": "player",
+                "property": "pypos"
+              }
+            },
+            "id": "403f6584-5cb4-42a8-bf86-f7136ff3bf6f"
+          }
+        ]
+      },
+      "id": "d51dc171-7209-4e46-ac6c-5216aad34bc7"
     }
   ]
 }

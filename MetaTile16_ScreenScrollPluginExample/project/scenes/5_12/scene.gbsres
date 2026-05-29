@@ -64,7 +64,7 @@
         "sceneId": "631cdde7-2798-4875-8e62-1e6b3433186d",
         "direction": "up",
         "rounded": false,
-        "__collapse": false
+        "__collapse": true
       },
       "id": "7174b331-e992-4989-b15e-df60ce50ca29"
     },
@@ -74,7 +74,7 @@
         "sceneId": "b3e27fa0-40fe-495a-8415-8ce98e54a7c4",
         "direction": "down",
         "rounded": false,
-        "__collapse": false
+        "__collapse": true
       },
       "id": "e8206a32-8c0c-4c02-84b3-35aa5997de89"
     },
@@ -82,14 +82,15 @@
       "command": "EVENT_CALL_CUSTOM_EVENT",
       "args": {
         "customEventId": "d2adb382-96a8-4994-ab31-b1e4dddffaa9",
-        "__collapse": false
+        "__collapse": true
       },
       "id": "89e98d30-7eed-487f-8e67-1ad1da9cd2ed"
     },
     {
       "command": "EVENT_FADE_IN",
       "args": {
-        "speed": "2"
+        "speed": "2",
+        "__collapse": true
       },
       "id": "513dbf24-a0ae-4f8f-bca3-7202cb20f9d8"
     }

@@ -51,11 +51,11 @@
     },
     {
       "id": "player_transition_right_threshold",
-      "value": 256
+      "value": 512
     },
     {
       "id": "player_transition_left_threshold",
-      "value": 256
+      "value": 0
     },
     {
       "id": "ENABLE_ADV_DOWN_COLLISION_METATILE",
@@ -92,6 +92,14 @@
     {
       "id": "scroll_bottom_margin",
       "value": 2
+    },
+    {
+      "id": "player_transition_top_threshold",
+      "value": 0
+    },
+    {
+      "id": "player_transition_bottom_threshold",
+      "value": 512
     },
     {
       "id": "METATILE_SIZE",

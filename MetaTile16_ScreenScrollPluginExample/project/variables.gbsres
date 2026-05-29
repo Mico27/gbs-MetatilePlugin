@@ -75,6 +75,36 @@
       "id": "14",
       "name": "StackSizeTest",
       "symbol": "var_stacksizetest"
+    },
+    {
+      "id": "15",
+      "name": "IsFalling",
+      "symbol": "var_isfalling"
+    },
+    {
+      "id": "16",
+      "name": "Falling_Thread_Handle",
+      "symbol": "var_falling_thread_handle"
+    },
+    {
+      "id": "17",
+      "name": "Current_Hole_X",
+      "symbol": "var_current_hole_x"
+    },
+    {
+      "id": "18",
+      "name": "Current_Hole_Y",
+      "symbol": "var_current_hole_y"
+    },
+    {
+      "id": "19",
+      "name": "SpawnPointX",
+      "symbol": "var_spawnpointx"
+    },
+    {
+      "id": "20",
+      "name": "SpawnPointY",
+      "symbol": "var_spawnpointy"
     }
   ],
   "constants": []
