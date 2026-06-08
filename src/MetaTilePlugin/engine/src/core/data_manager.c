@@ -1,4 +1,4 @@
-#pragma bank 255
+﻿#pragma bank 255
 
 #include <string.h>
 
@@ -116,9 +116,9 @@ void load_background(const background_t* background, UBYTE bank) BANKED {
     load_bkg_tileset(bkg.tileset.ptr, bkg.tileset.bank);
 #ifdef CGB
     if ((_is_CGB) && (bkg.cgb_tileset.ptr)) {
-        VBK_REG = 1;
+        VBK_REG = VBK_BANK_1;
         load_bkg_tileset(bkg.cgb_tileset.ptr, bkg.cgb_tileset.bank);
-        VBK_REG = 0;
+        VBK_REG = VBK_BANK_0;
     }
 #endif
 }
@@ -138,9 +138,9 @@ UBYTE load_sprite(UBYTE sprite_offset, const spritesheet_t * sprite, UBYTE bank)
     if (_is_CGB) {
         ReadBankedFarPtr(&data, (void *)&sprite->cgb_tileset, bank);
         if (data.ptr) {
-            VBK_REG = 1;
+            VBK_REG = VBK_BANK_1;
             UBYTE n_cgb_tiles = load_sprite_tileset(sprite_offset, data.ptr, data.bank);
-            VBK_REG = 0;
+            VBK_REG = VBK_BANK_0;
             if (n_cgb_tiles > n_tiles) return n_cgb_tiles;
         }
     }
@@ -230,6 +230,7 @@ UBYTE load_scene(const scene_t * scene, UBYTE bank, UBYTE init_data) BANKED {
     scroll_x_max = scn.scroll_bounds.right;
     scroll_y_min = scn.scroll_bounds.top;
     scroll_y_max = scn.scroll_bounds.bottom;
+    scroll_offset_x = scroll_offset_y = 0;
 
     if (scene_type != SCENE_TYPE_LOGO) {
         // Load player
