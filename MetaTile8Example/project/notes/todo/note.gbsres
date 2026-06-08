@@ -1,0 +1,10 @@
+{
+  "_resourceType": "note",
+  "id": "e2cd534c-7280-48f6-886b-770c8cff9b63",
+  "name": "TODO",
+  "x": 812,
+  "y": 93.6,
+  "width": 20,
+  "height": 15,
+  "content": "Update the text / number tiles to use the updated UiAltDisplayTextPlugin method"
+}

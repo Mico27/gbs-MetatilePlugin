@@ -1,0 +1,63 @@
+{
+  "type": "enginePlugin",
+  "name": "Configure Load/Save Plugin",
+  "author": "Mico27",
+  "url": "https://github.com/Mico27/gbs-ConfigLoadSavePlugin",
+  "description": "Allows configuration of the game saving structure.",
+  "license": "MIT",
+  "version": "4.3.0",
+  "gbsVersion": ">=4.3.0",
+  "order": -1,
+  "engineAltRules": [
+    {
+      "when": {
+        "additionalPlugins": [
+          "Mico27/MetaTilePlugin",
+          "Mico27/SceneStackExPlugin"
+        ]
+      },
+      "use": "M_Sce"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "MetaTilePlugin",
+          "SceneStackExPlugin"
+        ]
+      },
+      "use": "M_Sce"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "Mico27/MetaTilePlugin"
+        ]
+      },
+      "use": "M"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "MetaTilePlugin"
+        ]
+      },
+      "use": "M"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "Mico27/SceneStackExPlugin"
+        ]
+      },
+      "use": "Sce"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "SceneStackExPlugin"
+        ]
+      },
+      "use": "Sce"
+    }
+  ]
+}
