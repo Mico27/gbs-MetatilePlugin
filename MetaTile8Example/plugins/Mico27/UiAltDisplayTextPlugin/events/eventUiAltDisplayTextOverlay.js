@@ -1,15 +1,11 @@
 const id = "EVENT_UI_ALT_DISPLAY_TEXT_OVERLAY";
 const name = "Alt Load and Display Text To Overlay";
 const groups = ["EVENT_GROUP_MISC"];
-
 const autoLabel = (fetchArg) => {
   return `Alt Load and Display Text To Overlay`;
 };
-
 const wrap8Bit = (val) => (256 + (val % 256)) % 256;
-
 const decOct = (dec) => wrap8Bit(dec).toString(8).padStart(3, "0");
-
 const fields = [
   {
     key: "text",
@@ -35,7 +31,6 @@ const fields = [
     defaultValue: 0,
   },
 ];
-
 const compile = (input, helpers) => {
   const {
     appendRaw,
@@ -44,7 +39,6 @@ const compile = (input, helpers) => {
     _loadStructuredText,
     _addNL,
   } = helpers;
-
     const inputTexts = Array.isArray(input.text) ? input.text : [input.text];
     _addComment("Alt Draw Text To Overlay");
     appendRaw(`VM_SWITCH_TEXT_LAYER .TEXT_LAYER_WIN`);
@@ -56,7 +50,6 @@ const compile = (input, helpers) => {
     });
     _addNL();
 };
-
 module.exports = {
   id,
   name,

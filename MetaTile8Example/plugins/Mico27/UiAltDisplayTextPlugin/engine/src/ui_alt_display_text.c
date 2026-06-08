@@ -1,7 +1,5 @@
 #pragma bank 255
-
 #include <string.h>
-
 #include "system.h"
 #include "ui.h"
 #include "game_time.h"
@@ -18,17 +16,13 @@
 #include "scroll.h"
 #include "projectiles.h"
 #include "vm.h"
-#include "data/char_tileset_mapping.h"
-
+#include "data/data_bootstrap.h"
 UBYTE ui_alt_current_text_speed;
 UBYTE ui_alt_text_drawn;
-
 // char printer internals
 static UBYTE * ui_alt_text_ptr;
 static UBYTE * ui_alt_dest_ptr;
 static UBYTE * ui_alt_dest_base;
-
-
 inline void ui_alt_set_tile(UBYTE * addr, UBYTE tile) {
 #ifdef CGB
     if (_is_CGB) {
@@ -39,10 +33,8 @@ inline void ui_alt_set_tile(UBYTE * addr, UBYTE tile) {
 #endif
     set_vram_byte(addr, tile);
 }
-
 UBYTE ui_alt_draw_text_buffer_char(void) BANKED {
     static UBYTE current_text_ff_joypad, current_text_draw_speed;
-
     if (ui_alt_text_ptr == 0) {
         // set the delay mask
         ui_alt_current_text_speed = ui_time_masks[text_draw_speed];
@@ -59,7 +51,6 @@ UBYTE ui_alt_draw_text_buffer_char(void) BANKED {
             ui_alt_dest_ptr = ui_alt_dest_base;
         }
     }
-
     // normally runs once, but if control code encountered, then process them until printable symbol or terminator
     while (TRUE) {
         switch (*ui_alt_text_ptr) {
@@ -152,7 +143,9 @@ UBYTE ui_alt_draw_text_buffer_char(void) BANKED {
                 ui_alt_text_ptr++;
                 // fall down to default
             default:
-                UBYTE tile = ReadBankedUBYTE(char_tileset_mapping + (*ui_alt_text_ptr) , BANK(char_tileset_mapping));
+                //UBYTE tile = (*ui_alt_text_ptr);
+                UBYTE tile = ReadBankedUBYTE(vwf_current_font_desc.recode_table + (*ui_alt_text_ptr), vwf_current_font_bank);
+                //UBYTE tile = ReadBankedUBYTE(char_tileset_mapping + (*ui_alt_text_ptr) , BANK(char_tileset_mapping));
                 //warp around of vram instead of next line
                 if (((UBYTE)ui_alt_dest_ptr >> 5) != ((UBYTE)ui_alt_dest_base >> 5)) {
                     ui_alt_dest_ptr -= 32u;
@@ -165,7 +158,6 @@ UBYTE ui_alt_draw_text_buffer_char(void) BANKED {
         ui_alt_text_ptr++;
     }
 }
-
 void ui_alt_display_text(SCRIPT_CTX * THIS) OLDCALL BANKED {
     THIS;
     ui_alt_text_drawn = FALSE;
@@ -174,7 +166,15 @@ void ui_alt_display_text(SCRIPT_CTX * THIS) OLDCALL BANKED {
         ui_alt_draw_text_buffer_char();
     } while (!ui_alt_text_drawn);
 }
-
+inline void load_font_bitmaps(const font_desc_t *font, UBYTE bank, UBYTE tile_offset, UBYTE tile_length) {
+    SetBankedBkgData(tile_offset, tile_length, font->bitmaps, bank);
+}
+void ui_alt_load_font(SCRIPT_CTX * THIS) OLDCALL BANKED {
+    uint8_t font_index = *(int8_t*)VM_REF_TO_PTR(FN_ARG0);
+    uint8_t tile_offset = *(int8_t*)VM_REF_TO_PTR(FN_ARG1);
+    uint8_t tile_length = *(int8_t*)VM_REF_TO_PTR(FN_ARG2);
+    load_font_bitmaps(ui_fonts[font_index].ptr, ui_fonts[font_index].bank, tile_offset, tile_length);
+}
 void ui_alt_display_dialogue_modal(SCRIPT_CTX * THIS) OLDCALL BANKED {
     THIS;
     INPUT_RESET;
@@ -207,16 +207,14 @@ void ui_alt_display_dialogue_modal(SCRIPT_CTX * THIS) OLDCALL BANKED {
         actors_render();
         projectiles_render();
         activate_shadow_OAM();
-
         game_time++;
         wait_vbl_done();
         input_update();
-
     } while (!ui_alt_text_drawn);
 }
-
 UBYTE ui_alt_display_dialogue(void * THIS, UBYTE start, UWORD * stack_frame) OLDCALL BANKED {
     THIS;
+    stack_frame;
     UBYTE play_sound, speed_wait = FALSE;
     if (start){
         INPUT_RESET;
@@ -241,7 +239,6 @@ UBYTE ui_alt_display_dialogue(void * THIS, UBYTE start, UWORD * stack_frame) OLD
             // play sound
             if ((play_sound) && (text_sound_bank != SFX_STOP_BANK)) music_play_sfx(text_sound_bank, text_sound_data, text_sound_mask, MUSIC_SFX_PRIORITY_NORMAL);
         }
-
         ((SCRIPT_CTX *)THIS)->waitable = TRUE;
         return FALSE;
     }
