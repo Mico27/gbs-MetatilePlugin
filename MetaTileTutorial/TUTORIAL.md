@@ -41,14 +41,14 @@ compare your work at any point.
 In GB Studio, open the **Plugin Manager** from the **Edit** menu (or press the plug icon in the
 toolbar).
 
-![Open the Plugin Manager](Open_Plugin_Manager.png)
+<img width="256" height="165" alt="Open_Plugin_Manager" src="https://github.com/user-attachments/assets/dfd1594c-3fef-44bf-a145-cfb3578a1eec" />
 
 ### Adding the Plugin to Your Project
 
 Search for **MetaTile Plugin** and click **Add to Project**. GB Studio copies the plugin files into
 your project's `plugins/` folder automatically.
 
-![Add the MetaTile Plugin to the project](Add_Plugin_To_Project.png)
+<img width="588" height="698" alt="Add_Plugin_To_Project" src="https://github.com/user-attachments/assets/723205ac-968b-495f-ad8c-e2a53fb992c6" />
 
 > **Tip — manual install:** If you prefer to install manually, copy the `MetaTilePlugin/` folder
 > (found in this repository under `src/`) directly into your project's `plugins/` folder, then
@@ -120,12 +120,12 @@ defined (IDs 0–255).
    built from the same shared tileset as your playable scenes.
 3. Set the scene type to any non-playable type (Top-Down is fine — the scene is never entered).
 
-   ![The metatile scene configured in GB Studio](Metatile_Scene_Setup.png)
+<img width="712" height="474" alt="Metatile_Scene_Setup" src="https://github.com/user-attachments/assets/865493a4-535d-41a8-a592-351198829d76" />
 
 4. Paint collision data on the metatile scene. This is the collision data that will be copied to
    SRAM when the scene is initialised at runtime — so paint it carefully.
 
-   ![Setting collisions on the metatile scene](Set_Metatile_Scene_Collisions.png)
+<img width="403" height="348" alt="Set_Metatile_Scene_Collisions" src="https://github.com/user-attachments/assets/e1b8553f-65fe-4877-a41f-767f07502a72" />
 
 > **ID assignment:** IDs are assigned left-to-right, top-to-bottom, two-tile column by two-tile
 > column. The leftmost 2 × 2 block (columns 0–1, rows 0–1) is ID **0**, the next block (columns
@@ -148,7 +148,7 @@ options.
 
 ### Global metatile settings
 
-![Global metatile engine settings](Metatile_settings.png)
+<img width="950" height="481" alt="Metatile_settings" src="https://github.com/user-attachments/assets/9ff05186-c067-40bc-a52d-69789c659bb7" />
 
 | Setting | Description |
 |---------|-------------|
@@ -161,7 +161,7 @@ options.
 Each scene type has its own group of enable flags. Expand the group for the types you use and
 enable only what you need — each enabled flag adds a small per-frame check.
 
-![Per-scene-type metatile event flags](Metatile_Scene_Type_settings.png)
+<img width="744" height="481" alt="Metatile_Scene_Type_settings" src="https://github.com/user-attachments/assets/bf69550d-a3a4-4f96-93e5-0cae18a3b507" />
 
 For this tutorial, expand **Top-Down** and enable:
 
@@ -176,7 +176,7 @@ For this tutorial, expand **Top-Down** and enable:
 
 Create your playable scene using the same shared tileset as the metatile scene.
 
-![The main playable scene](Main_Scene_Setup.png)
+<img width="793" height="883" alt="Main_Scene_Setup" src="https://github.com/user-attachments/assets/071e0e41-4896-4674-a1b9-50953739dee4" />
 
 Key points:
 
@@ -211,7 +211,7 @@ the collision table and ID map from ROM into SRAM.
 Using named constants for metatile IDs keeps your scripts readable and easy to maintain. Open the
 **Constants** panel and add one constant for each metatile ID your scripts need to reference.
 
-![Constants and variables defined for the tutorial](Constants_And_Variables.png)
+<img width="206" height="418" alt="Constants_And_Variables" src="https://github.com/user-attachments/assets/de81b752-6bbb-4346-8638-3802df5518fb" />
 
 For this tutorial the project uses:
 
@@ -241,7 +241,7 @@ And the following **variables**:
 > `r × 16 + c` (for a 256 px wide scene with 16 metatile columns per row).
 > You can also use **Get meta tile at position** at runtime to read back the ID at any coordinate.
 
-![Adding a metatile ID constant](Add_Metatile_Id_Constant.png)
+<img width="208" height="187" alt="Add_Metatile_Id_Constant" src="https://github.com/user-attachments/assets/1a7183fd-1b98-43a7-8873-f33b2d02f8f1" />
 
 ---
 
@@ -257,7 +257,7 @@ The approach:
    coordinate.
 3. Use **Get meta tile at position** to read the ID at that coordinate into `FrontMetatileId`.
 
-![Script for getting the metatile in front of the player](Get_Metatile_In_Front_Of_Player.png)
+<img width="738" height="1055" alt="Get_Metatile_In_Front_Of_Player" src="https://github.com/user-attachments/assets/ce6f08b7-70f8-4814-b9b0-2110dcdedaeb" />
 
 **Get meta tile at position** — parameter summary:
 
@@ -281,7 +281,7 @@ event, comparing against your named constants.
 **Replace meta tile** overwrites the metatile ID stored in SRAM at a given position and optionally
 redraws the screen at that location.
 
-![Replace meta tile event](Replacing_Metatile.png)
+<img width="716" height="491" alt="Replacing_Metatile" src="https://github.com/user-attachments/assets/7fdf55b2-6786-4446-83a2-aa1fb1f1f92a" />
 
 | Field | Description |
 |-------|-------------|
@@ -324,14 +324,14 @@ metatile ID globally — affecting every tile on the map that uses that ID.
 The easiest way to set initial collisions is to paint them directly on the **metatile scene** in
 the GB Studio editor. The plugin copies this data to SRAM when **Load meta tiles** runs.
 
-![Setting collisions on the metatile scene](Set_Metatile_Scene_Collisions.png)
+<img width="403" height="348" alt="Set_Metatile_Scene_Collisions" src="https://github.com/user-attachments/assets/bffeac07-a1fe-46b4-bcf8-2520abc387fd" />
 
 ### Replacing collision at runtime
 
 Use **Replace collision (16px metatile)** to change the collision bytes for all four sub-tiles of a
 metatile ID at once:
 
-![Replace collision event](Replace_Collision.png)
+<img width="681" height="208" alt="Replace_Collision" src="https://github.com/user-attachments/assets/b53857f0-27e0-4d9a-bd5b-61d38a5ee314" />
 
 | Field | Description |
 |-------|-------------|
@@ -379,21 +379,21 @@ from pre-authored pieces.
 Create one or more extra scenes that act as "tile libraries". These scenes are never visited; they
 exist purely to store alternate arrangements of metatile IDs.
 
-![Metatile submap scene in the editor](Metatile_Submap_Scene.png)
+<img width="621" height="768" alt="Metatile_Submap_Scene" src="https://github.com/user-attachments/assets/12b028c5-672d-470c-a56e-2073a26a06fa" />
 
 ### Submapping from a different metatile layout scene
 
 Use a separate scene (different background from the metatile scene) to store alternate map chunks.
 Point **Submap metatiles** at that scene to stamp its region into the active scene.
 
-![Submapping from a different scene](Submapping_From_Another_Metatile_Scene.png)
+<img width="1140" height="1300" alt="Submapping_From_Another_Metatile_Scene" src="https://github.com/user-attachments/assets/35e7eec9-8d21-473d-a3c9-7c9cb7369104" />
 
 ### Submapping from the same metatile scene
 
 You can also re-use the metatile scene itself as a stamp source. Because every possible metatile
 pattern already lives there, you can use a region of the metatile scene as a ready-made tile chunk.
 
-![Submapping from the metatile scene itself](Submapping_From_Same_Metatile_Scene.png)
+<img width="1130" height="1286" alt="Submapping_From_Same_Metatile_Scene" src="https://github.com/user-attachments/assets/751de089-9d4d-4ac6-9622-005a8c0e7df8" />
 
 ### Event parameters
 
@@ -428,19 +428,19 @@ The player sprite for this tutorial has two animation groups:
 - **Default** — the standard idle and walk animations for all four directions.
 - **OnGrass** — a modified walk cycle to play when the player is on grass.
 
-![Player sprite animation states](Set_Player_Sprite_Animation_States.png)
+<img width="189" height="327" alt="Set_Player_Sprite_Animation_States" src="https://github.com/user-attachments/assets/229b656c-46cc-4c34-affb-6d4942ed576a" />
 
 The player sprites in the onGrass animation state has the bottom 8px tiles drawn behind the background
 to achieve the walking on grass effect, so sprites should be set to **8 × 8 px** tile mode for this.
 
-![Setting the sprite tile mode to 8 × 8 px](Set_Sprite_8x8.png)
+<img width="655" height="168" alt="Set_Sprite_8x8" src="https://github.com/user-attachments/assets/10a983f8-009e-4a83-becf-c536673a294d" />
 
 ### Attaching the Enter Metatile event
 
 In the scene's **On Init** script, after **Load meta tiles**, add an **Attach a Script to a
 Metatile Event** event:
 
-![Attach Script to Metatile Enter event](Attach_Metatile_Enter_Event.png)
+<img width="741" height="1169" alt="Attach_Metatile_Enter_Event" src="https://github.com/user-attachments/assets/3073ea6c-f10f-4462-8d8c-d7f840584c7c" />
 
 | Field | Value |
 |-------|-------|
@@ -511,10 +511,7 @@ open you should see:
 - The player's animation switching when entering and leaving short-grass tiles.
 - The ability to interact with grass tiles in front of the player (press **A**) to replace them.
 
-![Scene running in the GB Studio emulator preview](Scene_running_in%20GB_Studio_emulator_preview.mp4)
-
-> **Note:** `.mp4` files are not displayed inline in all markdown viewers. Open the file directly
-> from the `MetaTileTutorial/` folder to watch the preview video.
+https://github.com/user-attachments/assets/a9cf412e-b363-455f-bbd7-eadcf858e870
 
 ---
 
