@@ -1,0 +1,84 @@
+{
+  "_resourceType": "variables",
+  "variables": [
+    {
+      "id": "0",
+      "name": "FrontMetatileId",
+      "symbol": "var_frontmetatileid"
+    },
+    {
+      "id": "1",
+      "name": "TileY",
+      "symbol": "var_tiley"
+    },
+    {
+      "id": "2",
+      "name": "TileX",
+      "symbol": "var_tilex"
+    },
+    {
+      "id": "3",
+      "name": "PlayerDirection",
+      "symbol": "var_playerdirection"
+    },
+    {
+      "id": "5cc01c3c-f539-4c51-97e6-1934e766ce66__L0",
+      "name": "Local 0",
+      "symbol": "var_local_0"
+    },
+    {
+      "id": "4",
+      "name": "AnimationThread",
+      "symbol": "var_animationthread"
+    },
+    {
+      "id": "5",
+      "name": "IsOnGrass",
+      "symbol": "var_isongrass"
+    }
+  ],
+  "constants": [
+    {
+      "id": "39cec22f-8bed-4b19-8012-dc6ee0208206",
+      "name": "DIR_DOWN",
+      "symbol": "const_dir_down",
+      "value": 0
+    },
+    {
+      "id": "47162c8f-7104-4d9e-8359-8e54eddabc61",
+      "name": "DIR_RIGHT",
+      "symbol": "const_dir_right",
+      "value": 1
+    },
+    {
+      "id": "be95e926-f079-4a79-a638-4ba77e72597e",
+      "name": "DIR_UP",
+      "symbol": "const_dir_up",
+      "value": 2
+    },
+    {
+      "id": "01945265-3475-4609-badf-2ac4f5fe3157",
+      "name": "DIR_LEFT",
+      "symbol": "const_dir_left",
+      "value": 3
+    },
+    {
+      "id": "309131fb-bd91-4de0-8e83-47a2970104da",
+      "name": "GRASS_METATILE_ID",
+      "symbol": "const_grass_metatile_id",
+      "value": 16
+    },
+    {
+      "id": "962acb8a-c2a9-4edd-b24c-d5b9c99ec455",
+      "name": "GROUND_METATILE_ID",
+      "symbol": "const_ground_metatile_id",
+      "value": 1
+    },
+    {
+      "id": "b384e1ab-3c9f-4d91-b725-6f1d25bed518",
+      "name": "SHORTGRASS_METATILE_ID",
+      "symbol": "const_shortgrass_metatile_i",
+      "value": 6
+    }
+  ]
+}

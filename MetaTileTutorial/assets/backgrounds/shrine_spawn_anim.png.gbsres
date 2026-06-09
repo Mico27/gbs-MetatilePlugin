@@ -1,0 +1,12 @@
+{
+  "_resourceType": "background",
+  "id": "fadb745d-d858-42de-a659-deb41c7fafcd",
+  "name": "shrine_spawn_anim",
+  "symbol": "bg_shrine_spawn_anim",
+  "tileColors": "",
+  "filename": "shrine_spawn_anim.png",
+  "width": 6,
+  "height": 10,
+  "imageWidth": 48,
+  "imageHeight": 80
+}

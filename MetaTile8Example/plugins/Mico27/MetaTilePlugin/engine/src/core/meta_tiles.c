@@ -344,7 +344,7 @@ UBYTE metatile_overlap_at_intersection(rect16_t *bb, upoint16_t *offset) BANKED 
         left_side_checked = METATILE_TILE_WIDTH;
     }
     //check right
-    if (current_left_tile != current_right_tile && (current_right_tile > previous_right_tile)){
+    if (current_right_tile > previous_right_tile){
         tmp_tile = current_top_tile;
         while (tmp_tile <= current_bottom_tile){
             metatile_overlap_iteration++;
@@ -375,7 +375,7 @@ UBYTE metatile_overlap_at_intersection(rect16_t *bb, upoint16_t *offset) BANKED 
     }
 
     //Check bottom
-    if (current_top_tile != current_bottom_tile && (current_bottom_tile > previous_bottom_tile)){
+    if (current_bottom_tile > previous_bottom_tile){
         tmp_tile = current_left_tile + left_side_checked;
         while (tmp_tile <= (current_right_tile - right_side_checked)){
             metatile_overlap_iteration++;

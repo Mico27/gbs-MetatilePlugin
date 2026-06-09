@@ -1,0 +1,23 @@
+{
+  "_resourceType": "scene",
+  "id": "4215e3a8-0fee-48c5-adb0-6845510672a7",
+  "_index": 0,
+  "name": "Metatile Scene",
+  "backgroundId": "a3668ff2-1264-4caa-bdac-867979b174f6",
+  "tilesetId": "851a2f45-f62a-4ba4-a12b-a2d63d6b6a5c",
+  "width": 32,
+  "height": 32,
+  "type": "TOPDOWN",
+  "colorModeOverride": "none",
+  "paletteIds": [],
+  "spritePaletteIds": [],
+  "collisions": "001a+0f4+001c+0f4+002+0f10+004+0f1c+004+0f69+002+0f1e+002+0f!004+0fa+002+0f1e+002+0f16+002+0f2+0016+0f6+002+0f2+00296+",
+  "autoFadeSpeed": 1,
+  "symbol": "scene_1",
+  "x": 120,
+  "y": 184,
+  "script": [],
+  "playerHit1Script": [],
+  "playerHit2Script": [],
+  "playerHit3Script": []
+}

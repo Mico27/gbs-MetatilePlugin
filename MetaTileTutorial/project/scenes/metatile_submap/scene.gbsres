@@ -1,0 +1,33 @@
+{
+  "_resourceType": "scene",
+  "id": "5bdadec4-5076-4c78-a629-96dc099cbbc1",
+  "_index": 2,
+  "name": "Metatile Submap",
+  "backgroundId": "fadb745d-d858-42de-a659-deb41c7fafcd",
+  "tilesetId": "851a2f45-f62a-4ba4-a12b-a2d63d6b6a5c",
+  "width": 6,
+  "height": 10,
+  "type": "TOPDOWN",
+  "colorModeOverride": "none",
+  "paletteIds": [],
+  "spritePaletteIds": [],
+  "collisions": "003c+",
+  "autoFadeSpeed": 1,
+  "symbol": "scene_3",
+  "x": 416,
+  "y": 488,
+  "script": [
+    {
+      "command": "EVENT_LOAD_META_TILES",
+      "args": {
+        "sceneId": "4215e3a8-0fee-48c5-adb0-6845510672a7",
+        "matchColor": false,
+        "matchCollision": false
+      },
+      "id": "b3a9ef2e-32b7-4caa-82bd-f849cf596253"
+    }
+  ],
+  "playerHit1Script": [],
+  "playerHit2Script": [],
+  "playerHit3Script": []
+}
