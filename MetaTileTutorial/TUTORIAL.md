@@ -118,7 +118,11 @@ defined (IDs 0–255).
 1. Create a new scene and name it something like **Metatile Scene**.
 2. Assign a background image that is exactly **256 pixels wide** for 16px mode. This image must be
    built from the same shared tileset as your playable scenes.
-3. Set the scene type to any non-playable type (Top-Down is fine — the scene is never entered).
+3. **Set the scene's tileset** (in the scene properties panel). Any scene that uses this metatile
+   scene — via **Load meta tiles** or **Submap metatiles** — must use the **same tileset** as this
+   metatile scene. Using a different tileset will cause the tile-index lookup to produce wrong
+   results at compile time. Scenes that use a different metatile scene can use a different tileset.
+4. Set the scene type to any non-playable type (Top-Down is fine — the scene is never entered).
 
 <img width="712" height="474" alt="Metatile_Scene_Setup" src="https://github.com/user-attachments/assets/865493a4-535d-41a8-a592-351198829d76" />
 
@@ -174,13 +178,17 @@ For this tutorial, expand **Top-Down** and enable:
 
 ## 5. Setting Up the Main Scene
 
-Create your playable scene using the same shared tileset as the metatile scene.
+Create your playable scene and assign it the **same shared tileset** as the metatile scene.
 
 <img width="793" height="883" alt="Main_Scene_Setup" src="https://github.com/user-attachments/assets/071e0e41-4896-4674-a1b9-50953739dee4" />
 
 Key points:
 
 - The scene type must match the engine setting flag you just enabled (**Top-Down** here).
+- **Tileset must match the metatile scene** — the main scene must use the same tileset as the
+  metatile scene it references in **Load meta tiles**. Set the tileset in the scene properties
+  panel before painting any tiles. Other scenes that use a different metatile scene can use a
+  different tileset.
 - The scene's tilemap will be **rewritten at compile time** by the **Load meta tiles** event — every
   2 × 2 tile block is replaced with its corresponding metatile ID. You do **not** need to paint any
   collision data on the main scene; collision comes entirely from the metatile scene's SRAM data.
@@ -378,6 +386,11 @@ from pre-authored pieces.
 
 Create one or more extra scenes that act as "tile libraries". These scenes are never visited; they
 exist purely to store alternate arrangements of metatile IDs.
+
+> **Tileset requirement:** A submap scene must use the **same tileset as the metatile scene** that
+> the active scene loaded with **Load meta tiles**. Set the tileset in the scene properties panel
+> before painting any tiles. A mismatched tileset will cause wrong tile indices to be looked up at
+> compile time, resulting in garbled graphics at runtime.
 
 <img width="621" height="768" alt="Metatile_Submap_Scene" src="https://github.com/user-attachments/assets/12b028c5-672d-470c-a56e-2073a26a06fa" />
 
