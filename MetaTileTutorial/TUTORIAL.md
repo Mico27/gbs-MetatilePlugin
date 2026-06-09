@@ -472,11 +472,10 @@ When the Enter event fires the engine populates these read-only engine fields:
 
 A typical handler for the grass animation example:
 
-1. Read **Entered Metatile Id** (engine field `overlap_metatile_id`) into `FrontMetatileId`.
-2. If `FrontMetatileId` equals `GRASS_METATILE_ID`:
+1. If **Entered Metatile Id** (engine field `overlap_metatile_id`) equals `GRASS_METATILE_ID` and `IsOnGrass` equals `0`:
    - Set `IsOnGrass` to `1`.
    - Switch the player's animation group to **OnGrass**.
-3. Else if `IsOnGrass` equals `1` (player was on grass and is now leaving):
+2. Else if `IsOnGrass` equals `1` (player was on grass and is now leaving):
    - Set `IsOnGrass` to `0`.
    - Switch the player's animation group back to **Default**.
 
