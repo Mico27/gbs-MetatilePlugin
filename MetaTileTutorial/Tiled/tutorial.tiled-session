@@ -5,8 +5,13 @@
     },
     "activeFile": "",
     "expandedProjectPaths": [
+        "."
     ],
     "fileStates": {
+        "forest_metatiles.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
     },
     "last.imagePath": "D:/GBStudio/gbs-plugins-repos/gbs-MetatilePlugin/MetaTileTutorial/assets/backgrounds",
     "map.height": 5,
@@ -14,9 +19,11 @@
     "map.tileWidth": 16,
     "map.width": 3,
     "openFiles": [
+        "forest_metatiles.tsx"
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
+        "forest_metatiles.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
