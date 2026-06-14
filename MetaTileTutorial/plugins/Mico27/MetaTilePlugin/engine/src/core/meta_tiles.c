@@ -127,7 +127,10 @@ void vm_reset_meta_tile(SCRIPT_CTX * THIS) OLDCALL BANKED {
 void vm_get_sram_tile_id_at_pos(SCRIPT_CTX * THIS) OLDCALL BANKED {
     uint8_t x = *(uint8_t *) VM_REF_TO_PTR(FN_ARG0);
     uint8_t y = *(uint8_t *) VM_REF_TO_PTR(FN_ARG1);
-    script_memory[*(int16_t*)VM_REF_TO_PTR(FN_ARG2)] = sram_map_data[METATILE_MAP_OFFSET(x, y)];
+    int16_t idx = *(int16_t*)VM_REF_TO_PTR(FN_ARG2);
+    int16_t * A;
+    if (idx < 0) A = THIS->stack_ptr + idx - 3; else A = script_memory + idx;
+    *A = sram_map_data[METATILE_MAP_OFFSET(x, y)];
 }
 
 void vm_replace_collision(SCRIPT_CTX * THIS) OLDCALL BANKED {
@@ -150,10 +153,13 @@ void vm_replace_collision(SCRIPT_CTX * THIS) OLDCALL BANKED {
 void vm_get_collision_at_pos(SCRIPT_CTX * THIS) OLDCALL BANKED {
     uint8_t x = *(uint8_t *) VM_REF_TO_PTR(FN_ARG0);
     uint8_t y = *(uint8_t *) VM_REF_TO_PTR(FN_ARG1);
+    int16_t idx = *(int16_t*)VM_REF_TO_PTR(FN_ARG2);
+    int16_t * A;
+    if (idx < 0) A = THIS->stack_ptr + idx - 3; else A = script_memory + idx;
 #if METATILE_SIZE == METATILE_SIZE_16
-    script_memory[*(int16_t*)VM_REF_TO_PTR(FN_ARG2)] = sram_collision_data[TILE_MAP_OFFSET(sram_map_data[METATILE_MAP_OFFSET(x, y)], x, y)];
+    *A = sram_collision_data[TILE_MAP_OFFSET(sram_map_data[METATILE_MAP_OFFSET(x, y)], x, y)];
 #else
-    script_memory[*(int16_t*)VM_REF_TO_PTR(FN_ARG2)] = sram_collision_data[sram_map_data[METATILE_MAP_OFFSET(x, y)]];
+    *A = sram_collision_data[sram_map_data[METATILE_MAP_OFFSET(x, y)]];
 #endif
 }
 
