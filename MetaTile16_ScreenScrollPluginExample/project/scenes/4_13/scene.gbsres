@@ -28,6 +28,25 @@
       "id": "2aeea7db-08dc-443f-9513-cc5de8bf069b"
     },
     {
+      "command": "EVENT_REPLACE_META_TILE",
+      "args": {
+        "x": {
+          "type": "number",
+          "value": 12
+        },
+        "y": {
+          "type": "number",
+          "value": 6
+        },
+        "metatile_id": {
+          "type": "number",
+          "value": 19
+        },
+        "commit": false
+      },
+      "id": "144d1550-5f1a-46ad-99dc-58f40bb4d7f4"
+    },
+    {
       "command": "EVENT_SET_NEIGHBOUR_SCENE",
       "args": {
         "sceneId": "156d8301-ba82-498c-b982-123e1d117930",
@@ -66,23 +85,9 @@
       "id": "3f72de5f-8df7-47eb-86cd-c1ab829be742"
     },
     {
-      "command": "EVENT_REPLACE_META_TILE",
-      "args": {
-        "x": {
-          "type": "number",
-          "value": 12
-        },
-        "y": {
-          "type": "number",
-          "value": 6
-        },
-        "metatile_id": {
-          "type": "number",
-          "value": 19
-        },
-        "commit": true
-      },
-      "id": "144d1550-5f1a-46ad-99dc-58f40bb4d7f4"
+      "command": "EVENT_SCRIPT_UNLOCK",
+      "args": {},
+      "id": "a1ea195a-6cac-4bd6-a948-02cfc328a322"
     }
   ],
   "playerHit1Script": [],
