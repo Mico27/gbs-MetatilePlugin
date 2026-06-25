@@ -1,0 +1,19 @@
+Index: src\core\camera.c
+===================================================================
+--- src\core\camera.c
++++ src\core\camera.c
+@@ -26,11 +26,11 @@
+     camera_reset();
+ }
+ 
+ void camera_update(void) BANKED {
+-	if (is_transitioning_scene){
+-		return;
+-	}
++    if (is_transitioning_scene){
++        return;
++    }
+     if (camera_settings & CAMERA_LOCK_X_FLAG)
+     {
+         UWORD target_pos = PLAYER.pos.x + CAMERA_FIXED_OFFSET_X - PX_TO_SUBPX(camera_offset_x);
+         WORD tolerance = PX_TO_SUBPX(camera_deadzone_x);

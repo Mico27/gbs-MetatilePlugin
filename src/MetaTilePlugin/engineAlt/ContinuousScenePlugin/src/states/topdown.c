@@ -19,8 +19,6 @@
 #define INPUT_TOPDOWN_INTERACT INPUT_A
 #endif
 
-#define COUNTER_COLLISION_GROUP 32
-
 UBYTE topdown_grid;
 UBYTE player_collision_group;
 
@@ -38,44 +36,6 @@ void topdown_init(void) BANKED {
         PLAYER.pos.x = SUBPX_SNAP_TILE(PLAYER.pos.x);
         PLAYER.pos.y = SUBPX_SNAP_TILE(PLAYER.pos.y);
     }
-}
-
-static actor_t *actor_with_script_at_position(upoint16_t position) {
-    actor_t *actor = actors_active_tail;
-
-    const UWORD a_left   = position.x + PLAYER.bounds.left;
-    const UWORD a_right  = position.x + PLAYER.bounds.right;
-    const UWORD a_top    = position.y + PLAYER.bounds.top;
-    const UWORD a_bottom = position.y + PLAYER.bounds.bottom;
-
-    while (actor) {
-        if (actor == &PLAYER || !actor->script.bank) {
-            actor = actor->prev;
-            continue;
-        }
-        if ((actor->pos.x + actor->bounds.left)   > a_right)  { actor = actor->prev; continue; }
-        if ((actor->pos.x + actor->bounds.right)  < a_left)   { actor = actor->prev; continue; }
-        if ((actor->pos.y + actor->bounds.top)    > a_bottom) { actor = actor->prev; continue; }
-        if ((actor->pos.y + actor->bounds.bottom) < a_top)    { actor = actor->prev; continue; }
-        return actor;
-    }
-    return NULL;
-}
-
-actor_t *actor_with_script_in_front_of_player_or_counter(void) BANKED {
-    upoint16_t offset;
-    offset.x = PLAYER.pos.x;
-    offset.y = PLAYER.pos.y;
-    point_translate_dir_word(&offset, PLAYER.dir, PX_TO_SUBPX(topdown_grid));
-    actor_t *actor = actor_with_script_at_position(offset);
-
-    //check for counter collision group
-    if (!actor && tile_at(SUBPX_TO_TILE(offset.x), SUBPX_TO_TILE(offset.y)) & COUNTER_COLLISION_GROUP) {
-        point_translate_dir_word(&offset, PLAYER.dir, PX_TO_SUBPX(topdown_grid));
-        actor = actor_with_script_at_position(offset);
-    }
-
-    return actor;
 }
 
 void topdown_update(void) BANKED {
@@ -190,7 +150,7 @@ void topdown_update(void) BANKED {
         }
 
         if (INPUT_PRESSED(INPUT_TOPDOWN_INTERACT)) {
-            hit_actor = actor_with_script_in_front_of_player_or_counter();
+            hit_actor = actor_with_script_in_front_of_player(topdown_grid);
             if (hit_actor != NULL && !(hit_actor->collision_group & COLLISION_GROUP_MASK)) {
                 actor_set_dir(hit_actor, FLIPPED_DIR(PLAYER.dir), FALSE);
                 player_moving = FALSE;

@@ -1,0 +1,33 @@
+Index: include\scroll.h
+===================================================================
+--- include\scroll.h
++++ include\scroll.h
+@@ -55,14 +55,15 @@
+  */
+ void scroll_update(void) BANKED;
+ 
+ /**
+- * Resets scroll and update the whole screen 
++ * Resets scroll and update the whole screen
+  */
+ void scroll_repaint(void) BANKED;
+ 
+ void scroll_render_rows(INT16 scroll_x, INT16 scroll_y, BYTE row_offset, BYTE n_rows) BANKED;
+-
++void load_metatile_row(const UBYTE* from, UBYTE x, UBYTE y, UBYTE height, UBYTE bank) NONBANKED;
++void load_metatile_col(const UBYTE* from, UBYTE x, UBYTE y, UBYTE height, UBYTE bank) NONBANKED;
+ void scroll_render_cols(INT16 scroll_x, INT16 scroll_y, BYTE col_offset, BYTE n_cols) BANKED;
+ 
+ /**
+  * Get base address of window map
+@@ -78,9 +79,9 @@
+  * Scrolls rectangle area of VRAM filemap by base address 1 row up
+  * @param base_addr address of top-left corner
+  * @param w width of the area
+  * @param h height of the area
+- * @param fill tile id to fill the bottom row 
++ * @param fill tile id to fill the bottom row
+  */
+ void scroll_rect(UBYTE * base_addr, UBYTE w, UBYTE h, UBYTE fill) OLDCALL BANKED PRESERVES_REGS(b, c);
+ 
+ /**
