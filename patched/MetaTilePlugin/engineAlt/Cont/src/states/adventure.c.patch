@@ -70,17 +70,7 @@ Index: src\states\adventure.c
          }
  
      finally_update_y:
-@@ -827,17 +839,20 @@
-                 script_execute(hit_actor->script.bank, hit_actor->script.ptr, 0, 1, 0);
-             }
-         }
-     }
--
-+    
-     //Check scene transition
-     if (check_transition_to_scene_collision()) {
-         return;
-     }
+@@ -836,8 +848,11 @@
  
      if (mask & COL_CHECK_TRIGGERS)
      {

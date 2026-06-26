@@ -66,7 +66,7 @@ void metatile_reset(void) BANKED{
     metatile_collision_ptr = NULL;
 }
 
-void load_meta_tiles(void) BANKED {    
+void load_meta_tiles(void) BANKED {
     if (!is_transitioning_scene){
         MemcpyBanked(&sram_collision_data, metatile_collision_ptr, COLLISION_DATA_SIZE, metatile_collision_bank);
     }
@@ -151,7 +151,7 @@ static UBYTE get_metatile_id_from_pos(UBYTE x, UBYTE y) {
         y = y - image_tile_height;
     }
     continuous_scene_t* cs = &continuous_scenes[direction];
-    
+
     if (!cs->tilemap.ptr || x > SCREEN_OOB_LEFT || y > SCREEN_OOB_TOP ||
             x >= cs->tile_width || y >= cs->tile_height) {
         return fill_tile_id;
@@ -161,7 +161,7 @@ static UBYTE get_metatile_id_from_pos(UBYTE x, UBYTE y) {
     return ReadBankedUBYTE((const UBYTE*)cs->tilemap.ptr +
         ((UWORD)(y >> 1)) * (cs->tile_width >> 1) + (x >> 1),
         cs->tilemap.bank);
-        
+
 #else
     return ReadBankedUBYTE((const UBYTE*)cs->tilemap.ptr +
         ((UWORD)y * cs->tile_width + x),
@@ -463,7 +463,7 @@ void on_player_metatile_collision(UBYTE tile_x, UBYTE tile_y, UBYTE direction) B
                     collided_metatile_x = tile_x;
                     collided_metatile_y = tile_y;
                     collided_metatile_dir = DIR_DOWN;
-                    collided_metatile_source = 0;                       
+                    collided_metatile_source = 0;
                     script_execute(metatile_event->script_bank, metatile_event->script_addr, &metatile_event->handle, 0, 0);
                 }
             }
@@ -510,6 +510,6 @@ void on_player_metatile_collision(UBYTE tile_x, UBYTE tile_y, UBYTE direction) B
                 }
             }
             break;
-    }    
+    }
 }
 

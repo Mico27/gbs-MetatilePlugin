@@ -76,22 +76,11 @@ Index: src\states\topdown.c
          }
  
          // Update direction animation
-@@ -156,9 +174,9 @@
-     }
- 
-     if (player_moving) {
-         point_translate_dir(&PLAYER.pos, PLAYER.dir, PLAYER.move_speed);
--
-+        
-         // Clamp to grid
-         if (PLAYER.dir == DIR_RIGHT) {
-             if (PLAYER.pos.x > max_pos && (PLAYER.pos.x - max_pos) < PLAYER.move_speed) {
-                 PLAYER.pos.x = max_pos;
 @@ -175,6 +193,7 @@
              if (PLAYER.pos.y < max_pos && (max_pos - PLAYER.pos.y) < PLAYER.move_speed) {
                  PLAYER.pos.y = max_pos;
              }
          }
-+        
++
      }
  }

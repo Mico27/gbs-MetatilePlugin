@@ -190,17 +190,13 @@ UBYTE scroll_viewport(parallax_row_t * port) {
             UBYTE x = new_col - SCREEN_PAD_LEFT;
             UBYTE y = new_row - SCREEN_PAD_TOP + SCREEN_TILE_REFRES_H - 1;
             scroll_queue_row(x, y);
-            x = (x >= SCREEN_OOB_LEFT) ? 0 : x;
-            y = (y >= SCREEN_OOB_TOP) ? 0 : y;     
-            activate_actors_in_row(x, y);
+            activate_actors_in_row(((x >= SCREEN_OOB_LEFT) ? 0 : x), ((y >= SCREEN_OOB_TOP) ? 0 : y));
         } else if (current_row == (UBYTE)(new_row + 1)) {
             // Queue top row
             UBYTE x = new_col - SCREEN_PAD_LEFT;
             UBYTE y = (scene_LCD_type == LCD_parallax) ? port->start_tile : (new_row - SCREEN_PAD_TOP);
             scroll_queue_row(x, y);
-            x = (x >= SCREEN_OOB_LEFT) ? 0 : x;
-            y = (y >= SCREEN_OOB_TOP) ? 0 : y;
-            activate_actors_in_row(x, y);
+            activate_actors_in_row((x = (x >= SCREEN_OOB_LEFT) ? 0 : x), ((y >= SCREEN_OOB_TOP) ? 0 : y));
         } else if (current_row != new_row) {
             // If row differs by more than 1 render entire screen
             scroll_render_rows(draw_scroll_x, draw_scroll_y, ((scene_LCD_type == LCD_parallax) ? port->start_tile : -SCREEN_PAD_TOP), SCREEN_TILE_REFRES_H);

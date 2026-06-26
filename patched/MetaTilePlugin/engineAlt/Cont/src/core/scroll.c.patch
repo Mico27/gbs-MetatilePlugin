@@ -12,18 +12,18 @@ Index: src\core\scroll.c
  #include "data/game_globals.h"
  #include "vm.h"
  #include "macro.h"
-@@ -189,9 +190,9 @@
-             UBYTE x = new_col - SCREEN_PAD_LEFT;
-             UBYTE y = new_row - SCREEN_PAD_TOP + SCREEN_TILE_REFRES_H - 1;
-             scroll_queue_row(x, y);
-             x = (x >= SCREEN_OOB_LEFT) ? 0 : x;
--            y = (y >= SCREEN_OOB_TOP) ? 0 : y;
-+            y = (y >= SCREEN_OOB_TOP) ? 0 : y;     
-             activate_actors_in_row(x, y);
-         } else if (current_row == (UBYTE)(new_row + 1)) {
+@@ -194,9 +195,9 @@
              // Queue top row
              UBYTE x = new_col - SCREEN_PAD_LEFT;
-@@ -285,8 +286,14 @@
+             UBYTE y = (scene_LCD_type == LCD_parallax) ? port->start_tile : (new_row - SCREEN_PAD_TOP);
+             scroll_queue_row(x, y);
+-            activate_actors_in_row(((x >= SCREEN_OOB_LEFT) ? 0 : x), ((y >= SCREEN_OOB_TOP) ? 0 : y));
++            activate_actors_in_row((x = (x >= SCREEN_OOB_LEFT) ? 0 : x), ((y >= SCREEN_OOB_TOP) ? 0 : y));
+         } else if (current_row != new_row) {
+             // If row differs by more than 1 render entire screen
+             scroll_render_rows(draw_scroll_x, draw_scroll_y, ((scene_LCD_type == LCD_parallax) ? port->start_tile : -SCREEN_PAD_TOP), SCREEN_TILE_REFRES_H);
+             return TRUE;
+@@ -281,8 +282,14 @@
      pending_h_i = (scene_LCD_type == LCD_parallax) ? MIN(SCREEN_TILE_REFRES_H, image_tile_height - y) : SCREEN_TILE_REFRES_H;
      scroll_load_pending_col();
  }
@@ -38,7 +38,7 @@ Index: src\core\scroll.c
      _save_bank = CURRENT_BANK;
      SWITCH_ROM(bank);
      UWORD y_offset = (y * (UWORD)source_width);
-@@ -297,8 +304,9 @@
+@@ -293,8 +300,9 @@
      }
      SWITCH_ROM(_save_bank);
  }
@@ -48,7 +48,7 @@ Index: src\core\scroll.c
      _save_bank = CURRENT_BANK;
      SWITCH_ROM(bank);
      UWORD tile_offset = (y * (UINT16)source_width) + x;
-@@ -310,22 +318,223 @@
+@@ -306,22 +314,223 @@
      }
      SWITCH_ROM(_save_bank);
  }
@@ -274,7 +274,7 @@ Index: src\core\scroll.c
      // Used for continuous scene row rendering to adjust for different scene sizes and offsets
      bkg_address_offset = ((UWORD)get_bkg_xy_addr((x + bkg_offset_x), (y + bkg_offset_y))) - 0x9800;
      continuous_scene_t* continuous_scene;
-@@ -339,104 +548,76 @@
+@@ -335,104 +544,76 @@
          if (y > SCREEN_OOB_TOP) {
              if (top_x_offset > 0){
                  continuous_scene = &continuous_scenes[DIRECTION_TOP];
@@ -400,7 +400,7 @@ Index: src\core\scroll.c
              }
          }
          width -= section_width;
-@@ -447,36 +628,32 @@
+@@ -443,36 +624,32 @@
          section_width = MIN(width, (image_tile_width - x));
          if (y > SCREEN_OOB_TOP) {
              continuous_scene = &continuous_scenes[DIRECTION_TOP];
@@ -448,7 +448,7 @@ Index: src\core\scroll.c
          }
          width -= section_width;
          x += section_width;
-@@ -485,104 +662,76 @@
+@@ -481,104 +658,76 @@
      if (y > SCREEN_OOB_TOP) {
          if (top_x_offset + continuous_scenes[DIRECTION_TOP].tile_width > image_tile_width){
              continuous_scene = &continuous_scenes[DIRECTION_TOP];
@@ -574,7 +574,7 @@ Index: src\core\scroll.c
          }
      }
  }
-@@ -601,104 +750,76 @@
+@@ -597,104 +746,76 @@
          if (x > SCREEN_OOB_LEFT) {
              if (top_x_offset > 0){
                  continuous_scene = &continuous_scenes[DIRECTION_TOP];
@@ -700,7 +700,7 @@ Index: src\core\scroll.c
              }
          }
          height -= section_height;
-@@ -709,35 +830,31 @@
+@@ -705,35 +826,31 @@
          section_height = MIN(height, (image_tile_height - y));
          if (x > SCREEN_OOB_LEFT) {
              continuous_scene = &continuous_scenes[DIRECTION_LEFT];
@@ -747,7 +747,7 @@ Index: src\core\scroll.c
          }
          height -= section_height;
          y += section_height;
-@@ -746,112 +863,233 @@
+@@ -742,112 +859,233 @@
      if (x > SCREEN_OOB_LEFT) {
          if (bottom_x_offset > 0){
              continuous_scene = &continuous_scenes[DIRECTION_BOTTOM];
@@ -1030,7 +1030,7 @@ Index: src\core\scroll.c
      // Used for continuous scene row rendering to adjust for different scene sizes and offsets
      bkg_address_offset = ((UWORD)get_bkg_xy_addr((x + bkg_offset_x), (y + bkg_offset_y))) - 0x9800;
      continuous_scene_t* continuous_scene;
-@@ -865,104 +1103,76 @@
+@@ -861,104 +1099,76 @@
          if (y > SCREEN_OOB_TOP) {
              if (top_x_offset > 0){
                  continuous_scene = &continuous_scenes[DIRECTION_TOP];
@@ -1156,7 +1156,7 @@ Index: src\core\scroll.c
              }
          }
          width -= section_width;
-@@ -973,36 +1183,32 @@
+@@ -969,36 +1179,32 @@
          section_width = MIN(width, (image_tile_width - x));
          if (y > SCREEN_OOB_TOP) {
              continuous_scene = &continuous_scenes[DIRECTION_TOP];
@@ -1204,7 +1204,7 @@ Index: src\core\scroll.c
          }
          width -= section_width;
          x += section_width;
-@@ -1011,104 +1217,76 @@
+@@ -1007,104 +1213,76 @@
      if (y > SCREEN_OOB_TOP) {
          if (top_x_offset + continuous_scenes[DIRECTION_TOP].tile_width > image_tile_width){
              continuous_scene = &continuous_scenes[DIRECTION_TOP];
@@ -1330,7 +1330,7 @@ Index: src\core\scroll.c
          }
      }
  }
-@@ -1127,104 +1305,76 @@
+@@ -1123,104 +1301,76 @@
          if (x > SCREEN_OOB_LEFT) {
              if (top_x_offset > 0){
                  continuous_scene = &continuous_scenes[DIRECTION_TOP];
@@ -1456,7 +1456,7 @@ Index: src\core\scroll.c
              }
          }
          height -= section_height;
-@@ -1235,35 +1385,31 @@
+@@ -1231,35 +1381,31 @@
          section_height = MIN(height, (image_tile_height - y));
          if (x > SCREEN_OOB_LEFT) {
              continuous_scene = &continuous_scenes[DIRECTION_LEFT];
@@ -1503,7 +1503,7 @@ Index: src\core\scroll.c
          }
          height -= section_height;
          y += section_height;
-@@ -1272,104 +1418,76 @@
+@@ -1268,104 +1414,76 @@
      if (x > SCREEN_OOB_LEFT) {
          if (bottom_x_offset > 0){
              continuous_scene = &continuous_scenes[DIRECTION_BOTTOM];
