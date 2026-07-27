@@ -205,6 +205,26 @@ void vm_submap_metatiles(SCRIPT_CTX * THIS) OLDCALL BANKED {
     }
 }
 
+void vm_redraw_metatiles(SCRIPT_CTX * THIS) OLDCALL BANKED {
+    UBYTE x = *(uint8_t *) VM_REF_TO_PTR(FN_ARG0);
+    UBYTE y = *(uint8_t *) VM_REF_TO_PTR(FN_ARG1);
+    UBYTE width = *(uint8_t *) VM_REF_TO_PTR(FN_ARG2);
+    UBYTE height = *(uint8_t *) VM_REF_TO_PTR(FN_ARG3);
+    for (uint8_t i = 0; i < height; i++){
+        UBYTE current_y = y + i;
+        bkg_address_offset = ((UWORD)get_bkg_xy_addr(x & 31, current_y & 31)) - 0x9800;
+        load_metatile_row(metatile_ptr, x, current_y, width, metatile_bank);
+        #ifdef CGB
+            if (_is_CGB) {
+                VBK_REG = 1;
+                bkg_address_offset = ((UWORD)get_bkg_xy_addr(x & 31, current_y & 31)) - 0x9800;
+                load_metatile_row(metatile_attr_ptr, x, current_y, width, metatile_attr_bank);
+                VBK_REG = 0;
+            }
+        #endif
+    }
+}
+
 void vm_assign_metatile_script(SCRIPT_CTX * THIS) OLDCALL BANKED {
     uint8_t slot = *(int8_t*)VM_REF_TO_PTR(FN_ARG2);
     UBYTE *bank = VM_REF_TO_PTR(FN_ARG1);
@@ -318,6 +338,22 @@ UBYTE metatile_overlap_at_intersection(rect16_t *bb, upoint16_t *offset) BANKED 
     if (!metatile_bank || !metatile_events[METATILE_ENTER_EVENT].script_addr){
         return FALSE;
     }
+#if METATILE_ENTER_DETECTION == METATILE_ENTER_ORIGIN_POINT
+    // Origin point mode: test only the single tile under the actor's origin
+    // (the centre of its bounding box). Fires once each time that tile changes.
+    current_left_tile = SUBPX_TO_TILE(offset->x + ((bb->left + bb->right) >> 1));
+    current_top_tile  = SUBPX_TO_TILE(offset->y + ((bb->top + bb->bottom) >> 1));
+#if METATILE_SIZE == METATILE_SIZE_16
+    current_left_tile -= current_left_tile & 1;
+    current_top_tile  -= current_top_tile & 1;
+#endif
+    if (current_left_tile != previous_left_tile || current_top_tile != previous_top_tile){
+        previous_left_tile = current_left_tile;
+        previous_top_tile  = current_top_tile;
+        return on_metatile_enter(current_left_tile, current_top_tile);
+    }
+    return FALSE;
+#else
     if (!prev_metatile_overlap_iteration){
         current_left_tile = SUBPX_TO_TILE(offset->x + bb->left);
         current_top_tile = SUBPX_TO_TILE(offset->y + bb->top);
@@ -401,6 +437,7 @@ UBYTE metatile_overlap_at_intersection(rect16_t *bb, upoint16_t *offset) BANKED 
     previous_bottom_tile = current_bottom_tile;
     prev_metatile_overlap_iteration = 0;
     return FALSE;
+#endif
 }
 
 static script_event_t* metatile_event;

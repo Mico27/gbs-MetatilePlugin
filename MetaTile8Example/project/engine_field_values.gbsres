@@ -188,6 +188,10 @@
     {
       "id": "ENABLE_PLAT_ENTER_METATILE",
       "value": 1
+    },
+    {
+      "id": "METATILE_ENTER_DETECTION",
+      "value": "METATILE_ENTER_BOUNDING_BOX"
     }
   ]
 }

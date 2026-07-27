@@ -12,10 +12,44 @@
     {
       "when": {
         "additionalPlugins": [
+          "Mico27/ContinuousScenePlugin",
           "Mico27/ScreenScrollPlugin"
         ]
       },
-      "use": "Scr"
+      "use": "Cont_ScreenS"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "ContinuousScenePlugin",
+          "ScreenScrollPlugin"
+        ]
+      },
+      "use": "Cont_ScreenS"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "Mico27/ContinuousScenePlugin"
+        ]
+      },
+      "use": "Cont"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "ContinuousScenePlugin"
+        ]
+      },
+      "use": "Cont"
+    },
+    {
+      "when": {
+        "additionalPlugins": [
+          "Mico27/ScreenScrollPlugin"
+        ]
+      },
+      "use": "ScreenS"
     },
     {
       "when": {
@@ -23,7 +57,7 @@
           "ScreenScrollPlugin"
         ]
       },
-      "use": "Scr"
+      "use": "ScreenS"
     }
   ]
 }

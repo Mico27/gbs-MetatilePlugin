@@ -104,6 +104,10 @@
     {
       "id": "METATILE_SIZE",
       "value": "METATILE_SIZE_16"
+    },
+    {
+      "id": "METATILE_ENTER_DETECTION",
+      "value": "METATILE_ENTER_ORIGIN_POINT"
     }
   ]
 }

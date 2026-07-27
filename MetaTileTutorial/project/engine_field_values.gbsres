@@ -40,6 +40,10 @@
     {
       "id": "ENABLE_TOPDOWN_DOWN_COLLISION_METATILE",
       "value": 1
+    },
+    {
+      "id": "METATILE_ENTER_DETECTION",
+      "value": "METATILE_ENTER_ORIGIN_POINT"
     }
   ]
 }
