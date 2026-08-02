@@ -16,7 +16,8 @@ The plugin ships with example projects for the 8px and 16px metatile modes, as w
 4. [Size Limits and Restrictions](#size-limits-and-restrictions)
 5. [Events Reference](#events-reference)
 6. [Engine Fields Reference](#engine-fields-reference)
-7. [Memory Footprint](#memory-footprint)
+7. [Media](#media)
+8. [Memory Footprint](#memory-footprint)
 
 ---
 
@@ -398,7 +399,7 @@ Measured against the stock GB Studio **4.3.0-e1** engine (per-file SDCC compile 
 | WRAM | +62 bytes |
 | ROM | +4,500 bytes (DMG) / +4,800 bytes (CGB) |
 
-- **WRAM:** 62 bytes, almost all metatile state in `meta_tiles.c` (+63) with 1 byte saved in the reworked `scroll.c`.
+- **WRAM:** 62 bytes, almost all of it metatile state; the reworked scroll code gives 1 byte back.
 - **Engine WRAM headroom:** the stock GB Studio 4.3.0 engine leaves about **854 bytes** of WRAM free (usable engine WRAM is 7,776 bytes at 0xC0A0–0xDF00; the stock engine uses 6,922 bytes). With this plugin installed roughly **792 bytes** remain. This figure does not depend on how many global variables your project defines: the script memory array has a fixed size of VM_HEAP_SIZE + (VM_MAX_CONTEXTS × VM_CONTEXT_STACK_SIZE) words — 768 + 16 × 64 = 1,792 words (3,584 bytes) with stock engine settings.
 - **SRAM:** yes — the plugin claims the **entire 8 KiB of SRAM bank 0** (0xA000–0xBFFF) for the metatile map + collision cache (METATILE_SIZE_16: 0x1C00 map + 0x0400 collision; METATILE_SIZE_8: 0x1F00 map + 0x0100 collision). Game saves are relocated to SRAM banks 1–3, so a cartridge with at least 32 KiB SRAM is required if your game uses save slots.
 
