@@ -16,8 +16,7 @@ The plugin ships with example projects for the 8px and 16px metatile modes, as w
 4. [Size Limits and Restrictions](#size-limits-and-restrictions)
 5. [Events Reference](#events-reference)
 6. [Engine Fields Reference](#engine-fields-reference)
-7. [Inner Workings](#inner-workings)
-8. [Memory Footprint](#memory-footprint)
+7. [Memory Footprint](#memory-footprint)
 
 ---
 
@@ -369,74 +368,6 @@ These read-only runtime fields are populated by the engine before the attached m
 | `collided_metatile_y` | Tile Y coordinate of the collided tile. |
 | `collided_metatile_dir` | Direction of the collision (matches GB Studio direction constants). |
 | `collided_metatile_source` | Reserved for internal use; indicates the source of the collision check. |
-
----
-
-## Inner Workings
-
-### Compile-Time Tilemap Rewriting
-
-The most important step happens entirely at compile time inside `eventLoadMetaTiles.js`. When the compiler encounters a **Load meta tiles** event for a scene it:
-
-1. Reads the source scene's raw tilemap and (optionally) its CGB attribute map and collision array.
-2. Reads the metatile scene and builds a lookup dictionary: for each metatile position in the metatile scene it computes a lookup key from the tile indices of the raw tiles at that position (and, if requested, their color attributes and/or collision bytes), then maps that key to the metatile's index (0-based, left-to-right, top-to-bottom).
-3. Iterates over every metatile-sized cell in the source scene, computes the same lookup key, and finds the matching metatile index. If no match is found the compiler throws an error.
-4. Replaces the scene's tilemap data with the array of metatile IDs and clears the collision array (collision is now handled entirely by the SRAM data at runtime).
-
-The result is that the ROM tilemap for a metatile scene is an array of 1-byte metatile IDs instead of raw tile indices. This is much smaller for large scenes and is what gets placed in ROM.
-
-### Runtime Initialisation (vm_load_meta_tiles)
-
-When **Load meta tiles** runs at runtime it:
-
-1. Reads the metatile scene struct from ROM to obtain pointers to its tilemap, CGB attribute map, and collision arrays.
-2. Calls `load_meta_tiles()`, which:
-   - Copies the metatile scene's collision data into `sram_collision_data` at `SRAM_COLLISION_DATA_PTR` using `MemcpyBanked`.
-   - Computes `image_tile_width_bit` (the bit-shift equivalent of the next power of two of the scene width, used for fast row offset arithmetic).
-   - Copies the scene's metatile ID tilemap row by row into `sram_map_data` at `SRAM_MAP_DATA_PTR`.
-   - Calls `scroll_reset()` to force a full screen redraw using the new metatile data.
-
-After this point `metatile_collision_bank` is nonzero, which acts as a flag throughout the engine that metatile mode is active.
-
-### Rendering (scroll.c)
-
-The plugged scroll system overrides `load_metatile_row` and `load_metatile_col` which are called by the standard GB Studio scroll update loop whenever a new row or column of tiles needs to be drawn. Instead of reading tile indices directly from a ROM tilemap these functions:
-
-1. Look up the metatile ID for each cell from `sram_map_data`.
-2. Derive the actual raw tile index from the metatile scene's ROM tilemap using the ID (and the sub-tile offset for 16px mode).
-3. Write those tile indices into VRAM background map.
-
-For CGB the same process is repeated for the attribute map with VRAM bank 1 selected.
-
-This indirection means that any change to `sram_map_data` — whether from **Replace meta tile**, **Reset meta tile**, or **Submap metatiles** — is automatically picked up the next time that row or column scrolls into view. The optional **Commit render** flag triggers an immediate forced redraw of the affected row rather than waiting for natural scroll-driven rendering.
-
-### Collision Detection (collision.c)
-
-The plugged collision functions (`tile_col_test_range_y`, `tile_col_test_range_x`) check `metatile_collision_bank` at the start. When it is nonzero they read collision bytes from `sram_collision_data` instead of the ROM collision array:
-
-- **8px mode**: index = `sram_map_data[METATILE_MAP_OFFSET(tx, ty)]`
-- **16px mode**: index = `get_metatile_tile(metatile_offset, tile_offset)` — a two-level lookup that finds the metatile ID first, then computes the sub-tile's position within the 1024-byte collision table using the metatile ID's high and low nibbles.
-
-This means that calling **Replace collision** changes how the player physically interacts with a tile type globally, not just at one position. To change collision at a single position you would first call **Replace meta tile** to assign a different metatile ID at that coordinate and then optionally adjust the collision for that ID.
-
-### Metatile Enter Event
-
-When the enter metatile event is enabled for a scene type, the state update loop calls `metatile_overlap_at_intersection` once per frame when the player is grid-aligned. That function:
-
-1. Computes the metatile coordinate at the player's centre.
-2. Reads the metatile ID from `sram_map_data`.
-3. Compares the ID to `MIN_OVERLAP_METATILE`. If the ID is below the threshold the check is skipped.
-4. Compares the current metatile coordinate to the previously recorded one. If the player has moved to a new metatile, it stores the ID, X, and Y into `overlap_metatile_id/x/y` and fires the registered script event via `script_event_t`.
-
-### Metatile Collision Events
-
-When a directional collision event is enabled, the state update loop calls `on_player_metatile_collision` immediately after detecting a blocking tile. That function:
-
-1. Reads the metatile ID at the blocking tile's position.
-2. Compares it to the minimum index threshold for that direction.
-3. If the ID is at or above the threshold and the collision has not already been reported for the same tile this frame (debounced via a small cache), it stores the result into `collided_metatile_id/x/y/dir/source` and fires the registered script event.
-
-A call to `reset_collision_cache` clears the debounce state when the player is no longer blocked in that direction, ensuring the event can fire again the next time the player tries to move into the same tile.
 
 ---
 
