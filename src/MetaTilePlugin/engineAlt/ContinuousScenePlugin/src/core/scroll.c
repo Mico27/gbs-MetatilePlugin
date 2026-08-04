@@ -389,6 +389,8 @@ static void fill_metatile_row(UBYTE x_offset, UBYTE y_offset, UBYTE width, UBYTE
 #if METATILE_SIZE == METATILE_SIZE_16
         set_vram_byte((UBYTE*)(0x9800 + bkg_address_offset), ReadBankedUBYTE(metatile_ptr + TILE_MAP_OFFSET(metatile_id, x_offset + x, y_offset), metatile_bank));
 #else
+    (void)x_offset;
+    (void)y_offset;
         set_vram_byte((UBYTE*)(0x9800 + bkg_address_offset), ReadBankedUBYTE(metatile_ptr + metatile_id, metatile_bank));
 #endif
         bkg_address_offset = (bkg_address_offset & 0xFFE0) + ((bkg_address_offset + 1) & 31);
@@ -401,6 +403,8 @@ static void fill_metatile_col(UBYTE x_offset, UBYTE y_offset, UBYTE height, UBYT
 #if METATILE_SIZE == METATILE_SIZE_16
         set_vram_byte((UBYTE*)(0x9800 + bkg_address_offset), ReadBankedUBYTE(metatile_ptr + TILE_MAP_OFFSET(metatile_id, x_offset, y_offset + y), metatile_bank));
 #else
+    (void)x_offset;
+    (void)y_offset;
         set_vram_byte((UBYTE*)(0x9800 + bkg_address_offset), ReadBankedUBYTE(metatile_ptr + metatile_id, metatile_bank));
 #endif
         bkg_address_offset = (bkg_address_offset + 32) & 1023;
