@@ -18,6 +18,8 @@ The plugin ships with example projects for the 8px and 16px metatile modes, as w
 6. [Engine Fields Reference](#engine-fields-reference)
 7. [Media](#media)
 8. [Memory Footprint](#memory-footprint)
+9. [Bank 0 (HOME) Usage](#bank-0-home-usage)
+10. [Changelog](#changelog)
 
 ---
 
