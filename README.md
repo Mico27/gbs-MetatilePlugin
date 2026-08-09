@@ -518,3 +518,48 @@ the core compiles, move it independently of this plugin.
 
 </details>
 <!-- BANK0:END -->
+
+## Changelog
+
+Grouped by the date each change was merged into the official
+[gb-studio-plugins](https://github.com/gb-studio-dev/gb-studio-plugins) repository.
+
+Only bug fixes, new features and feature changes are listed. Engine version
+bumps, patch regeneration, packaging fixes and documentation edits are omitted.
+
+### 2026-07-27
+
+- Added metatile enter detection modes.
+- Fixed ScreenScroll / ContinuousScene plugin compatibility with the plugin's 8px mode.
+
+### 2026-07-19
+
+- Added a "Redraw Meta Tiles" event, to redraw a region of the screen that may have been modified directly in VRAM.
+
+### 2026-06-28
+
+- Added ContinuousScenePlugin compatibility.
+
+### 2026-06-14
+
+- Added custom script parameter / stack support to the events.
+
+### 2026-06-12
+
+- Fixed the metatile overlap event.
+- Fixed the actor position property field in custom events.
+
+### 2026-06-08
+
+First published in the official plugin repository. This entry covers everything
+developed since the plugin's standalone release in February 2025:
+
+- Metatile16 release, followed by the 8px metatile mode.
+- Added an "Attach a script to a metatile" event.
+- Extended scene stack (SceneStackExPlugin) integration.
+- Larger scene support, plus an engine setting for the metatile scene maximum size, and metatile scene size validation.
+- Metatile collision editing, and a collision event for the 8px mode.
+- Background cache, so metatiles are not regenerated when the same background is used in several scenes.
+- Exposed additional engine fields.
+- Load Metatile event compilation time optimisations, plus three rounds of runtime optimisation.
+- Fixes: parallax, sprite glitch on transition, scene scroll rendering when moving north in a 20x18 metatile scene, tile updates on scene edges while scrolling, scrolling and changing scene between metatile and non-metatile scenes, metatile replacement during scene transitions and during screen scroll, metatile submapping in the ScreenScroll variant, projectile rendering, and the small blip when scrolling up with a HUD margin.
