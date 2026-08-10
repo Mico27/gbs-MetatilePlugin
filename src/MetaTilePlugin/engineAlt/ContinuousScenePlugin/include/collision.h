@@ -15,6 +15,15 @@
 #define COLLISION_ALL 0xF
 #define TILE_PROP_LADDER 0x10
 
+#define DIRECTION_TOP_FLAG 0x01
+#define DIRECTION_RIGHT_FLAG 0x02
+#define DIRECTION_BOTTOM_FLAG 0x04
+#define DIRECTION_LEFT_FLAG 0x08
+#define DIRECTION_TOP_LEFT_FLAG 0x10
+#define DIRECTION_TOP_RIGHT_FLAG 0x20
+#define DIRECTION_BOTTOM_RIGHT_FLAG 0x40
+#define DIRECTION_BOTTOM_LEFT_FLAG 0x80
+
 #define METATILE_SIZE_8     0
 #define METATILE_SIZE_16    1
 
@@ -48,6 +57,8 @@ extern UBYTE image_tile_height;
 
 extern UBYTE tile_hit_x;
 extern UBYTE tile_hit_y;
+
+extern UBYTE continuous_scene_enabled;
 
 extern uint8_t __at(SRAM_COLLISION_DATA_PTR) sram_collision_data[COLLISION_DATA_SIZE];
 extern uint8_t __at(SRAM_MAP_DATA_PTR) sram_map_data[MAX_MAP_DATA_SIZE];

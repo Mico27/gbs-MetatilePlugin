@@ -1,5 +1,9 @@
 #pragma bank 255
 
+// engineAlt-replaces: set_bkg_submap_banked, source_width -- this variant renders through a
+// shifted background, so every row and column is written to VRAM directly by load_tile_row/load_tile_col
+// rather than handed to set_bkg_submap. MetaTilePlugin's banked wrapper has no caller here.
+
 #include "scroll.h"
 
 #include <string.h>
