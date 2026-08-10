@@ -20,7 +20,6 @@
 #endif
 
 UBYTE topdown_grid;
-UBYTE player_collision_group;
 
 void topdown_init(void) BANKED {
     camera_offset_x = 0;
@@ -76,7 +75,7 @@ void topdown_update(void) BANKED {
             tile_start = SUBPX_TO_TILE(PLAYER.pos.y + PLAYER.bounds.top);
             tile_end   = SUBPX_TO_TILE(PLAYER.pos.y + PLAYER.bounds.bottom);
             UBYTE tile_x = SUBPX_TO_TILE(PLAYER.pos.x + PLAYER.bounds.left);
-            if (tile_col_test_range_y(COLLISION_RIGHT | player_collision_group, tile_x - 1, tile_start, tile_end)) {
+            if (tile_col_test_range_y(COLLISION_RIGHT, tile_x - 1, tile_start, tile_end)) {
                 player_moving = FALSE;
 #ifdef ENABLE_TOPDOWN_LEFT_COLLISION_METATILE
                 on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_LEFT);
@@ -90,7 +89,7 @@ void topdown_update(void) BANKED {
             tile_start = SUBPX_TO_TILE(PLAYER.pos.y + PLAYER.bounds.top);
             tile_end   = SUBPX_TO_TILE(PLAYER.pos.y + PLAYER.bounds.bottom);
             UBYTE tile_x = SUBPX_TO_TILE(PLAYER.pos.x + PLAYER.bounds.right);
-            if (tile_col_test_range_y(COLLISION_LEFT | player_collision_group, tile_x + 1, tile_start, tile_end)) {
+            if (tile_col_test_range_y(COLLISION_LEFT, tile_x + 1, tile_start, tile_end)) {
                 player_moving = FALSE;
 #ifdef ENABLE_TOPDOWN_RIGHT_COLLISION_METATILE
                 on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_RIGHT);
@@ -104,7 +103,7 @@ void topdown_update(void) BANKED {
             tile_start = SUBPX_TO_TILE(PLAYER.pos.x + PLAYER.bounds.left);
             tile_end   = SUBPX_TO_TILE(PLAYER.pos.x + PLAYER.bounds.right);
             UBYTE tile_y = SUBPX_TO_TILE(PLAYER.pos.y + PLAYER.bounds.top);
-            if (tile_col_test_range_x(COLLISION_BOTTOM | player_collision_group, tile_y - 1, tile_start, tile_end)) {
+            if (tile_col_test_range_x(COLLISION_BOTTOM, tile_y - 1, tile_start, tile_end)) {
                 player_moving = FALSE;
 #ifdef ENABLE_TOPDOWN_UP_COLLISION_METATILE
                 on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_UP);
@@ -118,7 +117,7 @@ void topdown_update(void) BANKED {
             tile_start = SUBPX_TO_TILE(PLAYER.pos.x + PLAYER.bounds.left);
             tile_end   = SUBPX_TO_TILE(PLAYER.pos.x + PLAYER.bounds.right);
             UBYTE tile_y = SUBPX_TO_TILE(PLAYER.pos.y + PLAYER.bounds.bottom);
-            if (tile_col_test_range_x(COLLISION_TOP | player_collision_group, tile_y + 1, tile_start, tile_end)) {
+            if (tile_col_test_range_x(COLLISION_TOP, tile_y + 1, tile_start, tile_end)) {
                 player_moving = FALSE;
 #ifdef ENABLE_TOPDOWN_DOWN_COLLISION_METATILE
                 on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_DOWN);
