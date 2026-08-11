@@ -79,8 +79,6 @@ void topdown_update(void) BANKED {
                 player_moving = FALSE;
 #ifdef ENABLE_TOPDOWN_LEFT_COLLISION_METATILE
                 on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_LEFT);
-            } else {
-                reset_collision_cache(DIR_LEFT);
 #endif
             }
         } else if (INPUT_RECENT_RIGHT) {
@@ -95,8 +93,6 @@ void topdown_update(void) BANKED {
                 player_moving = FALSE;
 #ifdef ENABLE_TOPDOWN_RIGHT_COLLISION_METATILE
                 on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_RIGHT);
-            } else {
-                reset_collision_cache(DIR_RIGHT);
 #endif
             }
         } else if (INPUT_RECENT_UP) {
@@ -111,8 +107,6 @@ void topdown_update(void) BANKED {
                 player_moving = FALSE;
 #ifdef ENABLE_TOPDOWN_UP_COLLISION_METATILE
                 on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_UP);
-            } else {
-                reset_collision_cache(DIR_UP);
 #endif
             }
         } else if (INPUT_RECENT_DOWN) {
@@ -127,8 +121,6 @@ void topdown_update(void) BANKED {
                 player_moving = FALSE;
 #ifdef ENABLE_TOPDOWN_DOWN_COLLISION_METATILE
                 on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_DOWN);
-            } else {
-                reset_collision_cache(DIR_DOWN);
 #endif
             }
         }

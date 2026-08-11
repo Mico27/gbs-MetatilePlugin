@@ -1,1 +1,131 @@
-{"version": "4.3.0-e1"}
+{
+    "version": "4.3.0-e1",
+    "fields": [
+        {
+            "key": "SUBMAP_ENABLE_COPY_SCENE_TO_OVERLAY",
+            "label": "Enable: Copy scene submap to overlay",
+            "group": "Submapping Ex",
+            "type": "checkbox",
+            "cType": "define",
+            "defaultValue": 1
+        },
+        {
+            "key": "SUBMAP_ENABLE_COPY_SCENE_TO_OVERLAY_BASE",
+            "label": "Enable: Copy scene submap to overlay with tile offset",
+            "group": "Submapping Ex",
+            "type": "checkbox",
+            "cType": "define",
+            "defaultValue": 1
+        },
+        {
+            "key": "SUBMAP_ENABLE_COPY_SCENE_TO_BACKGROUND",
+            "label": "Enable: Copy scene submap to background",
+            "group": "Submapping Ex",
+            "type": "checkbox",
+            "cType": "define",
+            "defaultValue": 1
+        },
+        {
+            "key": "SUBMAP_ENABLE_COPY_SCENE_TO_BACKGROUND_BASE",
+            "label": "Enable: Copy scene submap to background with tile offset",
+            "group": "Submapping Ex",
+            "type": "checkbox",
+            "cType": "define",
+            "defaultValue": 1
+        },
+        {
+            "key": "SUBMAP_ENABLE_REFRESH_BACKGROUND",
+            "label": "Enable: Refresh background rectangle (reload original scene tiles)",
+            "group": "Submapping Ex",
+            "type": "checkbox",
+            "cType": "define",
+            "defaultValue": 1
+        },
+        {
+            "key": "SUBMAP_ENABLE_COPY_SCENE_TO_TILESET",
+            "label": "Enable: Copy scene submap to background tileset",
+            "group": "Submapping Ex",
+            "type": "checkbox",
+            "cType": "define",
+            "defaultValue": 1
+        },
+        {
+            "key": "SUBMAP_ENABLE_TILE_GET_SET",
+            "label": "Enable: Individual tile getters/setters (get/set background & overlay tile and attribute)",
+            "group": "Submapping Ex",
+            "type": "checkbox",
+            "cType": "define",
+            "defaultValue": 1
+        },
+        {
+            "key": "SUBMAP_ENABLE_FILL_BACKGROUND",
+            "label": "Enable: Fill background rectangle (tile and attribute)",
+            "group": "Submapping Ex",
+            "type": "checkbox",
+            "cType": "define",
+            "defaultValue": 1
+        },
+        {
+            "key": "SUBMAP_ENABLE_FILL_OVERLAY",
+            "label": "Enable: Fill overlay rectangle (tile and attribute)",
+            "group": "Submapping Ex",
+            "type": "checkbox",
+            "cType": "define",
+            "defaultValue": 1
+        },
+        {
+            "key": "SUBMAP_ENABLE_SCROLL_RECT",
+            "label": "Enable: Scroll rectangle by 1 tile",
+            "group": "Submapping Ex",
+            "type": "checkbox",
+            "cType": "define",
+            "defaultValue": 1,
+            "isHeading": true
+        },
+        {
+            "key": "SUBMAP_ENABLE_SCROLL_RECT_DOWN",
+            "label": "Enable: Scroll rectangle down",
+            "group": "Submapping Ex",
+            "type": "checkbox",
+            "cType": "define",
+            "defaultValue": 1,
+            "indent": 1,
+            "conditions": [
+                {
+                    "key": "SUBMAP_ENABLE_SCROLL_RECT",
+                    "truthy": true
+                }
+            ]
+        },
+        {
+            "key": "SUBMAP_ENABLE_SCROLL_RECT_LEFT",
+            "label": "Enable: Scroll rectangle left",
+            "group": "Submapping Ex",
+            "type": "checkbox",
+            "cType": "define",
+            "defaultValue": 1,
+            "indent": 1,
+            "conditions": [
+                {
+                    "key": "SUBMAP_ENABLE_SCROLL_RECT",
+                    "truthy": true
+                }
+            ]
+        },
+        {
+            "key": "SUBMAP_ENABLE_SCROLL_RECT_RIGHT",
+            "label": "Enable: Scroll rectangle right",
+            "group": "Submapping Ex",
+            "type": "checkbox",
+            "cType": "define",
+            "defaultValue": 1,
+            "indent": 1,
+            "conditions": [
+                {
+                    "key": "SUBMAP_ENABLE_SCROLL_RECT",
+                    "truthy": true
+                }
+            ]
+        }
+    ]
+}

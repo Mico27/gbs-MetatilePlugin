@@ -660,8 +660,6 @@ static void move_and_collide(UBYTE mask)
                 }
 #ifdef ENABLE_ADV_RIGHT_COLLISION_METATILE
                 on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_RIGHT);
-            } else {
-                reset_collision_cache(DIR_RIGHT);
 #endif
             }
         } else if (delta.x < 0) {
@@ -693,8 +691,6 @@ static void move_and_collide(UBYTE mask)
                 }
 #ifdef ENABLE_ADV_LEFT_COLLISION_METATILE
                 on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_LEFT);
-            } else {
-                reset_collision_cache(DIR_LEFT);
 #endif
             }
         }
@@ -745,8 +741,6 @@ static void move_and_collide(UBYTE mask)
                 }
 #ifdef ENABLE_ADV_DOWN_COLLISION_METATILE
                 on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_DOWN);
-            } else {
-                reset_collision_cache(DIR_DOWN);
 #endif
             }
         } else if (delta.y < 0) {
@@ -778,8 +772,6 @@ static void move_and_collide(UBYTE mask)
                 }
 #ifdef ENABLE_ADV_UP_COLLISION_METATILE
                 on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_UP);
-            } else {
-                reset_collision_cache(DIR_UP);
 #endif
             }
         }

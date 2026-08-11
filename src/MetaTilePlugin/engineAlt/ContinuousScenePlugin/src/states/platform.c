@@ -1192,14 +1192,10 @@ static void move_and_collide(UBYTE mask)
             if (moving_right){
 #ifdef ENABLE_PLAT_RIGHT_COLLISION_METATILE
                 on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_RIGHT);
-            } else {
-                reset_collision_cache(DIR_RIGHT);
 #endif
             } else {
 #ifdef ENABLE_PLAT_LEFT_COLLISION_METATILE
                 on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_LEFT);
-            } else {
-                reset_collision_cache(DIR_LEFT);
 #endif
             }
 #endif
@@ -1347,8 +1343,6 @@ static void move_and_collide(UBYTE mask)
                 plat_grounded = TRUE;
 #ifdef ENABLE_PLAT_DOWN_COLLISION_METATILE
                 on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_DOWN);
-            } else {
-                reset_collision_cache(DIR_DOWN);
 #endif
             }
         finally_update_y:
@@ -1384,8 +1378,6 @@ static void move_and_collide(UBYTE mask)
                 plat_next_state = FALL_STATE;
 #ifdef ENABLE_PLAT_UP_COLLISION_METATILE
                 on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_UP);
-            } else {
-                reset_collision_cache(DIR_UP);
 #endif
             }
             PLAYER.pos.y = new_y;

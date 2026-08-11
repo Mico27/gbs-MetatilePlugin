@@ -271,8 +271,6 @@ void shmup_update(void) BANKED {
                     PLAYER.pos.y = TILE_TO_SUBPX(tile_y) - EXCLUSIVE_OFFSET(PLAYER.bounds.bottom);
 #ifdef ENABLE_DOWN_COLLISION_METATILE
                     on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_DOWN);
-                } else {
-                    reset_collision_cache(DIR_DOWN);
 #endif
                 }
             } else { // Moving up
@@ -282,8 +280,6 @@ void shmup_update(void) BANKED {
                     PLAYER.pos.y = TILE_TO_SUBPX(tile_y + 1) - PLAYER.bounds.top;
 #ifdef ENABLE_UP_COLLISION_METATILE
                     on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_UP);
-                } else {
-                    reset_collision_cache(DIR_UP);
 #endif
                 }
             }
@@ -300,8 +296,6 @@ void shmup_update(void) BANKED {
                     PLAYER.pos.x = TILE_TO_SUBPX(tile_x) - EXCLUSIVE_OFFSET(PLAYER.bounds.right);
 #ifdef ENABLE_RIGHT_COLLISION_METATILE
                     on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_RIGHT);
-                } else {
-                    reset_collision_cache(DIR_RIGHT);
 #endif
                 }
             } else { // Moving left
@@ -311,8 +305,6 @@ void shmup_update(void) BANKED {
                     PLAYER.pos.x = TILE_TO_SUBPX(tile_x + 1) - PLAYER.bounds.left;
 #ifdef ENABLE_LEFT_COLLISION_METATILE
                     on_player_metatile_collision(tile_hit_x, tile_hit_y, DIR_LEFT);
-                } else {
-                    reset_collision_cache(DIR_LEFT);
 #endif
                 }
             }
