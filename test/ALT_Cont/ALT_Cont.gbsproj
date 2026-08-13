@@ -1,0 +1,8 @@
+{
+  "_resourceType": "project",
+  "name": "ALT_Cont",
+  "author": "micka",
+  "notes": "MetaTilePlugin with ContinuousScenePlugin — selects engineAlt/Cont.",
+  "_version": "4.2.0",
+  "_release": "10"
+}

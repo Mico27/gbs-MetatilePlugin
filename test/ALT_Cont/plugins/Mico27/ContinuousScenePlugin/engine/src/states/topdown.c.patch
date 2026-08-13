@@ -1,0 +1,59 @@
+Index: src/states/topdown.c
+===================================================================
+--- src/states/topdown.c
++++ src/states/topdown.c
+@@ -11,8 +11,9 @@
+ #include "input.h"
+ #include "trigger.h"
+ #include "math.h"
+ #include "vm.h"
++#include "continuous_scene.h"
+ 
+ #ifndef INPUT_TOPDOWN_INTERACT
+ #define INPUT_TOPDOWN_INTERACT INPUT_A
+ #endif
+@@ -47,8 +48,13 @@
+         // Player landed on an tile
+         // so stop movement for now
+         player_moving = FALSE;
+ 
++        //Check scene transition
++        if (check_transition_to_scene_collision()) {
++            return;
++        }
++
+         // Check for trigger collisions
+         if (trigger_activate_at_intersection(&PLAYER.bounds, &PLAYER.pos, FALSE)) {
+             // Landed on a trigger
+             return;
+@@ -152,26 +158,22 @@
+         point_translate_dir(&PLAYER.pos, PLAYER.dir, PLAYER.move_speed);
+ 
+         // Clamp to grid
+         if (PLAYER.dir == DIR_RIGHT) {
+-            if (PLAYER.pos.x > max_pos) {
++            if (PLAYER.pos.x > max_pos && (PLAYER.pos.x - max_pos) < PLAYER.move_speed) {
+                 PLAYER.pos.x = max_pos;
+             }
+         } else if (PLAYER.dir == DIR_LEFT) {
+-            if (PLAYER.pos.x < max_pos) {
++            if (PLAYER.pos.x < max_pos && (max_pos - PLAYER.pos.x) < PLAYER.move_speed) {
+                 PLAYER.pos.x = max_pos;
+-            } else if (max_pos == 0 && PLAYER.pos.x >= (UWORD_MAX - PLAYER.move_speed)) {
+-                PLAYER.pos.x = 0;
+             }
+         } else if (PLAYER.dir == DIR_DOWN) {
+-            if (PLAYER.pos.y > max_pos) {
++            if (PLAYER.pos.y > max_pos && (PLAYER.pos.y - max_pos) < PLAYER.move_speed) {
+                 PLAYER.pos.y = max_pos;
+             }
+         } else if (PLAYER.dir == DIR_UP) {
+-            if (PLAYER.pos.y < max_pos) {
++            if (PLAYER.pos.y < max_pos && (max_pos - PLAYER.pos.y) < PLAYER.move_speed) {
+                 PLAYER.pos.y = max_pos;
+-            } else if (max_pos == 0 && PLAYER.pos.y >= (UWORD_MAX - PLAYER.move_speed)) {
+-                PLAYER.pos.y = 0;
+             }
+         }
+     }
+ }

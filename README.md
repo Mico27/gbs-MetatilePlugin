@@ -407,29 +407,29 @@ move.
 | Enter metatile event detection mode → *Origin point* | — | — | −367 B |
 | Platformer: Enable enter metatile event *(off by default — cost of turning it on)* | — | — | +16 B |
 | Platformer: Enable collision metatile event *(off by default — cost of turning it on)* | — | — | — |
-| Platformer: Enable down collision metatile event *(off by default — cost of turning it on)* | — | — | +37 B |
-| Platformer: Enable right collision metatile event *(off by default — cost of turning it on)* | — | — | +50 B |
-| Platformer: Enable up collision metatile event *(off by default — cost of turning it on)* | — | — | +38 B |
-| Platformer: Enable left collision metatile event *(off by default — cost of turning it on)* | — | — | +50 B |
+| Platformer: Enable down collision metatile event *(off by default — cost of turning it on)* | — | — | +23 B |
+| Platformer: Enable right collision metatile event *(off by default — cost of turning it on)* | — | — | +29 B |
+| Platformer: Enable up collision metatile event *(off by default — cost of turning it on)* | — | — | +23 B |
+| Platformer: Enable left collision metatile event *(off by default — cost of turning it on)* | — | — | +29 B |
 | Point N Click: Enable enter metatile event *(off by default — cost of turning it on)* | — | — | +18 B |
 | Adventure: Enable enter metatile event *(off by default — cost of turning it on)* | — | — | +12 B |
 | Adventure: Enable collision metatile event *(off by default — cost of turning it on)* | — | — | — |
-| Adventure: Enable down collision metatile event *(off by default — cost of turning it on)* | — | — | −20 B |
-| Adventure: Enable right collision metatile event *(off by default — cost of turning it on)* | — | — | +53 B |
-| Adventure: Enable up collision metatile event *(off by default — cost of turning it on)* | — | — | +164 B |
-| Adventure: Enable left collision metatile event *(off by default — cost of turning it on)* | — | — | +49 B |
+| Adventure: Enable down collision metatile event *(off by default — cost of turning it on)* | — | — | −35 B |
+| Adventure: Enable right collision metatile event *(off by default — cost of turning it on)* | — | — | +37 B |
+| Adventure: Enable up collision metatile event *(off by default — cost of turning it on)* | — | — | +149 B |
+| Adventure: Enable left collision metatile event *(off by default — cost of turning it on)* | — | — | +34 B |
 | Shmup: Enable enter metatile event *(off by default — cost of turning it on)* | — | — | +19 B |
 | Shmup: Enable collision metatile event *(off by default — cost of turning it on)* | — | — | — |
-| Shmup: Enable down collision metatile event *(off by default — cost of turning it on)* | — | — | −4 B |
-| Shmup: Enable right collision metatile event *(off by default — cost of turning it on)* | — | — | −9 B |
-| Shmup: Enable up collision metatile event *(off by default — cost of turning it on)* | — | — | +55 B |
-| Shmup: Enable left collision metatile event *(off by default — cost of turning it on)* | — | — | +73 B |
+| Shmup: Enable down collision metatile event *(off by default — cost of turning it on)* | — | — | −18 B |
+| Shmup: Enable right collision metatile event *(off by default — cost of turning it on)* | — | — | −24 B |
+| Shmup: Enable up collision metatile event *(off by default — cost of turning it on)* | — | — | +37 B |
+| Shmup: Enable left collision metatile event *(off by default — cost of turning it on)* | — | — | +58 B |
 | Top Down: Enable enter metatile event *(off by default — cost of turning it on)* | — | — | +17 B |
 | Top Down: Enable collision metatile event *(off by default — cost of turning it on)* | — | — | — |
-| Top Down: Enable down collision metatile event *(off by default — cost of turning it on)* | — | — | +37 B |
-| Top Down: Enable right collision metatile event *(off by default — cost of turning it on)* | — | — | +40 B |
-| Top Down: Enable up collision metatile event *(off by default — cost of turning it on)* | — | — | +40 B |
-| Top Down: Enable left collision metatile event *(off by default — cost of turning it on)* | — | — | +40 B |
+| Top Down: Enable down collision metatile event *(off by default — cost of turning it on)* | — | — | +23 B |
+| Top Down: Enable right collision metatile event *(off by default — cost of turning it on)* | — | — | +24 B |
+| Top Down: Enable up collision metatile event *(off by default — cost of turning it on)* | — | — | +25 B |
+| Top Down: Enable left collision metatile event *(off by default — cost of turning it on)* | — | — | +24 B |
 
 - **Minimum metatile index to start checking for the entered metatile event**: going from 0 to 255 moves banked ROM by +24 B.
 
@@ -469,15 +469,18 @@ and settings that gate other settings only show their own contribution.
 
 ## Memory Footprint
 
-Measured against the stock GB Studio **4.3.0-e1** engine (per-file SDCC compile with GB Studio's build flags, default engine settings). Values are the plugin's *delta* versus the stock engine; DMG build, with CGB noted where it differs. ROM cost lands in banked ROM (GB Studio's autobanker spreads it across switchable banks); using the plugin's events additionally compiles a few bytes of GBVM script per call into your project's script banks.
+Measured against the stock GB Studio **4.3.0-e1** engine by `measure_plugin_memory.js` (per-file SDCC compile with GB Studio's own build flags, at default engine settings; report of 2026-08-13). Figures are this plugin's *delta* versus stock — a file that replaces a stock engine file counts only the difference, which is why a plugin can come out negative. Using the plugin's events additionally compiles a few bytes of GBVM script per call into your project's script banks, on top of the fixed cost below.
 
-| | Cost |
+| Budget | Cost |
 |---|---|
-| WRAM | +62 bytes |
-| ROM | +4,500 bytes (DMG) / +4,800 bytes (CGB) |
+| Bank 0 (HOME) | −27 bytes |
+| WRAM | +54 bytes |
+| Banked ROM | +3,952 bytes |
 
-- **WRAM:** 62 bytes, almost all of it metatile state; the reworked scroll code gives 1 byte back.
-- **Engine WRAM headroom:** the stock GB Studio 4.3.0 engine leaves about **854 bytes** of WRAM free (usable engine WRAM is 7,776 bytes at 0xC0A0–0xDF00; the stock engine uses 6,922 bytes). With this plugin installed roughly **792 bytes** remain. This figure does not depend on how many global variables your project defines: the script memory array has a fixed size of VM_HEAP_SIZE + (VM_MAX_CONTEXTS × VM_CONTEXT_STACK_SIZE) words — 768 + 16 × 64 = 1,792 words (3,584 bytes) with stock engine settings.
+- **Bank 0:** the plugin *gives back* 27 bytes — its replacements for stock engine files compile smaller than the originals. See [Bank 0 (HOME) Usage](#bank-0-home-usage).
+- **WRAM:** 54 bytes, almost all of it metatile state; the reworked scroll code gives part of it back.
+- **Banked ROM:** 3,952 bytes at the default `METATILE_SIZE_8`, 22 of which land in stock files the plugin does not ship but which recompile differently because it overrides `collision.h`, `load_save.h` and `scroll.h`. Switching to 16px metatiles adds 747 bytes of banked ROM and 137 bytes of bank 0 — which turns the bank 0 saving into a net cost of 110 bytes.
+- **Engine WRAM headroom:** a stock GB Studio 4.3.0 project leaves about **854 bytes** of WRAM free (usable engine WRAM is 7,776 bytes at 0xC0A0–0xDF00; the stock engine uses 6,922). With this plugin installed roughly **800 bytes** remain. That does not change with the number of global variables your project defines: the script memory array is a fixed 3,584 bytes at stock engine settings (VM_HEAP_SIZE + VM_MAX_CONTEXTS × VM_CONTEXT_STACK_SIZE = 768 + 16 × 64 words).
 - **SRAM:** yes — the plugin claims the **entire 8 KiB of SRAM bank 0** (0xA000–0xBFFF) for the metatile map + collision cache (METATILE_SIZE_16: 0x1C00 map + 0x0400 collision; METATILE_SIZE_8: 0x1F00 map + 0x0100 collision). Game saves are relocated to SRAM banks 1–3, so a cartridge with at least 32 KiB SRAM is required if your game uses save slots.
 
 ---
@@ -492,27 +495,26 @@ runs out of.
 
 | | Bytes |
 |---|---|
-| Bank 0 used by this plugin | **+110** |
-| Bank 0 free with this plugin installed | **1,341** of 16,384 (92% used) |
+| Bank 0 used by this plugin | **−27** |
+| Bank 0 free with this plugin installed | **1,478** of 16,384 (91% used) |
 
-Everything else this plugin adds lives in banked ROM.
+**This plugin gives bank 0 space back.** Its replacements for stock engine
+files compile smaller than the originals, freeing 27 bytes.
 
 | Module | This plugin | Stock engine | Bank 0 cost |
 |---|---|---|---|
-| `collision.c` | 339 | 401 | -62 |
-| `scroll.c` | 458 | 286 | +172 |
+| `core/collision.c` | 339 | 401 | −62 |
+| `core/scroll.c` | 321 | 286 | +35 |
 
 Modules that replace or patch a stock engine file only cost the *difference*:
 the stock version's bank 0 bytes were being spent anyway.
 
 <details><summary>How this was measured</summary>
 
-GB Studio 4.3.2, DMG target, default engine settings. Each module's bank 0
-contribution is the `A _HOME size` record that SDCC writes into its `.rel`
-object, summed over the engine sources this plugin provides. Stock sizes come
-from building projects whose only plugin ships no engine C, so every module in
-them is the untouched engine; two such builds were compared and agreed on all
-73 shared modules.
+GB Studio 4.3.0-e1, default engine settings. Each module is compiled with the
+toolchain and flags GB Studio itself uses, and the `A _HOME size` record SDCC
+writes into the resulting `.rel` object is read back; the stock column is the
+same compile of the engine file this module replaces.
 
 The "free" figure is a stock project with this plugin and nothing else. Your
 own number will differ: other plugins, and any engine settings that change what
