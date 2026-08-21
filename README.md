@@ -16,10 +16,11 @@ The plugin ships with example projects for the 8px and 16px metatile modes, as w
 4. [Size Limits and Restrictions](#size-limits-and-restrictions)
 5. [Events Reference](#events-reference)
 6. [Engine Fields Reference](#engine-fields-reference)
-7. [Media](#media)
-8. [Memory Footprint](#memory-footprint)
-9. [Bank 0 (HOME) Usage](#bank-0-home-usage)
-10. [Changelog](#changelog)
+7. [Animating Tiles](#animating-tiles)
+8. [Media](#media)
+9. [Memory Footprint](#memory-footprint)
+10. [Bank 0 (HOME) Usage](#bank-0-home-usage)
+11. [Changelog](#changelog)
 
 ---
 
@@ -308,6 +309,25 @@ Copies a rectangular region of metatile IDs from another scene's ROM tilemap dir
 
 ---
 
+### Redraw meta tiles
+
+**`EVENT_REDRAW_META_TILES`** — auto-label: *Redraw meta tiles*
+
+Re-renders a rectangular region of the screen from the metatile map currently held in SRAM, rewriting both the tile indices and — on Game Boy Color — the colour attributes for every cell in the region.
+
+Nothing in SRAM is modified; this event only pushes what is already there back into VRAM. Use it after changing map data with **Commit render** left unchecked, or after anything has written to the background tilemap in VRAM directly (a raw GBVM script, another plugin, a transition effect) and left cells showing the wrong tile.
+
+| Field | Description |
+|-------|-------------|
+| X / Y | Top-left corner of the region to redraw, in **raw tile** coordinates — not metatiles, in both 8px and 16px mode. |
+| Width / Height | Size of the region, also in raw tiles. |
+
+> **On-screen regions only.** Like the **Commit render** flag, this event maps the coordinate to a VRAM cell by wrapping it (`x & 31`, `y & 31`), so a region that is not currently visible overwrites whichever cells happen to occupy that wrapped position and corrupts the display. Redraw only what is on screen.
+
+Redrawing costs one VRAM write per cell, so keep regions as small as the change that prompted them rather than refreshing the whole screen.
+
+---
+
 ### Attach a Script to a Metatile Event
 
 **`PM_EVENT_METATILE_SCRIPT`**
@@ -371,6 +391,122 @@ These read-only runtime fields are populated by the engine before the attached m
 | `collided_metatile_y` | Tile Y coordinate of the collided tile. |
 | `collided_metatile_dir` | Direction of the collision (matches GB Studio direction constants). |
 | `collided_metatile_source` | Reserved for internal use; indicates the source of the collision check. |
+
+---
+
+## Animating Tiles
+
+Animated water, waterfalls, flowers and similar effects are set up differently in a
+metatile scene than in a stock GB Studio scene. This section explains why the usual
+event does not work, and the techniques that do.
+
+### Why "Replace Tile At Position" does not work here
+
+The stock **Replace Tile At Position** event — and its **Sequence** variant, which is
+what GB Studio normally uses for animated tiles — compiles to the GBVM opcode
+`VM_REPLACE_TILE_XY`. That opcode is not given a VRAM tile slot. It is given a scene
+coordinate, reads the scene's compiled tilemap in ROM at that coordinate to find out
+*which tile slot is displayed there*, and only then overwrites that slot's pixel data:
+
+```c
+UWORD ofs = (image_tile_width * y) + x;
+UBYTE target_tile = ReadBankedUBYTE(image_ptr + ofs, image_bank);   // <- tile index
+SetBankedBkgData(target_tile, 1, /* new pixels */ ...);
+```
+
+In a scene using this plugin, that lookup returns the wrong number. The compiler has
+rewritten the scene tilemap so that every cell holds a **metatile ID**, not a raw tile
+index. `VM_REPLACE_TILE_XY` reads the metatile ID, treats it as a VRAM slot number, and
+replaces the bitmap of a completely unrelated tile.
+
+This cannot be worked around by picking a different coordinate, because the raw tile
+index displayed at a position is not stored in the scene tilemap at all — the plugin
+resolves it at draw time from the metatile scene's tilemap (`metatile_ptr`), indexed by
+metatile ID. For the same reason, the stock **Get Tile At Position** event
+(`VM_GET_TILE_XY`) returns a metatile ID rather than a tile index; use
+[Get meta tile at position](#get-meta-tile-at-position) instead.
+
+### Technique 1 — Replace the VRAM tile bitmap directly
+
+Animating a tile on the Game Boy really means replacing the *pixel data* held in a VRAM
+tile slot. Every cell on screen that references that slot changes in the same frame —
+which is exactly the behaviour wanted for water, waterfalls or flowers. The tilemap is
+never touched, so no metatile ID changes, nothing has to be re-rendered, and no
+[Redraw meta tiles](#redraw-meta-tiles) call is needed.
+
+So rather than asking "which tile is at x,y?", address the VRAM slot directly.
+
+#### Keeping tile indices stable
+
+Set the same **Common Tileset** (scene inspector → *Common Tileset*) on the metatile
+scene and on every scene that uses metatiles. GB Studio then emits that tileset's tiles
+first and in order, so a tile's VRAM slot is the same in every scene and is simply its
+index in the common tileset image, counted left-to-right then top-to-bottom from 0.
+
+> **Slots above 127.** The engine loads the first 128 tiles of a scene's tileset to VRAM
+> slots 0–127, then places the remaining tiles in a second block that is aligned to end
+> at slot 192 when the remainder is 64 tiles or fewer, and at slot 128 otherwise
+> (`load_bkg_tileset` in `data_manager.c`). Index equals slot only for the first 128
+> tiles, so keep animated tiles inside the first 128 entries of the common tileset and
+> the question never comes up. If in doubt, confirm the slot in an emulator VRAM viewer
+> (BGB, Emulicious).
+
+#### Option A — gbs-replaceTilesetTilesPlugin
+
+[gbs-replaceTilesetTilesPlugin](https://github.com/Mico27/gbs-replaceTilesetTilesPlugin)
+wraps `VM_REPLACE_TILE` in a normal event, which is the simplest route.
+
+1. Put the animation frames in their own tileset asset — e.g. four 8×8 frames of water
+   laid out in a row, giving source indices 0, 1, 2, 3.
+2. Add a **Replace Tileset Tiles** event and set:
+   - **Tileset** — the animation frame tileset;
+   - **Target Tile Index** — the VRAM slot of the tile being animated (add 2048 /
+     `0x0800` to write into VRAM bank 1 on Game Boy Color);
+   - **Source Offset Tile Index** — the frame to show, which can be a variable;
+   - **Length** — how many consecutive tiles to copy (1 per frame here, or 4 for a
+     16px metatile's whole 2×2 block if the frames are stored as contiguous quads).
+3. Drive it from a loop — a **Set Timer Script**, or an *On Init* script ending in a
+   loop of *Wait 8 frames* → advance the frame variable → **Replace Tileset Tiles**.
+
+The **Replace Tileset Tiles Ex** event of that same plugin takes the source tileset as a
+runtime bank + pointer pair instead of a build-time asset, if the animation set itself
+has to be chosen at runtime.
+
+#### Option B — raw GBVM
+
+The same thing without the plugin, using a **GBVM Script** event. `VM_REPLACE_TILE` takes
+its target and source indices as *variable references*, not immediates, so push them
+first:
+
+```
+VM_PUSH_CONST   12                  ; target VRAM slot  -> .ARG1
+VM_PUSH_CONST   0                   ; source tile index -> .ARG0
+VM_REPLACE_TILE .ARG1, ___bank_tileset_water_anim, _tileset_water_anim, .ARG0, 4
+VM_POP          2
+```
+
+| Parameter | Meaning |
+|---|---|
+| `TARGET_TILE_IDX` | Variable holding the first VRAM slot to overwrite. Bit 11 (`0x0800`) selects VRAM bank 1 on Game Boy Color. |
+| `TILEDATA_BANK` / `TILEDATA` | Bank and address of the source tileset — `___bank_<symbol>` and `_<symbol>`, where `<symbol>` is the tileset asset's symbol as shown in its asset settings. |
+| `START_IDX` | Variable holding the first tile to read inside that tileset. |
+| `LEN` | Number of consecutive tiles to copy. An immediate, not a variable. |
+
+To advance frames, point `TARGET_TILE_IDX` / `START_IDX` at real script variables
+(`VM_SET_CONST`, or a GB Studio variable) instead of pushed constants and update them
+between calls.
+
+### Technique 2 — Swap the metatile ID (per-position animation)
+
+Technique 1 animates a tile everywhere it appears on screen at once. When a *single*
+position has to animate on its own — a lone flower, one torch — swap the metatile
+instead of the pixels: define one metatile per animation frame in the metatile scene,
+then cycle them with [Replace meta tile](#replace-meta-tile) at that coordinate, with
+**Commit render** checked so the change reaches the screen.
+
+This costs one metatile ID per frame and only redraws the cells actually named, so it
+suits a handful of animated positions; for a whole map's worth of water, use
+Technique 1.
 
 ---
 
