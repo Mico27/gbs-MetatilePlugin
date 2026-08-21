@@ -304,6 +304,9 @@ Copies a rectangular region of metatile IDs from another scene's ROM tilemap dir
 | Destination X / Destination Y | Top-left tile coordinate in the active scene to paste into. |
 | Width / Height | Size of the region to copy, in tile units (max 31 per axis). |
 | Commit render | Check to re-render each copied row immediately. Leave unchecked for off-screen regions. |
+| Destination relative to camera scroll | Treat Destination X/Y as screen coordinates instead of absolute scene tile coordinates. |
+
+> **Screen-relative coordinates.** With **relative to camera scroll** enabled the coordinate is a screen tile position — (0,0) is the top-left tile currently visible — and the camera's current scroll (`draw_scroll_x/y`, rounded down to whole tiles) is added to it. That is the same option the SubmappingEx plugin's background events use. In 16px mode the resulting absolute coordinate is still rounded down to the enclosing metatile, so a scroll position that lands mid-metatile snaps back to the even coordinate.
 
 <img width="742" height="149" alt="image" src="https://github.com/user-attachments/assets/6fb9d619-378c-4c27-a402-ebd32647708d" />
 
@@ -321,6 +324,9 @@ Nothing in SRAM is modified; this event only pushes what is already there back i
 |-------|-------------|
 | X / Y | Top-left corner of the region to redraw, in **raw tile** coordinates — not metatiles, in both 8px and 16px mode. |
 | Width / Height | Size of the region, also in raw tiles. |
+| Position relative to camera scroll | Treat X/Y as screen coordinates instead of absolute scene tile coordinates. |
+
+> **Screen-relative coordinates.** With **relative to camera scroll** enabled the coordinate is a screen tile position — (0,0) is the top-left tile currently visible — and the camera's current scroll (`draw_scroll_x/y`, rounded down to whole tiles) is added to it. That is the same option the SubmappingEx plugin's background events use. In 16px mode the resulting absolute coordinate is still rounded down to the enclosing metatile, so a scroll position that lands mid-metatile snaps back to the even coordinate.
 
 > **On-screen regions only.** Like the **Commit render** flag, this event maps the coordinate to a VRAM cell by wrapping it (`x & 31`, `y & 31`), so a region that is not currently visible overwrites whichever cells happen to occupy that wrapped position and corrupts the display. Redraw only what is on screen.
 
