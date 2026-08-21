@@ -437,8 +437,7 @@ metatile ID. For the same reason, the stock **Get Tile At Position** event
 Animating a tile on the Game Boy really means replacing the *pixel data* held in a VRAM
 tile slot. Every cell on screen that references that slot changes in the same frame —
 which is exactly the behaviour wanted for water, waterfalls or flowers. The tilemap is
-never touched, so no metatile ID changes, nothing has to be re-rendered, and no
-[Redraw meta tiles](#redraw-meta-tiles) call is needed.
+never touched, so no metatile ID changes.
 
 So rather than asking "which tile is at x,y?", address the VRAM slot directly.
 
