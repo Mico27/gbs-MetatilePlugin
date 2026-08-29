@@ -127,7 +127,7 @@ static UBYTE neighbor_legacy_col_test_x(UBYTE tile_mask, continuous_scene_t* cs,
 }
 
 // ============================================================
-// Metatile collision — current scene (SRAM lookup)
+// Metatile collision: current scene (SRAM lookup)
 // ============================================================
 
 // Iterate over y range using current scene's SRAM metatile collision table.
@@ -185,7 +185,7 @@ static UBYTE metatile_col_test_x(UBYTE tile_mask, UBYTE ty, UBYTE tx_start, UBYT
 }
 
 // ============================================================
-// Metatile collision — neighbor scene (ROM lookup via continuous scene)
+// Metatile collision: neighbor scene (ROM lookup via continuous scene)
 // ============================================================
 
 // Iterate over y range in a neighbor scene's metatile collision (ROM tilemap -> SRAM table).
@@ -234,7 +234,7 @@ UBYTE tile_col_test_range_y(UBYTE tile_mask, UBYTE tx, UBYTE ty_start, UBYTE ty_
     tile_hit_x = tx;
     tile_hit_y = ty_start;
 
-    // OOB: tile is outside current scene — check neighbor or treat as wall
+    // Outside the current scene: check the neighbour or treat it as a wall
     if (tile_hit_x >= image_tile_width || tile_hit_y >= image_tile_height) {
         if (continuous_scene_enabled) {
             // Metatile scene + continuous: look up collision in the neighbor's ROM tilemap
@@ -272,7 +272,7 @@ UBYTE tile_col_test_range_x(UBYTE tile_mask, UBYTE ty, UBYTE tx_start, UBYTE tx_
     tile_hit_x = tx_start;
     tile_hit_y = ty;
 
-    // OOB: tile is outside current scene — check neighbor or treat as wall
+    // Outside the current scene: check the neighbour or treat it as a wall
     if (tile_hit_x >= image_tile_width || tile_hit_y >= image_tile_height) {
         if (continuous_scene_enabled){
             continuous_scene_t* cs = NULL;

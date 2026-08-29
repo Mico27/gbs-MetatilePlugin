@@ -33,6 +33,7 @@ extern BYTE scroll_offset_x;
 extern BYTE scroll_offset_y;
 extern UBYTE bkg_scroll_x;
 extern UBYTE bkg_scroll_y;
+extern UBYTE DISABLE_SCROLL_LIMITS;
 extern BYTE bkg_offset_x;
 extern BYTE bkg_offset_y;
 extern UINT8 pending_w_i;

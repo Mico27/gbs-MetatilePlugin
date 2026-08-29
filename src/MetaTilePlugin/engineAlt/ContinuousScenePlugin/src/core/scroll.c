@@ -47,6 +47,7 @@ UBYTE bkg_scroll_x;
 UBYTE bkg_scroll_y;
 BYTE scroll_offset_x;
 BYTE scroll_offset_y;
+UBYTE DISABLE_SCROLL_LIMITS;
 BYTE bkg_offset_x;
 BYTE bkg_offset_y;
 UBYTE pending_h_x, pending_h_y;
@@ -97,18 +98,18 @@ void scroll_update(void) BANKED {
     x = SUBPX_TO_PX((UWORD)camera_x) - (SCREENWIDTH >> 1);
     y = SUBPX_TO_PX((UWORD)camera_y) - (SCREENHEIGHT >> 1);
 
-#ifndef DISABLE_SCROLL_LIMITS
-    if (!(continuous_scene_enabled & DIRECTION_LEFT_FLAG) && (((UWORD)x > SCREEN_OOB_LEFT_PX) || (x < scroll_x_min))) {
-        x = scroll_x_min;
-    } else if (!(continuous_scene_enabled & DIRECTION_RIGHT_FLAG) && (((UWORD)x < SCREEN_OOB_LEFT_PX) && (x > scroll_x_max))) {
-        x = scroll_x_max;
+    if (!DISABLE_SCROLL_LIMITS) {
+        if (!(continuous_scene_enabled & DIRECTION_LEFT_FLAG) && (((UWORD)x > SCREEN_OOB_LEFT_PX) || (x < scroll_x_min))) {
+            x = scroll_x_min;
+        } else if (!(continuous_scene_enabled & DIRECTION_RIGHT_FLAG) && (((UWORD)x < SCREEN_OOB_LEFT_PX) && (x > scroll_x_max))) {
+            x = scroll_x_max;
+        }
+        if (!(continuous_scene_enabled & DIRECTION_TOP_FLAG) && (((UWORD)y > SCREEN_OOB_TOP_PX) || (y < scroll_y_min))) {
+            y = scroll_y_min;
+        } else if (!(continuous_scene_enabled & DIRECTION_BOTTOM_FLAG) && (((UWORD)y < SCREEN_OOB_TOP_PX) && (y > scroll_y_max))) {
+            y = scroll_y_max;
+        }
     }
-    if (!(continuous_scene_enabled & DIRECTION_TOP_FLAG) && (((UWORD)y > SCREEN_OOB_TOP_PX) || (y < scroll_y_min))) {
-        y = scroll_y_min;
-    } else if (!(continuous_scene_enabled & DIRECTION_BOTTOM_FLAG) && (((UWORD)y < SCREEN_OOB_TOP_PX) && (y > scroll_y_max))) {
-        y = scroll_y_max;
-    }
-#endif
 
     current_col = PX_TO_TILE(scroll_x);
     current_row = PX_TO_TILE(scroll_y);
@@ -288,7 +289,7 @@ void scroll_queue_col(UBYTE x, UBYTE y) {
 }
 
 // ============================================================
-// Non-metatile tile rendering — current scene
+// Non-metatile tile rendering: current scene
 // ============================================================
 
 // Render a row section from any banked ROM tilemap into VRAM.
@@ -320,7 +321,7 @@ void load_tile_col(const unsigned char * from, UBYTE x, UWORD y, UWORD height, U
 }
 
 // ============================================================
-// Non-metatile fill — current scene
+// Non-metatile fill: current scene
 // ============================================================
 
 // Fill a row section in VRAM with a constant raw tile ID.
@@ -340,7 +341,7 @@ static void fill_tile_col_plain(UBYTE height, UBYTE tile_id) {
 }
 
 // ============================================================
-// Metatile tile rendering — current scene (SRAM lookup)
+// Metatile tile rendering: current scene (SRAM lookup)
 // ============================================================
 
 // Render a row section using the current scene's SRAM metatile map and banked VRAM tile table.
@@ -384,7 +385,7 @@ void load_metatile_col(const UBYTE* from, UBYTE x, UBYTE y, UBYTE height, UBYTE 
 }
 
 // ============================================================
-// Metatile fill — current scene
+// Metatile fill: current scene
 // ============================================================
 
 // Fill a row section by resolving a metatile ID through the current scene's VRAM tile table.
@@ -416,7 +417,7 @@ static void fill_metatile_col(UBYTE x_offset, UBYTE y_offset, UBYTE height, UBYT
 }
 
 // ============================================================
-// Fill dispatch — current scene (metatile or plain)
+// Fill dispatch: current scene (metatile or plain)
 // ============================================================
 
 // Fill a row section with fill_tile_id; treats it as a metatile ID when MetaTile is active.
@@ -438,7 +439,7 @@ void fill_tile_col(UBYTE x_offset, UBYTE y_offset, UBYTE height) {
 }
 
 // ============================================================
-// Metatile tile rendering — neighbor scene (ROM tilemap lookup)
+// Metatile tile rendering: neighbor scene (ROM tilemap lookup)
 // ============================================================
 
 // Render a row from a neighbor scene's ROM tilemap: reads the metatile ID via ReadBankedUBYTE,
@@ -515,7 +516,7 @@ static void load_neighbor_metatile_col(const UBYTE* tilemap, UBYTE x, UWORD y,
 }
 
 // ============================================================
-// Tile rendering dispatch — neighbor scene
+// Tile rendering dispatch: neighbor scene
 // ============================================================
 
 // Render a row from a neighbor scene: uses metatile ROM lookup when MetaTile is active,
@@ -944,7 +945,7 @@ void load_tile_col_continuous(UBYTE x, UBYTE y, UBYTE height) {
 #ifdef CGB
 
 // ============================================================
-// CGB: Metatile attribute rendering — neighbor scene (ROM tilemap lookup)
+// CGB: Metatile attribute rendering: neighbor scene (ROM tilemap lookup)
 // ============================================================
 
 // Render a row of CGB attributes from a neighbor scene's ROM tilemap via metatile_attr_ptr lookup.
@@ -1020,7 +1021,7 @@ static void load_neighbor_metatile_attr_col(const UBYTE* tilemap, UBYTE x, UWORD
 }
 
 // ============================================================
-// CGB: Metatile attribute fill — current scene
+// CGB: Metatile attribute fill: current scene
 // ============================================================
 
 // Fill a row section with CGB attribute bytes by resolving a metatile ID through metatile_attr_ptr.
@@ -1048,7 +1049,7 @@ static void fill_metatile_attr_col(UBYTE x_offset, UBYTE y_offset, UBYTE height,
 }
 
 // ============================================================
-// CGB: Attribute fill dispatch — current scene (metatile or plain)
+// CGB: Attribute fill dispatch: current scene (metatile or plain)
 // ============================================================
 
 // Fill a row section with fill_tile_id attrs; treats it as a metatile ID when MetaTile is active.
@@ -1070,7 +1071,7 @@ void fill_tile_attr_col(UBYTE x_offset, UBYTE y_offset, UBYTE height) {
 }
 
 // ============================================================
-// CGB: Attribute rendering dispatch — neighbor scene
+// CGB: Attribute rendering dispatch: neighbor scene
 // ============================================================
 
 // Render a row of CGB attributes from a neighbor scene: uses metatile ROM lookup when MetaTile
