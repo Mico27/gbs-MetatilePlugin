@@ -87,7 +87,9 @@ When the project is compiled, the compiler rewrites the scene's tilemap: every t
 - **Must match metatile color attributes** keeps blocks apart when they use the same tiles in different colours.
 - **Must match metatile collision** keeps blocks apart when they look the same but have different collision.
 
-> If a tile in your main scene is not found in the metatile scene, the compiler will throw an error identifying the problematic coordinate.
+Tile data is compared in every case. The flags add the colour attributes and the collision bytes on top of it. When a tile group fails the strict comparison, the compiler retries it against looser ones and takes the first metatile that comes back. See [Matching and fallback](#matching-and-fallback) for the exact order.
+
+> If the tile data of a group in your main scene is not found in the metatile scene, the compiler will throw an error identifying the problematic coordinate.
 
 ### 4. Enable Metatile Events (optional)
 
@@ -193,6 +195,27 @@ During the build it converts the scene's map from tiles into metatile numbers. W
 | Must match metatile collision | Treat blocks with different collision as different blocks. |
 
 <img width="739" height="130" alt="image" src="https://github.com/user-attachments/assets/aad82d0e-f5a5-44b6-a0ea-b2d042aa8ea1" />
+
+#### Matching and fallback
+
+Every comparison includes the tile data. The two flags add the colour attribute bytes and the collision bytes to it.
+
+A tile group that finds no metatile at the strictest comparison is retried at each looser one, and the first metatile returned is the one written into the scene:
+
+| Order | Compared |
+|-------|----------|
+| 1 | Tile data, full colour attribute, collision |
+| 2 | Tile data, VRAM bank and flip bits of the colour attribute, collision |
+| 3 | Tile data, collision |
+| 4 | Tile data |
+
+Orders that use a flag you left unchecked are dropped from the list. With only **Must match metatile color attributes** enabled, the compiler runs orders 1, 2 and 4 with the collision part removed from each. With only **Must match metatile collision** enabled, it runs orders 3 and 4. With both unchecked, it runs order 4 alone, which is the original behaviour.
+
+Order 2 looks at bit 3 (VRAM bank), bit 5 (X flip) and bit 6 (Y flip) of each attribute byte and ignores the palette number and the BG-to-OAM priority bit. A wall painted with palette 5 and flipped horizontally resolves to a metatile painted with palette 1 and flipped horizontally, and the scene stores that metatile's ID. The block keeps the palette and collision defined by the metatile scene, since the game reads both from there at runtime.
+
+The build stops with the coordinate of the tile group when its tile data matches nothing at order 4.
+
+When two Load meta tiles events point at the same metatile scene with different flag settings, each combination builds its own lookup tables.
 
 ---
 
