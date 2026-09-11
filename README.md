@@ -430,9 +430,7 @@ tile and changes the artwork of something unrelated.
 
 Picking a different coordinate does not help, because the tile displayed at a position is
 not in the scene's map at all. The plugin works it out as it draws, from the metatile
-scene. For the same reason, the stock **Get Tile At Position** event returns a metatile
-number rather than a tile. Use [Get meta tile at position](#get-meta-tile-at-position)
-instead.
+scene.
 
 ### Technique 1: change the tile's artwork
 
