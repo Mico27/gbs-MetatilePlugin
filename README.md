@@ -724,6 +724,23 @@ Grouped by the date each change was merged into the official
 Only bug fixes, new features and feature changes are listed. Engine version
 bumps, patch regeneration, packaging fixes and documentation edits are omitted.
 
+### 2026-09-09
+
+- **Load Meta Tiles** now matches in tiers instead of on one exact key. A tile that fails the strictest match falls back to one that ignores the palette and the background priority bit but keeps the VRAM bank and the two flips, then to tile data plus collision, then to tile data alone, taking the first metatile that answers. A scene whose colour or collision data does not line up with the metatile scene now resolves to the nearest metatile carrying the same tile data instead of failing the build.
+- The metatile lookup is cached per set of match options as well as per scene, so one metatile scene can be used with **Must match metatile color attributes** and **Must match metatile collision** set differently in different scenes.
+
+### 2026-08-28
+
+- Fixed **Load Meta Tiles** on a tilemap scene. A tilemap scene has no background of its own, so every one of them shared the same empty cache key and only the first was transformed.
+
+### 2026-08-21
+
+- Added **Position relative to camera scroll** to **Redraw Meta Tiles**, and **Destination relative to camera scroll** to **Submap Meta Tiles**. With it on, the coordinates are screen tile positions with (0,0) at the top-left tile currently visible, and the camera's scroll position is added for you.
+
+### 2026-08-11
+
+- The metatile collision scripts no longer keep a record of the last tile struck in each direction. A collision script is now started again once its previous run has finished, rather than once the player touches a different tile. That drops 8 bytes of RAM, and the reset call every scene state made on every frame the player was not blocked.
+
 ### 2026-07-27
 
 - Added metatile enter detection modes.
